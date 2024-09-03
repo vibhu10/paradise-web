@@ -1,7 +1,7 @@
 .home-container {
   width: 100vw;
   height: 100vh;
-  border: 5px solid red;
+  /* border: 5px solid red; */
   display: flex;
   flex-direction: column;
 }
@@ -18,8 +18,26 @@
   background-color: black;
   width: 100vw;
   height: 50vh;
-}
+  display: flex;
+  justify-content: center;
 
+  align-items: center;
+
+
+}
+.home-filter img{
+  width: 240px;
+  height: 76px;
+  position: absolute;
+ 
+  left: 43px;
+}
+.home-filter .filter{
+  width: 870px;
+  height: 64px;
+background: #198E78;
+border-radius: 10px;
+}
 .home-grid {
   width: 100vw; /* Adjusted to match viewport width */
   height: 50vh;
@@ -35,21 +53,21 @@
 .hotel-data {
   width: 100vw;
   max-height: 80vh; /* Adjust this value based on your layout needs */
-  border: 2px solid black;
+  /* border: 2px solid black; */
   display: flex;
   flex-wrap: wrap;
   justify-content:space-evenly;
-  overflow-y: auto; /* Enable vertical scrolling */
+  /* overflow-y: auto; Enable vertical scrolling */
   padding: 10px; /* Optional: Add some padding for aesthetics */
 }
 
 .hotel-card {
   width: 300px;
   height: 400px;
-
   display: flex;
   flex-direction: column;
   overflow: hidden; /* Prevent scroll bars */
+  margin: 10px;
 }
 
 .hotel-card img {

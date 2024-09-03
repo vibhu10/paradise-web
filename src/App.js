@@ -95,7 +95,18 @@ image: '/pexels-neverlandphotos-5028910.jpg'
       rating: 4.98,
       reviews: 154,
       image: "/pexels-rachel-claire-4825701.jpg"
-  },
+  },  {
+    id: 9,
+    name: "Miami, Florida",
+    description: "Lorem Ipsum is simply",
+    checkIn: "Aug 18",
+    checkOut: "-23",
+    pricePerNight: 224,
+    totalPrice: 1382,
+    rating: 4.98,
+    reviews: 154,
+image: '/pexels-neverlandphotos-5028910.jpg'
+},
 ];
 
 
@@ -105,7 +116,15 @@ export default function ParadiseHome() {
   return (
     <div className="home-container">
       <div className="header">
-        <div className="home-filter"></div>
+        <div className="home-filter">
+             <img src='/48564e5fe8898cf62b0bbf42276d6cf3.jpeg' alt="paradise"/>
+            <div className='filter'>
+
+
+            </div>
+
+           <p>switch to hosting</p> 
+        </div>
         <div className="home-grid"></div>
       </div>
 
@@ -119,7 +138,7 @@ export default function ParadiseHome() {
               <h3 style={{color:"#198E78"}} >{hotel.name}</h3>
               <p>{hotel.description}</p>
               <p>Check-in: {hotel.checkIn}{hotel.checkOut}</p>
-              <p style={{ color: "black", fontSize: "18px" }}>
+              <p style={{ color: "black", fontSize: "18px" ,fontWeight:"bold"}}>
   ${hotel.pricePerNight}/night Total: 
   <span style={{ color: '#198E78' }}>${hotel.totalPrice}</span>
 </p>
