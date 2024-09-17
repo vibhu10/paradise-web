@@ -30,6 +30,7 @@
     height: 76px;
     position: absolute;
     left: 43px;
+   
   }
   .home-filter .filter{
     left: 53px;
@@ -182,7 +183,7 @@
   
   .log-in-container{
     position: relative;
-      left: 279px;  /* log in hamburger and swich to host container */
+      left: 195px;  /* log in hamburger and swich to host container */
       display: flex;
    
   }

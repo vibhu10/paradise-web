@@ -49,11 +49,42 @@ background-color: #198E78;
     align-items: center;
     justify-content: space-evenly;
 }
- /* h4{
-    position: relative;
-    left: 771px;
-    top: -212px;
-} */
+.page-question{
+    font-weight: 600;
+    font-size: 25px;
+    top: 89px;
+    position: absolute;
+
+}
+/* this is css for page2 center buttons-starting*/
+.pannel-box-page2{
+    width: 610px;
+    height: 567px;
+    /* border: 2px solid grey; */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 10px;
+
+}
+.buttons-div{
+    width: 103px;
+    height: 125px;
+    border: 1px solid grey;
+    margin: 21px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.center-buttons{
+border: transparent;
+background-color: white;
+
+}
+/* this is css for page2 center buttons-ending*/
 .box{
     width: 372px;
     height: 350px;
@@ -79,7 +110,7 @@ background-color: #198E78;
     color:gray;
     text-align: center;
 }
-h3{
+.box h3{
     position: relative;
     left: -157px;
     top: -23px;
@@ -92,6 +123,7 @@ h3{
     display: flex;
     justify-content: end;
     align-items: center;
+    justify-content: space-between;
 }
 .host-footer button{
     width: 137px;
@@ -101,5 +133,6 @@ h3{
 background-color: #198E78;
  color:white;
  margin: 10px;
+
 
 }
