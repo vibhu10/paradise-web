@@ -136,3 +136,25 @@ background-color: #198E78;
 
 
 }
+.note-page{
+    position: absolute;
+    top: 578px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.loading-pagetwo{
+    width: 200px;
+    height: 4px;
+    position: absolute;
+    border-top: 4px solid #198E78;
+    top: 704px;
+}
+.loading-pagethree{
+    width: 300px;
+    height: 4px;
+    position: absolute;
+    top: 703px;
+    border-top: 4px solid #198E78;
+}

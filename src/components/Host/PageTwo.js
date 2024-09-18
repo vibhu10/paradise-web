@@ -1,7 +1,9 @@
 import { useState } from "react";
 
-export function PageTwo({handleNext,handlePrevious}){
+export function PageTwo({handleBack,handleNext}){
+
     const [selectedValue, setSelectedValue] = useState('')
+
     const buttonData = [
         { icon: 'bi-tree', label: 'Unique' },
         { icon: 'bi-house-door', label: 'Luxury' },
@@ -28,7 +30,7 @@ return(
    <button>Exit</button>
    </header>
        <div className="body-host">
-      <p className="page-question">Which of this describe your place ?</p>
+      <p className="page-question"> it's easy to get started on Paradise</p>
        {/* <h4> it's easy to get started on Paradise</h4> */}
            <div className="pannel-box-page2">
         
@@ -48,8 +50,11 @@ return(
                 
           </div>
        </div>
-   <div className='host-footer'>
-       <button  onClick={handlePrevious}>Back</button>
+    
+      <div className='host-footer'>
+           <div className="loading-pagetwo"></div>
+       <button onClick={handleBack}>Back</button>
+
        <button onClick={handleNext}>Next</button>
    </div>
 </div>
