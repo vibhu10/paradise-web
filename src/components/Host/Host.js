@@ -3,7 +3,8 @@ import './Host.css';
 import { PageOne } from './PageOne';
 import { PageTwo } from './PageTwo';
 import { PageThree } from './PageThree';
-
+import { PageFour } from './PageFour';
+import { PageFive } from './PageFive';
 export default function Host() {
     const [currentPage, setCurrentPage] = useState(1);
 
@@ -27,8 +28,8 @@ export default function Host() {
             {currentPage === 1 && <PageOne handleNext={handleNext} />}
             {currentPage === 2 &&  <PageTwo handleNext={handleNext} handleBack={handleBack} />}
             {currentPage === 3 && <PageThree handleNext={handleNext} handleBack={handleBack} />}
-           
-
+            {currentPage ===4 && <PageFour handleNext={handleNext} handleBack={handleBack}/>}
+            {currentPage ===5 && <PageFive handleNext={handleNext} handleBack={handleBack}/>}
         </div>
     );
 }

@@ -158,3 +158,60 @@ background-color: #198E78;
     top: 703px;
     border-top: 4px solid #198E78;
 }
+/* this is page 4  */
+
+.page-4-map{
+    border: 2px solid black;
+    width: 40vw;
+    height: 70vh;
+    margin: 10px;
+}
+.text-page-4{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    margin: 10px;
+}
+.text-page-4 {
+    font-family: 'Arial', sans-serif; /* Set font family */
+    color: #333; /* Darker text color */
+  }
+  
+  .text-page-4 p {
+    margin-bottom: 10px; /* Space between paragraphs */
+    font-size: 16px; /* Set font size */
+    line-height: 1.5; /* Improve readability */
+  }
+  
+  .text-page-4 p:first-child {
+    font-weight: bold; /* Make the first paragraph bold */
+    font-size: 23px; /* Slightly larger font for emphasis */
+  }
+  .text-page-4 p:second-child{
+    color: lightgray;
+  }
+  .loading-pageFour{
+    width: 400px;
+    height: 4px;
+    position: absolute;
+    top: 703px;
+    border-top: 4px solid #198E78;
+}
+
+
+/* page five   */
+.page-5-main-div
+{
+    display: flex;
+    flex-direction: column;
+    border: 2px solid lightgray;
+    width: 41vw;
+    height: 70vh;
+
+}
+
+.page-5-form{}
+.page-5-map{
+
+}
