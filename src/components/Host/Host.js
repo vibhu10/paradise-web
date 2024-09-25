@@ -5,6 +5,8 @@ import { PageTwo } from './PageTwo';
 import { PageThree } from './PageThree';
 import { PageFour } from './PageFour';
 import { PageFive } from './PageFive';
+import { PageSix } from './PageSix';
+import { PageSeven } from './PageSeven';
 export default function Host() {
     const [currentPage, setCurrentPage] = useState(1);
 
@@ -30,6 +32,8 @@ export default function Host() {
             {currentPage === 3 && <PageThree handleNext={handleNext} handleBack={handleBack} />}
             {currentPage ===4 && <PageFour handleNext={handleNext} handleBack={handleBack}/>}
             {currentPage ===5 && <PageFive handleNext={handleNext} handleBack={handleBack}/>}
+            {currentPage ===6 && <PageSix handleNext={handleNext} handleBack={handleBack}/>}
+            {currentPage ===7 && <PageSeven handleNext={handleNext} handleBack={handleBack}/>}
         </div>
     );
 }
