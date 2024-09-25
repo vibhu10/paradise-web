@@ -377,6 +377,23 @@ margin: 10px;
     border-top: 4px solid #198E78;
 }
 /*page seven  */
+.pannel-box-page7{
+  width: 31%;
+  height: 79%;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+*, ::after, ::before {
+  box-sizing: border-box;
+
+}
+
+.amenity-item{
+
+}
 
 .loading-pageSeven{
   width: 700px;
