@@ -1,0 +1,477 @@
+.host-container {
+    width: 100vw;
+}
+
+.header-host {
+    background-color: black;
+    width: 100vw;
+    height: 80px;
+    border: 2px solid black;
+    display: flex;
+    justify-content: space-between;
+
+}
+.header-host img{
+    width: 240px;
+    height: 76px;
+    margin-left: 10px;
+    /* position: absolute;
+    left: 43px; */
+}
+.header-host button{
+margin: 15px;
+
+    width: 100px;
+    height: 47px;
+    border-radius: 10px;
+    border: transparent;
+background-color: #198E78;
+ color:white;
+ margin: 10px;
+
+}
+.body-host {
+    width: 100vw;
+    height: 80vh;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+  
+}
+
+.pannel-box {
+    width: 1164px;
+    height: 429px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.page-question{
+    font-weight: 600;
+    font-size: 25px;
+    top: 89px;
+    position: absolute;
+
+}
+/* this is css for page2 center buttons-starting*/
+.pannel-box-page2{
+    width: 610px;
+    height: 567px;
+    /* border: 2px solid grey; */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 10px;
+
+}
+.buttons-div{
+    width: 103px;
+    height: 125px;
+    border: 1px solid grey;
+    margin: 21px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.center-buttons{
+border: transparent;
+background-color: white;
+
+}
+/* this is css for page2 center buttons-ending*/
+.box{
+    width: 372px;
+    height: 350px;
+    border: 0px solid grey;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.box-image{
+    width: 126px;
+    height: 126px;
+    background-color: lightgray;
+    border-radius: 50%;
+    margin:10px;
+}
+.box p{
+    color:gray;
+    text-align: center;
+}
+.box h3{
+    position: relative;
+    left: -157px;
+    top: -23px;
+}
+.host-footer{
+    width: 100vw;
+    height: 80px;
+    border-top: 4px solid lightgrey;
+   
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    justify-content: space-between;
+}
+.host-footer button{
+    width: 137px;
+    height: 47px;
+    border-radius: 10px;
+    border: transparent;
+background-color: #198E78;
+ color:white;
+ margin: 10px;
+
+
+}
+.note-page{
+    position: absolute;
+    top: 578px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.loading-pagetwo{
+    width: 200px;
+    height: 4px;
+    position: absolute;
+    border-top: 4px solid #198E78;
+    top: 704px;
+}
+.loading-pagethree{
+    width: 300px;
+    height: 4px;
+    position: absolute;
+    top: 703px;
+    border-top: 4px solid #198E78;
+}
+/* this is page 4  */
+
+.page-4-map{
+    border: 2px solid black;
+    width: 40vw;
+    height: 70vh;
+    margin: 10px;
+}
+.text-page-4{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    margin: 10px;
+}
+.text-page-4 {
+    font-family: 'Arial', sans-serif; /* Set font family */
+    color: #333; /* Darker text color */
+  }
+  
+  .text-page-4 p {
+    margin-bottom: 10px; /* Space between paragraphs */
+    font-size: 16px; /* Set font size */
+    line-height: 1.5; /* Improve readability */
+  }
+  
+  .text-page-4 p:first-child {
+    font-weight: bold; /* Make the first paragraph bold */
+    font-size: 23px; /* Slightly larger font for emphasis */
+  }
+  .text-page-4 p:second-child{
+    color: lightgray;
+  }
+  .loading-pageFour{
+    width: 400px;
+    height: 4px;
+    position: absolute;
+    top: 703px;
+    border-top: 4px solid #198E78;
+}
+
+
+/* page five   */
+.page-5-main-div
+{
+    display: flex;
+    flex-direction: column;
+    /* border: 2px solid lightgray; */
+    width: 38vw;
+    height: 70vh;
+    flex-wrap: wrap;
+
+}
+
+.page-5-form{
+  
+    height: 65%;
+    /* border: 2px dotted red; */
+   
+}
+.page-5-map{
+ 
+  height: 40%;
+    /* border: 2px dotted blue; */
+}
+
+
+.text-page-5{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    margin: 10px;
+}
+.text-page-5 {
+    font-family: 'Arial', sans-serif; /* Set font family */
+    color: #333; /* Darker text color */
+  }
+  
+  .text-page-5 p {
+    margin-bottom: 10px; /* Space between paragraphs */
+    font-size: 16px; /* Set font size */
+    line-height: 0.8; /* Improve readability */
+  }
+  
+  .text-page-5 p:first-child {
+    font-weight: bold; /* Make the first paragraph bold */
+    font-size: 23px; /* Slightly larger font for emphasis */
+  }
+  .text-page-5 p:second-child{
+    color: lightgray;
+  }
+  .loading-pageFive{
+    width: 500px;
+    height: 4px;
+    position: absolute;
+    top: 703px;
+    border-top: 4px solid #198E78;
+}
+.page-5-form-data{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+#country{
+    border-radius: 10px;
+    border: 1px solid lightgray;
+    height: 15%;
+    width: 93%;
+    font-size: 17px;
+    color: gray;
+    margin-left: 10px;
+}
+#house-and-flat, #street-address,#landmark,#District{
+    height: 15%;
+    width: 45%;
+    border-radius: 10px;
+    border: 1px solid lightgray;
+    color: grey;
+margin: 10px;
+}
+#City,#State,#pin{
+    height: 15%;
+    width: 29%;
+    border-radius: 10px;
+    border: 1px solid lightgray;
+    color: grey;
+margin: 10px;
+}
+
+
+/* The switch container */
+/* Flex container for p and slider */
+.switch {
+    display: flex;
+    align-items: center; /* Aligns the items (p and slider) vertically in the center */
+    justify-content: space-between; /* Ensures even spacing between text and slider */
+    width: 100%;
+    max-width: 600px; /* You can adjust this width */
+    margin-bottom: 15px;
+  }
+  
+  /* Flex item for text */
+  .switch-content {
+    flex-grow: 1;
+    margin-right: 20px; /* Add some space between the text and the slider */
+  }
+  
+  /* The switch (slider) styling */
+  .switch input {
+    display: none; /* Hide the default checkbox */
+  }
+  
+  .switch .slider {
+    position: relative;
+    display: inline-block;
+    width: 93px;
+    height: 34px;
+    background-color: #ccc;
+    border-radius: 34px;
+    cursor: pointer;
+    transition: 0.4s;
+  }
+  
+  .switch .slider:before {
+    content: "";
+    position: absolute;
+    height: 26px;
+    width: 26px;
+    background-color: white;
+    border-radius: 50%;
+    bottom: 4px;
+    left: 4px;
+    transition: 0.4s;
+  }
+  
+  input:checked + .slider {
+    background-color:#198E78;
+  }
+  
+  input:checked + .slider:before {
+    transform: translateX(26px);
+  }
+  
+
+  /* page six */
+  .page-6-div{
+    width: 30%;
+    height: 60%;
+    /* border:2px solid grey */
+  }
+
+  .page-6-button-div-outer{
+    margin: 44px;
+    /* border: 2px solid black; */
+    height: 80%;
+
+  }
+  .page-6-button-div-inner{
+    /* border: 2px solid rgb(182, 18, 18); */
+    height: 19.25%;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    border: 2px solid lightgray;
+    border-collapse: collapse;
+  }
+ 
+
+ .loading-pageSix{
+    width: 600px;
+    height: 4px;
+    position: absolute;
+    top: 703px;
+    border-top: 4px solid #198E78;
+}
+/*page seven  */
+.pannel-box-page7{
+  width: 31%;
+  height: 79%;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+*, ::after, ::before {
+  box-sizing: border-box;
+
+}
+
+.amenity-item{
+
+}
+
+.loading-pageSeven{
+  width: 700px;
+  height: 4px;
+  position: absolute;
+  top: 703px;
+  border-top: 4px solid #198E78;
+}
+/*page Eight */
+
+.loading-pageEight{
+  width: 800px;
+  height: 4px;
+  position: absolute;
+  top: 703px;
+  border-top: 4px solid #198E78;
+}
+
+/*page nine*/
+
+
+
+.pannel-box-page9{
+  width: 35%;
+  height: 35%;
+ 
+  display: flex;
+  flex-direction: column;
+ align-items: center;
+
+}
+#textarea-page9{
+  width: 63%;
+  height: 55%;
+  border-radius: 10px;
+}
+
+.loading-pageNine{
+  width: 900px;
+  height: 4px;
+  position: absolute;
+  top: 703px;
+  border-top: 4px solid #198E78;
+}
+/*page ten*/
+
+
+.pannel-box-page10{
+
+  width: 40%;
+  height: 80%;
+  /* border: 2px solid black; */
+}
+.pannel-box-page10-div1{
+  width: 100%;
+  height: 50%;
+  /* border: 2px solid black; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#textarea-page10{
+  border-radius: 10px;
+  height: 60%;
+}
+.pannel-box-page10-div2{
+ width: 40%;
+ height: 50%;
+ /* border: 2px solid black; */
+ display: flex;
+ flex-direction: column;
+ justify-content:flex-start;
+ margin-left: 140px;
+}
+.loading-pageTen{
+  width: 1000px;
+  height: 4px;
+  position: absolute;
+  top: 703px;
+  border-top: 4px solid #198E78;
+}
