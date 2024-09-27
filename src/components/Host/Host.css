@@ -33,7 +33,8 @@ background-color: #198E78;
 .body-host {
     width: 100vw;
     height: 80vh;
-   display: flex;
+  
+    display: flex;
    align-items: center;
    justify-content: center;
   
@@ -498,6 +499,101 @@ margin: 10px;
 
 .loading-pageEleven{
   width: 1100px;
+  height: 4px;
+  position: absolute;
+  top: 703px;
+  border-top: 4px solid #198E78;
+}
+
+/* page twelve*/
+
+.loading-pageTwelve{
+  width: 1200px;
+  height: 4px;
+  position: absolute;
+  top: 703px;
+  border-top: 4px solid #198E78;
+}
+
+
+
+/*page thirteen */
+
+
+
+.body-host-with-scroll {
+  width: 100%;
+  flex-grow: 1; /* This makes the body area flexible */
+  overflow-y: auto; /* Enables scrolling if content exceeds the available height */
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  
+  
+}
+
+.pannel-box-page13 {
+  width: 35%;
+  display: flex;
+  flex-direction: column;
+}
+
+.pannel-box-page12-div1,
+.pannel-box-page12-div2,
+.pannel-box-page12-div3,
+.pannel-box-page12-div4 {
+  width: 100%;
+  height: 250px; /* Large height to force scrolling */
+
+  margin-bottom: 10px;
+}
+
+.pannel-box-page12-div1 {
+  
+}
+
+.pannel-box-page12-div2 {
+  flex-grow: 1; /* This makes the body area flexible */
+  overflow-y: auto; 
+}
+
+.pannel-box-page12-div3 {
+  border-color: #94197a;
+}
+
+.pannel-box-page12-div4 {
+  border-color: #b64623;
+}
+
+.host-footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-top: 1px solid #ccc;
+}
+
+
+.loading-pageThirteen{
+  width: 1350px;
+  height: 4px;
+  position: absolute;
+  top: 703px;
+  border-top: 4px solid #198E78;
+}
+
+/* page Fourteen*/
+
+
+.loading-pageFourteen{
+  width: 1550px;
+  height: 4px;
+  position: absolute;
+  top: 703px;
+  border-top: 4px solid #198E78;
+}
+/*page Fifteen*/
+.loading-pageFifteen{
+  width: 1700px;
   height: 4px;
   position: absolute;
   top: 703px;

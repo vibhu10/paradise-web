@@ -11,6 +11,10 @@ import { PageEight } from './PageEight';
 import { PageNine } from './PageNine';
 import { PageTen } from './PageTen';
 import { PageEleven } from './PageEleven';
+import {PageTwelve} from'./PageTwelve';
+import { PageThirteen } from './PageThirteen';
+import { PageFourteen } from './PageFourteen';
+import { PageFifteen } from './PageFifteen';
 export default function Host() {
     const [currentPage, setCurrentPage] = useState(1);
 
@@ -27,8 +31,6 @@ export default function Host() {
         }
     }
 
-    console.log("Current Page:", currentPage); // Check the current page state
-
     return (
         <div className="host-container">
             {currentPage === 1 && <PageOne handleNext={handleNext} />}
@@ -42,6 +44,10 @@ export default function Host() {
             {currentPage ===9 && <PageNine handleNext={handleNext} handleBack={handleBack}/>}
             {currentPage ===10 && <PageTen handleNext={handleNext} handleBack={handleBack}/>}
             {currentPage ===11 && <PageEleven handleNext={handleNext} handleBack={handleBack}/>}
+            {currentPage ===12 && <PageTwelve handleNext={handleNext} handleBack={handleBack}/>}
+            {currentPage ===13 && <PageThirteen handleNext={handleNext} handleBack={handleBack}/>}
+            {currentPage ===14 && <PageFourteen handleNext={handleNext} handleBack={handleBack}/>}
+            {currentPage ===15 && <PageFifteen handleNext={handleNext} handleBack={handleBack}/>}
         </div>
     );
 }
