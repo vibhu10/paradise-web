@@ -10,6 +10,7 @@ import { PageSeven } from './PageSeven';
 import { PageEight } from './PageEight';
 import { PageNine } from './PageNine';
 import { PageTen } from './PageTen';
+import { PageEleven } from './PageEleven';
 export default function Host() {
     const [currentPage, setCurrentPage] = useState(1);
 
@@ -40,6 +41,7 @@ export default function Host() {
             {currentPage ===8 && <PageEight handleNext={handleNext} handleBack={handleBack}/>}
             {currentPage ===9 && <PageNine handleNext={handleNext} handleBack={handleBack}/>}
             {currentPage ===10 && <PageTen handleNext={handleNext} handleBack={handleBack}/>}
+            {currentPage ===11 && <PageEleven handleNext={handleNext} handleBack={handleBack}/>}
         </div>
     );
 }
