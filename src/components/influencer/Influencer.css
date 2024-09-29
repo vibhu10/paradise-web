@@ -1,0 +1,40 @@
+.influencer-container{
+    width: 100%;
+    height: auto;
+}
+.header-influencer{
+    width: 100%;
+    height: 7%;
+    border: 2px solid black;
+
+}
+.header-influencer img{
+    width: 240px;
+    height: 76px;
+    margin-left: 10px;
+    /* position: absolute;
+    left: 43px; */
+}
+.top-header-influencer{
+background-color: black;
+height: 90px;
+}
+.botton-header-influencer{
+    background-color: rgb(243, 248, 250);
+    height: 90px;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+
+.body-influencer{
+
+
+}
+
+.influencer-footer{
+
+
+
+}

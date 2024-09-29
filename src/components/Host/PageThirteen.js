@@ -13,7 +13,7 @@ export function PageThirteen({ handleNext, handleBack }) {
     quitHourStart: null,
     quiteHourEnd: null,
   });
-  const [AddInstruction, setAddInstruction] = useState([]);
+  const [AddInstruction, setAddInstruction] = useState(["",""]);
 
 
   function handleInstruction(index,value){
