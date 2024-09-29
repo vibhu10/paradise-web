@@ -1,7 +1,8 @@
-import './Influencer.css'
+import './HostProfileCss/influencer.css'
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import { useState } from "react";
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
 
 const hotels = [
   {
@@ -117,10 +118,26 @@ export default function Influencer() {
       
            </div>
           <div className='botton-header-influencer'>
-                   <button>Collaboration</button>
-                   <input type='text'
-                   placeholder='Search for influencers'/>
-                   <button>Saved</button>
+                   <button className='collaboration'>Collaboration</button>
+                   
+                   <div className="search-bar-influencer">
+                   <div className="search-input-influencer">
+  <i className="bi bi-search"></i> {/* Bootstrap search icon */}
+  <input 
+    type="text" 
+    placeholder="Search for Influencers" 
+    className="search-box-influencer"
+  />
+</div>
+
+      <select className="influencer-type-influencer">
+        <option value="">Influencer Type</option>
+        {/* Add more options as needed */}
+      </select>
+    </div>
+
+
+                   <button id='save-header-influencer'>Saved</button>
             </div>
        </header>
            <div className="body-influencer">
