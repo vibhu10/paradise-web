@@ -1,0 +1,146 @@
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Header */
+  .header-influencer {
+    background-color: #080808;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+  }
+  
+  .header-influencer-left h1 {
+    margin: 0;
+  }
+  .header-influencer img{
+   
+        width: 240px;
+        height: 76px;
+        margin-left: 10px;
+        /* position: absolute;
+        left: 43px; */
+    
+  }
+  .header-influencer-middle ul {
+    list-style-type: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .header-influencer-middle ul li {
+    margin-left: 15px;
+    cursor: pointer;
+    color: white;
+  }
+  .header-influencer-right{
+width: 20%;
+
+  }
+  /* Main content layout */
+  .main-content {
+    display: flex;
+    padding: 20px;
+    gap: 30px;
+  }
+  
+  .profile-section {
+    width: 250px;
+  }
+  
+  .profile-info {
+    text-align: center;
+  }
+  
+  .profile-img {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+  }
+  
+  .social-icons a {
+    margin-right: 10px;
+    color: #333;
+  }
+  
+  .bio {
+    margin-top: 10px;
+  }
+  
+  .travel-section {
+    margin-top: 20px;
+  }
+  
+  .edit-profile-btn {
+    width: 200px;
+    margin-top: 21px;
+    padding: 10px;
+    background-color: #198E78;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+  }
+  
+  /* Description Section */
+  .sections{
+    width: 80%;
+
+  }
+  .description-section {
+    flex: 1;
+  }
+  
+  .image-gallery {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .gallery-img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+  }
+  
+  .description-text {
+    padding: 10px;
+    background-color: #f8f9fa;
+  }
+  
+  .description-text h2, .description-text h3 {
+    margin-top: 0;
+  }
+  
+  .description-text ul {
+    padding-left: 20px;
+  }
+  
+  /* Reviews Section */
+  .reviews-section {
+    flex: 0.3;
+    background-color: #f8f9fa;
+    padding: 10px;
+  }
+  
+  .review {
+    width: 300px;
+    height: auto;
+    border: 1px solid gray;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    margin-right: 10px;
+  }
+  .reviews{
+    display: flex;
+    justify-content: start;
+    flex-wrap: wrap;
+  }
