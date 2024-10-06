@@ -1,9 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './components/Home/Home';
-import Host from './components/Host/Host'
+
 import  EdifInfluencerProfile from './components/influencer/Edif-Influencer-Profile';
 import Inbox from './components/influencer/Inbox'
+import HostRegistration from './components/Host-Registration/Host-Registration';
+import UserHome from './components/Host-login/UserHome';
 function App() {
   return (
     <Router>
@@ -12,9 +14,10 @@ function App() {
         <Routes>
          
           <Route path="/" element={<Home />} /> 
-          <Route path='/host' element={<Host />}/>
+          <Route path='/hostRegistration' element={<HostRegistration/>}/>
         <Route path='/influencer' element={<EdifInfluencerProfile/>}/>
         <Route path='/influencer/inbox' element={<Inbox/>}/>
+        <Route path='/hostuser'  element={<UserHome/>}/>
         </Routes>
       </div>
     </Router>

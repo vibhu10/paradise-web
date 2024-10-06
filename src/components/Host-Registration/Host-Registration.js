@@ -15,7 +15,7 @@ import {PageTwelve} from'./PageTwelve';
 import { PageThirteen } from './PageThirteen';
 import { PageFourteen } from './PageFourteen';
 import { PageFifteen } from './PageFifteen';
-export default function Host() {
+export default function HostRegistration() {
     const [currentPage, setCurrentPage] = useState(1);
 
     function handleNext() {
