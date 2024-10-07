@@ -23,7 +23,7 @@ export default function PropertyEdit({selectedPropertyData,handleSave }) {
           />
         );
       case 'Amenities':
-        return <AmenitiesEdit />;
+        return <AmenitiesEdit selectedPropertyData={selectedPropertyData}onSave={handleSave}/>;
       case 'Pricing & Availability':
         return <PricingAvailabilityEdit />;
       case 'House Rules':
