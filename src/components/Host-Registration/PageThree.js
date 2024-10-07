@@ -35,7 +35,7 @@ export function PageThree({handleNext,handleBack}){
                 </div>
              
             <div className='host-footer'>
-              <div className="loading-pagethree"></div>
+              {/* <div className="loading-pagethree"></div> */}
             <button  onClick={handleBack}>Back</button>
             <button onClick={handleNext}>Next</button>
             </div>

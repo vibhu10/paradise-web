@@ -53,6 +53,28 @@ const hotels = [
     rating: 4.98,
     reviews: 154,
     image: "/pexels-rachel-claire-4577385.jpg",
+  }, {
+    id: 5,
+    name: "Miami, Florida",
+    description: "Lorem Ipsum is simply",
+    checkIn: "Aug 18",
+    checkOut: "Aug 23",
+    pricePerNight: 224,
+    totalPrice: 1382,
+    rating: 4.98,
+    reviews: 154,
+    image: "/pexels-pixabay-258154.jpg",
+  },  {
+    id: 6,
+    name: "Miami, Florida",
+    description: "Lorem Ipsum is simply",
+    checkIn: "Aug 18",
+    checkOut: "Aug 23",
+    pricePerNight: 224,
+    totalPrice: 1382,
+    rating: 4.98,
+    reviews: 154,
+    image: "/pexels-pixabay-258154.jpg",
   },
   // Add more hotels as needed...
 ];
@@ -72,6 +94,9 @@ export default function Home() {
       { icon: "tree", label: "Nature" },
       { icon: "eye", label: "Views" },
       { icon: "house", label: "Playhouse" },
+
+    
+      
     ];
   
     return (

@@ -72,7 +72,7 @@ export function PageFifteen({ handleNext, handleBack }) {
            </div>
    
         <div className="host-footer">
-          <div className="loading-pageFifteen"></div>
+          {/* <div className="loading-pageFifteen"></div> */}
           <button onClick={handleBack}>Back</button>
           <button onClick={handleNext}>Next</button>
         </div>

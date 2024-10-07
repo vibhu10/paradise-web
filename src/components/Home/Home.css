@@ -234,13 +234,13 @@
   }
   .hotel-data {
     width: 100vw;
-    max-height: 80vh; /* Adjust this value based on your layout needs */
+    
     /* border: 2px solid black; */
     display: flex;
     flex-wrap: wrap;
-    justify-content:space-evenly;
+    justify-content: space-between;
     /* overflow-y: auto; Enable vertical scrolling */
-    padding: 10px; /* Optional: Add some padding for aesthetics */
+    padding: 50px; 
   }
   
   .hotel-card {

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import PhotoEdit from './PhotoEdit';
 import TimeAndDescriptionEdit from './TimeDescriptionEdit';
 import AmenitiesEdit from './AmenitiesEdit';
@@ -7,23 +8,26 @@ import HouseRulesEdit from './HouseRulesEdit';
 import AccessibilityEdit from './AccessibilityEdit';
 import InfluencerSettings from './InfluencerSettings';
 
-export default function PropertyEdit({ selectedPropertyData }) {
- 
+export default function PropertyEdit({selectedPropertyData,handleSave }) {
   const [activeTab, setActiveTab] = useState('Photos');
-
-
+ 
   const renderComponent = () => {
     switch (activeTab) {
       case 'Photos':
-        return <PhotoEdit/>;
+        return <PhotoEdit selectedPropertyData={selectedPropertyData} />;
       case 'Time&Description':
-        return <TimeAndDescriptionEdit/>;
+        return (
+          <TimeAndDescriptionEdit
+            selectedPropertyData={selectedPropertyData}
+            onSave={handleSave} // Pass the onSave function to the child
+          />
+        );
       case 'Amenities':
         return <AmenitiesEdit />;
       case 'Pricing & Availability':
         return <PricingAvailabilityEdit />;
       case 'House Rules':
-        return <HouseRulesEdit/>;
+        return <HouseRulesEdit />;
       case 'Accesibility':
         return <AccessibilityEdit />;
       case 'Influencer Settings':
@@ -42,14 +46,14 @@ export default function PropertyEdit({ selectedPropertyData }) {
           <p>Check-in Guide</p>
         </div>
         <div className="Propertyedit-head-div2">
-          <ul>
+          <ul style={{fontWeight:500}}>
             {['Photos', 'Time&Description', 'Amenities', 'Pricing & Availability', 'House Rules', 'Accesibility', 'Influencer Settings'].map((item) => (
               <li
                 key={item}
                 onClick={() => setActiveTab(item)}
                 style={{
                   cursor: 'pointer',
-                  color: activeTab === item ? 'green' : 'black', 
+                  color: activeTab === item ? 'green' : 'black',
                 }}
               >
                 {item}

@@ -17,7 +17,7 @@ function App() {
           <Route path='/hostRegistration' element={<HostRegistration/>}/>
         <Route path='/influencer' element={<EdifInfluencerProfile/>}/>
         <Route path='/influencer/inbox' element={<Inbox/>}/>
-        <Route path='/hostuser'  element={<UserHome/>}/>
+        <Route path='/hostlogin'  element={<UserHome/>}/>
         </Routes>
       </div>
     </Router>

@@ -1,7 +1,7 @@
 export default function AmenitiesEdit(){
 
     return(
-        <div>
+        <div className="amenitesEdit-hostlogin">
             
         </div>
     )

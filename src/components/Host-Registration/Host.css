@@ -139,26 +139,29 @@ background-color: #198E78;
 }
 .note-page{
     position: absolute;
-    top: 578px;
+    top: 620px;
     display: flex;
     justify-content: center;
     align-items: center;
 
 }
-.loading-pagetwo{
+/* .loading-pagetwo{
     width: 200px;
     height: 4px;
     position: absolute;
     border-top: 4px solid #198E78;
     top: 704px;
-}
-.loading-pagethree{
+} */
+/* .loading-pagethree{
+
     width: 300px;
     height: 4px;
     position: absolute;
-    top: 703px;
+    top: 780px;
+    left: -1px;
     border-top: 4px solid #198E78;
-}
+
+} */
 /* this is page 4  */
 
 .page-4-map{
@@ -192,13 +195,13 @@ background-color: #198E78;
   .text-page-4 p:second-child{
     color: lightgray;
   }
-  .loading-pageFour{
+  /* .loading-pageFour{
     width: 400px;
     height: 4px;
     position: absolute;
     top: 703px;
     border-top: 4px solid #198E78;
-}
+} */
 
 
 /* page five   */
@@ -251,13 +254,13 @@ background-color: #198E78;
   .text-page-5 p:second-child{
     color: lightgray;
   }
-  .loading-pageFive{
+  /* .loading-pageFive{
     width: 500px;
     height: 4px;
     position: absolute;
     top: 703px;
     border-top: 4px solid #198E78;
-}
+} */
 .page-5-form-data{
     display: flex;
     flex-direction: row;
@@ -370,13 +373,13 @@ margin: 10px;
   }
  
 
- .loading-pageSix{
+ /* .loading-pageSix{
     width: 600px;
     height: 4px;
     position: absolute;
     top: 703px;
     border-top: 4px solid #198E78;
-}
+} */
 /*page seven  */
 .pannel-box-page7{
   width: 31%;
@@ -396,22 +399,22 @@ margin: 10px;
 
 }
 
-.loading-pageSeven{
+/* .loading-pageSeven{
   width: 700px;
   height: 4px;
   position: absolute;
   top: 703px;
   border-top: 4px solid #198E78;
-}
+} */
 /*page Eight */
-
+/* 
 .loading-pageEight{
   width: 800px;
   height: 4px;
   position: absolute;
   top: 703px;
   border-top: 4px solid #198E78;
-}
+} */
 
 /*page nine*/
 
@@ -432,13 +435,13 @@ margin: 10px;
   border-radius: 10px;
 }
 
-.loading-pageNine{
+/* .loading-pageNine{
   width: 900px;
   height: 4px;
   position: absolute;
   top: 703px;
   border-top: 4px solid #198E78;
-}
+} */
 /*page ten*/
 
 
@@ -469,13 +472,13 @@ margin: 10px;
  justify-content:flex-start;
  margin-left: 140px;
 }
-.loading-pageTen{
+/* .loading-pageTen{
   width: 1000px;
   height: 4px;
   position: absolute;
   top: 703px;
   border-top: 4px solid #198E78;
-}
+} */
 
 
 /*page eleven */
@@ -497,13 +500,13 @@ margin: 10px;
 
 }
 
-.loading-pageEleven{
+/* .loading-pageEleven{
   width: 1100px;
   height: 4px;
   position: absolute;
   top: 703px;
   border-top: 4px solid #198E78;
-}
+} */
 
 /* page twelve*/
 
@@ -578,13 +581,13 @@ border: 2px solis green;
 .accordion-button:not(.collapsed) {
 background-color: white;
 }
-  .loading-pageTwelve{
+  /* .loading-pageTwelve{
   width: 1200px;
   height: 4px;
   position: absolute;
   top: 703px;
   border-top: 4px solid #198E78;
-}
+} */
 .uploading-photo-page12 .photo-card {
   width: 208px;
   height: 208px;
@@ -661,13 +664,13 @@ background-color: white;
 }
 
 
-.loading-pageThirteen{
+/* .loading-pageThirteen{
   width: 1350px;
   height: 4px;
   position: absolute;
   top: 703px;
   border-top: 4px solid #198E78;
-}
+} */
 
 /* page Fourteen*/
 .pannel-box-page14{
@@ -740,12 +743,12 @@ border:1px solid gray;
 border-radius: 10px;
 height: 62px;
 }
-.loading-pageFifteen{
+/* .loading-pageFifteen{
   width: 1700px;
   height: 4px;
   position: absolute;
   top: 703px;
   border-top: 4px solid #198E78;
-}
+} */
 
 

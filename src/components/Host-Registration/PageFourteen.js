@@ -146,7 +146,7 @@ export function PageFourteen({ handleNext, handleBack }) {
       </div>
 
       <div className="host-footer">
-        <div className="loading-pageFourteen"></div>
+        {/* <div className="loading-pageFourteen"></div> */}
         <button onClick={handleBack}>Back</button>
         <button onClick={handleNext}>Next</button>
       </div>

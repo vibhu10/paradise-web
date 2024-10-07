@@ -52,7 +52,7 @@ return(
        </div>
     
       <div className='host-footer'>
-           <div className="loading-pagetwo"></div>
+           {/* <div className="loading-pagetwo"></div> */}
        <button onClick={handleBack}>Back</button>
 
        <button onClick={handleNext}>Next</button>
