@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import './Host-login-Css/amenites.css'
 // List of amenities with their corresponding Font Awesome icon classes
 const amenitiesList = [
   { name: 'Wifi', icon: 'fas fa-wifi' },
@@ -32,9 +32,9 @@ console.log(selectedAmenities,"fdfd")
     setSelectedAmenities(selectedPropertyData.amenities || []);
   };
 
-  const handleSave = () => {
-    onSave({ ...selectedPropertyData, amenities: selectedAmenities });
-  };
+function handeSave(){
+onSave(selectedAmenities)
+}
 
   return (
     <div className="amenities-edit-container">
@@ -55,7 +55,7 @@ console.log(selectedAmenities,"fdfd")
       </div>
       <div className="button-group">
         <button className="cancel-button" onClick={handleCancel}>Cancel</button>
-        <button className="save-button" onClick={handleSave}>Save</button>
+        <button className="save-button" onClick={handeSave}>Save</button>
       </div>
     </div>
   );

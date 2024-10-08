@@ -102,12 +102,12 @@ export function PageFive({ handleNext, handleBack }) {
                   placeholder="Pin code"
                 />
                 <label className="switch">
-                  <div className="switch-content">
-                    <h6>Show your specific location</h6>
-                    <p>
+                  <div className="switch-content-page5">
+                    <h6 style={{fontWeight:600}}>Show your specific location</h6>
+                    <h8>
                       Make it clear to guest where your place is located. We'll
                       only share your address after they've made a reservation.
-                    </p>
+                    </h8>
                   </div>
                   <input type="checkbox" />
                   <span className="slider"></span>

@@ -1,0 +1,112 @@
+.photo-edit-container {
+  padding: 20px;
+}
+
+.sleeping-arrangements, .photo-tour {
+  margin-bottom: 30px;
+}
+
+h3 {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.arrangement-options {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.arrangement-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.arrangement-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.counter {
+  display: flex;
+  align-items: center;
+}
+
+.counter button {
+  background-color: #f1f1f1;
+  border: 1px solid #ccc;
+  width: 30px;
+  height: 30px;
+}
+
+.counter span {
+  padding: 0 10px;
+}
+
+.buttons, .photo-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.cancel-btn, .save-btn {
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.cancel-btn {
+  background-color: #fff;
+  border: 1px solid #ccc;
+}
+
+.save-btn {
+  background-color: #007b5f;
+  color: white;
+  border: none;
+}
+
+.photo-options {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.photo-item {
+  padding: 10px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  text-align: center;
+}
+
+.photo-item.active {
+  border: 2px solid #007b5f;
+}
+
+.add-photo-section {
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+  border: 1px dashed #ccc;
+}
+
+.add-photo-box {
+  text-align: center;
+}
+
+.add-photo-box span {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.add-photo-btn {
+  background-color: #007b5f;
+  color: white;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 24px;
+  border: none;
+}

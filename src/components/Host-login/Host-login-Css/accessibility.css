@@ -1,0 +1,83 @@
+
+/*accessiblity edi */
+.accessibility-edit {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  
+  .accordion {
+    margin-top: 20px;
+  }
+  
+  .accordion-item {
+    border:1px solid gray;
+    padding: 10px 0;
+    margin-bottom: 20px;
+    border-radius: 10px;
+  }
+  
+  .accordion-header {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    justify-content: space-between;
+  }
+  
+  .accordion-header .icon {
+    margin-right: 10px;
+    font-size: 20px;
+    font-weight: 500;
+  }
+  
+  .accordion-header .title {
+    flex-grow: 1;
+    font-size: 16px;
+  }
+  
+  .accordion-content {
+    margin-top: 10px;
+    font-size: 14px;
+    padding-left: 30px;
+  }
+  
+  .photo-upload {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+  }
+  
+  .upload-placeholder {
+    border: 1px dashed #ccc;
+    padding: 20px;
+    cursor: pointer;
+    text-align: center;
+    width: 200px;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+  }
+  
+  .upload-placeholder i {
+    font-size: 30px;
+    margin-bottom: 8px;
+  }
+  
+  .upload-note {
+    font-size: 12px;
+    color: #888;
+    margin-top: 8px;
+    text-align: center;
+  }
+  
+  .buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    justify-content: center;
+  }
+  

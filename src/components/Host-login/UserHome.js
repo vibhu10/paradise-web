@@ -6,11 +6,23 @@ const data = [
     "type": "listed",
     "title": "Sample Title",
     "name": "Sunny Beachside Cottage",
-    "price": "$150 per night",
+    "price": "2000",
     "property_type": "Cottage",
     "photo": "https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg?cs=srgb&dl=pexels-pixabay-258154.jpg&fm=jpg",
-    "check_in_time": "3:00 PM",
-    "check_out_time": "11:00 AM",
+    "checkInTime": "3:00",
+    "checkOutTime": "11:00",
+    "minNights":"1",
+    "maxNights":"10",
+    "petsAllowed":"true",
+    "maxPets":"2",
+    "eventsAllowed":"true",
+    "smokingAllowed":"true",
+    "quietHoursEnabled":"true",
+    "quietHoursStart":"10:00",
+    "quietHoursEnd":"10:00",
+    "commercialPhotography":"true",
+    "maxGuests":"6",
+
     "rules": "No smoking, No pets, Quiet hours after 10 PM",
     "amenities": ["Wifi", "Kitchen", "Washing machine", "Pool", "Firepit"],
     "internalName": "hottub lake",
@@ -81,6 +93,7 @@ const data = [
     "photo": "https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?cs=srgb&dl=pexels-expect-best-106399.jpg&fm=jpg",
     "check_in_time": "2:00 PM",
     "check_out_time": "12:00 PM",
+    
     "rules": "No parties, No smoking, No pets",
     "amenities": ["Air conditioning", "Kitchen", "Dedicated workspace", "Washing machine", "Outdoor shower"],
     "internalName": "hottub lake",
@@ -89,18 +102,18 @@ const data = [
 ]
 
 export default function UserHome() {
-    const [myProperty] = useState(data);
+    const [myProperty,setmyProperty] = useState(data);
     const [selectedProperty, setSelectedProperty] = useState(null); 
-    const [propertyData, setPropertyData] = useState(data); // State to manage property data
-
-    // Function to handle saving the updated property data
-    const handleSave = (updatedData) => {
-      // Update the propertyData state with the updated data
-      setPropertyData(updatedData);
+    
   
-      // Here you can add your logic to post the data to the server
-      console.log('Saving updated property data:', updatedData);
-      // Add your API call logic here
+
+ 
+    function handleSave  (updatedAmenities) {
+      // Update the myProperty state with the new amenities list
+      setmyProperty({
+        ...myProperty,
+        amenities: updatedAmenities,
+      });
     };
   
     const handlePropertyClick = (property) => {
@@ -139,7 +152,7 @@ export default function UserHome() {
   
         <main>
           {selectedProperty ? (
-            <PropertyEdit  selectedPropertyData={selectedProperty} handleSave={handleSave}/>
+            <PropertyEdit  selectedPropertyData={selectedProperty} handleSave={ handleSave}/>
           ) : (
             <div className="property-list">
               {myProperty.map((property, index) => (
