@@ -40,7 +40,7 @@ export default function InfluencerSettings({ selectedPropertyData, handleSave })
         <Form.Group>
           <Form.Label>Are you open to influencer collaborations?</Form.Label>
           <Form.Check
-           style={{accentColor: "#198E78"}}
+           style={{accentColor: "#198E78",}}
             type="radio"
             label="Yes"
             checked={settings.openToCollaborations}
@@ -205,7 +205,7 @@ export default function InfluencerSettings({ selectedPropertyData, handleSave })
           />
         </Form.Group>
 
-        <Button variant="primary" onClick={handleSaveClick}>
+        <Button  style={{backgroundColor:" #198E78",marginTop:"10px"}}variant="primary" onClick={handleSaveClick}>
           Save
         </Button>
       </Form>
