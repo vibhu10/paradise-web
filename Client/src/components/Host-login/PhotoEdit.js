@@ -12,13 +12,13 @@ export default function PhotoEdit() {
       sleepingArrangement: {
         single: 0,
         double: 0,
-        queen: 1, // default from your screenshot
+        queen: 1,
         king: 0,
         smallDouble: 0,
         bunkBed: 0,
         sofaBed: 0,
         sofa: 0,
-      }
+      },
     },
   ]);
 
@@ -32,6 +32,10 @@ export default function PhotoEdit() {
     { name: "Wash Rooms", Photos: [] },
   ]);
 
+  const [showModal, setShowModal] = useState(false);
+  const [currentPhotos, setCurrentPhotos] = useState([]);
+  const [currentRoom, setCurrentRoom] = useState(null); // Keep track of the current room or bedroom being shown
+
   const handleRemoveBedroom = (id) => {
     setBedrooms(bedrooms.filter((bedroom) => bedroom.id !== id));
   };
@@ -44,7 +48,6 @@ export default function PhotoEdit() {
     const file = e.target.files[0];
 
     if (isBedroom) {
-      // Handle photo upload for bedrooms
       const updatedBedrooms = [...bedrooms];
       const bedroomIndex = bedrooms.findIndex((room) => room.id === bedroomId);
 
@@ -53,7 +56,6 @@ export default function PhotoEdit() {
         setBedrooms(updatedBedrooms);
       }
     } else {
-      // Handle photo upload for rooms in the photoGallery
       const updatedPhotoGallery = [...photoGallery];
       const roomIndex = photoGallery.findIndex((room) => room.name === roomName);
 
@@ -71,6 +73,36 @@ export default function PhotoEdit() {
     if (bedroomIndex >= 0) {
       updatedBedrooms[bedroomIndex].sleepingArrangement[type] = value;
       setBedrooms(updatedBedrooms);
+    }
+  };
+
+  // Open modal with the current room or bedroom's photos
+  const openPhotoModal = (photos, room) => {
+    setCurrentPhotos(photos);
+    setCurrentRoom(room);
+    setShowModal(true);
+  };
+
+  // Handle deleting a photo from the current room or bedroom
+  const deletePhoto = (photoIndex) => {
+    if (currentRoom) {
+      // Check if it's a bedroom or a gallery room
+      if (currentRoom.Photos) {
+        // It's a room from the photoGallery
+        const updatedGallery = [...photoGallery];
+        const roomIndex = updatedGallery.findIndex((room) => room === currentRoom);
+        updatedGallery[roomIndex].Photos.splice(photoIndex, 1);
+        setPhotoGallery(updatedGallery);
+      } else {
+        // It's a bedroom
+        const updatedBedrooms = [...bedrooms];
+        const bedroomIndex = updatedBedrooms.findIndex((bedroom) => bedroom === currentRoom);
+        updatedBedrooms[bedroomIndex].photos.splice(photoIndex, 1);
+        setBedrooms(updatedBedrooms);
+      }
+
+      // Update current photos in modal after deletion
+      setCurrentPhotos((prevPhotos) => prevPhotos.filter((_, idx) => idx !== photoIndex));
     }
   };
 
@@ -117,9 +149,7 @@ export default function PhotoEdit() {
                     <input
                       style={{ borderRadius: "10px", border: "none" }}
                       type="file"
-                      onChange={(e) =>
-                        handlePhotoUpload(e, selectedRoom, false)
-                      }
+                      onChange={(e) => handlePhotoUpload(e, selectedRoom, false)}
                     />
                   </div>
                 )}
@@ -134,25 +164,33 @@ export default function PhotoEdit() {
             )}
           </div>
           <p style={{ color: "gray", lineHeight: 0.9 }}>
-            Manage photos and add details. Guests will only see your tour if
-            every room has a photo.
+            Manage photos and add details. Guests will only see your tour if every room has a photo.
           </p>
         </div>
 
-        {/* Photo Gallery Display */}
+        {/* Photo Gallery Display with Stacking and Modal */}
         <div className="photos-gallery">
           {photoGallery.map((data, index) => (
-            <div className="photo-gallery-div" key={index}>
-              {data.Photos.map((photo, idx) => (
-                <img
-                  className="image-gallery-photo"
-                  key={idx}
-                  src={photo}
-                  alt={`${data.name} photo`}
-                />
-              ))}
-              <h5 style={{ fontWeight: 600 }}>{data.name}</h5>
-              <p>{data.Photos.length} Photos</p>
+            <div
+              className="photo-gallery-div"
+              key={index}
+              onClick={() => openPhotoModal(data.Photos, data)}
+              style={{ cursor: "pointer" }}
+            >
+              <div className="photo-stack" style={{ marginBottom: "15px" }}>
+                {data.Photos.slice(0, 3).map((photo, idx) => (
+                  <img
+                    className="image-gallery-photo stacked-photo"
+                    key={idx}
+                    src={photo}
+                    alt={`${data.name} photo`}
+                  />
+                ))}
+              </div>
+              <div>
+              <h5 style={{ fontWeight: 600, lineHeight: 0.4 }}>{data.name}</h5>
+              <p style={{ lineHeight: 0.7 }}>{data.Photos.length} Photos</p>
+                </div>
             </div>
           ))}
         </div>
@@ -207,9 +245,7 @@ export default function PhotoEdit() {
                       aria-expanded="false"
                       aria-controls={`flush-collapse-${bedroom.id}`}
                     >
-                      <h6 style={{ fontWeight: 600 }}>
-                        {`Add ${bedroom.name} Photo`}
-                      </h6>
+                      <h6 style={{ fontWeight: 600 }}>{`Add ${bedroom.name} Photo`}</h6>
                     </button>
                   </h2>
                   <div
@@ -269,81 +305,51 @@ export default function PhotoEdit() {
                   >
                     <div className="accordion-body-sleepingArrangement">
                       <div className="sleeping-arrangement">
-                        {Object.keys(bedroom.sleepingArrangement).map(
-                          (key, index) => (
-                            <div
-                              key={index}
+                        {Object.keys(bedroom.sleepingArrangement).map((key, index) => (
+                          <div
+                            key={index}
+                            style={{
+                              display: "flex",
+                              alignItems: "center",
+                              marginBottom: "10px",
+                            }}
+                          >
+                            <label
                               style={{
-                                display: "flex",
-                                alignItems: "center",
-                                marginBottom: "10px",
+                                marginRight: "10px",
+                                width: "100px",
                               }}
                             >
-                              <label
-                                style={{
-                                  marginRight: "10px",
-                                  width: "100px",
-                                }}
-                              >
-                                {key.charAt(0).toUpperCase() + key.slice(1)}:
-                              </label>
-                              <button
-                                onClick={() =>
-                                  handleSleepingArrangementChange(
-                                    bedroom.id,
-                                    key,
-                                    Math.max(
-                                      0,
-                                      bedroom.sleepingArrangement[key] - 1
-                                    )
-                                  )
-                                }
-                              >
-                                -
-                              </button>
-                              <span style={{ margin: "0 10px" }}>
-                                {bedroom.sleepingArrangement[key]}
-                              </span>
-                              <button
-                                onClick={() =>
-                                  handleSleepingArrangementChange(
-                                    bedroom.id,
-                                    key,
-                                    bedroom.sleepingArrangement[key] + 1
-                                  )
-                                }
-                              >
-                                +
-                              </button>
-                            </div>
-                          )
-                        )}
+                              {key.charAt(0).toUpperCase() + key.slice(1)}:
+                            </label>
+                            <button
+                              onClick={() =>
+                                handleSleepingArrangementChange(
+                                  bedroom.id,
+                                  key,
+                                  Math.max(0, bedroom.sleepingArrangement[key] - 1)
+                                )
+                              }
+                            >
+                              -
+                            </button>
+                            <span style={{ margin: "0 10px" }}>
+                              {bedroom.sleepingArrangement[key]}
+                            </span>
+                            <button
+                              onClick={() =>
+                                handleSleepingArrangementChange(
+                                  bedroom.id,
+                                  key,
+                                  bedroom.sleepingArrangement[key] + 1
+                                )
+                              }
+                            >
+                              +
+                            </button>
+                          </div>
+                        ))}
                       </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="accordion-item">
-                  <h2 className="accordion-header">
-                    <button
-                      className="accordion-button collapsed"
-                      type="button"
-                      data-bs-toggle="collapse"
-                      data-bs-target="#flush-collapseThree"
-                      aria-expanded="false"
-                      aria-controls="flush-collapseThree"
-                    >
-                      <h6 style={{ fontWeight: 600 }}>Privacy info</h6>
-                    </button>
-                  </h2>
-                  <div
-                    id="flush-collapseThree"
-                    className="accordion-collapse collapse"
-                    data-bs-parent="#accordionFlushExample"
-                  >
-                    <div className="accordion-body">
-                      Placeholder content for this accordion, which is intended
-                      to demonstrate the <code>.accordion-flush</code> class.
                     </div>
                   </div>
                 </div>
@@ -351,23 +357,58 @@ export default function PhotoEdit() {
             </div>
           ))}
         </div>
+
+
+
+        
       </div>
 
+      {/* Bedrooms photos footer container */}
       <div className="bedrooms-photos-footer-container">
-        {bedrooms.map((data, index) => (
-          <div style={{marginRight:"20px"}} className="photo-gallery-div" key={index}>
-            {data.photos.map((photo, idx) => (
-              <img
-                className="image-gallery-photo"
-                key={idx}
-                src={photo}
-                alt={`${data.name} photo`}
-              />
-            ))}
-            <h5 style={{ fontWeight: 600 }}>{data.name}</h5>
+        {bedrooms.map((bedroom, index) => (
+          <div
+            className="photo-gallery-div bedroom-photo-container"
+            key={index}
+            onClick={() => openPhotoModal(bedroom.photos, bedroom)}
+          >
+            <div className="photo-stack" style={{ marginBottom: "15px" }}>
+              {bedroom.photos.slice(0, 3).map((photo, idx) => (
+                <img
+                  className="image-gallery-photo stacked-photo"
+                  key={idx}
+                  src={photo}
+                  alt={`${bedroom.name} photo`}
+                />
+              ))}
+            </div>
+            <div>
+              <h5 style={{ fontWeight: 600, lineHeight: 0.4 }}>{bedroom.name}</h5>
+              <p style={{ lineHeight: 0.7 }}>{bedroom.photos.length} Photos</p>
+            </div>
           </div>
         ))}
       </div>
+
+      {/* Modal for showing all photos */}
+      {showModal && (
+        <div className="photo-modal">
+          <div className="photo-modal-content">
+            <button onClick={() => setShowModal(false)} className="close-modal">
+              X
+            </button>
+            <div className="photo-modal-gallery">
+              {currentPhotos.map((photo, idx) => (
+                <div key={idx} className="photo-container">
+                  <img src={photo} alt={`Photo ${idx}`} />
+                  <button className="delete-photo-btn" onClick={() => deletePhoto(idx)}>
+                    X
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
