@@ -87,6 +87,7 @@ export function PageTwelve({ handleNext, handleBack }) {
 
   return (
     <div className="main-container">
+    
       <header className="header-host">
         <img src="/48564e5fe8898cf62b0bbf42276d6cf3.jpeg" alt="paradise" />
         <button className="btn btn-danger">Exit</button>
