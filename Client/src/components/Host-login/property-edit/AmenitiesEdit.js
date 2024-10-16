@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import './Host-login-Css/amenites.css'
+
+import '../Host-login-Css/amenites.css'
 // List of amenities with their corresponding Font Awesome icon classes
 const amenitiesList = [
   { name: 'Wifi', icon: 'fas fa-wifi' },

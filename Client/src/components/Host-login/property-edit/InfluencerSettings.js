@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Button, Row, Col, InputGroup } from 'react-bootstrap';
 import { BsAirplane, BsPerson, BsGem, BsCameraReels, BsPeopleFill, BsBicycle, BsTree, BsHeart, BsCupStraw } from 'react-icons/bs';
-import './Host-login-Css/influencerSetting.css'
+import '../Host-login-Css/influencerSetting.css'
 export default function InfluencerSettings({ selectedPropertyData, handleSave }) {
   const [settings, setSettings] = useState({
     openToCollaborations: false,

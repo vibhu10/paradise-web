@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Host-login-Css/pricingAndAvailability.css'
+import '../Host-login-Css/pricingAndAvailability.css'
 export default function PricingAvailabilityEdit({ selectedPropertyData, onSave }) {
   const [price, setPrice] = useState(selectedPropertyData.price || 0);
   const [minNights, setMinNights] = useState(selectedPropertyData.minNights || 1);

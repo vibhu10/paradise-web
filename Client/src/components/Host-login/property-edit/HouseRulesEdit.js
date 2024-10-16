@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
+import '../Host-login-Css/houseRules.css'
 
-import './Host-login-Css/houseRules.css'
 export default function HouseRulesEdit({ selectedPropertyData, onSave }) {
   const [formData, setFormData] = useState({
     petsAllowed: selectedPropertyData.petsAllowed || false,

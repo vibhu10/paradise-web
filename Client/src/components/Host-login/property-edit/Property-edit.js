@@ -6,7 +6,14 @@ import PricingAvailabilityEdit from './PricingAvailabilityEdit';
 import HouseRulesEdit from './HouseRulesEdit';
 import AccessibilityEdit from './AccessibilityEdit';
 import InfluencerSettings from './InfluencerSettings';
-import "./Host-login-Css/property-edit.css";
+
+import CheckInOut from '../check-in-guide/Check-In-Out';
+import Directions from '../check-in-guide/Directions';
+import GuideBook from '../check-in-guide/Guide-book';
+import HouseManual from '../check-in-guide/House-Manual';
+import HouseRules from '../check-in-guide/House-Rules';
+import WifiDetails from '../check-in-guide/Wifi-Details';
+import "../Host-login-Css/property-edit.css";
 
 export default function PropertyEdit({ selectedPropertyData, handleSave }) {
   const [activeTab, setActiveTab] = useState('Photos');
@@ -45,10 +52,13 @@ export default function PropertyEdit({ selectedPropertyData, handleSave }) {
     return (
       <ul style={{ fontWeight: 500 }}>
         {[
-          'Guide Introduction',
-          'Check-in Instructions',
-          'Key Information',
-          'Local Recommendations'
+          'Check-in/out',
+          'Directions',
+          'House Manual',
+          'House Rules',
+          'guidebook',
+          'Wifi Details'
+          
         ].map((item) => (
           <li
             key={item}
@@ -93,20 +103,25 @@ export default function PropertyEdit({ selectedPropertyData, handleSave }) {
           return <AccessibilityEdit selectedPropertyData={selectedPropertyData} onSave={handleSave} />;
         case 'Influencer Settings':
           return <InfluencerSettings selectedPropertyData={selectedPropertyData} onSave={handleSave} />;
-        default:
+          default:
           return null;
       }
     } else if (activeSection === 'Check-in Guide') {
       // Placeholder content for Check-in Guide sections, modify as per your needs
       switch (activeTab) {
-        case 'Guide Introduction':
-          return <div>Guide Introduction Content</div>;
-        case 'Check-in Instructions':
-          return <div>Check-in Instructions Content</div>;
-        case 'Key Information':
-          return <div>Key Information Content</div>;
-        case 'Local Recommendations':
-          return <div>Local Recommendations Content</div>;
+        case'Check-in/out':
+         
+         return <CheckInOut/>
+        case 'Directions':
+          return <Directions/>;
+        case 'House Manual':
+          return <HouseManual/>;
+        case 'House Rules':
+          return <HouseRules/>;
+          case  'guidebook':
+            return <GuideBook/>
+          case   'Wifi Details':
+            return <WifiDetails/>
         default:
           return null;
       }

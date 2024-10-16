@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Host-login-Css/TimeDescription.css'
+import '../Host-login-Css/TimeDescription.css'
 export default function TimeAndDescriptionEdit({ selectedPropertyData, onSave }) {
   // Destructure data with default values to prevent 'undefined' errors
   const {

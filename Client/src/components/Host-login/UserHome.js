@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import './UserHome.css';
-import PropertyEdit from './Property-edit';
+
+import PropertyEdit from './property-edit/Property-edit';
 const data = [
   {
     "type": "listed",

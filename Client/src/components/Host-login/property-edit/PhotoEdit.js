@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./Host-login-Css/photos.css";
+import "../Host-login-Css/photos.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 

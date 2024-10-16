@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import './Host-login-Css/accessibility.css'
 
+import '../Host-login-Css/accessibility.css'
 export default function AccessibilityEdit() {
   const [expanded, setExpanded] = useState(null);
   const [parkingSpotPhoto, setParkingSpotPhoto] = useState(null);

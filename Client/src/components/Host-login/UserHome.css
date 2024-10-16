@@ -2,6 +2,16 @@
    
 
 }
+.selector-userHome {
+  padding-right: 140px;
+  padding-left: 60px;
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+  border: 2px solid black;
+  width: 100%;
+  height: 90px;
+}
 
 header{
     width: 100vw;
