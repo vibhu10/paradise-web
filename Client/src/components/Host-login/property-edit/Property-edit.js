@@ -111,17 +111,17 @@ export default function PropertyEdit({ selectedPropertyData, handleSave }) {
       switch (activeTab) {
         case'Check-in/out':
          
-         return <CheckInOut/>
+         return <CheckInOut selectedPropertyData={selectedPropertyData} onSave={handleSave}/>
         case 'Directions':
-          return <Directions/>;
+          return <Directions selectedPropertyData={selectedPropertyData} onSave={handleSave}/>;
         case 'House Manual':
-          return <HouseManual/>;
+          return <HouseManual selectedPropertyData={selectedPropertyData} onSave={handleSave}/>;
         case 'House Rules':
-          return <HouseRules/>;
+          return <HouseRules selectedPropertyData={selectedPropertyData} onSave={handleSave}/>;
           case  'guidebook':
-            return <GuideBook/>
+            return <GuideBook selectedPropertyData={selectedPropertyData} onSave={handleSave}/>
           case   'Wifi Details':
-            return <WifiDetails/>
+            return <WifiDetails selectedPropertyData={selectedPropertyData} onSave={handleSave}/>
         default:
           return null;
       }
@@ -132,6 +132,7 @@ export default function PropertyEdit({ selectedPropertyData, handleSave }) {
     <div className="host-Propertyedit-page">
       <div className="Propertyedit-head">
         <div className="Propertyedit-head-div1">
+        
           <h4 style={{ fontWeight: 700 }}>Listing editor</h4>
           <div className='button-div'>
             {/* Buttons to toggle between sections */}
