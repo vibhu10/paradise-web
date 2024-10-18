@@ -52,9 +52,9 @@ const data = [
       "serviceFee": "40"
     },
     "additionalRules": [
-      "No shoes inside.",
-      "No outside guests.",
-      "Keep noise to a minimum during quiet hours."
+      {"No outside guests allowed.":true},
+      {"No loud music or parties.":false},
+      
     ],
     "locationDetails": {
       "address": "123 Urban Ave, New York, NY 10001, USA",
@@ -145,9 +145,9 @@ const data = [
       "petFee": "50"
     },
     "additionalRules": [
-      "No outside guests allowed.",
-      "No loud music or parties.",
-      "Please keep the cabin clean and follow check-out procedures."
+      {"No outside guests allowed.":true},
+      {"No loud music or parties.":false},
+      
     ],
     "locationDetails": {
       "address": "456 Mountain Rd, Asheville, NC 28801, USA",

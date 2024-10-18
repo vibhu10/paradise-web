@@ -1,90 +1,109 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Modal, Button, Form } from "react-bootstrap"; // Bootstrap modal
 
-export function PageTwelve({ handleNext, handleBack }) {
-  const [buttonPopup, setButtonPopup] = useState(false);
-  const [bedrooms, setBedrooms] = useState([]);
-  const [openAccordionIndex, setOpenAccordionIndex] = useState(null);
-  const [photos, setPhotos] = useState({});
-  const [selectedDiv, setSelectedDiv] = useState(null); // State for selecting div for photos
-  const [showPhotoModal, setShowPhotoModal] = useState(false); // Modal for showing photos in a div
-  const [currentRoomPhotos, setCurrentRoomPhotos] = useState([]); // To store photos for clicked room
 
-  useEffect(() => {
-    addBedroom(); // Add one bedroom on load
-  }, []);
-
-  function addBedroom() {
-    setBedrooms((prevBedrooms) => [
-      ...prevBedrooms,
-      {
-        singleBed: 0,
-        doubleBed: 0,
-        queenBed: 0,
-        kingBed: 0,
+export function PageTwelve({ handleNext, handleBack } ) {
+  const [bedrooms, setBedrooms] = useState([
+    {
+      id: 1,
+      name: "Bedroom 1",
+      photos: [],
+      sleepingArrangement: {
+        single: 0,
+        double: 0,
+        queen: 1,
+        king: 0,
         smallDouble: 0,
         bunkBed: 0,
         sofaBed: 0,
         sofa: 0,
       },
-    ]);
-  }
+    },
+  ]);
 
-  function incrementValue(index, bedType) {
-    const updatedBedrooms = bedrooms.map((bedroom, i) => {
-      if (i === index) {
-        return { ...bedroom, [bedType]: bedroom[bedType] + 1 };
+  const [addPhotoButtonPopUP, setAddPhotoPopUp] = useState(false);
+  const [selectedRoom, setSelectedRoom] = useState("");
+  const [photoGallery, setPhotoGallery] = useState([
+    { name: "Living room", Photos: [] },
+    { name: "Full Kitchen", Photos: [] },
+    { name: "Exterior", Photos: [] },
+    { name: "Dining area", Photos: [] },
+    { name: "Wash Rooms", Photos: [] },
+  ]);
+
+  const [showModal, setShowModal] = useState(false);
+  const [currentPhotos, setCurrentPhotos] = useState([]);
+  const [currentRoom, setCurrentRoom] = useState(null); // Keep track of the current room or bedroom being shown
+
+  const handleRemoveBedroom = (id) => {
+    setBedrooms(bedrooms.filter((bedroom) => bedroom.id !== id));
+  };
+
+  const handleRoomSelection = (e) => {
+    setSelectedRoom(e.target.value);
+  };
+
+  const handlePhotoUpload = (e, roomName, isBedroom = false, bedroomId = null) => {
+    const file = e.target.files[0];
+
+    if (isBedroom) {
+      const updatedBedrooms = [...bedrooms];
+      const bedroomIndex = bedrooms.findIndex((room) => room.id === bedroomId);
+
+      if (bedroomIndex >= 0) {
+        updatedBedrooms[bedroomIndex].photos.push(URL.createObjectURL(file));
+        setBedrooms(updatedBedrooms);
       }
-      return bedroom;
-    });
-    setBedrooms(updatedBedrooms);
-  }
+    } else {
+      const updatedPhotoGallery = [...photoGallery];
+      const roomIndex = photoGallery.findIndex((room) => room.name === roomName);
 
-  function decrementValue(index, bedType) {
-    const updatedBedrooms = bedrooms.map((bedroom, i) => {
-      if (i === index && bedroom[bedType] > 0) {
-        return { ...bedroom, [bedType]: bedroom[bedType] - 1 };
+      if (roomIndex >= 0) {
+        updatedPhotoGallery[roomIndex].Photos.push(URL.createObjectURL(file));
+        setPhotoGallery(updatedPhotoGallery);
       }
-      return bedroom;
-    });
-    setBedrooms(updatedBedrooms);
-  }
-
-  function deleteBedroom(index) {
-    setBedrooms(bedrooms.filter((_, i) => i !== index));
-  }
-
-  const toggleAccordion = (index) => {
-    setOpenAccordionIndex((prevIndex) => (prevIndex === index ? null : index));
-  };
-
-  // Handle File Upload and Assign to Div
-  const handleFileUpload = (event) => {
-    const files = Array.from(event.target.files);
-    if (!selectedDiv) return alert("Please select a div to assign photos");
-
-    setPhotos((prevPhotos) => ({
-      ...prevPhotos,
-      [selectedDiv]: [...(prevPhotos[selectedDiv] || []), ...files],
-    }));
-
-    setButtonPopup(false); // Close the modal after upload
-  };
-
-  // Handle Div Selection
-  const handleDivSelection = (event) => {
-    setSelectedDiv(event.target.value);
-  };
-
-  // Handle Room Div Click to Show Photos
-  const handleRoomClick = (room) => {
-    if (photos[room] && photos[room].length > 0) {
-      setCurrentRoomPhotos(photos[room]); // Set photos for the clicked room
-      setShowPhotoModal(true); // Show modal
     }
   };
 
+  const handleSleepingArrangementChange = (bedroomId, type, value) => {
+    const updatedBedrooms = [...bedrooms];
+    const bedroomIndex = bedrooms.findIndex((room) => room.id === bedroomId);
+
+    if (bedroomIndex >= 0) {
+      updatedBedrooms[bedroomIndex].sleepingArrangement[type] = value;
+      setBedrooms(updatedBedrooms);
+    }
+  };
+
+  // Open modal with the current room or bedroom's photos
+  const openPhotoModal = (photos, room) => {
+    setCurrentPhotos(photos);
+    setCurrentRoom(room);
+    setShowModal(true);
+  };
+
+  // Handle deleting a photo from the current room or bedroom
+  const deletePhoto = (photoIndex) => {
+    if (currentRoom) {
+      // Check if it's a bedroom or a gallery room
+      if (currentRoom.Photos) {
+        // It's a room from the photoGallery
+        const updatedGallery = [...photoGallery];
+        const roomIndex = updatedGallery.findIndex((room) => room === currentRoom);
+        updatedGallery[roomIndex].Photos.splice(photoIndex, 1);
+        setPhotoGallery(updatedGallery);
+      } else {
+        // It's a bedroom
+        const updatedBedrooms = [...bedrooms];
+        const bedroomIndex = updatedBedrooms.findIndex((bedroom) => bedroom === currentRoom);
+        updatedBedrooms[bedroomIndex].photos.splice(photoIndex, 1);
+        setBedrooms(updatedBedrooms);
+      }
+
+      // Update current photos in modal after deletion
+      setCurrentPhotos((prevPhotos) => prevPhotos.filter((_, idx) => idx !== photoIndex));
+    }
+  };
   return (
     <div className="main-container">
     
@@ -93,285 +112,309 @@ export function PageTwelve({ handleNext, handleBack }) {
         <button className="btn btn-danger">Exit</button>
       </header>
 
-      <div className="body-host-with-scroll">
-        <div className="pannel-box-page12">
-          <div className="uploading-photo-page12">
-            <div style={{ marginLeft: "23px" }}>
-              <button
-                className="btn btn-outline-secondary rounded-circle"
-                onClick={() => setButtonPopup(true)} // Open modal on click
-              >
-                +
-              </button>
-              <h4>Photo tour</h4>
-              <p>
-                Manage photos and add details. Guests will only see your tour if
-                every room has a photo.
-              </p>
-            </div>
-
-            <div className="photo-card-container row">
-              {["Living room", "Full Kitchen", "Exterior", "Dining area", "Wash room"].map((div, index) => (
-                <div
-                  key={index}
-                  className="col-md-3 photo-card"
-                  onClick={() => handleRoomClick(div)} // Handle room div click
-                >
-                
-                  <div className="photo-gallery">
-                    {photos[div] && photos[div].length > 0 ? (
-                      <>
-                        
-                        <img
-                          src={URL.createObjectURL(photos[div][0])}
-                          alt="Room Thumbnail"
-                          width="100%"
-                          height="100px"
-                          style={{ objectFit: "cover", marginBottom: "10px" }}
-                        />
-                          <h6>{div}</h6>
-                        <p>{photos[div].length} photos</p>
-                      </>
-                    ) : (
-                      <p>No photos yet</p>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Accordion for Bedrooms */}
-          <div className="adding-bedrooms-page12">
+      <div className="photoEdit-hostlogin">
+      <div id="photo-tour-section">
+        <div className="heading-photo-tour">
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <h4 style={{ fontWeight: 600 }}>Photo tour</h4>
             <button
-              style={{ position: "relative", left: "440px", top: "10px" }}
-              className="btn btn-outline-secondary rounded-circle"
-              onClick={addBedroom}
+              style={{ backgroundColor: "lightgray", borderRadius: "20px" }}
+              onClick={() => setAddPhotoPopUp(!addPhotoButtonPopUP)}
             >
               +
             </button>
 
-            <div className="accordion mt-4" id="bedroomAccordion">
-              {bedrooms.map((bedroom, index) => (
-                <div key={index} className="accordion-item mb-3">
-                  <h2 className="accordion-header" id={`heading${index}`}>
-                    <button
-                      className="accordion-button"
-                      type="button"
-                      onClick={() => toggleAccordion(index)}
-                    >
-                      Bedroom {index + 1}
-                    </button>
-                    <button
-                      className="btn btn-outline-secondary rounded-circle"
+            {addPhotoButtonPopUP && (
+              <div className="addphotos-gallery-popup">
+                <h4 style={{ fontWeight: 600 }}>Select Room to Add Photos</h4>
+                <select
+                  style={{ width: "400px", height: "50px" }}
+                  onChange={handleRoomSelection}
+                  value={selectedRoom}
+                >
+                  <option value="">-- Select a Room --</option>
+                  {photoGallery.map((room, index) => (
+                    <option key={index} value={room.name}>
+                      {room.name}
+                    </option>
+                  ))}
+                </select>
+
+                {selectedRoom && (
+                  <div className="photo-upload-section">
+                    <label
                       style={{
-                        backgroundColor: "red",
-                        color: "white",
-                        position: "absolute",
-                        right: "330px",
-                        top: "463px",
-                        border: "1px solid gray",
+                        color: "gray",
+                        fontWeight: 500,
+                        marginRight: "10px",
                       }}
-                      onClick={() => deleteBedroom(index)}
                     >
-                      X
+                      Upload Photo for {selectedRoom}
+                    </label>
+                    <input
+                      style={{ borderRadius: "10px", border: "none" }}
+                      type="file"
+                      onChange={(e) => handlePhotoUpload(e, selectedRoom, false)}
+                    />
+                  </div>
+                )}
+
+                <button
+                  style={{ width: "200px", marginTop: "10px" }}
+                  onClick={() => setAddPhotoPopUp(false)}
+                >
+                  Close
+                </button>
+              </div>
+            )}
+          </div>
+          <p style={{ color: "gray", lineHeight: 0.9 }}>
+            Manage photos and add details. Guests will only see your tour if every room has a photo.
+          </p>
+        </div>
+
+        {/* Photo Gallery Display with Stacking and Modal */}
+        <div className="photos-gallery">
+          {photoGallery.map((data, index) => (
+            <div
+              className="photo-gallery-div"
+              key={index}
+              onClick={() => openPhotoModal(data.Photos, data)}
+              style={{ cursor: "pointer" }}
+            >
+              <div className="photo-stack" style={{ marginBottom: "15px" }}>
+                {data.Photos.slice(0, 3).map((photo, idx) => (
+                  <img
+                    className="image-gallery-photo stacked-photo"
+                    key={idx}
+                    src={photo}
+                    alt={`${data.name} photo`}
+                  />
+                ))}
+              </div>
+              <div>
+              <h5 style={{ fontWeight: 600, lineHeight: 0.4 }}>{data.name}</h5>
+              <p style={{ lineHeight: 0.7 }}>{data.Photos.length} Photos</p>
+                </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Bedrooms Accordion */}
+      <div className="bedroom-accordion-outer">
+        <button
+          onClick={() =>
+            setBedrooms([
+              ...bedrooms,
+              {
+                id: bedrooms.length + 1,
+                name: `Bedroom ${bedrooms.length + 1}`,
+                photos: [],
+                sleepingArrangement: {
+                  single: 0,
+                  double: 0,
+                  queen: 1,
+                  king: 0,
+                  smallDouble: 0,
+                  bunkBed: 0,
+                  sofaBed: 0,
+                  sofa: 0,
+                },
+              },
+            ])
+          }
+        >
+          Add Bedroom
+        </button>
+        <div className="accordion accordion-flush" id="accordionFlushExample">
+          {bedrooms.map((bedroom) => (
+            <div className="accordian-divs" key={bedroom.id}>
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <h3 style={{ fontWeight: 600 }}>{bedroom.name}</h3>
+                <button
+                  style={{ backgroundColor: "red", borderRadius: "50%" }}
+                  onClick={() => handleRemoveBedroom(bedroom.id)}
+                >
+                  X
+                </button>
+              </div>
+              <div className="accordion accordion-flush" id="accordionFlushExample">
+                <div className="accordion-item">
+                  <h2 className="accordion-header">
+                    <button
+                      className="accordion-button collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target={`#flush-collapse-${bedroom.id}`}
+                      aria-expanded="false"
+                      aria-controls={`flush-collapse-${bedroom.id}`}
+                    >
+                      <h6 style={{ fontWeight: 600 }}>{`Add ${bedroom.name} Photo`}</h6>
                     </button>
                   </h2>
-
                   <div
-                    id={`collapse${index}`}
-                    className={`accordion-collapse collapse ${
-                      openAccordionIndex === index ? "show" : ""
-                    }`}
-                    aria-labelledby={`heading${index}`}
-                    data-bs-parent="#bedroomAccordion"
+                    id={`flush-collapse-${bedroom.id}`}
+                    className="accordion-collapse collapse"
+                    data-bs-parent="#accordionFlushExample"
                   >
                     <div className="accordion-body">
-                      <h6 className="border-bottom">Sleeping Arrangements</h6>
-
-                      <div className="row">
-                        <div className="col-md-6">
-                          {[
-                            { label: "Single", type: "singleBed" },
-                            { label: "Double", type: "doubleBed" },
-                            { label: "Queen", type: "queenBed" },
-                            { label: "King", type: "kingBed" },
-                          ].map(({ label, type }) => (
-                            <div key={type}>
-                              <i
-                                className="bi bi-bed"
-                                style={{ fontSize: "24px", marginRight: "10px" }}
-                              ></i>
-                              <label className="me-auto">{label}</label>
-                              <button
-                                className="btn btn-outline-secondary"
-                                onClick={() => decrementValue(index, type)}
-                              >
-                                -
-                              </button>
-                              <span className="mx-2">{bedroom[type]}</span>
-                              <button
-                                className="btn btn-outline-secondary"
-                                onClick={() => incrementValue(index, type)}
-                              >
-                                +
-                              </button>
-                            </div>
-                          ))}
+                      <label htmlFor={`file-upload-${bedroom.id}`}>
+                        <div
+                          className="file-upload-bedrooms-accordian"
+                          style={{
+                            border: "2px dashed lightgray",
+                            padding: "10px",
+                            textAlign: "center",
+                            cursor: "pointer",
+                          }}
+                        >
+                          <img
+                            src="image-upload-placeholder-icon"
+                            alt="Add Photo"
+                            style={{ width: "50px" }}
+                          />
+                          <p>Add photos</p>
                         </div>
+                      </label>
+                      <input
+                        id={`file-upload-${bedroom.id}`}
+                        type="file"
+                        style={{ display: "none" }}
+                        onChange={(e) =>
+                          handlePhotoUpload(e, bedroom.name, true, bedroom.id)
+                        }
+                      />
+                    </div>
+                  </div>
+                </div>
 
-                        <div className="col-md-6">
-                          {[
-                            { label: "Small Double", type: "smallDouble" },
-                            { label: "Bunk Bed", type: "bunkBed" },
-                            { label: "Sofa Bed", type: "sofaBed" },
-                            { label: "Sofa", type: "sofa" },
-                          ].map(({ label, type }) => (
-                            <div
-                              className="d-flex align-items-center mb-3"
-                              key={type}
+                {/* Sleeping Arrangements Accordion */}
+                <div className="accordion-item">
+                  <h2 className="accordion-header">
+                    <button
+                      className="accordion-button collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target={`#flush-collapseTwo-${bedroom.id}`}
+                      aria-expanded="false"
+                      aria-controls={`flush-collapseTwo-${bedroom.id}`}
+                    >
+                      <h6 style={{ fontWeight: 600 }}>Sleeping Arrangements</h6>
+                    </button>
+                  </h2>
+                  <div
+                    id={`flush-collapseTwo-${bedroom.id}`}
+                    className="accordion-collapse collapse"
+                    data-bs-parent="#accordionFlushExample"
+                  >
+                    <div className="accordion-body-sleepingArrangement">
+                      <div className="sleeping-arrangement">
+                        {Object.keys(bedroom.sleepingArrangement).map((key, index) => (
+                          <div
+                            key={index}
+                            style={{
+                              display: "flex",
+                              alignItems: "center",
+                              marginBottom: "10px",
+                            }}
+                          >
+                            <label
+                              style={{
+                                marginRight: "10px",
+                                width: "100px",
+                              }}
                             >
-                              <i
-                                className="bi bi-bed"
-                                style={{ fontSize: "24px", marginRight: "10px" }}
-                              ></i>
-                              <label className="me-auto">{label}</label>
-                              <button
-                                className="btn btn-outline-secondary"
-                                onClick={() => decrementValue(index, type)}
-                              >
-                                -
-                              </button>
-                              <span className="mx-2">{bedroom[type]}</span>
-                              <button
-                                className="btn btn-outline-secondary"
-                                onClick={() => incrementValue(index, type)}
-                              >
-                                +
-                              </button>
-                            </div>
-                          ))}
-                        </div>
+                              {key.charAt(0).toUpperCase() + key.slice(1)}:
+                            </label>
+                            <button
+                              onClick={() =>
+                                handleSleepingArrangementChange(
+                                  bedroom.id,
+                                  key,
+                                  Math.max(0, bedroom.sleepingArrangement[key] - 1)
+                                )
+                              }
+                            >
+                              -
+                            </button>
+                            <span style={{ margin: "0 10px" }}>
+                              {bedroom.sleepingArrangement[key]}
+                            </span>
+                            <button
+                              onClick={() =>
+                                handleSleepingArrangementChange(
+                                  bedroom.id,
+                                  key,
+                                  bedroom.sleepingArrangement[key] + 1
+                                )
+                              }
+                            >
+                              +
+                            </button>
+                          </div>
+                        ))}
                       </div>
                     </div>
                   </div>
                 </div>
-              ))}
-
-              {/* New Privacy Info Accordion */}
-              <div className="accordion-item mb-3">
-                <h2 className="accordion-header" id="privacyInfoHeading">
-                  <button
-                    className="accordion-button"
-                    type="button"
-                    onClick={() => toggleAccordion("privacyInfo")}
-                  >
-                    Privacy Info
-                  </button>
-                </h2>
-
-                <div
-                  id="collapsePrivacyInfo"
-                  className={`accordion-collapse collapse ${
-                    openAccordionIndex === "privacyInfo" ? "show" : ""
-                  }`}
-                  aria-labelledby="privacyInfoHeading"
-                  data-bs-parent="#bedroomAccordion"
-                >
-                  <div className="accordion-body">
-                    <p>Privacy information goes here.</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Restore the Amenities Accordion */}
-              <div className="accordion-item mb-3">
-                <h2 className="accordion-header" id="amenitiesHeading">
-                  <button
-                    className="accordion-button"
-                    type="button"
-                    onClick={() => toggleAccordion("amenities")}
-                  >
-                    Amenities
-                  </button>
-                </h2>
-
-                <div
-                  id="collapseAmenities"
-                  className={`accordion-collapse collapse ${
-                    openAccordionIndex === "amenities" ? "show" : ""
-                  }`}
-                  aria-labelledby="amenitiesHeading"
-                  data-bs-parent="#bedroomAccordion"
-                >
-                  <div className="accordion-body">
-                    <p>Amenities information goes here.</p>
-                  </div>
-                </div>
               </div>
             </div>
-          </div>
-
-          {/* Modal for Photo Upload */}
-          <Modal show={buttonPopup} onHide={() => setButtonPopup(false)}>
-            <Modal.Header closeButton>
-              <Modal.Title>Upload Photos</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <Form.Group controlId="formFileMultiple" className="mb-3">
-                <Form.Label>Select Room you want to upload photo of</Form.Label>
-                <Form.Select onChange={handleDivSelection}>
-                  <option>Select a Room</option>
-                  {["Living room", "Full Kitchen", "Exterior", "Dining area", "Wash room"].map((div, index) => (
-                    <option key={index} value={div}>
-                      {div}
-                    </option>
-                  ))}
-                </Form.Select>
-
-                <Form.Label className="mt-3">Upload Photos</Form.Label>
-                <Form.Control
-                  type="file"
-                  multiple
-                  accept="image/*"
-                  onChange={handleFileUpload}
-                />
-              </Form.Group>
-            </Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={() => setButtonPopup(false)}>
-                Close
-              </Button>
-            </Modal.Footer>
-          </Modal>
-
-          {/* Modal for Viewing Room Photos */}
-          <Modal show={showPhotoModal} onHide={() => setShowPhotoModal(false)}>
-            <Modal.Header closeButton>
-              <Modal.Title>Room Photos</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              {currentRoomPhotos.map((photo, index) => (
-                <img
-                  key={index}
-                  src={URL.createObjectURL(photo)}
-                  alt={`Room photo ${index + 1}`}
-                  width="100%"
-                  style={{ marginBottom: "10px" }}
-                />
-              ))}
-            </Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={() => setShowPhotoModal(false)}>
-                Close
-              </Button>
-            </Modal.Footer>
-          </Modal>
-
+          ))}
         </div>
+
+
 
         
       </div>
+
+      {/* Bedrooms photos footer container */}
+      <div className="bedrooms-photos-footer-container">
+        {bedrooms.map((bedroom, index) => (
+          <div
+            className="photo-gallery-div bedroom-photo-container"
+            key={index}
+            onClick={() => openPhotoModal(bedroom.photos, bedroom)}
+          >
+            <div className="photo-stack" style={{ marginBottom: "15px" }}>
+              {bedroom.photos.slice(0, 3).map((photo, idx) => (
+                <img
+                  className="image-gallery-photo stacked-photo"
+                  key={idx}
+                  src={photo}
+                  alt={`${bedroom.name} photo`}
+                />
+              ))}
+            </div>
+            <div>
+              <h5 style={{ fontWeight: 600, lineHeight: 0.4 }}>{bedroom.name}</h5>
+              <p style={{ lineHeight: 0.7 }}>{bedroom.photos.length} Photos</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Modal for showing all photos */}
+      {showModal && (
+        <div className="photo-modal">
+          <div className="photo-modal-content">
+            <button onClick={() => setShowModal(false)} className="close-modal">
+              X
+            </button>
+            <div className="photo-modal-gallery">
+              {currentPhotos.map((photo, idx) => (
+                <div key={idx} className="photo-container">
+                  <img src={photo} alt={`Photo ${idx}`} />
+                  <button className="delete-photo-btn" onClick={() => deletePhoto(idx)}>
+                    X
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
       
       <div className="host-footer">
         <button onClick={handleBack}>Back</button>
