@@ -1,0 +1,95 @@
+.check-in-out-container {
+    font-family: Arial, sans-serif;
+    max-width: 700px;
+    margin: auto;
+    padding: 20px;
+  }
+  
+  h2, h3 {
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .time-select {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  select {
+    padding: 8px;
+    width: 150px;
+  }
+  
+  p {
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .instructions-section {
+    margin-bottom: 20px;
+  }
+  .instructions-section-textarea{
+    width: 100%;
+    height: 100%;
+  }
+  
+
+  .instruction-box {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    width: 600px;
+    height: 100px;
+
+  }
+  
+  .add-instruction {
+    background-color: transparent;
+    border: 1px dashed #000;
+    padding: 10px;
+    cursor: pointer;
+    display: block;
+  }
+  
+  .method-section ul, .checkout-section ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  
+  li {
+    margin-bottom: 10px;
+    line-height: 1.5;
+  }
+  
+  li strong {
+    font-weight: bold;
+  }
+  
+  .action-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .cancel {
+    background-color: #ccc;
+  }
+  
+  .save {
+    background-color: #4CAF50;
+    color: white;
+  }
+  

@@ -1,0 +1,280 @@
+.home-container {
+    width: 100vw;
+    /* border: 5px solid red; */
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+  }
+  
+  .header {
+    width: 100vw;
+    height: 200px;
+    /* border: 2px solid black; */
+    display: flex;
+    flex-direction: column;
+    
+  }
+  
+  .home-filter {
+    background-color: black;
+    width: 100vw;
+    height: 50vh;
+    display: flex;
+   justify-content: center;
+   align-items: center;
+  
+  
+  }
+  .home-filter img{
+    width: 240px;
+    height: 76px;
+    position: absolute;
+    left: 43px;
+   
+  }
+  .home-filter .filter{
+    left: 53px;
+    position: relative;
+    width: 870px;
+    height: 64px;
+  background: #198E78;
+  border-radius: 10px;
+  }
+  /*homw filter hamburger*/
+  
+  .filter-hamburger{
+    position: relative;
+    left: 61px;
+    width: 64px;
+    height: 64px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #198E78;
+    gap: 5px;
+    color: white;
+    margin:5px
+  }
+  .filter-hamburger .line {
+    width: 30px;
+    height: 3px;
+    background-color: white;
+    border-radius: 2px;
+  }
+  
+  
+  
+  /* this is hamburger menu */
+  .hamburger-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    padding: 0;
+  }
+  
+  .line {
+    width: 30px;
+    height: 3px;
+    background-color: white;
+    border-radius: 2px;
+  }
+  
+  .short {
+    width: 20px; /* Shorter middle line */
+  }
+  
+  /*login popup*/
+  
+  .login-popup {
+    width: 568px;
+    height: 543px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    background-color: white;
+    position: absolute;
+    left: -936px;
+    top: 150px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction:column;
+    justify-content: space-evenly;
+    padding: 15px;
+  }
+  .login-popup h4{
+    border-bottom: 2px solid lightgrey;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: bold;
+  
+  }
+  #log-in-phoneNo-div{
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+  }
+  #log-in-phoneNo-div #country-code{
+    width: 30vw;
+    height: 62px;
+    border-collapse: collapse;
+    border: 1px solid lightgray;
+    border-radius: 3px;
+    border-radius: 10px 10px 0px 0px;
+  }
+  #log-in-phoneNo-div #phone{
+    width: 30vw;
+    height: 62px;
+    border-collapse: collapse;
+    border: 1px solid lightgray;
+    border-radius: 3px;
+    border-radius: 0px 0px 10px 10px;
+  }
+  .login-popup h1{
+    margin: 5px;
+  }
+  
+  .login-popup div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .login-popup button{
+    width: 112px;
+    height: 50px;
+    color: white;
+    border-radius: 10px;
+    background-color: #198E78;
+  }
+  .login-popup #line{
+   border-bottom: 2px solid lightgray;
+   
+  }
+  
+    #line-text {
+      position: relative;
+      top: 27px;
+  }
+  
+  .login-popup div button {
+    background-color: white;
+    color: black;
+    border-radius: 10px;
+    width: 112px;
+    height: 50px;
+    margin: 10px;
+  }
+  
+  .switch-to-hosting-button{
+    background:transparent;
+    box-shadow: none;
+    color: white;
+    border: none;
+    margin: 10px;
+  }
+  
+  
+  .log-in-container{
+    position: relative;
+      left: 195px;  /* log in hamburger and swich to host container */
+      display: flex;
+   
+  }
+  
+  
+  .home-grid {
+    width: 100vw; /* Adjusted to match viewport width */
+    height: 50vh;
+  }
+  
+  .container-filter-buttons .btn {
+    border: none; /* Removes the border from the button */
+    color: grey; /* Changes the font color to grey */
+    
+  }
+  
+  .container-filter-buttons .btn:hover {
+    background-color: transparent;
+    color: #198E78;
+  }
+  .container-filter-buttons{
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    justify-content:space-evenly;
+    height: 50vh;
+  }
+  .container-filter-buttons .compare-button {
+    width: 174px;
+    height: 47px;
+    position: absolute;
+    left: 45px;
+    top: 139px;
+    background: #198E78;
+    color: white;
+    border-radius: 8px;
+  
+  
+  }
+  .container-filter-buttons 
+  /* Body section */
+  .home-body {
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column; /* Adjust as needed */
+    align-items: center; /* Center items */
+  }
+  .hotel-data {
+    width: 100vw;
+    
+    /* border: 2px solid black; */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    /* overflow-y: auto; Enable vertical scrolling */
+    padding: 50px; 
+  }
+  
+  .hotel-card {
+    width: 300px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Prevent scroll bars */
+    margin: 10px;
+  }
+  
+  .hotel-card img {
+    object-fit: cover;
+    width: 100%;
+    height: 70%; /* Image takes 70% of the card's height */
+    border-radius: 20px ; /* Rounded top corners */
+  }
+  
+  #hotel-detail {
+    height: 30%; /* Remaining space for the content */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    overflow: hidden; /* Prevent scroll bars */
+  }
+  
+  #hotel-detail p,h3{
+    line-height: 3px;
+  }
+  
+  /*footer*/
+  
+  .footer{
+    width: 100vw;
+    height: 100px;
+    background-color: black;
+  }
+  
+  

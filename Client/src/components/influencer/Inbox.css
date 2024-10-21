@@ -1,0 +1,398 @@
+.inbox {
+  
+    height: 100vh;
+    font-family: Arial, sans-serif;
+  }
+
+
+  .view-offer-popup{
+    width:35%;
+    height: 70%;
+    border: 1px solid gray;
+    border-radius: 10px;
+    position: absolute;
+    top:100px;
+    left: 40%;
+    background-color: white;
+    z-index: 100;
+  }
+  
+
+
+
+
+/* General popup styles */
+.view-offer-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure popup is above other content */
+  }
+  
+  .popup-content {
+    background: white;
+    border-radius: 10px;
+    width: 500px;
+    max-width: 100%;
+    text-align: center;
+    padding: 20px;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  }
+  
+  .close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 24px;
+    background: none;
+    border: none;
+    color: #000;
+    cursor: pointer;
+  }
+  
+  /* Popup image */
+  .popup-image {
+    width: 100%;
+    border-radius: 10px;
+  }
+  
+  /* Titles and text */
+  .popup-title {
+    font-size: 18px;
+    margin: 20px 0 10px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .popup-heading {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .popup-description {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+  
+  .popup-description span {
+    color: #28a745; /* Highlighted green text for discount */
+  }
+  
+  .popup-limited-time {
+    font-size: 14px;
+    color: #999;
+    margin-bottom: 20px;
+  }
+  
+  .popup-limited-time span {
+    color: #28a745;
+    font-weight: bold;
+  }
+  
+  /* Button styles */
+  .popup-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 0;
+  }
+  
+  button {
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: 2px solid transparent;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .preview-btn {
+    border-color: #17a2b8;
+    color: #17a2b8;
+    background: none;
+  }
+  
+  .accept-btn {
+    border-color: #28a745;
+    color: white;
+    background-color: #28a745;
+    width: 240px;
+    margin-right: 10px;
+  }
+  
+  .decline-btn {
+    border-color: #dc3545;
+    color: #dc3545;
+    background: none;
+    position: relative;
+    width: 240px;
+  }
+  
+  .counter-btn {
+    border-color: #6c757d;
+    color: #6c757d;
+    background: none;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  /* Avatar inside decline button */
+  .avatar-image {
+    position: absolute;
+    right: -40px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+  }
+  
+
+
+
+
+
+
+
+  /**8*************************************/
+  .header-influencer-inbox {
+    background-color: #080808;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    height: 10%;
+    width: 100vw;
+  }
+  
+  .header-influencer-inbox-left h1 {
+    margin: 0;
+  }
+  .header-influencer-inbox img{
+   
+        width: 240px;
+        height: 76px;
+        margin-left: 10px;
+        /* position: absolute;
+        left: 43px; */
+    
+  }
+.influencer-inbox-body{
+
+display: flex;
+height: 90vh;
+width: 100vw;
+flex-wrap: wrap;
+}
+
+  .sidebar {
+    height: 100%;
+    width: 20%;
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-right: 1px solid #ddd;
+  }
+  
+  .search-bar {
+    margin-bottom: 20px;
+  }
+  
+  .search-bar input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+  }
+  
+  .message-sidebar {
+    
+    overflow-y: auto;
+  }
+  
+  .chat-preview {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .chat-preview:hover,
+  .chat-preview.active {
+    background-color: #e6f7ff;
+  }
+  
+  .avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .chat-info {
+    flex-grow: 1;
+  }
+  
+  .chat-info h4 {
+    margin: 0;
+    font-size: 16px;
+  }
+  
+  .chat-info p {
+    margin: 5px 0;
+    color: #666;
+    font-size: 14px;
+  }
+  
+  .chat-info .date {
+    float: right;
+    font-size: 12px;
+    color: #999;
+  }
+  
+  .chat-container {
+width:80%;
+height: 90vh;
+display: flex;
+
+flex-direction: column;
+flex-wrap: wrap;
+  }
+  
+  .chat-window {
+    width: 100%;
+    display: flex;
+    flex-direction:column;
+  
+    height: 90%;
+
+  }
+  
+  .chat-window .header {
+    height: 15%;
+    width: 100%;
+    border-bottom: 1px solid gray;
+    display: flex;
+    flex-direction: row;
+    /* display: flex; */
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 30px;
+  }
+  
+  .chat-window .header .avatar {
+    width: 60px;
+    height: 60px;
+    margin-right: 10px;
+  }
+  
+  .messages {
+   width: 100%;
+   height: 70%;
+   padding-left:30px ;
+   padding-top: 30px;
+  }
+  .messages {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    max-height: 100vh; /* Ensures the messages section takes up full height */
+    overflow-y: auto; /* Allows scrolling for overflowing content */
+  }
+  
+  /* Common styles for all messages */
+  .message {
+    display: inline-block;
+    max-width: 75%; /* Max width for messages, adjusts for different screen sizes */
+    padding: 10px 20px;
+    border-radius: 20px;
+    position: relative;
+    word-wrap: break-word; /* Ensures long words are broken and wrapped */
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
+  
+  /* Sent messages by the user */
+  .sent {
+    background-color: #dcf8c6; /* Example light green for sent messages */
+    align-self: flex-end; /* Aligns the message to the right */
+    color: #000; /* Text color for sent messages */
+  }
+  
+  /* Received messages from others */
+  .received {
+    background-color: #f1f1f1; /* Example light gray for received messages */
+    align-self: flex-start; /* Aligns the message to the left */
+    color: #000; /* Text color for received messages */
+  }
+  
+  /* Time for each message */
+  .message .time {
+    display: block;
+    font-size: 11px;
+    color: #999; /* Light gray for the time */
+    margin-top: 5px;
+    text-align: right; /* Aligns the time text to the right of the message */
+  }
+  
+  
+  .message .time {
+    display: block;
+    text-align: right;
+    font-size: 12px;
+    margin-top: 5px;
+    color: #999;
+  }
+  
+  .message-form {
+    display: flex;
+    padding: 10px;
+    background-color: #f5f5f5;
+    border-top: 1px solid #ddd;
+  }
+  
+  .message-form input {
+    flex-grow: 1;
+    padding: 10px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    margin-right: 10px;
+  }
+  
+  .message-form button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+  
+  .message-form button:hover {
+    background-color: #45a049;
+  }
+  
