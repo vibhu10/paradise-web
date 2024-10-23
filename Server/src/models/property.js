@@ -1,0 +1,1 @@
+// property  model for host listing
