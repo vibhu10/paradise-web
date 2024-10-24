@@ -194,14 +194,21 @@ align-items: center;
 }
 
 .photo-modal-content {
+  display: flex;
+  flex-direction: column;
+ 
+  padding: 10px;
   background-color: white;
   padding: 20px;
   border-radius: 10px;
-  max-width: 700px;
+  max-width: 85%;
   min-height: 500px;
   width: 100%;
-  opacity: 1.5;
+  max-height: 80vh; /* Set a maximum height to allow scrolling when content exceeds this height */
+  overflow-y: auto;  /* Enables vertical scroll if content exceeds the height */
+  opacity: 1.5; /* Note: Opacity values over 1.0 won't make a difference */
 }
+
 
 .photo-modal-gallery {
   display: flex;
@@ -216,10 +223,44 @@ align-items: center;
 }
 
 .close-modal {
-  background-color: red;
+  /* background-color: red;
   color: white;
   border: none;
   padding: 5px 10px;
   border-radius: 5px;
-  cursor: pointer;
+  cursor: pointer; */
+}
+.delete-photo-btn {
+  color: white;
+  background-color: transparent;
+  position: relative;
+  top: -78px;
+  left: -36px;
+  border-radius: 50%;
+  width: 48px;
+  height: 41px;}
+
+
+  .delete-photo-btn:hover {
+    width: 48px;
+    background-color: rgba(255, 0, 0, 0.7); /* Change to your desired hover background color */
+    color: yellow; /* Change to your desired hover text color */
+  }
+.photo-modal-content-roomName{
+  display: flex;
+  flex-direction: column;
+ justify-content: center;
+ align-items: center;
+  padding: 10px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 30%;
+  height: 30%;
+  
+  width: 100%;
+  max-height: 80vh; /* Set a maximum height to allow scrolling when content exceeds this height */
+  overflow-y: auto;  /* Enables vertical scroll if content exceeds the height */
+  opacity: 1.5; /* Note: Opacity values over 1.0 won't make a difference */
+
 }

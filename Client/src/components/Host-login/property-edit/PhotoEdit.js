@@ -35,6 +35,9 @@ export default function PhotoEdit() {
   const [showModal, setShowModal] = useState(false);
   const [currentPhotos, setCurrentPhotos] = useState([]);
   const [currentRoom, setCurrentRoom] = useState(null); // Keep track of the current room or bedroom being shown
+  const [showAllPhotosModal, setShowAllPhotosModal] = useState(false); // For "All Photos" modal
+  const [newRoomName, setNewRoomName] = useState(""); // State to store new room name
+  const [isRoomModalOpen, setIsRoomModalOpen] = useState(false); // To handle modal for entering room name
 
   const handleRemoveBedroom = (id) => {
     setBedrooms(bedrooms.filter((bedroom) => bedroom.id !== id));
@@ -45,14 +48,17 @@ export default function PhotoEdit() {
   };
 
   const handlePhotoUpload = (e, roomName, isBedroom = false, bedroomId = null) => {
-    const file = e.target.files[0];
+    const files = e.target.files; // Now it's an array of files
 
     if (isBedroom) {
       const updatedBedrooms = [...bedrooms];
       const bedroomIndex = bedrooms.findIndex((room) => room.id === bedroomId);
 
       if (bedroomIndex >= 0) {
-        updatedBedrooms[bedroomIndex].photos.push(URL.createObjectURL(file));
+        // Loop through the selected files and add each to the bedroom's photos array
+        for (let i = 0; i < files.length; i++) {
+          updatedBedrooms[bedroomIndex].photos.push(URL.createObjectURL(files[i]));
+        }
         setBedrooms(updatedBedrooms);
       }
     } else {
@@ -60,7 +66,10 @@ export default function PhotoEdit() {
       const roomIndex = photoGallery.findIndex((room) => room.name === roomName);
 
       if (roomIndex >= 0) {
-        updatedPhotoGallery[roomIndex].Photos.push(URL.createObjectURL(file));
+        // Loop through the selected files and add each to the room's photos array
+        for (let i = 0; i < files.length; i++) {
+          updatedPhotoGallery[roomIndex].Photos.push(URL.createObjectURL(files[i]));
+        }
         setPhotoGallery(updatedPhotoGallery);
       }
     }
@@ -106,18 +115,67 @@ export default function PhotoEdit() {
     }
   };
 
+  // Open modal to display all photos from all rooms and bedrooms
+  const openAllPhotosModal = () => {
+    const allPhotos = [
+      ...bedrooms.flatMap((bedroom) => bedroom.photos),
+      ...photoGallery.flatMap((room) => room.Photos),
+    ];
+
+    setCurrentPhotos(allPhotos); // Set all photos in the modal
+    setShowAllPhotosModal(true); // Open the modal for all photos
+  };
+
+  // Handle adding a new room by showing a prompt
+  const handleAddRoom = () => {
+    setIsRoomModalOpen(true); // Open modal to enter room name
+  };
+
+  const handleRoomNameSubmit = () => {
+    if (newRoomName.trim() !== "") {
+      setBedrooms([
+        ...bedrooms,
+        {
+          id: bedrooms.length + 1,
+          name: newRoomName, // Use the entered room name
+          photos: [],
+          sleepingArrangement: {
+            single: 0,
+            double: 0,
+            queen: 1,
+            king: 0,
+            smallDouble: 0,
+            bunkBed: 0,
+            sofaBed: 0,
+            sofa: 0,
+          },
+        },
+      ]);
+      setNewRoomName(""); // Reset room name input
+      setIsRoomModalOpen(false); // Close the modal
+    }
+  };
+
   return (
     <div className="photoEdit-hostlogin">
       <div id="photo-tour-section">
         <div className="heading-photo-tour">
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <h4 style={{ fontWeight: 600 }}>Photo tour</h4>
-            <button
-              style={{ backgroundColor: "lightgray", borderRadius: "20px" }}
-              onClick={() => setAddPhotoPopUp(!addPhotoButtonPopUP)}
-            >
-              +
-            </button>
+            <div>
+              <button
+                style={{ marginRight: "10px", borderRadius: "10px" }}
+                onClick={openAllPhotosModal} // Open all photos modal
+              >
+                All Photos
+              </button>
+              <button
+                style={{ backgroundColor: "lightgray", borderRadius: "20px" }}
+                onClick={() => setAddPhotoPopUp(!addPhotoButtonPopUP)}
+              >
+                +
+              </button>
+            </div>
 
             {addPhotoButtonPopUP && (
               <div className="addphotos-gallery-popup">
@@ -149,6 +207,7 @@ export default function PhotoEdit() {
                     <input
                       style={{ borderRadius: "10px", border: "none" }}
                       type="file"
+                      multiple
                       onChange={(e) => handlePhotoUpload(e, selectedRoom, false)}
                     />
                   </div>
@@ -188,9 +247,9 @@ export default function PhotoEdit() {
                 ))}
               </div>
               <div>
-              <h5 style={{ fontWeight: 600, lineHeight: 0.4 }}>{data.name}</h5>
-              <p style={{ lineHeight: 0.7 }}>{data.Photos.length} Photos</p>
-                </div>
+                <h5 style={{ fontWeight: 600, lineHeight: 0.4 }}>{data.name}</h5>
+                <p style={{ lineHeight: 0.7 }}>{data.Photos.length} Photos</p>
+              </div>
             </div>
           ))}
         </div>
@@ -198,30 +257,7 @@ export default function PhotoEdit() {
 
       {/* Bedrooms Accordion */}
       <div className="bedroom-accordion-outer">
-        <button
-          onClick={() =>
-            setBedrooms([
-              ...bedrooms,
-              {
-                id: bedrooms.length + 1,
-                name: `Bedroom ${bedrooms.length + 1}`,
-                photos: [],
-                sleepingArrangement: {
-                  single: 0,
-                  double: 0,
-                  queen: 1,
-                  king: 0,
-                  smallDouble: 0,
-                  bunkBed: 0,
-                  sofaBed: 0,
-                  sofa: 0,
-                },
-              },
-            ])
-          }
-        >
-          Add Bedroom
-        </button>
+        <button onClick={handleAddRoom}>Add Room</button> {/* Add Room Button */}
         <div className="accordion accordion-flush" id="accordionFlushExample">
           {bedrooms.map((bedroom) => (
             <div className="accordian-divs" key={bedroom.id}>
@@ -276,6 +312,7 @@ export default function PhotoEdit() {
                         id={`file-upload-${bedroom.id}`}
                         type="file"
                         style={{ display: "none" }}
+                        multiple
                         onChange={(e) =>
                           handlePhotoUpload(e, bedroom.name, true, bedroom.id)
                         }
@@ -357,10 +394,6 @@ export default function PhotoEdit() {
             </div>
           ))}
         </div>
-
-
-
-        
       </div>
 
       {/* Bedrooms photos footer container */}
@@ -390,21 +423,75 @@ export default function PhotoEdit() {
       </div>
 
       {/* Modal for showing all photos */}
+      {showAllPhotosModal && (
+        <div className="photo-modal">
+          <div className="photo-modal-content">
+           <div style={{display:"flex",justifyContent:"center"}}>
+            <h1>All Photos</h1>
+            <button style={{position:"relative",right:"-650px",borderRadius:"10px" ,color:"gray"}}onClick={() => setShowAllPhotosModal(false)} className="close-modal">
+              X
+            </button>
+            </div>
+            <div className="photo-modal-gallery">
+              {currentPhotos.map((photo, idx) => (
+                <div key={idx} className="photo-container">
+                  <img src={photo} alt={`Photo ${idx}`} />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal for showing photos of the selected room/bedroom */}
       {showModal && (
         <div className="photo-modal">
           <div className="photo-modal-content">
-            <button onClick={() => setShowModal(false)} className="close-modal">
+            <button
+              style={{
+                position: "relative",
+                marginBottom: "10px",
+                borderRadius: "10px",
+                backgroundColor: "transparent",
+                color: "gray",
+              }}
+              onClick={() => setShowModal(false)}
+              className="close-modal"
+            >
               X
             </button>
             <div className="photo-modal-gallery">
               {currentPhotos.map((photo, idx) => (
                 <div key={idx} className="photo-container">
                   <img src={photo} alt={`Photo ${idx}`} />
+
                   <button className="delete-photo-btn" onClick={() => deletePhoto(idx)}>
-                    X
+                    x
                   </button>
                 </div>
               ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal for entering the new room name */}
+      {isRoomModalOpen && (
+        <div className="photo-modal">
+          <div className="photo-modal-content-roomName">
+            <h2>Enter Room Name</h2>
+            <input
+              type="text"
+              value={newRoomName}
+              onChange={(e) => setNewRoomName(e.target.value)}
+              placeholder="Enter room name"
+              style={{ padding: "10px", width: "300px", marginBottom: "20px" }}
+            />
+            <div>
+              <button onClick={handleRoomNameSubmit} style={{ marginRight: "10px" }}>
+                Add Room
+              </button>
+              <button onClick={() => setIsRoomModalOpen(false)}>Cancel</button>
             </div>
           </div>
         </div>
