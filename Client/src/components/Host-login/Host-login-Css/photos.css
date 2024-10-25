@@ -129,19 +129,18 @@ align-items: center;
   height: 300px;
 }
 
-.bedrooms-photos-footer-container{
+.bedrooms-photos-footer-container {
+  height: auto;
   width: 100%;
-  
   opacity: 0.9;
   padding: 20px;
   background-color: white;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.15);
-  
+  flex-wrap: wrap;
+  margin-bottom: 10px;
   display: flex;
-
 }
-
 
 
 .bedroom-photo-container {
@@ -234,17 +233,16 @@ align-items: center;
   color: white;
   background-color: transparent;
   position: relative;
-  top: -78px;
-  left: -36px;
+  top: -85px;
+  left: -40px;
   border-radius: 50%;
   width: 48px;
-  height: 41px;}
+  height: 41px;
+}
 
 
   .delete-photo-btn:hover {
-    width: 48px;
-    background-color: rgba(255, 0, 0, 0.7); /* Change to your desired hover background color */
-    color: yellow; /* Change to your desired hover text color */
+    color: red;
   }
 .photo-modal-content-roomName{
   display: flex;

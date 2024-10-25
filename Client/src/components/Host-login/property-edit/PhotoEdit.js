@@ -257,14 +257,14 @@ export default function PhotoEdit() {
 
       {/* Bedrooms Accordion */}
       <div className="bedroom-accordion-outer">
-        <button onClick={handleAddRoom}>Add Room</button> {/* Add Room Button */}
+        <button onClick={handleAddRoom}>+</button> {/* Add Room Button */}
         <div className="accordion accordion-flush" id="accordionFlushExample">
           {bedrooms.map((bedroom) => (
             <div className="accordian-divs" key={bedroom.id}>
               <div style={{ display: "flex", justifyContent: "space-between" }}>
                 <h3 style={{ fontWeight: 600 }}>{bedroom.name}</h3>
                 <button
-                  style={{ backgroundColor: "red", borderRadius: "50%" }}
+                  style={{ color:"red",backgroundColor:"transparent" }}
                   onClick={() => handleRemoveBedroom(bedroom.id)}
                 >
                   X
@@ -447,6 +447,11 @@ export default function PhotoEdit() {
       {showModal && (
         <div className="photo-modal">
           <div className="photo-modal-content">
+<div style={{display:"flex",justifyContent:"space-between"}}>
+<div></div>
+          <h2 style={{ marginBottom: "10px",paddingRight:"20px" }}>
+              {currentRoom ? currentRoom.name : ""}
+            </h2>
             <button
               style={{
                 position: "relative",
@@ -457,16 +462,17 @@ export default function PhotoEdit() {
               }}
               onClick={() => setShowModal(false)}
               className="close-modal"
-            >
+              >
               X
             </button>
+              </div>
             <div className="photo-modal-gallery">
               {currentPhotos.map((photo, idx) => (
                 <div key={idx} className="photo-container">
                   <img src={photo} alt={`Photo ${idx}`} />
 
                   <button className="delete-photo-btn" onClick={() => deletePhoto(idx)}>
-                    x
+                    X
                   </button>
                 </div>
               ))}
@@ -479,7 +485,7 @@ export default function PhotoEdit() {
       {isRoomModalOpen && (
         <div className="photo-modal">
           <div className="photo-modal-content-roomName">
-            <h2>Enter Room Name</h2>
+            <h2>Enter Name Of The Space</h2>
             <input
               type="text"
               value={newRoomName}
