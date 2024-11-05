@@ -10,8 +10,10 @@ export default class UserModal{
   }
 
   static singUp(name,email,password,type){
-
-
+const newUser=new UserModal(name,email,password,type);
+newUser.id=users.length+1;
+users.push(newUser);
+return newUser
   }
   static signIn(email,password){
     const user=users.find((u)=>u.email===email && u.password===password)
