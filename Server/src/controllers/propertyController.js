@@ -8,7 +8,9 @@ export default class PropertyController {
 
   // Method to get all properties
   getAllProperties(req, res) {
-    res.json(this.properties);
+    const properties=PropertyModel.allProperty();
+    res.status(200).send(properties);
+    console.log(properties)
   }
 
   // Method to get filtered properties based on criteria in the request

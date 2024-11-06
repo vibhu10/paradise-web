@@ -4,10 +4,11 @@ import jwt from 'jsonwebtoken'
 export default class userController{
 
     signUp(req,res){
+       
         const{name,email,password,type}=req.body;
        const user= UserModal.singUp(name,email,password,type)
        res.status(201).send(user);
-          console.log(user)
+       console.log(user)
     }
 
     signIn(req,res){
