@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import './UserHome.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import PropertyEdit from './property-edit/Property-edit';
 
 export default function UserHome() {
@@ -11,6 +12,7 @@ export default function UserHome() {
   // Fetch data from the API when the component mounts
   useEffect(() => {
     async function fetchProperties() {
+      setIsLoading(true); // Set loading to true before starting fetch
       try {
         const response = await fetch("http://localhost:3000/api/property/");
         if (!response.ok) {
@@ -18,17 +20,16 @@ export default function UserHome() {
         }
         const data = await response.json();
         setMyProperty(data);  // Set fetched data to state
-        setIsLoading(false);
       } catch (error) {
         setError(error.message);
-        setIsLoading(false);
+      } finally {
+        setTimeout(() => setIsLoading(false), 3000); // Show spinner for at least 3 seconds
       }
     }
     fetchProperties();
   }, []);
 
   function handleSave(updatedAmenities) {
-    // Update the amenities list in myProperty state
     setMyProperty(prevProperties =>
       prevProperties.map(property =>
         property === selectedProperty
@@ -74,7 +75,11 @@ export default function UserHome() {
 
       <main>
         {isLoading ? (
-          <p>Loading properties...</p>
+          <div className="loading-overlay">
+            <div className="spinner-border text-primary" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+          </div>
         ) : error ? (
           <p>Error: {error}</p>
         ) : selectedProperty ? (

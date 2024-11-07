@@ -2,7 +2,7 @@ import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
-export function PageSeven({ handleBack, handleNext }) {
+export function PageSeven({ handleBack, handleNext, handleSaveProperty }) {
   const [selectedAmenities, setSelectedAmenities] = useState([]);
 
   const amenities = [
@@ -10,21 +10,9 @@ export function PageSeven({ handleBack, handleNext }) {
     { id: "tv", label: "TV", icon: "fas fa-tv" },
     { id: "kitchen", label: "Kitchen", icon: "fas fa-utensils" },
     { id: "washing_machine", label: "Washing Machine", icon: "fas fa-tshirt" },
-    {
-      id: "free_parking",
-      label: "Free parking on premises",
-      icon: "fas fa-parking",
-    },
-    {
-      id: "paid_parking",
-      label: "Paid parking on premises",
-      icon: "fas fa-dollar-sign",
-    },
-    {
-      id: "air_conditioning",
-      label: "Air Conditioning",
-      icon: "fas fa-snowflake",
-    },
+    { id: "free_parking", label: "Free parking on premises", icon: "fas fa-parking" },
+    { id: "paid_parking", label: "Paid parking on premises", icon: "fas fa-dollar-sign" },
+    { id: "air_conditioning", label: "Air Conditioning", icon: "fas fa-snowflake" },
     { id: "workspace", label: "Dedicated Workspace", icon: "fas fa-laptop" },
     { id: "pool", label: "Pool", icon: "fas fa-swimming-pool" },
     { id: "hot_tub", label: "Hot tub", icon: "fas fa-hot-tub" },
@@ -38,6 +26,12 @@ export function PageSeven({ handleBack, handleNext }) {
         ? prevSelected.filter((amenityId) => amenityId !== id)
         : [...prevSelected, id]
     );
+  };
+
+  // Function to handle saving data and moving to the next page
+  const handleNextClick = async () => {
+    await handleSaveProperty({ amenities: selectedAmenities });
+    handleNext();
   };
 
   return (
@@ -59,7 +53,7 @@ export function PageSeven({ handleBack, handleNext }) {
                 style={{
                   fontSize: "30px",
                   margin: "10px",
-                  border: isSelected ? "2px solid green" : "2px solid gray", 
+                  border: isSelected ? "2px solid green" : "2px solid gray",
                   width: "100px",
                   height: "100px",
                   display: "flex",
@@ -68,7 +62,7 @@ export function PageSeven({ handleBack, handleNext }) {
                   alignItems: "center",
                   borderRadius: "10px",
                   cursor: "pointer",
-                  backgroundColor: isSelected ? "#e0ffe0" : "white", 
+                  backgroundColor: isSelected ? "#e0ffe0" : "white",
                 }}
               >
                 <i className={amenity.icon}></i>
@@ -88,9 +82,8 @@ export function PageSeven({ handleBack, handleNext }) {
       </div>
 
       <div className="host-footer">
-        {/* <div className="loading-pageSeven"></div> */}
         <button onClick={handleBack}>Back</button>
-        <button onClick={handleNext}>Next</button>
+        <button onClick={handleNextClick}>Next</button>
       </div>
     </div>
   );

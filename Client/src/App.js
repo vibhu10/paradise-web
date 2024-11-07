@@ -15,10 +15,10 @@ function App() {
          
           <Route path="/" element={<Home />} /> 
           <Route path='/hostRegistration' element={<HostRegistration/>}/>
-        <Route path='/influencer' element={<EdifInfluencerProfile/>}/>
-        <Route path='/influencer/inbox' element={<Inbox/>}/>
-        <Route path='/hostlogin'  element={<UserHome/>}/>
-        </Routes>
+          <Route path='/influencer' element={<EdifInfluencerProfile/>}/>
+          <Route path='/influencer/inbox' element={<Inbox/>}/>
+          <Route path='/hostlogin'  element={<UserHome/>}/>
+          </Routes>
       </div>
     </Router>
   );

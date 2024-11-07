@@ -1,7 +1,7 @@
 
 
 
-export function PageFifteen({ handleNext, handleBack }) {
+export function PageFifteen({ handleNext, handleBack, handleSaveProperty  }) {
 
 
     return (

@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export function PageFourteen({ handleNext, handleBack }) {
+export function PageFourteen({ handleNext, handleBack, handleSaveProperty }) {
   const [houseRules, setHouseRules] = useState({
     petsAllowed: false,
     maxNoPets: 0,
@@ -11,7 +11,6 @@ export function PageFourteen({ handleNext, handleBack }) {
   });
 
   const handleCheckboxChange = (e) => {
-    console.log(e)
     const { name, checked } = e.target;
     setHouseRules((prev) => ({
       ...prev,
@@ -20,7 +19,6 @@ export function PageFourteen({ handleNext, handleBack }) {
   };
 
   const incrementValue = (key) => {
-    
     setHouseRules((prev) => ({
       ...prev,
       [key]: prev[key] + 1,
@@ -32,6 +30,15 @@ export function PageFourteen({ handleNext, handleBack }) {
       ...prev,
       [key]: prev[key] > 0 ? prev[key] - 1 : 0,
     }));
+  };
+
+  // Function to handle saving data when Next is pressed
+  const handleNextWithSave = () => {
+    handleSaveProperty({
+      houseRules: houseRules,
+    });
+
+    handleNext();
   };
 
   return (
@@ -146,9 +153,8 @@ export function PageFourteen({ handleNext, handleBack }) {
       </div>
 
       <div className="host-footer">
-        {/* <div className="loading-pageFourteen"></div> */}
         <button onClick={handleBack}>Back</button>
-        <button onClick={handleNext}>Next</button>
+        <button onClick={handleNextWithSave}>Next</button>
       </div>
     </div>
   );
