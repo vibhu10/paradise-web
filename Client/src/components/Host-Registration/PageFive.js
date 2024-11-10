@@ -35,7 +35,8 @@ export function PageFive({ handleNext, handleBack, handleSaveProperty }) {
   const handleSave = async () => {
     // Ensure `handleSaveProperty` completes and returns before proceeding
     return new Promise((resolve) => {
-      handleSaveProperty(formData);
+    const addressData={Address:formData}
+      handleSaveProperty(addressData);
       resolve(); // Resolve after saving
     });
   };

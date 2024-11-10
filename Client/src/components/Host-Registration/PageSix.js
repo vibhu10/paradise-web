@@ -24,7 +24,8 @@ export function PageSix({ handleNext, handleBack, handleSaveProperty }) {
 
   // Function to save data and navigate to the next page
   const handleNextClick = async () => {
-    await handleSaveProperty(counter); // Save the counter data
+    const basicData={basicDetails:counter}
+    await handleSaveProperty(basicData); // Save the counter data
     handleNext(); // Navigate to the next page
   };
 

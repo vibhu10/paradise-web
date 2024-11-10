@@ -31,28 +31,28 @@ export default class PropertyController {
   // Method to add a new property
   addProperty(req, res) {
     const propertyData = req.body;
-
+console.log(propertyData,"new data")
     // Create a new property instance
-    const newProperty = new PropertyModel(
-      propertyData.type,
-      propertyData.title,
-      propertyData.name,
-      propertyData.price
-    );
+    // const newProperty = new PropertyModel(
+    //   propertyData.type,
+    //   propertyData.title,
+    //   propertyData.name,
+    //   propertyData.price
+    // );
 
     // Assign additional property data
-    Object.assign(newProperty, propertyData);
+    // Object.assign(newProperty, propertyData);
 
     // Add the new property to the properties array
-    this.properties.push(newProperty);
+    // this.properties.push(newProperty);
 
     // Optionally, you may also want to add the property to the static list in PropertyModel
-    PropertyModel.addProperty(newProperty);
+    // PropertyModel.addProperty(newProperty);
 
-    res.status(201).json({
-      message: 'Property added successfully',
-      property: newProperty
-    });
+    // res.status(201).json({
+    //   message: 'Property added successfully',
+    //   property: newProperty
+    // });
   }
 
   // Method to rate a property

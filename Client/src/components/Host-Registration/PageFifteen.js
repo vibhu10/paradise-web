@@ -1,7 +1,7 @@
 
 
 
-export function PageFifteen({ handleNext, handleBack, handleSaveProperty  }) {
+export function PageFifteen({ handeNext, handleBack, handleSaveProperty , setSaveProperty }) {
 
 
     return (
@@ -74,7 +74,7 @@ export function PageFifteen({ handleNext, handleBack, handleSaveProperty  }) {
         <div className="host-footer">
           {/* <div className="loading-pageFifteen"></div> */}
           <button onClick={handleBack}>Back</button>
-          <button onClick={handleNext}>Next</button>
+          <button onClick={()=>setSaveProperty(true)}>Finish</button>
         </div>
       </div>
     );

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './Host.css';
 import { PageOne } from './PageOne';
 import { PageTwo } from './PageTwo';
@@ -18,10 +18,10 @@ import { PageFifteen } from './PageFifteen';
 
 export default function HostRegistration() {
     const [currentPage, setCurrentPage] = useState(1);
-    const [propertyData, setPropertyData] = useState({}); // Single object for all data
+    const [propertyData, setPropertyData] = useState({});
+    const [saveProperty, setSaveProperty] = useState(false);
 
     function handleNext() {
-        console.log("Next button pressed");
         if (currentPage >= 1 && currentPage < 15) {
             setCurrentPage((p) => p + 1);
         }
@@ -34,13 +34,40 @@ export default function HostRegistration() {
     }
 
     function handleSaveProperty(data) {
-        // Merge new data into the existing propertyData object
         setPropertyData((prevData) => ({
             ...prevData,
-            ...data // Merging data from the current page
+            ...data
         }));
-        console.log("Updated property data:", propertyData);
     }
+
+    // Function to save property data to the server
+    async function savePropertyDataToServer() {
+        try {
+            const response = await fetch("http://localhost:3000/api/property/registration", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(propertyData)
+            });
+
+            if (response.ok) {
+                console.log("Property data saved successfully");
+            } else {
+                console.error("Failed to save property data");
+            }
+        } catch (error) {
+            console.error("Error saving property data:", error);
+        }
+    }
+
+    // useEffect to watch for changes in saveProperty
+    useEffect(() => {
+        if (saveProperty) {
+            savePropertyDataToServer();
+            setSaveProperty(false); // Reset saveProperty after saving
+        }
+    }, [saveProperty]);
 
     return (
         <div className="host-container">
@@ -58,7 +85,7 @@ export default function HostRegistration() {
             {currentPage === 12 && <PageTwelve handleNext={handleNext} handleBack={handleBack} handleSaveProperty={handleSaveProperty} />}
             {currentPage === 13 && <PageThirteen handleNext={handleNext} handleBack={handleBack} handleSaveProperty={handleSaveProperty} />}
             {currentPage === 14 && <PageFourteen handleNext={handleNext} handleBack={handleBack} handleSaveProperty={handleSaveProperty} />}
-            {currentPage === 15 && <PageFifteen handleNext={handleNext} handleBack={handleBack} handleSaveProperty={handleSaveProperty} />}
+            {currentPage === 15 && <PageFifteen handleNext={handleNext} handleBack={handleBack} handleSaveProperty={handleSaveProperty} setSaveProperty={setSaveProperty} />}
         </div>
     );
 }

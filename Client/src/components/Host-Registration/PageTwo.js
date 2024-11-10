@@ -28,7 +28,11 @@ export function PageTwo({ handleBack, handleNext, handleSaveProperty }) {
 
   const handleNextClick = () => {
     if (selectedValues.length > 0) {
-      handleSaveProperty(selectedValues);  // Pass selected values to handleSaveProperty
+
+      const propertyData={
+        propertyType:selectedValues
+      };
+      handleSaveProperty(propertyData);  // Pass selected values to handleSaveProperty
       handleNext();  // Move to the next page
     } else {
       alert("Please select at least one property type before proceeding.");
