@@ -1,0 +1,212 @@
+/* Global styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    background-color: #f8f9fa;
+  }
+  
+  .user-profile {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  header {
+    background-color: #000;
+    padding: 1rem;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .header-content .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .header-content .logo span {
+    color: #4ab15f; /* Accent color for "Vacation Rentals" */
+  }
+  
+  .user-options a {
+    color: #fff;
+    margin-right: 1rem;
+    text-decoration: none;
+  }
+  
+  .user-options .user-icon {
+    background-color: #4ab15f;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 50%;
+    padding: 0.5rem;
+    width: 2rem;
+    height: 2rem;
+    text-align: center;
+    line-height: 1.5rem;
+  }
+  
+  main {
+    display: flex;
+    padding: 1rem;
+    flex-grow: 1;
+  }
+  
+  /* Sidebar styling */
+  .sidebar {
+    width: 250px;
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .profile-card {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .profile-pic {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .profile-card h3 {
+    margin: 0.5rem 0 0;
+    font-size: 1.2rem;
+  }
+  
+  .profile-card .verified-info {
+    color: #4ab15f;
+    font-size: 0.9rem;
+  }
+  
+  .verify-btn {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: #4ab15f;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .sidebar-menu a {
+    display: block;
+    padding: 0.75rem 0;
+    color: #333;
+    text-decoration: none;
+    font-size: 0.95rem;
+  }
+  
+  .sidebar-menu a:hover,
+  .sidebar-menu .active {
+    color: #4ab15f;
+    font-weight: bold;
+  }
+  
+  /* Main content styling */
+  .main-content {
+    flex-grow: 1;
+    background-color: #fff;
+    padding: 2rem;
+    margin-left: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .main-content h2 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .main-content .subtext {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 1.5rem;
+  }
+  
+  .info-group {
+    margin-bottom: 1.5rem;
+  }
+  
+  .info-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+  
+  .info-field {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  .info-field span {
+    color: #333;
+    font-size: 1rem;
+  }
+  
+  .edit-btn,
+  .add-btn {
+    background-color: transparent;
+    color: #4ab15f;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .edit-btn:hover,
+  .add-btn:hover {
+    text-decoration: underline;
+  }
+  
+  .profile-picture {
+    display: flex;
+    align-items: center;
+  }
+  
+  .profile-picture img.profile-pic-large {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 1rem;
+  }
+  
+  /* Social accounts styling */
+  .social-accounts .social-links {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .connect-btn {
+    color: #4ab15f;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 0.5rem 0;
+  }
+  
+  .connect-btn:hover {
+    text-decoration: underline;
+  }
+  
+  /* Button styling */
+  button {
+    font-size: 0.9rem;
+    cursor: pointer;
+  }
+  
+  button:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+  
+  

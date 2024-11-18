@@ -20,7 +20,7 @@ export default function HostRegistration() {
     const [currentPage, setCurrentPage] = useState(1);
     const [propertyData, setPropertyData] = useState({});
     const [saveProperty, setSaveProperty] = useState(false);
-
+  
     function handleNext() {
         if (currentPage >= 1 && currentPage < 15) {
             setCurrentPage((p) => p + 1);

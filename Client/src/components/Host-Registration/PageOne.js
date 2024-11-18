@@ -1,9 +1,13 @@
+import { useNavigate } from 'react-router-dom';
 export function PageOne({handleNext}){
+
+    const navigate = useNavigate(); // Initialize useNavigate hook
     return(
         <div>
              <header className="header-host">
             <img src="/48564e5fe8898cf62b0bbf42276d6cf3.jpeg" alt="paradise" />
-            <button>Exit</button>
+           
+            <button onClick={() => navigate('/')}>Exit</button>
             </header>
                 <div className="body-host">
 

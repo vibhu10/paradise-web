@@ -4,9 +4,9 @@ import jwt from 'jsonwebtoken'
 export default class userController{
 
     signUp(req,res){
-       
-        const{name,email,password,type}=req.body;
-       const user= UserModal.singUp(name,email,password,type)
+       console.log(req.body,"data comming form form i fill")
+        const{legalName,dob,email,password,type}=req.body;
+       const user= UserModal.singUp(legalName,email,password,dob,type)
        res.status(201).send(user);
        console.log(user)
     }
@@ -16,6 +16,7 @@ export default class userController{
 
 
     const result=UserModal.signIn(email,password);
+    console.log(result,"datacomming for user")
     if(!result){
 return res.status(400).send("incorrect credential");
     }
@@ -23,7 +24,17 @@ return res.status(400).send("incorrect credential");
     //creating token
     const token=jwt.sign({email:result.email},"szdi014rTyUfylsmwwEkJF5HAOsiKWrq",{expiresIn:"1h"})
    console.log(token)
-  return  res.status(200).send(token);
+   return res.status(200).json({
+    token,
+    user: {
+      id: result.id,
+      name: result.name,
+      email: result.email,
+      type: result.type,
+      mobile: result.mobile,
+      gender: result.gender,
+      address: result.address
+    }})
 
 }
     
