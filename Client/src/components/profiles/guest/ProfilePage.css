@@ -1,0 +1,20 @@
+.profile-page {
+  display: flex;
+  height: 100vh;
+ 
+  display: flex;
+  
+}
+
+.sidebar {
+  width: 250px;
+  background-color: #f5f5f5;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.content-area-profilePage {
+  padding-top: 19px;
+  padding-left: 60px;
+  background-color: #fff;
+}

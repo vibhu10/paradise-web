@@ -1,0 +1,113 @@
+/* General Container Styling */
+.login-security-container {
+    max-width: 600px;
+    margin: 50px auto;
+    font-family: Arial, sans-serif;
+    color: #333;
+  }
+  
+  /* Titles and Subtitles */
+  .login-security-container h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .login-security-container p {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 30px;
+  }
+  
+  /* Form Section */
+  .password-section .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .password-section label {
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+  
+  .password-section input {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .update-password-btn {
+    background-color: #1e9159;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .update-password-btn:hover {
+    background-color: #167b47;
+  }
+  
+  /* Social Accounts Section */
+  .social-accounts-section h3 {
+    margin-top: 30px;
+    margin-bottom: 10px;
+  }
+  
+  .social-account-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .social-account-row span {
+    font-size: 14px;
+  }
+  
+  .social-connect-btn {
+    background: none;
+    border: none;
+    font-size: 14px;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  
+  .connect-btn {
+    color: #007bff;
+  }
+  
+  .connect-btn:hover {
+    color: #0056b3;
+  }
+  
+  .disconnect-btn {
+    color: red;
+  }
+  
+  .disconnect-btn:hover {
+    color: darkred;
+  }
+  
+  /* Deactivate Section */
+  .deactivate-section {
+    margin-top: 20px;
+  }
+  
+  .deactivate-btn {
+    background: none;
+    border: none;
+    font-size: 14px;
+    color: red;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  
+  .deactivate-btn:hover {
+    color: darkred;
+  }
+  

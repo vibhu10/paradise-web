@@ -69,16 +69,36 @@ export default function Home() {
 
   const handleSignUp = async (e) => {
     e.preventDefault();
+  
+    // Clear previous error messages
+    setError("");
+  
+    // Basic validation for email format
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  
+    // Check if email is provided
     if (!email) {
       setError("Email is required.");
       return;
     }
-    const isEmailAvailable = await checkEmailExistence();
-    if (isEmailAvailable) {
-      setSignupStep(2);
-      setError("");
+  
+    // Validate email format
+    if (!emailRegex.test(email)) {
+      setError("Please enter a valid email address.");
+      return;
     }
+  
+    // Check if the email is available (asynchronous check)
+    const isEmailAvailable = await checkEmailExistence();
+    if (!isEmailAvailable) {
+      setError("Email is already in use.");
+      return;
+    }
+  
+    // If email passes all checks, proceed with the signup process
+    setSignupStep(2);
   };
+  
 
   const handleCompleteSignUp = async () => {
     if (!password || !legalName.first || !legalName.last || !dob) {
@@ -114,7 +134,8 @@ export default function Home() {
         password,
       });
       console.log(response, "Login response home");
-      localStorage.setItem("token", response.data.token); // Store JWT in localStorage
+      localStorage.setItem("token", response.data.token);
+      console.log(response.data.user) // Store JWT in localStorage
       setIsAuthenticated(true); // Set authenticated state
       setPopup(false); // Close the main popup
       setLoginPopup(false); // Close the login-specific popup
@@ -156,8 +177,17 @@ export default function Home() {
   };
 
   const toggleSignupPopup = () => {
+    if (!signupPopup) {
+      // Reset all signup form fields when opening the popup
+      setEmail("");
+      setPassword("");
+      setLegalName({ first: "", last: "" });
+      setDob("");
+      setError("");
+    }
     setSignupPopup(!signupPopup);
   };
+  
 
   const toggleDropdown = () => {
     setShowDropdown(!showDropdown);
@@ -313,118 +343,117 @@ export default function Home() {
 
       {/* Signup Popup */}
       {signupPopup && (
-        <div>
-          <div
-            className="signup-popup-overlay"
-            onClick={() => setSignupPopup(false)}
-          ></div>
-          {signupStep === 1 ? (
-            <div className="signup-popup">
-              <button
-                className="close-popup-btn"
-                onClick={() => setSignupPopup(false)}
-              >
-                ✖
-              </button>
-              <h3 className="text-center mb-4">Sign up</h3>
-              <form>
-                <div className="mb-3">
-                  <label htmlFor="email" className="form-label">Email</label>
-                  <input
-                    type="email"
-                    className="form-control"
-                    id="email"
-                    placeholder="Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                  {error && (
-                    <small style={{ color: "red", display: "block", marginTop: "5px" }}>{error}</small>
-                  )}
-                </div>
-                <button
-                  onClick={handleSignUp}
-                  type="submit"
-                  className="btn btn-primary w-100 mb-3"
-                  style={{ background: "#198E78", border: "none" }}
-                >
-                  Continue
-                </button>
-              </form>
+  <div>
+    <div
+      className="signup-popup-overlay"
+      onClick={() => setSignupPopup(false)}
+    ></div>
+    {signupStep === 1 ? (
+      <div className="signup-popup">
+        <button
+          className="close-popup-btn"
+          onClick={() => setSignupPopup(false)}
+        >
+          ✖
+        </button>
+        <h3 className="text-center mb-4">Sign up</h3>
+        <form>
+        <div className="mb-3">
+  <label htmlFor="email" className="form-label">Email</label>
+  <input
+    type="email"
+    className="form-control"
+    id="email"
+    placeholder="Email"
+    value={email}
+    onChange={(e) => setEmail(e.target.value)}
+  />
+  {error && (
+    <small style={{ color: "red", display: "block", marginTop: "5px" }}>{error}</small>
+  )}
+</div>
+          <button
+            onClick={handleSignUp}
+            type="submit"
+            className="btn btn-primary w-100 mb-3"
+            style={{ background: "#198E78", border: "none" }}
+          >
+            Continue
+          </button>
+        </form>
 
-              <div className="d-flex align-items-center my-3">
-        <hr className="flex-grow-1" />
-        <span className="mx-2 text-muted">or</span>
-        <hr className="flex-grow-1" />
-      </div>
-      <div className="d-grid gap-3">
-        <button className="btn btn-outline-primary d-flex align-items-center justify-content-center">
-          <i className="bi bi-facebook me-2"></i> Continue with Facebook
-        </button>
-        <button className="btn btn-outline-danger d-flex align-items-center justify-content-center">
-          <i className="bi bi-google me-2"></i> Continue with Google
-        </button>
-        <button className="btn btn-outline-dark d-flex align-items-center justify-content-center">
-          <i className="bi bi-apple me-2"></i> Continue with Apple
-        </button>
-      </div>
-    
-
-            </div>
-          ) : (
-            <div className="signup2-container">
-              <h2>Finish Signing Up</h2>
-              <div className="signup2-input-group">
-                <label htmlFor="legal-name">Legal Name</label>
-                <input
-                  type="text"
-                  id="legal-name"
-                  placeholder="First name on ID"
-                  value={legalName.first}
-                  onChange={(e) => setLegalName({ ...legalName, first: e.target.value })}
-                />
-              </div>
-              <div className="signup2-input-group">
-                <input
-                  type="text"
-                  placeholder="Last name on ID"
-                  value={legalName.last}
-                  onChange={(e) => setLegalName({ ...legalName, last: e.target.value })}
-                />
-              </div>
-              <div className="signup2-input-group">
-                <label htmlFor="dob">Date of Birth</label>
-                <input
-                  type="date"
-                  id="dob"
-                  value={dob}
-                  onChange={(e) => setDob(e.target.value)}
-                />
-              </div>
-              <div className="signup2-input-group">
-                <label htmlFor="password">Password</label>
-                <input
-                  type="password"
-                  id="password"
-                  placeholder="Password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </div>
-              <p className="signup2-agree">
-                By selecting Agree and Continue, I agree to Airbnb's Terms of Service, 
-                Payments Terms of Service, and Nondiscrimination Policy, and acknowledge the Privacy Policy.
-              </p>
-              <div className="signup2-checkbox-group">
-                <input type="checkbox" id="marketing" />
-                <label htmlFor="marketing">I don't want to receive marketing messages from paradise.</label>
-              </div>
-              <button onClick={handleCompleteSignUp}>Agree and Continue</button>
-              {error && <p style={{ color: "red" }}>{error}</p>}
-            </div>
-          )}
+        <div className="d-flex align-items-center my-3">
+          <hr className="flex-grow-1" />
+          <span className="mx-2 text-muted">or</span>
+          <hr className="flex-grow-1" />
         </div>
-      )}
+        <div className="d-grid gap-3">
+          <button className="btn btn-outline-primary d-flex align-items-center justify-content-center">
+            <i className="bi bi-facebook me-2"></i> Continue with Facebook
+          </button>
+          <button className="btn btn-outline-danger d-flex align-items-center justify-content-center">
+            <i className="bi bi-google me-2"></i> Continue with Google
+          </button>
+          <button className="btn btn-outline-dark d-flex align-items-center justify-content-center">
+            <i className="bi bi-apple me-2"></i> Continue with Apple
+          </button>
+        </div>
+      </div>
+    ) : (
+      <div className="signup2-container">
+        <h2>Finish Signing Up</h2>
+        <div className="signup2-input-group">
+          <label htmlFor="legal-name">Legal Name</label>
+          <input
+            type="text"
+            id="legal-name"
+            placeholder="First name on ID"
+            value={legalName.first}
+            onChange={(e) => setLegalName({ ...legalName, first: e.target.value })}
+          />
+        </div>
+        <div className="signup2-input-group">
+          <input
+            type="text"
+            placeholder="Last name on ID"
+            value={legalName.last}
+            onChange={(e) => setLegalName({ ...legalName, last: e.target.value })}
+          />
+        </div>
+        <div className="signup2-input-group">
+          <label htmlFor="dob">Date of Birth</label>
+          <input
+            type="date"
+            id="dob"
+            value={dob}
+            onChange={(e) => setDob(e.target.value)}
+          />
+        </div>
+        <div className="signup2-input-group">
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        <p className="signup2-agree">
+          By selecting Agree and Continue, I agree to Airbnb's Terms of Service, 
+          Payments Terms of Service, and Nondiscrimination Policy, and acknowledge the Privacy Policy.
+        </p>
+        <div className="signup2-checkbox-group">
+          <input type="checkbox" id="marketing" />
+          <label htmlFor="marketing">I don't want to receive marketing messages from paradise.</label>
+        </div>
+        <button onClick={handleCompleteSignUp}>Agree and Continue</button>
+        {error && <p style={{ color: "red" }}>{error}</p>}
+      </div>
+    )}
+  </div>
+)}
+
 
       {/* Footer */}
       <div className="footer">Footer content here</div>

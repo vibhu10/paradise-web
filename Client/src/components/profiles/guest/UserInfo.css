@@ -1,0 +1,120 @@
+/* General Styles */
+.user-info {
+  max-width: 700px;
+  margin: 20px auto;
+  font-family: "Arial", sans-serif;
+  color: #333;
+  line-height: 1.6;
+ 
+  border-radius: 8px;
+  padding: 20px;
+  background: #fff;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #111;
+  text-align: left;
+}
+
+.description {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 30px;
+  text-align: left;
+}
+
+/* Section Styles */
+.profile-picture {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.profile-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ddd;
+}
+
+.edit-btn {
+  font-size: 14px;
+  color: #131313;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.edit-btn:hover {
+  text-decoration: underline;
+}
+
+/* Single Row Layout */
+.info-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.info-row:last-child {
+  border-bottom: none;
+}
+
+.info-row label {
+  flex: 2; /* Label takes more space */
+  font-size: 16px;
+  color: #333;
+}
+
+.info-row span {
+  flex: 3; /* Field or value takes moderate space */
+  font-size: 16px;
+  color: #666;
+}
+
+.info-row button {
+  flex: 1; /* Button occupies minimal space */
+  text-align: right;
+  margin-left: 10px;
+  font-size: 14px;
+  background: none;
+  border: none;
+  color: #0c0c0c;
+  cursor: pointer;
+}
+
+.info-row button:hover {
+  text-decoration: underline;
+}
+
+/* Editable Fields */
+.input-field {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  width: 100%;
+}
+
+/* Add and Update Buttons */
+.add-btn,
+.update-btn {
+  color: #0e0e0f;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.add-btn:hover,
+.update-btn:hover {
+  text-decoration: underline;
+}

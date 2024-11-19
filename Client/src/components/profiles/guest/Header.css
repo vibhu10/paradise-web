@@ -1,0 +1,22 @@
+.header-profilePage{
+
+  width: 100%;
+  height: 108px;
+  background: black;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.home-filter-profilePage{
+}
+.profilePage-img{
+  width: 240px;
+  height: 76px;
+  position: absolute;
+  left: 360px;
+  top: 1%;
+ 
+}
+.log-in-container-profilePage{
+
+}

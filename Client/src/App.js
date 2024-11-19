@@ -6,7 +6,8 @@ import  EdifInfluencerProfile from './components/influencer/Edif-Influencer-Prof
 import Inbox from './components/influencer/Inbox'
 import HostRegistration from './components/Host-Registration/Host-Registration';
 import UserHome from './components/Host-login/UserHome';
-import UserProfile from './components/user-login/user-profile-home';
+import ProfilePage from './components/profiles/guest/profilePage';
+
 
 function App() {
   return (
@@ -16,8 +17,8 @@ function App() {
         <Routes>
          
           <Route path="/" element={<Home />} /> 
-{/* 
-          <Route path="/user-profile" element={<UserProfile />} /> */}
+
+          <Route path="/user-profile" element={<ProfilePage/>} />
           <Route path='/host-Registration' element={<HostRegistration/>}/>
         
           <Route path='/influencer' element={<EdifInfluencerProfile/>}/>
