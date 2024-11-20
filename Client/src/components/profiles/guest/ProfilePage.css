@@ -18,3 +18,21 @@
   padding-left: 60px;
   background-color: #fff;
 }
+
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensure it's above all other content */
+}
+
+.loading-overlay .spinner {
+  width: 100px; /* Adjust size if needed */
+  height: 100px;
+}

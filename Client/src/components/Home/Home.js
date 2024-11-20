@@ -40,13 +40,13 @@ export default function Home() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [signupStep, setSignupStep] = useState(1); // New: Track signup step
-  const [legalName, setLegalName] = useState({ first: "", last: "" }); // New: First & last name
+  const [firstName, setFirstName] = useState(""); // New: Separate first name
+  const [lastName, setLastName] = useState(""); // New: Separate last name
   const [dob, setDob] = useState(""); // New: Date of birth
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
   const [loginPopup, setLoginPopup] = useState(false);
   const [signupPopup, setSignupPopup] = useState(false);
-
   const navigate = useNavigate();
 
   const checkEmailExistence = async () => {
@@ -101,7 +101,7 @@ export default function Home() {
   
 
   const handleCompleteSignUp = async () => {
-    if (!password || !legalName.first || !legalName.last || !dob) {
+    if (!password || !firstName || !lastName || !dob) {
       setError("All fields are required.");
       return;
     }
@@ -110,7 +110,8 @@ export default function Home() {
       const response = await axios.post("http://localhost:3000/api/users/signup", {
         email,
         password,
-        legalName,
+        firstName,
+        lastName,
         dob,
       });
       alert("Signup completed successfully! You can now log in.");
@@ -176,18 +177,18 @@ export default function Home() {
     setLoginPopup(!loginPopup);
   };
 
+
   const toggleSignupPopup = () => {
     if (!signupPopup) {
-      // Reset all signup form fields when opening the popup
       setEmail("");
       setPassword("");
-      setLegalName({ first: "", last: "" });
+      setFirstName("");
+      setLastName("");
       setDob("");
       setError("");
     }
     setSignupPopup(!signupPopup);
   };
-  
 
   const toggleDropdown = () => {
     setShowDropdown(!showDropdown);
@@ -344,10 +345,7 @@ export default function Home() {
       {/* Signup Popup */}
       {signupPopup && (
   <div>
-    <div
-      className="signup-popup-overlay"
-      onClick={() => setSignupPopup(false)}
-    ></div>
+    <div className="signup-popup-overlay" onClick={() => setSignupPopup(false)}></div>
     {signupStep === 1 ? (
       <div className="signup-popup">
         <button
@@ -358,20 +356,20 @@ export default function Home() {
         </button>
         <h3 className="text-center mb-4">Sign up</h3>
         <form>
-        <div className="mb-3">
-  <label htmlFor="email" className="form-label">Email</label>
-  <input
-    type="email"
-    className="form-control"
-    id="email"
-    placeholder="Email"
-    value={email}
-    onChange={(e) => setEmail(e.target.value)}
-  />
-  {error && (
-    <small style={{ color: "red", display: "block", marginTop: "5px" }}>{error}</small>
-  )}
-</div>
+          <div className="mb-3">
+            <label htmlFor="email" className="form-label">Email</label>
+            <input
+              type="email"
+              className="form-control"
+              id="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            {error && (
+              <small style={{ color: "red", display: "block", marginTop: "5px" }}>{error}</small>
+            )}
+          </div>
           <button
             onClick={handleSignUp}
             type="submit"
@@ -403,21 +401,23 @@ export default function Home() {
       <div className="signup2-container">
         <h2>Finish Signing Up</h2>
         <div className="signup2-input-group">
-          <label htmlFor="legal-name">Legal Name</label>
+          <label htmlFor="first-name">First Name</label>
           <input
             type="text"
-            id="legal-name"
-            placeholder="First name on ID"
-            value={legalName.first}
-            onChange={(e) => setLegalName({ ...legalName, first: e.target.value })}
+            id="first-name"
+            placeholder="First Name"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
           />
         </div>
         <div className="signup2-input-group">
+          <label htmlFor="last-name">Last Name</label>
           <input
             type="text"
-            placeholder="Last name on ID"
-            value={legalName.last}
-            onChange={(e) => setLegalName({ ...legalName, last: e.target.value })}
+            id="last-name"
+            placeholder="Last Name"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
           />
         </div>
         <div className="signup2-input-group">
@@ -440,19 +440,26 @@ export default function Home() {
           />
         </div>
         <p className="signup2-agree">
-          By selecting Agree and Continue, I agree to Airbnb's Terms of Service, 
+          By selecting Agree and Continue, I agree to the Terms of Service, 
           Payments Terms of Service, and Nondiscrimination Policy, and acknowledge the Privacy Policy.
         </p>
         <div className="signup2-checkbox-group">
           <input type="checkbox" id="marketing" />
           <label htmlFor="marketing">I don't want to receive marketing messages from paradise.</label>
         </div>
-        <button onClick={handleCompleteSignUp}>Agree and Continue</button>
-        {error && <p style={{ color: "red" }}>{error}</p>}
+        <button
+          onClick={handleCompleteSignUp}
+          className="btn btn-primary w-100"
+          style={{ background: "#198E78", border: "none" }}
+        >
+          Agree and Continue
+        </button>
+        {error && <p style={{ color: "red", marginTop: "10px" }}>{error}</p>}
       </div>
     )}
   </div>
 )}
+
 
 
       {/* Footer */}

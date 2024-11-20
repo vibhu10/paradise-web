@@ -1,76 +1,83 @@
 import { useState } from "react";
-
+import '../Host-Registration/css/pageTwo.css'
 export function PageTwo({ handleBack, handleNext, handleSaveProperty }) {
-  const [selectedValues, setSelectedValues] = useState([]);  // Store multiple selected values
+  const [selectedValues, setSelectedValues] = useState([]);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const buttonData = [
-    { icon: 'bi-tree', label: 'Unique' },
-    { icon: 'bi-house-door', label: 'Luxury' },
-    { icon: 'bi-pencil-ruler', label: 'Design' },
-    { icon: 'bi-water', label: 'Waterfront' },
-    { icon: 'bi-people', label: 'Group Stays' },
-    { icon: 'bi-mountain', label: 'Scenic Views' },
-    { icon: 'bi-compass', label: 'Adventure' },
-    { icon: 'bi-leaf', label: 'Nature' },
-    { icon: 'bi-building', label: 'City' },
-    { icon: 'bi-person-bounding-box', label: 'Family' },
-    { icon: 'bi-controller', label: 'Game House' },
-    { icon: 'bi-sun', label: 'Seasonal' },
+    { icon: "bi-tree", label: "Unique" },
+    { icon: "bi-house-door", label: "Luxury" },
+    { icon: "bi-pencil-ruler", label: "Design" },
+    { icon: "bi-water", label: "Waterfront" },
+    { icon: "bi-people", label: "Group Stays" },
+    { icon: "bi-mountain", label: "Scenic Views" },
+    { icon: "bi-compass", label: "Adventure" },
+    { icon: "bi-leaf", label: "Nature" },
+    { icon: "bi-building", label: "City" },
+    { icon: "bi-person-bounding-box", label: "Family" },
+    { icon: "bi-controller", label: "Game House" },
+    { icon: "bi-tree", label: "Countryside" },
+    { icon: "bi-people", label: "Wellness" },
+    { icon: "bi-bank", label: "Historical" },
+    { icon: "bi-heart", label: "Romantic" },
+    { icon: "bi-cash", label: "Budget-Friendly" },
+    { icon: "bi-sun", label: "Seasonal" },
   ];
 
   const handleClick = (label) => {
     setSelectedValues((prevSelected) =>
       prevSelected.includes(label)
-        ? prevSelected.filter((item) => item !== label)  // Remove if already selected
-        : [...prevSelected, label]  // Add if not selected
+        ? prevSelected.filter((item) => item !== label)
+        : [...prevSelected, label]
     );
+    setErrorMessage("");
   };
 
   const handleNextClick = () => {
     if (selectedValues.length > 0) {
-
-      const propertyData={
-        propertyType:selectedValues
-      };
-      handleSaveProperty(propertyData);  // Pass selected values to handleSaveProperty
-      handleNext();  // Move to the next page
+      const propertyData = { propertyType: selectedValues };
+      handleSaveProperty(propertyData);
+      handleNext();
     } else {
-      alert("Please select at least one property type before proceeding.");
+      setErrorMessage("Please select at least one property type before proceeding.");
     }
   };
 
   return (
-    <div>
+    <div className="page-two-container">
       <header className="header-host">
         <img src="/48564e5fe8898cf62b0bbf42276d6cf3.jpeg" alt="paradise" />
         <button>Exit</button>
       </header>
-      
-      <div className="body-host">
-        <p className="page-question">It's easy to get started on Paradise</p>
-        
-        <div className="pannel-box-page2">
+
+      <div className="page-two-content">
+        <h2 className="page-two-question">Which of these best describes your place?</h2>
+        <p className="page-two-subtext">Select all that apply</p>
+
+        <div className="page-two-grid">
           {buttonData.map((button, index) => (
-            <div key={index} className="buttons-div">
-              <button 
-                className={`center-buttons ${selectedValues.includes(button.label) ? 'selected' : ''}`} 
-                onClick={() => handleClick(button.label)}
-                style={{
-                  backgroundColor: selectedValues.includes(button.label) ? 'lightgreen' : 'white',
-                }}
-              >
-                <i className={`bi ${button.icon}`} style={{ fontSize: '1.5rem' }}></i>
-                <p>{button.label}</p>
-              </button>
-            </div>
+            <button
+              key={index}
+              className={`page-two-button ${selectedValues.includes(button.label) ? "selected" : ""}`}
+              onClick={() => handleClick(button.label)}
+            >
+              <i className={`bi ${button.icon} page-two-icon`}></i>
+              <span className="page-two-label">{button.label}</span>
+            </button>
           ))}
         </div>
+
+        {errorMessage && <p className="page-two-error">{errorMessage}</p>}
       </div>
 
-      <div className='host-footer'>
-        <button onClick={handleBack}>Back</button>
-        <button onClick={handleNextClick}>Next</button> {/* Next button to save and move forward */}
-      </div>
+      <footer className="page-two-footer">
+        <button className="page-two-back-btn" onClick={handleBack}>
+          Back
+        </button>
+        <button className="page-two-next-btn" onClick={handleNextClick}>
+          Next
+        </button>
+      </footer>
     </div>
   );
 }

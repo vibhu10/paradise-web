@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useDebugValue } from 'react';
 import './Sidebar.css';
 import { FaUser, FaShieldAlt, FaCalendarAlt, FaMoneyBillWave, FaHome, FaBullhorn, FaBell, FaGift } from 'react-icons/fa';
 
-const Sidebar = ({ activeComponent, setActiveComponent }) => {
+const Sidebar = ({ activeComponent, setActiveComponent, userData }) => {
+
   return (
     <div className="sidebar-profilePage-container">
       <div className="sidebar-profilePage-div1">
@@ -13,13 +14,13 @@ const Sidebar = ({ activeComponent, setActiveComponent }) => {
             alt="User"
           />
           <div className="profile-info">
-            <h4>Wenkatesh</h4>
+            <h4>{userData.firstName}</h4>
             <p className="profile-role">Guest</p>
           </div>
         </div>
         <div className="profile-confirmed">
           <p>
-            <strong>Wenkatesh confirmed information</strong>
+            <strong>{userData.firstName} confirmed information</strong>
           </p>
           <p>
             <i className="bi bi-envelope"></i> Email address
@@ -31,7 +32,7 @@ const Sidebar = ({ activeComponent, setActiveComponent }) => {
             Before you book or host on Paradise, you'll need to complete this step.
           </p>
           <button className="btn-verify">Get verified</button>
-          <button className="btn-switch">Switch to influencer</button>
+          {userData.isHost==='true' ? <button className="btn-switch">Switch to Host</button>:<></>}
         </div>
       </div>
 

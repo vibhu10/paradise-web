@@ -13,6 +13,8 @@ userRoute.post("/signup", userController.signUp);
 userRoute.post("/signin", userController.signIn);
 
   userRoute.get('/profile',jwtAuth,userController.getProfile)
+
+  userRoute.put('/profile',jwtAuth,userController.updateProfile)
 // Check email existence route
 userRoute.post("/signin/check-email", async (req, res) => {
   const { email } = req.body;
