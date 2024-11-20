@@ -1,23 +1,26 @@
-// jwt validation and role base access control
-import jwt from 'jsonwebtoken'
+import jwt from 'jsonwebtoken';
 
-const jwtAuth=(req,res,next)=>{
-    //read the token comming form usercontroller
+const jwtAuth = (req, res, next) => {
+  // Read the Authorization header
+  const authHeader = req.headers['authorization'];
 
-    const token=req.header['authorization']
-    if(!token){
-        return res.status(401).send("unauthorized")
-    }
-    
-    try{
-        const payload=jwt.verify(token,"szdi014rTyUfylsmwwEkJF5HAOsiKWrq")
-        console.log(payload,"pppp")
-    }
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    return res.status(401).send("Unauthorized - Token missing or invalid");
+  }
 
-    catch(err){
-        return res.status(401).send('unauthorized');
-    }
+  // Extract the token by removing the "Bearer " prefix
+  const token = authHeader.split(' ')[1];
 
-    next();
-}
-export default jwtAuth
+  try {
+    // Verify the token and attach the payload to the request object
+    const payload = jwt.verify(token, "szdi014rTyUfylsmwwEkJF5HAOsiKWrq");
+    console.log(payload, "Decoded JWT payload");
+    req.user = payload; // Attach the user information from the token to the request
+    next(); // Allow the request to proceed
+  } catch (err) {
+    console.error("JWT Verification Error:", err.message);
+    return res.status(401).send('Unauthorized - Invalid token');
+  }
+};
+
+export default jwtAuth;

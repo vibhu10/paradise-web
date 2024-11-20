@@ -19,18 +19,18 @@
   }
   
   /* Form Section */
-  .password-section .form-group {
+  .login-security-container .password-section .form-group {
     margin-bottom: 20px;
   }
   
-  .password-section label {
+  .login-security-container .password-section label {
     display: block;
     font-size: 14px;
     font-weight: bold;
     margin-bottom: 8px;
   }
   
-  .password-section input {
+  .login-security-container .password-section input {
     width: 100%;
     padding: 10px;
     font-size: 14px;
@@ -38,76 +38,81 @@
     border-radius: 4px;
   }
   
-  .update-password-btn {
-    background-color: #1e9159;
+  .login-security-container .update-password-btn {
+    background-color:#198E78;
     color: white;
-    padding: 10px 20px;
+ width: 180px;
     font-size: 16px;
     border: none;
-    border-radius: 4px;
+    border-radius: 10px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
   }
   
-  .update-password-btn:hover {
+  .login-security-container .update-password-btn:hover {
     background-color: #167b47;
   }
   
   /* Social Accounts Section */
-  .social-accounts-section h3 {
+  .login-security-container .social-accounts-section h3 {
     margin-top: 30px;
     margin-bottom: 10px;
   }
   
-  .social-account-row {
+  .login-security-container .social-account-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
   }
   
-  .social-account-row span {
+  .login-security-container .social-account-row span {
     font-size: 14px;
   }
   
-  .social-connect-btn {
+  .login-security-container .social-connect-btn {
     background: none;
     border: none;
     font-size: 14px;
     text-decoration: underline;
     cursor: pointer;
+    padding: 8px 16px; /* Added padding for consistent button sizing */
+    border-radius: 4px;
   }
   
-  .connect-btn {
+  .login-security-container .connect-btn {
     color: #007bff;
   }
   
-  .connect-btn:hover {
+  .login-security-container .connect-btn:hover {
     color: #0056b3;
   }
   
-  .disconnect-btn {
+  .login-security-container .disconnect-btn {
     color: red;
   }
   
-  .disconnect-btn:hover {
+  .login-security-container .disconnect-btn:hover {
     color: darkred;
   }
   
   /* Deactivate Section */
-  .deactivate-section {
+  .login-security-container .deactivate-section {
     margin-top: 20px;
   }
   
-  .deactivate-btn {
+  .login-security-container .deactivate-btn {
     background: none;
     border: none;
     font-size: 14px;
     color: red;
     text-decoration: underline;
     cursor: pointer;
+    padding: 8px 16px; /* Added padding for consistency */
+    border-radius: 4px;
   }
   
-  .deactivate-btn:hover {
+  .login-security-container .deactivate-btn:hover {
     color: darkred;
   }
   

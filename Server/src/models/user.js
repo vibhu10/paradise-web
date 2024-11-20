@@ -24,11 +24,17 @@ return newUser
   }
 
   static async findOne(email) {
-    console.log(email,"checking in model idfjdkjf")
+  
     const user = users.find((u) => u.email == email.email);
+    
     return user || null;
   }
-  
+ static findProfile(email){
+  console.log(email,"email in user.js")
+  const userdata=users.find((u)=>email==u.email);
+  console.log(userdata,"user return after finding data")
+  return userdata ||null;
+ }
 }
 var users=[
     {
@@ -42,4 +48,16 @@ gender:'male',
 address:"india "
 
     }
+,
+    {
+      id:2,
+      name:"vibhu",
+      email:"vibhu@admin.com",
+      password:"12345678",
+      type:"user",
+      mobile:"98634673",
+      gender:'male',
+      address:"india "
+      
+          }
 ]

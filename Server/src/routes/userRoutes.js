@@ -1,6 +1,7 @@
 import express from "express";
 import UserController from "../controllers/userController.js";
 import UserModal from "../models/user.js";
+import jwtAuth from "../middlewares/authMiddleware.js";
 
 const userController = new UserController();
 const userRoute = express.Router();
@@ -11,6 +12,7 @@ userRoute.post("/signup", userController.signUp);
 // Signin route
 userRoute.post("/signin", userController.signIn);
 
+  userRoute.get('/profile',jwtAuth,userController.getProfile)
 // Check email existence route
 userRoute.post("/signin/check-email", async (req, res) => {
   const { email } = req.body;
@@ -31,5 +33,7 @@ userRoute.post("/signin/check-email", async (req, res) => {
     return res.status(500).json({ error: "Internal Server Error" });
   }
 });
+
+
 
 export default userRoute;
