@@ -1,5 +1,6 @@
 import { useState } from "react";
-import '../Host-Registration/css/pageTwo.css'
+import '../Host-Registration/css/pageTwo.css';
+
 export function PageTwo({ handleBack, handleNext, handleSaveProperty }) {
   const [selectedValues, setSelectedValues] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
@@ -45,11 +46,6 @@ export function PageTwo({ handleBack, handleNext, handleSaveProperty }) {
 
   return (
     <div className="page-two-container">
-      <header className="header-host">
-        <img src="/48564e5fe8898cf62b0bbf42276d6cf3.jpeg" alt="paradise" />
-        <button>Exit</button>
-      </header>
-
       <div className="page-two-content">
         <h2 className="page-two-question">Which of these best describes your place?</h2>
         <p className="page-two-subtext">Select all that apply</p>
@@ -74,6 +70,7 @@ export function PageTwo({ handleBack, handleNext, handleSaveProperty }) {
         <button className="page-two-back-btn" onClick={handleBack}>
           Back
         </button>
+        <div className="page-two-progress-bar"></div>
         <button className="page-two-next-btn" onClick={handleNextClick}>
           Next
         </button>

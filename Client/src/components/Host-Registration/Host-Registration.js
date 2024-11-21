@@ -70,6 +70,11 @@ export default function HostRegistration() {
     }, [saveProperty]);
 
     return (
+        <div>
+      <header className="header-host">
+        <img src="/48564e5fe8898cf62b0bbf42276d6cf3.jpeg" alt="paradise" />
+        <button className='header-host button'>Exit</button>
+       </header >
         <div className="host-container">
             {currentPage === 1 && <PageOne handleNext={handleNext} />}
             {currentPage === 2 && <PageTwo handleNext={handleNext} handleBack={handleBack} handleSaveProperty={handleSaveProperty} />}
@@ -86,6 +91,7 @@ export default function HostRegistration() {
             {currentPage === 13 && <PageThirteen handleNext={handleNext} handleBack={handleBack} handleSaveProperty={handleSaveProperty} />}
             {currentPage === 14 && <PageFourteen handleNext={handleNext} handleBack={handleBack} handleSaveProperty={handleSaveProperty} />}
             {currentPage === 15 && <PageFifteen handleNext={handleNext} handleBack={handleBack} handleSaveProperty={handleSaveProperty} setSaveProperty={setSaveProperty} />}
+        </div>
         </div>
     );
 }

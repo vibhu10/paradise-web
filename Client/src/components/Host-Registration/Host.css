@@ -5,8 +5,8 @@
 .header-host {
     background-color: black;
     width: 100vw;
-    height: 80px;
-    border: 2px solid black;
+    height: 85px;
+    
     display: flex;
     justify-content: space-between;
 
@@ -19,15 +19,14 @@
     left: 43px; */
 }
 .header-host button{
-margin: 15px;
-
-    width: 100px;
-    height: 47px;
-    border-radius: 10px;
-    border: transparent;
-background-color: #198E78;
- color:white;
- margin: 10px;
+  margin: 15px;
+  width: 70px;
+  height: 45px;
+  border-radius: 20px;
+  border: transparent;
+  background-color: #198E78;
+  color: white;
+  margin: 50px;
 
 }
 .body-host {
@@ -58,16 +57,7 @@ background-color: #198E78;
 
 }
 /* this is css for page2 center buttons-starting*/
-.pannel-box-page2{
-    width: 610px;
-    height: 567px;
-    /* border: 2px solid grey; */
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    padding: 10px;
 
-}
 .buttons-div{
     width: 103px;
     height: 125px;
@@ -204,56 +194,6 @@ background-color: #198E78;
 } */
 
 
-/* page five   */
-.page-5-main-div
-{
-    display: flex;
-    flex-direction: column;
-    /* border: 2px solid lightgray; */
-    width: 38vw;
-    height: 70vh;
-    flex-wrap: wrap;
-
-}
-
-.page-5-form{
-  
-    height: 65%;
-    /* border: 2px dotted red; */
-   
-}
-.page-5-map{
- 
-  height: 40%;
-    /* border: 2px dotted blue; */
-}
-
-
-.text-page-5{
-    display: flex;
-    flex-direction: column;
-    /* justify-content: center; */
-    align-items: center;
-    margin: 10px;
-}
-.text-page-5 {
-    font-family: 'Arial', sans-serif; /* Set font family */
-    color: #333; /* Darker text color */
-  }
-  
-  .text-page-5 p {
-    margin-bottom: 10px; /* Space between paragraphs */
-    font-size: 16px; /* Set font size */
-    line-height: 0.8; /* Improve readability */
-  }
-  
-  .text-page-5 p:first-child {
-    font-weight: bold; /* Make the first paragraph bold */
-    font-size: 23px; /* Slightly larger font for emphasis */
-  }
-  .text-page-5 p:second-child{
-    color: lightgray;
-  }
   /* .loading-pageFive{
     width: 500px;
     height: 4px;
@@ -261,128 +201,11 @@ background-color: #198E78;
     top: 703px;
     border-top: 4px solid #198E78;
 } */
-.page-5-form-data{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-#country{
-    border-radius: 10px;
-    border: 1px solid lightgray;
-    height: 50px;
-    width: 93%;
-    font-size: 17px;
-    color: gray;
-    margin-left: 10px;
-}
-#house-and-flat, #street-address,#landmark,#District{
-    height:50px;
-    width: 45%;
-    border-radius: 10px;
-    border: 1px solid lightgray;
-    color: grey;
-margin: 10px;
-}
-#City,#State,#pin{
-    height: 45px;
-    width: 29%;
-    border-radius: 10px;
-    border: 1px solid lightgray;
-    color: grey;
-margin: 10px;
-}
 
 
-/* The switch container */
-/* Flex container for p and slider */
-.switch {
-    display: flex;
-    align-items: center; /* Aligns the items (p and slider) vertically in the center */
-    justify-content: space-between; /* Ensures even spacing between text and slider */
-    width: 100%;
-    max-width: 600px; /* You can adjust this width */
-    margin-bottom: 15px;
-  }
-  
-  /* Flex item for text */
-  .switch-content-page5 {
-    width: 600px;
-    display: flex;
-    flex-direction: column;
-   
-    flex-grow: 1;
-    margin-right: 20px;
-}
-  /* The switch (slider) styling */
-  .switch input {
-    display: none; /* Hide the default checkbox */
-  }
-  
-  .switch .slider {
-    position: relative;
-    display: inline-block;
-    width: 53px;
-    height: 34px;
-    background-color: #ccc;
-    border-radius: 34px;
-    cursor: pointer;
-    transition: 0.4s;
-  }
-  
-  .switch .slider:before {
-    content: "";
-    position: absolute;
-    height: 26px;
-    width: 26px;
-    background-color: white;
-    border-radius: 50%;
-    bottom: 4px;
-    left: 4px;
-    transition: 0.4s;
-  }
-  
-  input:checked + .slider {
-    background-color:#198E78;
-  }
-  
-  input:checked + .slider:before {
-    transform: translateX(26px);
-  }
-  
 
-  /* page six */
-  .page-6-div{
-    width: 30%;
-    height: 60%;
-    /* border:2px solid grey */
-  }
 
-  .page-6-button-div-outer{
-    margin: 44px;
-    /* border: 2px solid black; */
-    height: 80%;
 
-  }
-  .page-6-button-div-inner{
-    /* border: 2px solid rgb(182, 18, 18); */
-    height: 19.25%;
-    border-radius: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 16px;
-    border: 2px solid lightgray;
-    border-collapse: collapse;
-  }
- 
-
- /* .loading-pageSix{
-    width: 600px;
-    height: 4px;
-    position: absolute;
-    top: 703px;
-    border-top: 4px solid #198E78;
-} */
 /*page seven  */
 .pannel-box-page7{
   width: 31%;

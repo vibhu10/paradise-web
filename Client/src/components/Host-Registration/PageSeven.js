@@ -36,10 +36,7 @@ export function PageSeven({ handleBack, handleNext, handleSaveProperty }) {
 
   return (
     <div>
-      <header className="header-host">
-        <img src="/48564e5fe8898cf62b0bbf42276d6cf3.jpeg" alt="paradise" />
-        <button>Exit</button>
-      </header>
+     
       <div className="body-host">
         <p className="page-question">Tell guests what your place has to offer</p>
 

@@ -43,10 +43,7 @@ export function PageTen({ handleNext, handleBack, handleSaveProperty }) {
 
   return (
     <div>
-      <header className="header-host">
-        <img src="/48564e5fe8898cf62b0bbf42276d6cf3.jpeg" alt="paradise" />
-        <button>Exit</button>
-      </header>
+  
       <div className="body-host">
         <div className="pannel-box-page10">
           <div className="pannel-box-page10-div1">

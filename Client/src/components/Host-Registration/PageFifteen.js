@@ -6,10 +6,7 @@ export function PageFifteen({ handeNext, handleBack, handleSaveProperty , setSav
 
     return (
       <div className="main-container">
-        <header className="header-host">
-          <img src="/48564e5fe8898cf62b0bbf42276d6cf3.jpeg" alt="paradise" />
-          <button>Exit</button>
-        </header>
+      
   
         <div className="body-host">
               

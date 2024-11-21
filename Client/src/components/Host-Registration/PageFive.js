@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import '../Host-Registration/css/pageFive.css'
 export function PageFive({ handleNext, handleBack, handleSaveProperty }) {
   const [formData, setFormData] = useState({
     country: "",
@@ -10,7 +10,7 @@ export function PageFive({ handleNext, handleBack, handleSaveProperty }) {
     city: "",
     state: "",
     pin: "",
-    showLocation: false
+    showLocation: false,
   });
   const [countries, setCountries] = useState([]);
 
@@ -28,151 +28,160 @@ export function PageFive({ handleNext, handleBack, handleSaveProperty }) {
     const { name, value, type, checked } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: type === "checkbox" ? checked : value
+      [name]: type === "checkbox" ? checked : value,
     }));
   };
 
   const handleSave = async () => {
-    // Ensure `handleSaveProperty` completes and returns before proceeding
     return new Promise((resolve) => {
-    const addressData={Address:formData}
+      const addressData = { Address: formData };
       handleSaveProperty(addressData);
-      resolve(); // Resolve after saving
+      resolve();
     });
   };
 
   const handleNextClick = async () => {
-    await handleSave(); // Wait for the data to save fully
-    handleNext(); // Proceed to the next page
+    await handleSave();
+    handleNext();
   };
 
   return (
-    <div>
-      <header className="header-host">
-        <img src="/48564e5fe8898cf62b0bbf42276d6cf3.jpeg" alt="paradise" />
-        <button>Exit</button>
-      </header>
-      <div className="body-host">
-        <div className="page-5-main-div">
-          <div className="page-5-form">
-            <div className="text-page-5">
-              <p>Confirm your address</p>
-              <p>
-                Your address is only shared with guests after they’ve made a
-                reservation.
-              </p>
-            </div>
-            <div className="page-5-form-data">
-              <form onSubmit={(e) => { e.preventDefault(); handleSave(); }}>
-                <select
-                  id="country"
-                  name="country"
-                  value={formData.country}
-                  onChange={handleChange}
-                >
-                  <option value="" disabled>
-                    Country/Region
-                  </option>
-                  {countries.map((country) => (
-                    <option key={country.cca3} value={country.name.common}>
-                      {country.name.common} ({country.idd?.root || ""})
-                    </option>
-                  ))}
-                </select>
-
-                <input
-                  type="text"
-                  id="house-and-flat"
-                  name="houseAndFlat"
-                  placeholder="Flat, house, etc. (if applicable)"
-                  value={formData.houseAndFlat}
-                  onChange={handleChange}
-                  required
-                />
-
-                <input
-                  type="text"
-                  id="street-address"
-                  name="streetAddress"
-                  placeholder="Street address"
-                  value={formData.streetAddress}
-                  onChange={handleChange}
-                  required
-                />
-
-                <input
-                  type="text"
-                  id="landmark"
-                  name="landmark"
-                  placeholder="Nearby landmark (if applicable)"
-                  value={formData.landmark}
-                  onChange={handleChange}
-                />
-
-                <input
-                  type="text"
-                  id="district"
-                  name="district"
-                  placeholder="District/locality (if applicable)"
-                  value={formData.district}
-                  onChange={handleChange}
-                />
-
-                <input
-                  type="text"
-                  id="city"
-                  name="city"
-                  placeholder="City/Town"
-                  value={formData.city}
-                  onChange={handleChange}
-                />
-
-                <input
-                  type="text"
-                  id="state"
-                  name="state"
-                  placeholder="State/Union Territory"
-                  value={formData.state}
-                  onChange={handleChange}
-                />
-
-                <input
-                  type="number"
-                  id="pin"
-                  name="pin"
-                  placeholder="Pin code"
-                  value={formData.pin}
-                  onChange={handleChange}
-                />
-
-                <label className="switch">
-                  <div className="switch-content-page5">
-                    <h6 style={{ fontWeight: 600 }}>Show your specific location</h6>
-                    <p>
-                      Make it clear to guests where your place is located. We'll
-                      only share your address after they've made a reservation.
-                    </p>
-                  </div>
-                  <input
-                    type="checkbox"
-                    name="showLocation"
-                    checked={formData.showLocation}
-                    onChange={handleChange}
-                  />
-                  <span className="slider"></span>
-                </label>
-
-                {/* <button type="submit">Save Address</button> */}
-              </form>
-            </div>
-          </div>
-          <div className="page-5-map"></div>
+    <div className="page-5-body-host">
+      <div className="page-5-main-div">
+        <div className="page-5-text">
+          <p className="page-5-title">Confirm your address</p>
+          <p className="page-5-subtitle">
+            Your address is only shared with guests after they’ve made a reservation.
+          </p>
         </div>
-      </div>
+        <div className="page-5-form-data">
+  <form>
+    <select
+      id="country"
+      name="country"
+      value={formData.country}
+      onChange={handleChange}
+      className="page-5-input"
+    >
+      <option value="" disabled>
+        Country/Region
+      </option>
+      {countries.map((country) => (
+        <option key={country.cca3} value={country.name.common}>
+          {country.name.common} ({country.idd?.root || ""})
+        </option>
+      ))}
+    </select>
 
-      <div className="host-footer">
-        <button onClick={handleBack}>Back</button>
-        <button onClick={handleNextClick}>Next</button>
+    <input
+      type="text"
+      name="houseAndFlat"
+      placeholder="Flat, house, etc. (if applicable)"
+      value={formData.houseAndFlat}
+      onChange={handleChange}
+      className="page-5-input"
+    />
+
+    <input
+      type="text"
+      name="streetAddress"
+      placeholder="Street address"
+      value={formData.streetAddress}
+      onChange={handleChange}
+      className="page-5-input"
+    />
+
+    <div className="page-5-form-row">
+      <input
+        type="text"
+        name="landmark"
+        placeholder="Nearby landmark (if applicable)"
+        value={formData.landmark}
+        onChange={handleChange}
+        className="page-5-input"
+      />
+      <input
+        type="text"
+        name="district"
+        placeholder="District/locality (if applicable)"
+        value={formData.district}
+        onChange={handleChange}
+        className="page-5-input"
+      />
+    </div>
+
+    <div className="page-5-form-row">
+      <input
+        type="text"
+        name="city"
+        placeholder="City / town"
+        value={formData.city}
+        onChange={handleChange}
+        className="page-5-input"
+      />
+      <input
+        type="text"
+        name="state"
+        placeholder="State/Union Territory"
+        value={formData.state}
+        onChange={handleChange}
+        className="page-5-input"
+      />
+    </div>
+
+    <input
+      type="number"
+      name="pin"
+      placeholder="Pin code"
+      value={formData.pin}
+      onChange={handleChange}
+      className="page-5-input"
+    />
+
+    <label className="page-5-switch">
+      <div className="page-5-switch-content">
+        <h6>Show your specific location</h6>
+        <p>
+          Make it clear to guests where your place is located. We'll only share
+          your address after they've made a reservation.
+        </p>
+      </div>
+      <input
+        type="checkbox"
+        name="showLocation"
+        checked={formData.showLocation}
+        onChange={handleChange}
+      />
+      <span className="page-5-slider"></span>
+    </label>
+  </form>
+</div>
+
+<div className="page-5-map">
+  <iframe
+    src="https://maps.google.com/maps?q=London&t=&z=13&ie=UTF8&iwloc=&output=embed"
+    frameBorder="0"
+    style={{
+      width: "100%",
+      height: "100%",
+      borderRadius: "8px",
+    }}
+    allowFullScreen=""
+    aria-hidden="false"
+    tabIndex="0"
+  ></iframe>
+
+</div>
+
+      </div>
+      <div className="page-5-footer">
+        <button onClick={handleBack} className="page-5-btn page-5-back-btn">
+          Back
+        </button>
+        <div className="page-5-progress-bar"></div>
+        <button onClick={handleNextClick} className="page-5-btn page-5-next-btn">
+          Next
+        </button>
       </div>
     </div>
   );
