@@ -4,7 +4,7 @@ import PropertyController from "../controllers/propertyController.js";
 
 const propertyRoutes=express.Router();
 const propertyController=new PropertyController()
-propertyRoutes.get('/',propertyController.getAllProperties)
+propertyRoutes.get('/allproperties',propertyController.getAllProperties)
 propertyRoutes.post('/registration',propertyController.addProperty)
 
 

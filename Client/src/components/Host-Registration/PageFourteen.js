@@ -1,4 +1,5 @@
 import { useState } from "react";
+import '../Host-Registration/css/pageFourteen.css';
 
 export function PageFourteen({ handleNext, handleBack, handleSaveProperty }) {
   const [houseRules, setHouseRules] = useState({
@@ -42,11 +43,9 @@ export function PageFourteen({ handleNext, handleBack, handleSaveProperty }) {
   };
 
   return (
-    <div>
-   
-
-      <div className="body-host">
-        <div className="panel-box-page14">
+    <div className="PageFourteen-container">
+    
+        <div className="PageFourteen-panel-box">
           <h4>House Rules</h4>
           <p>
             Guests are expected to follow your rules and may be removed from
@@ -147,11 +146,16 @@ export function PageFourteen({ handleNext, handleBack, handleSaveProperty }) {
             </button>
           </h6>
         </div>
-      </div>
-
-      <div className="host-footer">
-        <button onClick={handleBack}>Back</button>
-        <button onClick={handleNextWithSave}>Next</button>
+      
+      <div className="PageFourteen-footer">
+        <button className="PageFourteen-footer-button" onClick={handleBack}>
+          Back
+        </button>
+        <div className="PageFourteen-progress-bar"></div>
+       
+        <button className="PageFourteen-footer-button" onClick={handleNextWithSave}>
+          Next
+        </button>
       </div>
     </div>
   );

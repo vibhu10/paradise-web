@@ -15,12 +15,12 @@ import { PageTwelve } from './PageTwelve';
 import { PageThirteen } from './PageThirteen';
 import { PageFourteen } from './PageFourteen';
 import { PageFifteen } from './PageFifteen';
-
+import { useNavigate } from 'react-router-dom';
 export default function HostRegistration() {
     const [currentPage, setCurrentPage] = useState(1);
     const [propertyData, setPropertyData] = useState({});
     const [saveProperty, setSaveProperty] = useState(false);
-  
+  const navigate=useNavigate();
     function handleNext() {
         if (currentPage >= 1 && currentPage < 15) {
             setCurrentPage((p) => p + 1);
@@ -73,7 +73,12 @@ export default function HostRegistration() {
         <div>
       <header className="header-host">
         <img src="/48564e5fe8898cf62b0bbf42276d6cf3.jpeg" alt="paradise" />
-        <button className='header-host button'>Exit</button>
+        <button
+      className='header-host button'
+      onClick={() => navigate('/')} // Redirect to the home page
+    >
+      Exit
+    </button>
        </header >
         <div className="host-container">
             {currentPage === 1 && <PageOne handleNext={handleNext} />}

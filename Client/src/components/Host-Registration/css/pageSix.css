@@ -1,13 +1,16 @@
 /* PageSix Component Styles */
 .page-six-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    font-family: Arial, sans-serif;
-    background-color: #fff;
-  }
-  
+  /* height: 100vh; */
+  height: 81vh;
+  display: flex
+;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* padding: 20px; */
+  font-family: Arial, sans-serif;
+  background-color: #fff;
+}
   .page-six-header {
     text-align: center;
     margin-bottom: 20px;
@@ -94,7 +97,7 @@
   
   /* Back and Next buttons */
   .page-six-back-btn,
-  .page-six-next-btn {
+  .page-six-footer-button {
     padding: 10px 20px;
     width: 100px;
     border-radius: 20px;
@@ -105,14 +108,13 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
-  
   .page-six-back-btn:hover,
   .page-six-next-btn:hover {
     background-color: #388e3c;
   }
   
   .page-six-progress-bar {
-    width: 650px;
+    width: 750px;
     height: 4px;
     background-color: #198E78;
     border-radius: 2px;

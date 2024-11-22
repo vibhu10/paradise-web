@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import '../Host-Registration/css/pageTen.css'
 export function PageTen({ handleNext, handleBack, handleSaveProperty }) {
   const [text, setText] = useState("");
   const [wordCount, setWordCount] = useState(0);

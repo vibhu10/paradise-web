@@ -1,7 +1,7 @@
 import "./Home.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -48,6 +48,35 @@ export default function Home() {
   const [loginPopup, setLoginPopup] = useState(false);
   const [signupPopup, setSignupPopup] = useState(false);
   const navigate = useNavigate();
+
+  const [propertyData, setPropertyData] = useState(null);//state for the showing all property
+  console.log(propertyData,"check for data comming from backetd")
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      setIsAuthenticated(true);
+    }
+  }, []);
+  useEffect(() => {
+    const fetchPropertyData = async () => {
+      try {
+        const response = await axios.get('http://localhost:3000/api/property/allproperties');
+        setPropertyData(response.data); // Update state with fetched data
+      } catch (err) {
+        console.error('Error fetching property data:', err);
+        setError('Failed to fetch property data.');
+      }
+    };
+
+    fetchPropertyData(); // Automatically fetch data on page load
+  }, []);
+
+
+
+
+
+
+
 
   const checkEmailExistence = async () => {
     try {
@@ -314,33 +343,50 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Body */}
-      <div className="home-body">
-        <div className="hotel-data">
-          {hotels.map((hotel) => (
-            <div key={hotel.id} className="hotel-card">
-              <img src={hotel.image} alt={`Image of ${hotel.name}`} />
-              <div id="hotel-detail">
-                <h3 style={{ color: "#198E78" }}>{hotel.name}</h3>
-                <p>{hotel.description}</p>
-                <p>
-                  Check-in: {hotel.checkIn} {hotel.checkOut}
-                </p>
-                <p
-                  style={{
-                    color: "black",
-                    fontSize: "18px",
-                    fontWeight: "bold",
-                  }}
-                >
-                  ${hotel.pricePerNight}/night Total:
-                  <span style={{ color: "#198E78" }}>${hotel.totalPrice}</span>
-                </p>
-              </div>
-            </div>
-          ))}
+     {/* Body */}
+{/* Body */}
+<div className="home-body">
+  <div className="hotel-data">
+    {propertyData && propertyData.length > 0 ? ( // Check if propertyData is valid and non-empty
+      propertyData.map((property, index) => (
+        <div key={index} className="hotel-card">
+          <img
+            src={property.propertyCoverPhoto || "https://via.placeholder.com/150"} // Fallback to a placeholder if no image
+            alt={`Image of ${property.propertyName || "Unknown Property"}`} // Handle missing property name
+          />
+          <div id="hotel-detail">
+            <h3 style={{ color: "#198E78" }}>{property.propertyName || "Unnamed Property"}</h3>
+            <p>
+              Check-in: {property.availability?.checkinTime || "N/A"} {/* Handle missing availability */}
+            </p>
+            <p>
+              Minimum Nights: {property.availability?.minimumNight || "N/A"} | Maximum Nights: {property.availability?.maximumNight || "N/A"}
+            </p>
+            <p>
+              Address:{" "}
+              {property.address?.streetAddress || "N/A"}, {property.address?.city || "N/A"}
+            </p>
+            <p
+              style={{
+                color: "black",
+                fontSize: "18px",
+                fontWeight: "bold",
+              }}
+            >
+              ${property.pricing?.BaseCharge || "0"}/night Total:{" "}
+              <span style={{ color: "#198E78" }}>
+                ${property.pricing?.PriceBeforeTax || "0"}
+              </span>
+            </p>
+          </div>
         </div>
-      </div>
+      ))
+    ) : (
+      <p>No properties available to display.</p> // Fallback message if no data is available
+    )}
+  </div>
+</div>
+
 
       {/* Signup Popup */}
       {signupPopup && (

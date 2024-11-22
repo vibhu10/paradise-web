@@ -1,10 +1,11 @@
 /* Base Styles */
-body {
+/* body {
     margin: 0;
     font-family: "Roboto", Arial, sans-serif;
     background-color: #f9f9f9;
     color: #333;
-  }
+    border: 2px solid red;
+  } */
   
   .page-5-body-host {
     display: flex;
@@ -15,6 +16,7 @@ body {
     width: 100%;
     max-width: 800px;
     margin: 0 auto;
+    
   
   }
   

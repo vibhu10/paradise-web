@@ -8,9 +8,9 @@ export default class PropertyController {
 
   // Method to get all properties
   getAllProperties(req, res) {
-    const properties=PropertyModel.allProperty();
+    const properties=PropertyModel.allProperties()
     res.status(200).send(properties);
-    console.log(properties)
+    console.log(properties,"comming i geallpro")
   }
 
   // Method to get filtered properties based on criteria in the request
@@ -29,32 +29,38 @@ export default class PropertyController {
   }
 
   // Method to add a new property
-  addProperty(req, res) {
-    const propertyData = req.body;
-console.log(propertyData,"new data")
-    // Create a new property instance
-    // const newProperty = new PropertyModel(
-    //   propertyData.type,
-    //   propertyData.title,
-    //   propertyData.name,
-    //   propertyData.price
-    // );
 
-    // Assign additional property data
-    // Object.assign(newProperty, propertyData);
 
-    // Add the new property to the properties array
-    // this.properties.push(newProperty);
-
-    // Optionally, you may also want to add the property to the static list in PropertyModel
-    // PropertyModel.addProperty(newProperty);
-
-    // res.status(201).json({
-    //   message: 'Property added successfully',
-    //   property: newProperty
-    // });
-  }
-
+  addProperty = (req, res) => {
+    try {
+      // Extract data from the request body
+      const propertyData = req.body;
+  
+      // Validate the incoming data (optional but recommended)
+      if (!propertyData.title || !propertyData.propertyName || !propertyData.pricing?.BaseCharge) {
+        return res.status(400).json({ message: 'Missing required property fields' });
+      }
+  
+      // Add the property using the static method
+      PropertyModel.addProperty(propertyData);
+  
+      // Retrieve the newly added property (last property in the static array)
+      const newProperty = PropertyModel.properties[PropertyModel.properties.length - 1];
+  
+      // Return success response
+      res.status(201).json({
+        message: 'Property added successfully',
+        property: newProperty, // Respond with the created property
+      });
+    } catch (error) {
+      res.status(500).json({
+        message: 'An error occurred while adding the property',
+        error: error.message,
+      });
+    }
+  };
+  
+  
   // Method to rate a property
   rateProperty(req, res) {
     const { propertyId, rating } = req.body;
