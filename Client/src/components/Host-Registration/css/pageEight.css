@@ -1,0 +1,140 @@
+/* Container for the entire page */
+.page-eight-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    text-align: center;
+}
+
+/* Header text */
+.page-eight-question {
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    color: #444;
+}
+
+/* Panel box styling */
+.page-eight-panel-box {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+/* Photo container styling */
+.page-eight-photo-container {
+    position: relative;
+    margin-bottom: 20px;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.page-eight-cover-photo {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Cover photo button styling */
+.page-eight-cover-photo-button {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background-color: rgba(0, 123, 255, 0.8);
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.page-eight-cover-photo-button:hover {
+    background-color: #0056b3;
+}
+
+.page-eight-cover-photo-button label {
+    cursor: pointer;
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Property name input styling */
+.page-eight-property-name-input {
+    margin-top: 20px;
+    text-align: left;
+}
+
+.page-eight-property-name-input label {
+    font-size: 16px;
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.page-eight-property-name-input input {
+    width: 100%;
+    padding: 12px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+.page-eight-property-name-input input:focus {
+    border-color: #007BFF;
+    outline: none;
+}
+
+  /* Footer styling */
+  .page-eight-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Spread Back and Next buttons */
+    width: 100%; /* Full width of the screen */
+    position: fixed; /* Fixed at the bottom */
+    bottom: 0;
+    left: 0;
+    background-color: #fff; /* Background color */
+    padding: 16px;
+    box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Back and Next buttons */
+  .page-eight-back-btn,
+  .page-eight-footer-button {
+    padding: 10px 20px;
+    width: 100px;
+    border-radius: 20px;
+    border: none;
+    background-color: #198E78;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .page-eight-back-btn:hover,
+  .page-eight-next-btn:hover {
+    background-color: #388e3c;
+  }
+  
+  .page-eight-progress-bar {
+    width: 750px;
+    height: 4px;
+    background-color: #198E78;
+    border-radius: 2px;
+    margin: 0 16px;
+    position: absolute;
+   
+    top: -3px;
+    left: -17px;
+}

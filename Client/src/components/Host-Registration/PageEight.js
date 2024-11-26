@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import '../Host-Registration/css/pageEight.css'; // Import the CSS styles
 
 export function PageEight({ handleNext, handleBack, handleSaveProperty }) {
     const [selectedImage, setSelectedImage] = useState(null);
     const [propertyName, setPropertyName] = useState('');
+    const [errors, setErrors] = useState({ name: '' }); // Error state for validation
 
-    const defaultImage = "https://images.pexels.com/photos/462235/pexels-photo-462235.jpg";
+    const defaultImage = "https://images.pexels.com/photos/462235/pexels-photo-462235.jpg"; // Default cover photo
 
     const handleImageChange = (event) => {
         const file = event.target.files[0];
@@ -14,82 +16,84 @@ export function PageEight({ handleNext, handleBack, handleSaveProperty }) {
         }
     };
 
+    const validateInputs = () => {
+        let isValid = true;
+        const newErrors = {};
+
+        if (!propertyName.trim()) {
+            newErrors.name = 'Property name is required!';
+            isValid = false;
+        }
+
+        setErrors(newErrors);
+        return isValid;
+    };
+
     const handleNextButtonClick = () => {
+        if (!validateInputs()) {
+            return; // Stop here if validation fails
+        }
+
         const propertyData = {
-            propertyCoverPhoto: selectedImage,
-            propertyName: propertyName,
+            propertyCoverPhoto: selectedImage || defaultImage, // Use default photo if no image is selected
+            propertyName: propertyName.trim(),
         };
         handleSaveProperty(propertyData);
         handleNext();
     };
 
     return (
-        <div>
-          
-            
-            <div className="body-host">
-                <p className="page-question">How does this look?</p>
-                
-                <div className="panel-box-page8">
-                    <div className="photo-container" style={{ position: 'relative' }}>
-                        <img
-                            style={{ width: "500px", height: "300px" }}
-                            src={selectedImage || defaultImage}
-                            alt="Property Cover"
-                            className="cover-photo"
-                            onError={(e) => { 
-                                console.log("Image failed to load, using default."); 
-                                e.target.src = defaultImage; 
-                            }}
-                        />
-                        <button 
-                            style={{ 
-                                position: "absolute", 
-                                left: "400px", 
-                                top: "200px", 
-                              
-                                backgroundColor: '#007BFF', 
-                                color: '#fff', 
-                                border: 'none', 
-                                cursor: 'pointer',
-                                borderRadius: '4px' 
-                            }}
-                        >
-                            <label htmlFor="image-upload" style={{ cursor: 'pointer' }}>cover photo</label>
-                        </button>
-                        <input
-                            type="file"
-                            id="image-upload"
-                            accept="image/*"
-                            style={{ display: 'none' }}
-                            onChange={handleImageChange}
-                        />
-                    </div>
+        <div className="page-eight-container">
+            {/* Header */}
+            <p className="page-eight-question">How does this look?</p>
 
-                    {/* Input field for property name */}
-                    <div className="property-name-input" style={{ marginTop: '20px' }}>
-                        <label htmlFor="property-name" style={{ display: 'block', marginBottom: '5px' }}>Add Property Name</label>
-                        <input
-                            type="text"
-                            id="property-name"
-                            value={propertyName}
-                            onChange={(e) => setPropertyName(e.target.value)}
-                            placeholder="Enter property name"
-                            style={{
-                                width: '100%',
-                                padding: '10px',
-                                borderRadius: '4px',
-                                border: '1px solid #ccc',
-                                boxSizing: 'border-box'
-                            }}
-                        />
-                    </div>
+            {/* Photo section */}
+            <div className="page-eight-panel-box">
+                <div className="page-eight-photo-container">
+                    <img
+                        className="page-eight-cover-photo"
+                        src={selectedImage || defaultImage} // Default image if none is uploaded
+                        alt="Property Cover"
+                        onError={(e) => { 
+                            console.log("Image failed to load, using default."); 
+                            e.target.src = defaultImage; 
+                        }}
+                    />
+                    <button className="page-eight-cover-photo-button" style={{backgroundColor:"white",border:"2px solid gray"}}>
+                        <label style={{color:"black"}}htmlFor="image-upload">Change Photo</label>
+                    </button>
+                    <input
+                        type="file"
+                        id="image-upload"
+                        accept="image/*"
+                        style={{ display: 'none' }}
+                        onChange={handleImageChange}
+                    />
+                </div>
+
+                {/* Property Name Input */}
+                <div className="page-eight-property-name-input">
+                    <label htmlFor="property-name">Add Property Name</label>
+                    <input
+                        type="text"
+                        id="property-name"
+                        value={propertyName}
+                        onChange={(e) => setPropertyName(e.target.value)}
+                        placeholder="Enter property name"
+                    />
+                    {errors.name && <p className="page-eight-error" style={{color:"red"}}>{errors.name}</p>}
                 </div>
             </div>
-            
-            <div className="host-footer" style={{ marginTop: '20px', textAlign: 'center' }}>
-                <button onClick={handleBack} style={{ marginRight: '10px', padding: '8px 16px' }}>Back</button>
-                <button onClick={handleNextButtonClick} style={{ padding: '8px 16px' }}>Next</button>
+
+            {/* Footer Buttons */}
+            <div className="page-eight-footer">
+                <button className="page-eight-footer-button" onClick={handleBack}>
+                    Back
+                </button>
+                <div className="page-eight-progress-bar"></div>
+                <button className="page-eight-footer-button" onClick={handleNextButtonClick}>
+                    Next
+                </button>
             </div>
         </div>
     );

@@ -136,7 +136,7 @@ PropertyModel.properties = [ {
     Bathrooms: 2, // Number of bathrooms
   },
   amenities: ["wifi", "firepit", "workspace", "pool"], // List of amenities
-  propertyCoverPhoto: "https://example.com/cover-photo.jpg", // Example photo URL
+  propertyCoverPhoto:"https://images.pexels.com/photos/21014/pexels-photo.jpg", // Example photo URL
   description: "A charming lakefront property with stunning views, perfect for a romantic getaway or family vacation.",
   availability: {
     minimumNight: 2, // Minimum nights required

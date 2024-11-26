@@ -1,0 +1,105 @@
+.page-one-container {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    max-width: 900px;
+    margin: auto;
+    text-align: center;
+  }
+  
+  .page-one-question {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    color: #333;
+  }
+  
+  .page-one-pannel-box {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  
+  .page-one-box {
+    flex: 1;
+    padding: 20px;
+    border: 1px solid #eaeaea;
+    border-radius: 12px;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .page-one-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .page-one-box-number {
+    font-size: 20px;
+    font-weight: bold;
+    color: #555;
+  }
+  
+  .page-one-box-image {
+    height: 100px;
+    width: 100px;
+    margin: 20px auto;
+    background-color: #eaeaea;
+    border-radius: 50%;
+  }
+  
+  .page-one-box-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10px 0;
+    color: #333;
+  }
+  
+  .page-one-box-description {
+    font-size: 14px;
+    color: #666;
+  }
+  
+
+  /* Footer styling */
+.page-one-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Spread Back and Next buttons */
+    width: 100%; /* Full width of the screen */
+    position: fixed; /* Fixed at the bottom */
+    bottom: 0;
+    left: 0;
+    background-color: #fff; /* Background color */
+    padding: 16px;
+    box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Back and Next buttons */
+  
+  .page-one-next-btn {
+    padding: 10px 20px;
+    width: 150px;
+    border-radius: 20px;
+    border: none;
+    background-color: #198E78;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  
+  .page-one-next-btn:hover {
+    background-color: #388e3c;
+  }
+  
+  .page-one-progress-bar {
+    width:10px;
+    height: 4px;
+    background-color: #198E78;
+    border-radius: 2px;
+    margin: 0 16px;
+    position: relative;
+    left: -823px;
+    top: -37px;}

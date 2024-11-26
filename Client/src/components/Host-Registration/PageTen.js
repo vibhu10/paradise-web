@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import '../Host-Registration/css/pageTen.css'
+
 export function PageTen({ handleNext, handleBack, handleSaveProperty }) {
   const [text, setText] = useState("");
   const [wordCount, setWordCount] = useState(0);
@@ -9,6 +10,8 @@ export function PageTen({ handleNext, handleBack, handleSaveProperty }) {
     PriceBeforeTax: 0,
     YouEarn: 0,
   });
+
+  const [errors, setErrors] = useState({ description: false, price: false });
 
   useEffect(() => {
     const words = text.trim().split(/\s+/);
@@ -35,73 +38,74 @@ export function PageTen({ handleNext, handleBack, handleSaveProperty }) {
     }));
   }
 
-  // Function to handle saving data and moving to the next page
+  const validateForm = () => {
+    const descriptionError = text.trim() === "";
+    const priceError = price.BaseCharge <= 0;
+    setErrors({ description: descriptionError, price: priceError });
+    return !descriptionError && !priceError;
+  };
+
   const handleNextClick = async () => {
-    await handleSaveProperty({ description: text, pricing: price });
-    handleNext();
+    if (validateForm()) {
+      await handleSaveProperty({ description: text, pricing: price });
+      handleNext();
+    }
   };
 
   return (
-    <div>
-  
-      <div className="body-host">
-        <div className="pannel-box-page10">
-          <div className="pannel-box-page10-div1">
-            <h5 style={{ textAlign: "center", fontSize: 25 }}>Create your description</h5>
-            <p style={{ textAlign: "center" }}>Share what makes your place special</p>
-            <textarea
-              id="textarea-page10"
-              name="textarea-page10"
-              value={text}
-              onChange={(e) => {
-                setText(e.target.value);
-                setWordCount(e.target.value.split(" ").filter((word) => word).length);
-              }}
-              rows="4"
-              cols="50"
-            />
-            <p style={{ color: "#198E78" }}>{wordCount}/400</p>
-          </div>
+    <div className="PageTen-container">
+      <div className="PageTen-panel">
+        <div className="PageTen-description">
+          <h5>Create your description</h5>
+          <p>Share what makes your place special.</p>
+          <textarea
+            id="PageTen-description-textarea"
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            rows="6"
+            placeholder="Describe your property..."
+          />
+          <p className="PageTen-word-count">{wordCount}/400</p>
+          {errors.description && <p className="PageTen-error">Description is required.</p>}
+        </div>
 
-          <div className="pannel-box-page10-div2">
-            <h5 style={{ textAlign: "left" }}>Now, set your price</h5>
-            <p style={{ textAlign: "left" }}>You can change it anytime.</p>
-            <input
-              style={{ height: "50px", borderRadius: "10px", border: "1px solid lightgray" }}
-              type="number"
-              name="input-price-page10"
-              id="input-price-page10"
-              value={price.BaseCharge === 0 ? "" : price.BaseCharge}
-              onChange={handlePrice}
-            />
-            <p style={{ display: "flex", justifyContent: "space-between", fontWeight: "500", margin: 0, padding: 0 }}>
-              Base price <span style={{ marginLeft: "auto" }}>${price.BaseCharge.toFixed(2)}</span>
+        <div className="PageTen-pricing">
+          <h5>Now, set your price</h5>
+          <p>You can change it anytime.</p>
+          <input
+            className="PageTen-price-input"
+            type="number"
+            value={price.BaseCharge === 0 ? "" : price.BaseCharge}
+            onChange={handlePrice}
+            placeholder="Add price"
+          />
+          {errors.price && <p className="PageTen-error">Price is required.</p>}
+          <div className="PageTen-price-details">
+            <p>
+              Base price <span>${price.BaseCharge.toFixed(2)}</span>
             </p>
-            <p style={{ display: "flex", justifyContent: "space-between", fontWeight: "500", margin: 0, padding: 0 }}>
-              Guest service fees <span style={{ marginLeft: "auto" }}>${price.ServiceFees.toFixed(2)}</span>
+            <p>
+              Guest service fee <span>${price.ServiceFees.toFixed(2)}</span>
             </p>
-            <p style={{ display: "flex", justifyContent: "space-between", fontWeight: "500", margin: 0, padding: 0 }}>
-              Guest price before taxes <span style={{ marginLeft: "auto" }}>${price.PriceBeforeTax.toFixed(2)}</span>
+            <p>
+              Guest price before taxes <span>${price.PriceBeforeTax.toFixed(2)}</span>
             </p>
-            <p
-              style={{
-                color: "green",
-                display: "flex",
-                justifyContent: "space-between",
-                fontWeight: "500",
-                marginTop: 10,
-                padding: 0,
-              }}
-            >
-              You earn <span style={{ marginLeft: "auto" }}>${price.YouEarn.toFixed(2)}</span>
+            <p className="PageTen-you-earn">
+              You earn <span>${price.YouEarn.toFixed(2)}</span>
             </p>
           </div>
         </div>
       </div>
-      <div className="host-footer">
-        <button onClick={handleBack}>Back</button>
-        <button onClick={handleNextClick}>Next</button>
-      </div>
+
+      <footer className="PageTen-footer">
+        <button className="PageTen-back-btn" onClick={handleBack}>
+          Back
+        </button>
+        <div className="PageTen-progress-bar"></div>
+        <button className="PageTen-next-btn" onClick={handleNextClick}>
+          Next
+        </button>
+      </footer>
     </div>
   );
 }

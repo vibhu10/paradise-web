@@ -8,19 +8,19 @@ const mapContainerStyle = {
   borderRadius: '20px',
 };
 
-const centerDefault = { lat: 25.7617, lng: -80.1918 }; // Default: Miami
+const centerDefault = { lat: 25.7617, lng: -80.1918 }; // Default location (Miami)
 
 export function PageFour({ handleNext, handleBack }) {
   const [location, setLocation] = useState(centerDefault); // Current map center
   const [searchInput, setSearchInput] = useState(''); // Address input
   const [formattedAddress, setFormattedAddress] = useState(''); // Formatted address
+  const [errorMessage, setErrorMessage] = useState(null);
 
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: 'YOUR_GOOGLE_MAPS_API_KEY', // Replace with your API key
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY, // Use environment variable
     libraries: ['places'],
   });
 
-  // Get the user's current location
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -28,18 +28,18 @@ export function PageFour({ handleNext, handleBack }) {
           lat: position.coords.latitude,
           lng: position.coords.longitude,
         });
+        setErrorMessage(null);
       },
-      () => console.log('Could not fetch location')
+      () => {
+        setErrorMessage('Unable to fetch your current location. Showing default location.');
+      }
     );
   }, []);
 
-  // Function to update map center based on user input
   const handleSearch = async () => {
-    if (!searchInput) return;
-
     const geocodeUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
       searchInput
-    )}&key=YOUR_GOOGLE_MAPS_API_KEY`;
+    )}&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`;
 
     try {
       const response = await fetch(geocodeUrl);
@@ -47,16 +47,23 @@ export function PageFour({ handleNext, handleBack }) {
       if (data.results && data.results[0]) {
         const newLocation = data.results[0].geometry.location;
         setLocation(newLocation);
-        setFormattedAddress(data.results[0].formatted_address); // Store the formatted address
+        setFormattedAddress(data.results[0].formatted_address);
+        setErrorMessage(null);
       } else {
-        alert('Location not found. Please try again.');
+        setErrorMessage('Location not found. Please try again.');
       }
     } catch (error) {
       console.error('Error fetching location:', error);
+      setErrorMessage('Error fetching location. Please try again later.');
     }
   };
 
-  if (!isLoaded) return <div>Loading...</div>;
+  const handleNextClick = () => {
+    // Proceed without requiring `formattedAddress`
+    handleNext(formattedAddress || null);
+  };
+
+  if (!isLoaded) return <div>Loading map...</div>;
 
   return (
     <div className="page-four-container">
@@ -67,7 +74,6 @@ export function PageFour({ handleNext, handleBack }) {
             <p>Your address is only shared with guests after they've made a reservation.</p>
           </div>
 
-          {/* Input field overlay */}
           <div className="page-four-address-input-container">
             <input
               type="text"
@@ -81,26 +87,28 @@ export function PageFour({ handleNext, handleBack }) {
             </button>
           </div>
 
-          {/* Google Map */}
-          <GoogleMap mapContainerStyle={mapContainerStyle} center={location} zoom={14}>
+          <GoogleMap
+            mapContainerStyle={mapContainerStyle}
+            center={location}
+            zoom={14}
+          >
             <Marker position={location} />
           </GoogleMap>
 
-          {/* Display the formatted address */}
           {formattedAddress && (
             <p className="formatted-address">Address: {formattedAddress}</p>
           )}
+
+          {errorMessage && <p className="error-message">{errorMessage}</p>}
         </div>
       </div>
 
-      <div className="page-four-host-footer">
-        <button className="page-four-host-button page-four-back-button" onClick={handleBack}>
+      <div className="page-4-footer">
+        <button onClick={handleBack} className="page-4-back-btn">
           Back
         </button>
-        <button
-          className="page-four-host-button page-four-next-button"
-          onClick={() => handleNext(formattedAddress)}
-        >
+        <div className="page-4-progress-bar"></div>
+        <button onClick={handleNextClick} className="page-4-next-btn">
           Next
         </button>
       </div>

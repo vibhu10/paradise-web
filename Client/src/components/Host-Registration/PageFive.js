@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import '../Host-Registration/css/pageFive.css'
+import "../Host-Registration/css/pageFive.css";
+
 export function PageFive({ handleNext, handleBack, handleSaveProperty }) {
   const [formData, setFormData] = useState({
     country: "",
@@ -12,6 +13,8 @@ export function PageFive({ handleNext, handleBack, handleSaveProperty }) {
     pin: "",
     showLocation: false,
   });
+
+  const [errors, setErrors] = useState({}); // For validation errors
   const [countries, setCountries] = useState([]);
 
   async function getCountryData() {
@@ -30,6 +33,20 @@ export function PageFive({ handleNext, handleBack, handleSaveProperty }) {
       ...prev,
       [name]: type === "checkbox" ? checked : value,
     }));
+
+    // Clear the error for the field when the user starts typing
+    setErrors((prev) => ({ ...prev, [name]: "" }));
+  };
+
+  const validateFields = () => {
+    const newErrors = {};
+    if (!formData.country) newErrors.country = "Country/Region is required";
+    if (!formData.streetAddress) newErrors.streetAddress = "Street address is required";
+    if (!formData.city) newErrors.city = "City / Town is required";
+    if (!formData.state) newErrors.state = "State / Union Territory is required";
+    if (!formData.pin) newErrors.pin = "Pin code is required";
+
+    return newErrors;
   };
 
   const handleSave = async () => {
@@ -41,6 +58,13 @@ export function PageFive({ handleNext, handleBack, handleSaveProperty }) {
   };
 
   const handleNextClick = async () => {
+    const validationErrors = validateFields();
+
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors); // Set errors for invalid fields
+      return; // Prevent navigation
+    }
+
     await handleSave();
     handleNext();
   };
@@ -55,124 +79,138 @@ export function PageFive({ handleNext, handleBack, handleSaveProperty }) {
           </p>
         </div>
         <div className="page-5-form-data">
-  <form>
-    <select
-      id="country"
-      name="country"
-      value={formData.country}
-      onChange={handleChange}
-      className="page-5-input"
-    >
-      <option value="" disabled>
-        Country/Region
-      </option>
-      {countries.map((country) => (
-        <option key={country.cca3} value={country.name.common}>
-          {country.name.common} ({country.idd?.root || ""})
-        </option>
-      ))}
-    </select>
+          <form>
+            <div className="form-group">
+              <select
+                id="country"
+                name="country"
+                value={formData.country}
+                onChange={handleChange}
+                className={`page-5-input ${errors.country ? "input-error" : ""}`}
+              >
+                <option value="" disabled>
+                  Country/Region
+                </option>
+                {countries.map((country) => (
+                  <option key={country.cca3} value={country.name.common}>
+                    {country.name.common} ({country.idd?.root || ""})
+                  </option>
+                ))}
+              </select>
+              {errors.country && <p className="error-text">{errors.country}</p>}
+            </div>
 
-    <input
-      type="text"
-      name="houseAndFlat"
-      placeholder="Flat, house, etc. (if applicable)"
-      value={formData.houseAndFlat}
-      onChange={handleChange}
-      className="page-5-input"
-    />
+            <input
+              type="text"
+              name="houseAndFlat"
+              placeholder="Flat, house, etc. (if applicable)"
+              value={formData.houseAndFlat}
+              onChange={handleChange}
+              className="page-5-input"
+            />
 
-    <input
-      type="text"
-      name="streetAddress"
-      placeholder="Street address"
-      value={formData.streetAddress}
-      onChange={handleChange}
-      className="page-5-input"
-    />
+            <div className="form-group">
+              <input
+                type="text"
+                name="streetAddress"
+                placeholder="Street address"
+                value={formData.streetAddress}
+                onChange={handleChange}
+                className={`page-5-input ${errors.streetAddress ? "input-error" : ""}`}
+              />
+              {errors.streetAddress && <p className="error-text">{errors.streetAddress}</p>}
+            </div>
 
-    <div className="page-5-form-row">
-      <input
-        type="text"
-        name="landmark"
-        placeholder="Nearby landmark (if applicable)"
-        value={formData.landmark}
-        onChange={handleChange}
-        className="page-5-input"
-      />
-      <input
-        type="text"
-        name="district"
-        placeholder="District/locality (if applicable)"
-        value={formData.district}
-        onChange={handleChange}
-        className="page-5-input"
-      />
-    </div>
+            <div className="page-5-form-row">
+              <input
+                type="text"
+                name="landmark"
+                placeholder="Nearby landmark (if applicable)"
+                value={formData.landmark}
+                onChange={handleChange}
+                className="page-5-input"
+              />
+              <input
+                type="text"
+                name="district"
+                placeholder="District/locality (if applicable)"
+                value={formData.district}
+                onChange={handleChange}
+                className="page-5-input"
+              />
+            </div>
 
-    <div className="page-5-form-row">
-      <input
-        type="text"
-        name="city"
-        placeholder="City / town"
-        value={formData.city}
-        onChange={handleChange}
-        className="page-5-input"
-      />
-      <input
-        type="text"
-        name="state"
-        placeholder="State/Union Territory"
-        value={formData.state}
-        onChange={handleChange}
-        className="page-5-input"
-      />
-    </div>
+            <div className="page-5-form-row">
+              <div className="form-group">
+                <input
+                  type="text"
+                  name="city"
+                  placeholder="City / town"
+                  value={formData.city}
+                  onChange={handleChange}
+                  className={`page-5-input ${errors.city ? "input-error" : ""}`}
+                />
+                {errors.city && <p className="error-text">{errors.city}</p>}
+              </div>
 
-    <input
-      type="number"
-      name="pin"
-      placeholder="Pin code"
-      value={formData.pin}
-      onChange={handleChange}
-      className="page-5-input"
-    />
+              <div className="form-group">
+                <input
+                  type="text"
+                  name="state"
+                  placeholder="State/Union Territory"
+                  value={formData.state}
+                  onChange={handleChange}
+                  className={`page-5-input ${errors.state ? "input-error" : ""}`}
+                />
+                {errors.state && <p className="error-text">{errors.state}</p>}
+              </div>
+            </div>
 
-    <label className="page-5-switch">
-      <div className="page-5-switch-content">
-        <h6>Show your specific location</h6>
-        <p>
-          Make it clear to guests where your place is located. We'll only share
-          your address after they've made a reservation.
-        </p>
-      </div>
-      <input
-        type="checkbox"
-        name="showLocation"
-        checked={formData.showLocation}
-        onChange={handleChange}
-      />
-      <span className="page-5-slider"></span>
-    </label>
-  </form>
-</div>
+            <div className="form-group">
+              <input
+                type="number"
+                name="pin"
+                placeholder="Pin code"
+                value={formData.pin}
+                onChange={handleChange}
+                className={`page-5-input ${errors.pin ? "input-error" : ""}`}
+              />
+              {errors.pin && <p className="error-text">{errors.pin}</p>}
+            </div>
 
-<div className="page-5-map">
-  <iframe
-    src="https://maps.google.com/maps?q=London&t=&z=13&ie=UTF8&iwloc=&output=embed"
-    frameBorder="0"
-    style={{
-      width: "100%",
-      height: "100%",
-      borderRadius: "8px",
-    }}
-    allowFullScreen=""
-    aria-hidden="false"
-    tabIndex="0"
-  ></iframe>
+            <label className="page-5-switch">
+              <div className="page-5-switch-content">
+                <h6>Show your specific location</h6>
+                <p>
+                  Make it clear to guests where your place is located. We'll only share
+                  your address after they've made a reservation.
+                </p>
+              </div>
+              <input
+                type="checkbox"
+                name="showLocation"
+                checked={formData.showLocation}
+                onChange={handleChange}
+              />
+              <span className="page-5-slider"></span>
+            </label>
+          </form>
+        </div>
 
-</div>
-
+        <div className="page-5-map">
+          <iframe
+            src="https://maps.google.com/maps?q=London&t=&z=13&ie=UTF8&iwloc=&output=embed"
+            frameBorder="0"
+            style={{
+              width: "100%",
+              height: "100%",
+              borderRadius: "8px",
+            }}
+            allowFullScreen=""
+            aria-hidden="false"
+            tabIndex="0"
+          ></iframe>
+        </div>
       </div>
       <div className="page-5-footer">
         <button onClick={handleBack} className="page-5-btn page-5-back-btn">

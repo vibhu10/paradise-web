@@ -282,24 +282,24 @@
   }
   .hotel-data {
     width: 100vw;
-    
+    height: 100%;
     /* border: 2px solid black; */
-    display: flex;
+    display: flex
+;
     flex-wrap: wrap;
-    justify-content: space-between;
-    /* overflow-y: auto; Enable vertical scrolling */
-    padding: 50px; 
-  }
-  
-  .hotel-card {
-    width: 300px;
-    height: 400px;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden; /* Prevent scroll bars */
-    margin: 10px;
-  }
-  
+    justify-content: space-evenly;
+    padding: 50px;
+}
+
+.hotel-card {
+  width: 400px;
+  height: 400px;
+  display: flex
+;
+  flex-direction: column;
+  overflow: hidden;
+  margin: 10px;
+}
   .hotel-card img {
     object-fit: cover;
     width: 100%;
@@ -307,11 +307,15 @@
     border-radius: 20px ; /* Rounded top corners */
   }
   
-  #hotel-detail {
-    height: 30%; /* Remaining space for the content */
-    box-sizing: border-box; /* Include padding and border in the element's total width and height */
-    overflow: hidden; /* Prevent scroll bars */
+ 
+
+    #hotel-detail {
+      margin-top: 17px;
+      height: 40%;
+      box-sizing: border-box;
+      /* overflow: hidden; */
   }
+  
   
   #hotel-detail p,h3{
     line-height: 3px;
@@ -319,11 +323,13 @@
   
   /*footer*/
   
-  .footer{
+  .home-footer {
+    position: fixed;
+    top: 808px;
     width: 100vw;
-    height: 100px;
+    height: 70px;
     background-color: black;
-  }
+}
   
   .email-popup {
     position: fixed;

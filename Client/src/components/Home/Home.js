@@ -346,45 +346,49 @@ export default function Home() {
      {/* Body */}
 {/* Body */}
 <div className="home-body">
-  <div className="hotel-data">
-    {propertyData && propertyData.length > 0 ? ( // Check if propertyData is valid and non-empty
-      propertyData.map((property, index) => (
-        <div key={index} className="hotel-card">
-          <img
-            src={property.propertyCoverPhoto || "https://via.placeholder.com/150"} // Fallback to a placeholder if no image
-            alt={`Image of ${property.propertyName || "Unknown Property"}`} // Handle missing property name
-          />
-          <div id="hotel-detail">
-            <h3 style={{ color: "#198E78" }}>{property.propertyName || "Unnamed Property"}</h3>
-            <p>
-              Check-in: {property.availability?.checkinTime || "N/A"} {/* Handle missing availability */}
-            </p>
-            <p>
-              Minimum Nights: {property.availability?.minimumNight || "N/A"} | Maximum Nights: {property.availability?.maximumNight || "N/A"}
-            </p>
-            <p>
-              Address:{" "}
-              {property.address?.streetAddress || "N/A"}, {property.address?.city || "N/A"}
-            </p>
-            <p
-              style={{
-                color: "black",
-                fontSize: "18px",
-                fontWeight: "bold",
-              }}
-            >
-              ${property.pricing?.BaseCharge || "0"}/night Total:{" "}
-              <span style={{ color: "#198E78" }}>
-                ${property.pricing?.PriceBeforeTax || "0"}
-              </span>
-            </p>
-          </div>
+<div className="hotel-data">
+  {propertyData && propertyData.length > 0 ? (
+    propertyData.map((property, index) => (
+      <div key={index} className="hotel-card">
+        <img
+          src={property.propertyCoverPhoto || "https://via.placeholder.com/150"} // Fallback to a placeholder if no image
+          alt={`Image of ${property.propertyName || "Unknown Property"}`} // Handle missing property name
+        />
+        <div id="hotel-detail">
+          <h3 style={{ color: "#198E78" }}>{property.propertyName || "Unnamed Property"}</h3>
+          <p>
+            Check-in:{" "}
+            {property.availability?.checkinTime
+              ? new Date(property.availability.checkinTime).toLocaleTimeString([], {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                }) // Format to HH:mm AM/PM
+              : "N/A"}
+          </p>
+          <p>
+            Min Nights: {property.availability?.minimumNight || "N/A"} | Max Nights: {property.availability?.maximumNight || "N/A"}
+          </p>
+          <p
+            style={{
+              color: "black",
+              fontSize: "18px",
+              fontWeight: "bold",
+            }}
+          >
+            ${Math.floor(property.pricing?.BaseCharge || 0)}/night Total:{" "}
+            <span style={{ color: "#198E78" }}>
+              ${Math.floor(property.pricing?.PriceBeforeTax || 0)}
+            </span>
+          </p>
         </div>
-      ))
-    ) : (
-      <p>No properties available to display.</p> // Fallback message if no data is available
-    )}
-  </div>
+      </div>
+    ))
+  ) : (
+    <p>No properties available to display.</p>
+  )}
+</div>
+
+
 </div>
 
 
@@ -509,7 +513,7 @@ export default function Home() {
 
 
       {/* Footer */}
-      <div className="footer">Footer content here</div>
+      <div className="home-footer">Footer content here</div>
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-
+import '../Host-Registration/css/pageTwelve.css'
 export function PageTwelve({ handleNext, handleBack, handleSaveProperty } ) {
   const [bedrooms, setBedrooms] = useState([
     {

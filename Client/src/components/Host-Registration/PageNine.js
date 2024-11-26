@@ -1,17 +1,17 @@
 import { useState, useEffect } from "react";
+import '../Host-Registration/css/pageNine.css';
 
 export function PageNine({ handleNext, handleBack, handleSaveProperty }) {
   const [text, setText] = useState("");
-  const [wordCount, setWordCount] = useState(0);
+  const [charCount, setCharCount] = useState(0);
 
   useEffect(() => {
-    const words = text.trim().split(/\s+/);
-    const count = words.filter((word) => word.length > 0).length;
-    setWordCount(count);
+    const count = text.length;
+    setCharCount(count);
 
     if (count > 50) {
-      alert("You have reached your limit of 50 words.");
-      setText(words.slice(0, 50).join(" "));
+      alert("You have reached your limit of 50 characters.");
+      setText(text.slice(0, 50));
     }
   }, [text]);
 
@@ -22,29 +22,35 @@ export function PageNine({ handleNext, handleBack, handleSaveProperty }) {
   };
 
   return (
-    <div>
-   
-      <div className="body-host">
-        <div className="pannel-box-page9">
-          <div>
-            <h5 style={{ textAlign: "center" }}>Now, let's give your property a short title</h5>
-            <p style={{ textAlign: "center" }}>Short titles work best</p>
+    <div className="page-nine-container">
+      <div className="page-nine-body-host">
+        <div className="page-nine-panel-box">
+          <div className="page-nine-title-box">
+            <h5 className="page-nine-title">Now, let's give your property a short title</h5>
+            <p className="page-nine-subtitle">Short titles work best</p>
           </div>
           <textarea
-            id="textarea-page9"
+            id="page-nine-textarea"
+            className="page-nine-textarea"
             name="textarea-page9"
             value={text}
             onChange={(e) => setText(e.target.value)}
             rows="4"
             cols="50"
+            placeholder="Enter a short title for your property"
           />
-          <p style={{ color: "#198E78" }}>Words: {wordCount}/50</p>
+          <p className="page-nine-char-count">{charCount}/50</p>
         </div>
       </div>
-      <div className="host-footer">
-        <button onClick={handleBack}>Back</button>
-        <button onClick={handleNextClick}>Next</button>
-      </div>
+      <footer className="page-nine-footer">
+        <button className="page-nine-back-btn" onClick={handleBack}>
+          Back
+        </button>
+        <div className="page-nine-progress-bar"></div>
+        <button className="page-nine-next-btn" onClick={handleNextClick}>
+          Next
+        </button>
+      </footer>
     </div>
   );
 }

@@ -1,0 +1,115 @@
+.page-three-container {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    max-width: 900px;
+    margin: auto;
+  }
+  
+  .page-three-question {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .page-three-pannel-box {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  
+  .page-three-box {
+    flex: 1;
+    padding: 20px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #fff;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .page-three-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .page-three-box-heading {
+    font-size: 20px;
+    color: #555;
+  }
+  
+  .page-three-box-image {
+    height: 100px;
+    width: 100px;
+    margin: 10px auto;
+    background-color: #eaeaea;
+    border-radius: 50%;
+  }
+  
+  .page-three-box-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin: 10px 0;
+  }
+  
+  .page-three-box-description {
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .page-three-note {
+    margin-top: 20px;
+    font-size: 12px;
+    color: #999;
+    text-align: center;
+  }
+  
+  .page-three-note span {
+    font-weight: bold;
+    color: #333;
+  }
+  
+  /* Footer styling */
+.page-3-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Spread Back and Next buttons */
+    width: 100%; /* Full width of the screen */
+    position: fixed; /* Fixed at the bottom */
+    bottom: 0;
+    left: 0;
+    background-color: #fff; /* Background color */
+    padding: 16px;
+    box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Back and Next buttons */
+  .page-3-back-btn,
+  .page-3-next-btn {
+    padding: 10px 20px;
+    width: 100px;
+    border-radius: 20px;
+    border: none;
+    background-color: #198E78;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .page-3-back-btn:hover,
+  .page-3-next-btn:hover {
+    background-color: #388e3c;
+  }
+  .page-3-progress-bar {
+    width: 250px;
+    height: 4px;
+    background-color: #198E78;
+    border-radius: 2px;
+    margin: 0 16px;
+    position: absolute;
+    left: -15px;
+    top: -5px;
+}

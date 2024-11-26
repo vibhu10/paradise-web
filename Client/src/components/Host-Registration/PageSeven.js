@@ -1,9 +1,11 @@
 import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import "../Host-Registration/css/pageSeven.css"; // Reference the new CSS file
 
 export function PageSeven({ handleBack, handleNext, handleSaveProperty }) {
   const [selectedAmenities, setSelectedAmenities] = useState([]);
+  const [error, setError] = useState(""); // Error state for validation
 
   const amenities = [
     { id: "wifi", label: "Wifi", icon: "fas fa-wifi" },
@@ -26,62 +28,57 @@ export function PageSeven({ handleBack, handleNext, handleSaveProperty }) {
         ? prevSelected.filter((amenityId) => amenityId !== id)
         : [...prevSelected, id]
     );
+    setError(""); // Clear the error when an amenity is selected
   };
 
-  // Function to handle saving data and moving to the next page
   const handleNextClick = async () => {
+    if (selectedAmenities.length === 0) {
+      setError("Please select at least one amenity to proceed.");
+      return;
+    }
     await handleSaveProperty({ amenities: selectedAmenities });
     handleNext();
   };
 
   return (
-    <div>
-     
-      <div className="body-host">
-        <p className="page-question">Tell guests what your place has to offer</p>
+    <div className="page-seven-container">
+      {/* Header */}
+      <p className="page-seven-title">Tell guests what your place has to offer</p>
+      <p className="page-seven-subtitle">
+        You can add more amenities after you publish your listing.
+      </p>
 
-        <div className="pannel-box-page7" style={{ display: "flex", flexWrap: "wrap" }}>
+      {/* Amenities Section */}
+      <div className="page-seven-amenities-section">
+        <p className="page-seven-question">What about these guest favourites?</p>
+        <div className="page-seven-grid">
           {amenities.map((amenity) => {
             const isSelected = selectedAmenities.includes(amenity.id);
             return (
               <div
                 onClick={() => toggleAmenity(amenity.id)}
                 key={amenity.id}
-                style={{
-                  fontSize: "30px",
-                  margin: "10px",
-                  border: isSelected ? "2px solid green" : "2px solid gray",
-                  width: "100px",
-                  height: "100px",
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  borderRadius: "10px",
-                  cursor: "pointer",
-                  backgroundColor: isSelected ? "#e0ffe0" : "white",
-                }}
+                className={`page-seven-amenity ${isSelected ? "selected" : ""}`}
               >
-                <i className={amenity.icon}></i>
-                <p
-                  style={{
-                    fontSize: "12px",
-                    paddingTop: "5px",
-                    textAlign: "center",
-                  }}
-                >
-                  {amenity.label}
-                </p>
+                <i className={`${amenity.icon} page-seven-icon`}></i>
+                <p className="page-seven-label">{amenity.label}</p>
               </div>
             );
           })}
         </div>
+        {error && <p className="page-seven-error">{error}</p>} {/* Display error message */}
       </div>
 
-      <div className="host-footer">
-        <button onClick={handleBack}>Back</button>
-        <button onClick={handleNextClick}>Next</button>
-      </div>
+ {/* Footer Buttons */}
+ <div className="page-seven-footer">
+                <button className="page-seven-footer-button" onClick={handleBack}>
+                    Back
+                </button>
+                <div className="page-seven-progress-bar"></div>
+                <button className="page-seven-footer-button" onClick={handleNextClick}>
+                    Next
+                </button>
+            </div>
     </div>
   );
 }

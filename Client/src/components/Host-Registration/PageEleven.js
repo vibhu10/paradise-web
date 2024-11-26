@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Flatpickr from "react-flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
+import "../Host-Registration/css/pageEleven.css";
 
 export function PageEleven({ handleNext, handleBack, handleSaveProperty }) {
   const [price, setPrice] = useState({
@@ -10,24 +11,32 @@ export function PageEleven({ handleNext, handleBack, handleSaveProperty }) {
     YouEarn: 0,
   });
 
-  const [Availability, setAvailability] = useState({
+  const [availability, setAvailability] = useState({
     minimumNight: 0,
     maximumNight: 0,
     checkinTime: new Date(),
   });
 
+  const [errors, setErrors] = useState({
+    price: false,
+    minimumNight: false,
+    maximumNight: false,
+    checkinTime: false,
+  });
+
   function handleChanges(e) {
     const { name, value } = e.target;
+    const numericValue = parseInt(value, 10);
     setAvailability((prevData) => ({
       ...prevData,
-      [name]: value,
+      [name]: numericValue >= 0 ? numericValue : 0, // Prevent negative values
     }));
   }
 
   function handleTimeChange(date) {
     setAvailability((prevData) => ({
       ...prevData,
-      checkinTime: date[0], // save the time selected from Flatpickr
+      checkinTime: date[0],
     }));
   }
 
@@ -45,19 +54,33 @@ export function PageEleven({ handleNext, handleBack, handleSaveProperty }) {
     }));
   }
 
+  function validateFields() {
+    const errorsObj = {
+      price: price.BaseCharge <= 0,
+      minimumNight: availability.minimumNight <= 0,
+      maximumNight: availability.maximumNight <= 0,
+      checkinTime: !availability.checkinTime,
+    };
+
+    setErrors(errorsObj);
+
+    // Return false if any field has an error
+    return !Object.values(errorsObj).some((error) => error);
+  }
+
   // Function to save data and move to the next page
   const handleNextClick = async () => {
-    await handleSaveProperty({
-      price: price,
-      availability: Availability,
-    });
-    handleNext(); // Proceed to the next page
+    if (validateFields()) {
+      await handleSaveProperty({
+        price: price,
+        availability: availability,
+      });
+      handleNext(); // Proceed to the next page
+    }
   };
 
   return (
     <div>
-    
-
       <div className="body-host">
         <div className="pannel-box-page11">
           <div className="pannel-box-page11-div1">
@@ -78,6 +101,9 @@ export function PageEleven({ handleNext, handleBack, handleSaveProperty }) {
               value={price.BaseCharge === 0 ? "" : price.BaseCharge}
               onChange={handlePrice}
             />
+            {errors.price && (
+              <p style={{ color: "red", fontSize: "12px" }}>Price is required.</p>
+            )}
 
             <p
               style={{
@@ -132,7 +158,9 @@ export function PageEleven({ handleNext, handleBack, handleSaveProperty }) {
               }}
             >
               You earn{" "}
-              <span style={{ marginLeft: "auto" }}>${price.YouEarn.toFixed(2)}</span>
+              <span style={{ marginLeft: "auto" }}>
+                ${price.YouEarn.toFixed(2)}
+              </span>
             </p>
           </div>
 
@@ -143,8 +171,10 @@ export function PageEleven({ handleNext, handleBack, handleSaveProperty }) {
               date.
             </p>
             <div>
-              <h9 style={{ marginRight: "40px", fontSize: "12px" }}>MinimumNights</h9>
-              <h9 style={{ fontSize: "12px" }}>MaximumNight</h9>
+              <h9 style={{ marginRight: "40px", fontSize: "12px" }}>
+                Minimum Nights
+              </h9>
+              <h9 style={{ fontSize: "12px" }}>Maximum Nights</h9>
             </div>
             <input
               style={{
@@ -160,9 +190,14 @@ export function PageEleven({ handleNext, handleBack, handleSaveProperty }) {
               }}
               type="number"
               name="minimumNight"
-              value={Availability.minimumNight}
+              value={availability.minimumNight}
               onChange={handleChanges}
             />
+            {errors.minimumNight && (
+              <p style={{ color: "red", fontSize: "12px" }}>
+                Minimum nights must be greater than 0.
+              </p>
+            )}
 
             <input
               style={{
@@ -177,9 +212,14 @@ export function PageEleven({ handleNext, handleBack, handleSaveProperty }) {
               }}
               type="number"
               name="maximumNight"
-              value={Availability.maximumNight}
+              value={availability.maximumNight}
               onChange={handleChanges}
             />
+            {errors.maximumNight && (
+              <p style={{ color: "red", fontSize: "12px" }}>
+                Maximum nights must be greater than 0.
+              </p>
+            )}
 
             <label htmlFor="timePicker" className="form-label">
               Guests can book on the same day as check-in until this time.
@@ -189,7 +229,7 @@ export function PageEleven({ handleNext, handleBack, handleSaveProperty }) {
                 style={{ fontWeight: 600, fontSize: 17 }}
                 id="timePicker"
                 className="form-control"
-                value={Availability.checkinTime}
+                value={availability.checkinTime}
                 onChange={handleTimeChange}
                 options={{
                   enableTime: true,
@@ -198,15 +238,24 @@ export function PageEleven({ handleNext, handleBack, handleSaveProperty }) {
                   time_24hr: false,
                 }}
               />
+              {errors.checkinTime && (
+                <p style={{ color: "red", fontSize: "12px" }}>
+                  Check-in time is required.
+                </p>
+              )}
             </div>
           </div>
         </div>
       </div>
-
-      <div className="host-footer">
-        <button onClick={handleBack}>Back</button>
-        <button onClick={handleNextClick}>Next</button>
-      </div>
+      <footer className="PageEleven-footer">
+        <button className="PageEleven-back-btn" onClick={handleBack}>
+          Back
+        </button>
+        <div className="PageEleven-progress-bar"></div>
+        <button className="PageEleven-next-btn" onClick={handleNextClick}>
+          Next
+        </button>
+      </footer>
     </div>
   );
 }

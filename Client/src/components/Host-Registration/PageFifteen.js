@@ -32,6 +32,7 @@ export function PageFifteen({ handleNext, handleBack, handleSaveProperty, setSav
     setNewCard({ cardType: "", cardNumber: "" });
     setEditIndex(null);
     setShowPopup(false);
+    handleNext();
   };
 
   // Open Card Editor
@@ -63,6 +64,7 @@ export function PageFifteen({ handleNext, handleBack, handleSaveProperty, setSav
       handleSaveProperty(data);
       setSaveProperty(true);
       setIsLoading(false);
+      handleNext()
    
     }, 5000); // 5-second loading delay
 

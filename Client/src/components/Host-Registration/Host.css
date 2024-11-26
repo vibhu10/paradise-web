@@ -14,7 +14,7 @@
 .header-host img{
     width: 240px;
     height: 76px;
-    margin-left: 10px;
+    margin-left: 9px;
     /* position: absolute;
     left: 43px; */
 }
@@ -22,7 +22,7 @@
   margin: 15px;
   width: 70px;
   height: 45px;
-  border-radius: 20px;
+  border-radius: 10px;
   border: transparent;
   background-color: #198E78;
   color: white;
@@ -135,271 +135,6 @@ background-color: #198E78;
     align-items: center;
 
 }
-/* .loading-pagetwo{
-    width: 200px;
-    height: 4px;
-    position: absolute;
-    border-top: 4px solid #198E78;
-    top: 704px;
-} */
-/* .loading-pagethree{
-
-    width: 300px;
-    height: 4px;
-    position: absolute;
-    top: 780px;
-    left: -1px;
-    border-top: 4px solid #198E78;
-
-} */
-/* this is page 4  */
-
-.page-4-map{
-    border: 2px solid black;
-    width: 40vw;
-    height: 70vh;
-    margin: 10px;
-}
-.text-page-4{
-    display: flex;
-    flex-direction: column;
-    /* justify-content: center; */
-    align-items: center;
-    margin: 10px;
-}
-.text-page-4 {
-    font-family: 'Arial', sans-serif; /* Set font family */
-    color: #333; /* Darker text color */
-  }
-  
-  .text-page-4 p {
-    margin-bottom: 10px; /* Space between paragraphs */
-    font-size: 16px; /* Set font size */
-    line-height: 1.5; /* Improve readability */
-  }
-  
-  .text-page-4 p:first-child {
-    font-weight: bold; /* Make the first paragraph bold */
-    font-size: 23px; /* Slightly larger font for emphasis */
-  }
-  .text-page-4 p:second-child{
-    color: lightgray;
-  }
-  /* .loading-pageFour{
-    width: 400px;
-    height: 4px;
-    position: absolute;
-    top: 703px;
-    border-top: 4px solid #198E78;
-} */
-
-
-  /* .loading-pageFive{
-    width: 500px;
-    height: 4px;
-    position: absolute;
-    top: 703px;
-    border-top: 4px solid #198E78;
-} */
-
-
-
-
-
-/*page seven  */
-.pannel-box-page7{
-  width: 31%;
-  height: 79%;
-
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-}
-
-*, ::after, ::before {
-  box-sizing: border-box;
-
-}
-
-.amenity-item{
-
-}
-
-/* .loading-pageSeven{
-  width: 700px;
-  height: 4px;
-  position: absolute;
-  top: 703px;
-  border-top: 4px solid #198E78;
-} */
-/*page Eight */
-/* 
-.loading-pageEight{
-  width: 800px;
-  height: 4px;
-  position: absolute;
-  top: 703px;
-  border-top: 4px solid #198E78;
-} */
-
-/*page nine*/
-
-
-
-.pannel-box-page9{
-  width: 35%;
-  height: 35%;
- 
-  display: flex;
-  flex-direction: column;
- align-items: center;
-
-}
-#textarea-page9{
-  width: 63%;
-  height: 55%;
-  border-radius: 10px;
-}
-
-/* .loading-pageNine{
-  width: 900px;
-  height: 4px;
-  position: absolute;
-  top: 703px;
-  border-top: 4px solid #198E78;
-} */
-
-
-
-/*page eleven */
-.pannel-box-page11{
-    width: 30%;
-  height: 90%;
-}
-.pannel-box-page11-div1{
-
- 
-    width: 70%;
-    height: 50%;
-}
-
-.pannel-box-page11-div2{
- 
-  width: 100%;
-  height: 50%;
-
-}
-
-/* .loading-pageEleven{
-  width: 1100px;
-  height: 4px;
-  position: absolute;
-  top: 703px;
-  border-top: 4px solid #198E78;
-} */
-
-/* page twelve*/
-
-.pannel-box-page12{
-width: 70%;
-display: flex;
-flex-direction: column;
-/* border: 2px solid black; */
-}
-.uploading-photo-page12{
-width: 100%;
-height: 350px;
-border: 2px solis green;
-}
-.photo-card-container{
-  display: flex;
-  justify-content: space-evenly;
-
-}
-.button-popup-page12{
-  width:500px;
-  height: 400px;
-  border: 1px solid gray;
-  border-radius: 10px;
-  position:absolute;
-  top:200px;
-  left:600px;
-  background-color: white;
-
-}
-.uploading-photo-page12 .photo-card{
-  width: 200px;
-  height: 200px;
-  border-radius: 10px;
-  border: 1px solid gray
-}
-.adding-bedrooms-page12{
-  background-color: #F7F7F7;
- border-radius: 10px;
-  width: 100%;
-  
-  /* border: 2px solid green; */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.bedroom-page12{
-  background-color: white;
-  border-radius: 10px;
-  width: 95%;
-  
-  margin: 10px;
-  margin-top: 50px;
-}
-
-
-.bedrooms-photos-page12{
-  width: 100%;
-  height: 400px;
-  /* border: 2px solid green; */
-  margin-top: 10px;
-}
-.accordion-button{
-  width: 1100px;
- font-weight: 500;
- font-size: 20px;
-}
-.accordion-body{
-  width: 1100px;
-  background-color: whitesmoke;
-}
-.accordion-button:not(.collapsed) {
-background-color: white;
-}
-  /* .loading-pageTwelve{
-  width: 1200px;
-  height: 4px;
-  position: absolute;
-  top: 703px;
-  border-top: 4px solid #198E78;
-} */
-.uploading-photo-page12 .photo-card {
-  width: 208px;
-  height: 208px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
- border:white;
-}
-
-.photo-gallery{
-/* border:2px solid red; */
-}
-.photo-gallery img{
-  width: 175px;
-  height: 168px;
-  border-radius: 10px;
-}
-.photo-gallery ,h6, p{
-  /* line-height: 0.8;  */
-}
-/*page thirteen */
-
 
 
 .body-host-with-scroll {
@@ -461,4 +196,51 @@ background-color: white;
   top: 703px;
   border-top: 4px solid #198E78;
 } */
-
+   /* Footer styling */
+   .PageThirteen-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Spread Back and Next buttons */
+    width: 100%; /* Full width of the screen */
+    position: fixed; /* Fixed at the bottom */
+    bottom: 0;
+    left: 0;
+    background-color: #fff; /* Background color */
+    padding: 16px;
+    box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Back and Next buttons */
+  .PageThirteen-back-btn,
+  .PageThirteen-next-btn {
+    padding: 10px 20px;
+    width: 100px;
+    border-radius: 20px;
+    border: none;
+    background-color: #198E78;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .PageThirteen-back-btn:hover,
+  .PageThirteen-next-btn:hover {
+    background-color: #388e3c;
+  }
+  
+  .PageThirteen-progress-bar {
+    width: 1450px;
+    height: 4px;
+    background-color: #198E78;
+    border-radius: 2px;
+    margin: 0 16px;
+    position: absolute;
+    top: -5px;
+    left: -16px;
+  }
+  .PageThirteen-error {
+    color: red;
+    font-size: 14px;
+    margin-top: 20px;
+  }

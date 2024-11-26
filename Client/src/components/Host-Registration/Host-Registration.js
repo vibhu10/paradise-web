@@ -16,16 +16,18 @@ import { PageThirteen } from './PageThirteen';
 import { PageFourteen } from './PageFourteen';
 import { PageFifteen } from './PageFifteen';
 import { useNavigate } from 'react-router-dom';
+import CongratulationsPage from './congratulationPage';
 export default function HostRegistration() {
     const [currentPage, setCurrentPage] = useState(1);
     const [propertyData, setPropertyData] = useState({});
     const [saveProperty, setSaveProperty] = useState(false);
   const navigate=useNavigate();
-    function handleNext() {
-        if (currentPage >= 1 && currentPage < 15) {
-            setCurrentPage((p) => p + 1);
-        }
+  function handleNext() {
+    if (currentPage >= 1 && currentPage <= 15) { // Allow transition to page 16
+        setCurrentPage((p) => p + 1);
     }
+}
+console.log(currentPage,"printing page")
 
     function handleBack() {
         if (currentPage > 1) {
@@ -96,6 +98,8 @@ export default function HostRegistration() {
             {currentPage === 13 && <PageThirteen handleNext={handleNext} handleBack={handleBack} handleSaveProperty={handleSaveProperty} />}
             {currentPage === 14 && <PageFourteen handleNext={handleNext} handleBack={handleBack} handleSaveProperty={handleSaveProperty} />}
             {currentPage === 15 && <PageFifteen handleNext={handleNext} handleBack={handleBack} handleSaveProperty={handleSaveProperty} setSaveProperty={setSaveProperty} />}
+ 
+            {currentPage === 16 && <CongratulationsPage/>}
         </div>
         </div>
     );

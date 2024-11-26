@@ -110,11 +110,12 @@
 }
 
 .page-two-progress-bar {
-  width: 250px;
+  width: 100px;
   height: 4px;
   background-color: #198E78;
   border-radius: 2px;
   margin: 0 16px;
-  position: relative;
-  left: -823px;
-  top: -37px;}
+  position: absolute;
+  left: -15px;
+  top: -3px;
+}
