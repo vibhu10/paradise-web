@@ -98,11 +98,29 @@ export default class PropertyModel {
   static allProperties() {
     return PropertyModel.properties;
   }
-}
 
+
+    // Static method to get properties by owner email
+    static getPropertiesByEmail(ownerEmail) {
+      return this.properties.filter(property => property.ownerEmail === ownerEmail);
+    }
+  
+  // Edit a property by ID
+  static editProperty(id, updatedData) {
+    const propertyIndex = this.properties.findIndex((property) => property.id === id);
+    if (propertyIndex === -1) {
+      throw new Error("Property not found");
+    }
+    this.properties[propertyIndex] = { ...this.properties[propertyIndex], ...updatedData };
+    return this.properties[propertyIndex];
+  }
+
+    // Static method to edit a property by owner email and propertyId
+  }
 // Initialize the static properties list
 PropertyModel.properties = [ {
   id:1,
+  ownerEmail:"vibhu@admin.com",
   propertyType: ["Romantic", "City"], // Randomly selected property types
   title: "Cozy Retreat by the Lake", // Example title
   propertyName: "Lakeview Cottage", // Example property name
@@ -135,7 +153,7 @@ PropertyModel.properties = [ {
     Beds: 2, // Number of beds
     Bathrooms: 2, // Number of bathrooms
   },
-  amenities: ["wifi", "firepit", "workspace", "pool"], // List of amenities
+  amenities: ["wifi", "firepit", "workspace"], // List of amenities
   propertyCoverPhoto:"https://images.pexels.com/photos/21014/pexels-photo.jpg", // Example photo URL
   description: "A charming lakefront property with stunning views, perfect for a romantic getaway or family vacation.",
   availability: {

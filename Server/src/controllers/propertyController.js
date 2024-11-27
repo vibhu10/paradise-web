@@ -33,33 +33,43 @@ export default class PropertyController {
 
   addProperty = (req, res) => {
     try {
-      // Extract data from the request body
-      const propertyData = req.body;
-  
-      // Validate the incoming data (optional but recommended)
-      if (!propertyData.title || !propertyData.propertyName || !propertyData.pricing?.BaseCharge) {
-        return res.status(400).json({ message: 'Missing required property fields' });
-      }
-  
-      // Add the property using the static method
-      PropertyModel.addProperty(propertyData);
-  
-      // Retrieve the newly added property (last property in the static array)
-      const newProperty = PropertyModel.properties[PropertyModel.properties.length - 1];
-  
-      // Return success response
-      res.status(201).json({
-        message: 'Property added successfully',
-        property: newProperty, // Respond with the created property
-      });
+        // Extract data from the request body
+        const propertyData = req.body;
+
+        // Retrieve the user's email from the JWT payload (added by the jwtAuth middleware)
+        const userEmail = req.user?.email;
+
+        if (!userEmail) {
+            return res.status(400).json({ message: 'User email not found in token' });
+        }
+
+        // Embed the user's email in the property data
+        propertyData.ownerEmail = userEmail;
+
+        // Validate the incoming data
+        if (!propertyData.title || !propertyData.propertyName || !propertyData.pricing?.BaseCharge) {
+            return res.status(400).json({ message: 'Missing required property fields' });
+        }
+
+        // Add the property using the static method
+        PropertyModel.addProperty(propertyData);
+
+        // Retrieve the newly added property (last property in the static array)
+        const newProperty = PropertyModel.properties[PropertyModel.properties.length - 1];
+
+        // Return success response
+        res.status(201).json({
+            message: 'Property added successfully',
+            property: newProperty, // Respond with the created property
+        });
     } catch (error) {
-      res.status(500).json({
-        message: 'An error occurred while adding the property',
-        error: error.message,
-      });
+        res.status(500).json({
+            message: 'An error occurred while adding the property',
+            error: error.message,
+        });
     }
-  };
-  
+};
+
   
   // Method to rate a property
   rateProperty(req, res) {
@@ -73,4 +83,45 @@ export default class PropertyController {
       res.status(404).json({ message: "Property not found" });
     }
   }
-}
+
+
+  // Fetch all properties by email
+  async getPropertiesByEmail(req, res) {
+    try {
+      const email = req.user.email; // Extract email from JWT token (provided by jwtAuth middleware)
+      
+      // Use the static method to retrieve properties
+      const properties = PropertyModel.getPropertiesByEmail(email);
+  
+      console.log(properties, "Fetched properties by email");
+      return res.status(200).json({ success: true, properties });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ success: false, message: "Error fetching properties." });
+    }
+  }
+  
+    // Edit property by email and propertyId
+    
+
+editProperty = (req, res) => {
+  try {
+    const propertyId = parseInt(req.body.id); 
+    // Assuming the `id` is passed in the request body
+    console.log(propertyId,"property id for the propertyedit")
+    const updatedData = req.body;
+
+    if (!propertyId) {
+      return res.status(400).json({ message: "Property ID is required" });
+    }
+
+    const updatedProperty = PropertyModel.editProperty(propertyId, updatedData);
+
+    return res.status(200).json(updatedProperty);
+  } catch (error) {
+    return res.status(400).json({ message: error.message });
+  }
+};
+
+  }
+

@@ -15,7 +15,7 @@ import HouseRules from '../check-in-guide/House-Rules';
 import WifiDetails from '../check-in-guide/Wifi-Details';
 import "../Host-login-Css/property-edit.css";
 
-export default function PropertyEdit({ selectedPropertyData, handleSave }) {
+export default function PropertyEdit({ selectedPropertyData,  onEditProperty }) {
   const [activeTab, setActiveTab] = useState('Photos');
   const [activeSection, setActiveSection] = useState('Your Property'); // New state to handle section
 
@@ -85,24 +85,24 @@ export default function PropertyEdit({ selectedPropertyData, handleSave }) {
           return (
             <TimeAndDescriptionEdit
               selectedPropertyData={selectedPropertyData}
-              onSave={handleSave} // Pass the onSave function to the child
+              onEditProperty={onEditProperty} // Pass the onEditProperty function to the child
             />
           );
         case 'Amenities':
           return (
             <AmenitiesEdit
               selectedPropertyData={selectedPropertyData}
-              onSave={handleSave} // Pass the onSave function to the child
+              onEditProperty={onEditProperty} // Pass the onEditProperty function to the child
             />
           );
         case 'Pricing & Availability':
-          return <PricingAvailabilityEdit selectedPropertyData={selectedPropertyData} onSave={handleSave} />;
+          return <PricingAvailabilityEdit selectedPropertyData={selectedPropertyData} onEditProperty={onEditProperty} />;
         case 'House Rules':
-          return <HouseRulesEdit selectedPropertyData={selectedPropertyData} onSave={handleSave} />;
+          return <HouseRulesEdit selectedPropertyData={selectedPropertyData} onEditProperty={onEditProperty} />;
         case 'Accesibility':
-          return <AccessibilityEdit selectedPropertyData={selectedPropertyData} onSave={handleSave} />;
+          return <AccessibilityEdit selectedPropertyData={selectedPropertyData} onEditProperty={onEditProperty} />;
         case 'Influencer Settings':
-          return <InfluencerSettings selectedPropertyData={selectedPropertyData} onSave={handleSave} />;
+          return <InfluencerSettings selectedPropertyData={selectedPropertyData} onEditProperty={onEditProperty} />;
           default:
           return null;
       }
@@ -111,17 +111,17 @@ export default function PropertyEdit({ selectedPropertyData, handleSave }) {
       switch (activeTab) {
         case'Check-in/out':
          
-         return <CheckInOut selectedPropertyData={selectedPropertyData} onSave={handleSave}/>
+         return <CheckInOut selectedPropertyData={selectedPropertyData} onEditProperty={onEditProperty}/>
         case 'Directions':
-          return <Directions selectedPropertyData={selectedPropertyData} onSave={handleSave}/>;
+          return <Directions selectedPropertyData={selectedPropertyData} onEditProperty={onEditProperty}/>;
         case 'House Manual':
-          return <HouseManual selectedPropertyData={selectedPropertyData} onSave={handleSave}/>;
+          return <HouseManual selectedPropertyData={selectedPropertyData} onEditProperty={onEditProperty}/>;
         case 'House Rules':
-          return <HouseRules selectedPropertyData={selectedPropertyData} onSave={handleSave}/>;
+          return <HouseRules selectedPropertyData={selectedPropertyData} onEditProperty={onEditProperty}/>;
           case  'guidebook':
-            return <GuideBook selectedPropertyData={selectedPropertyData} onSave={handleSave}/>
+            return <GuideBook selectedPropertyData={selectedPropertyData} onEditProperty={onEditProperty}/>
           case   'Wifi Details':
-            return <WifiDetails selectedPropertyData={selectedPropertyData} onSave={handleSave}/>
+            return <WifiDetails selectedPropertyData={selectedPropertyData} onEditProperty={onEditProperty}/>
         default:
           return null;
       }

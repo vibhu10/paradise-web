@@ -1,8 +1,19 @@
 import React, { useDebugValue } from 'react';
 import './Sidebar.css';
-import { FaUser, FaShieldAlt, FaCalendarAlt, FaMoneyBillWave, FaHome, FaBullhorn, FaBell, FaGift } from 'react-icons/fa';
+import {
+  FaUser,
+  FaShieldAlt,
+  FaCalendarAlt,
+  FaMoneyBillWave,
+  FaHome,
+  FaBullhorn,
+  FaBell,
+  FaGift,
+} from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 const Sidebar = ({ activeComponent, setActiveComponent, userData }) => {
+  const navigate = useNavigate(); // Initialize useNavigate
 
   return (
     <div className="sidebar-profilePage-container">
@@ -32,7 +43,14 @@ const Sidebar = ({ activeComponent, setActiveComponent, userData }) => {
             Before you book or host on Paradise, you'll need to complete this step.
           </p>
           <button className="btn-verify">Get verified</button>
-          {userData.isHost==='true' ? <button className="btn-switch">Switch to Host</button>:<></>}
+          {userData.isHost === 'true' ? (
+            <button
+              className="btn-switch"
+              onClick={() => navigate('/hostlogin')} // Navigate to /hostlogin
+            >
+              Switch to Host
+            </button>
+          ) : null}
         </div>
       </div>
 

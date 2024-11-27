@@ -1,156 +1,167 @@
-.userHome-container{
-   
-
-}
-.back-button {
-  width: 50px;
-  height: 50px;
-  background-color: #eff1f1;
-  color: rgb(188, 187, 187);
-  border: none;
- 
-  font-size: 16px;
-  cursor: pointer;
-  margin: 20px;
-  border-radius:50%;
+/* General Container */
+.UserHome-container {
+  font-family: 'Arial', sans-serif;
+  background-color: #f8f9fa; /* Light background for the page */
+  color: #333; /* Darker text for readability */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-.back-button:hover {
-  background-color: #145a52;
-}
-
-
-header{
-    width: 100vw;
-    height: 20%;
-    /* border: 2px solid black; */
-    background-color: #080808;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    justify-content: space-between;
-}
-header .nav-bar ul{
-display: flex;
-color: white;
-font-weight: 700;
-justify-content: space-evenly;
-list-style: none;
-gap: 15px;
-}
-
-header .userhome-login{
-/* border: 2px solid black; */
-width: 300px;
-
-}
-
-main{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-}
-
-body.user-property-card{
-    /* border: 2px solid gray; */
-    border-radius: 10px;
-    width: 20%;
-    height: 30%;
-
-}
-
-
-
-.property-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    padding: 80px;
-  
-    margin-left: 400px;
-    margin-right: 400px;
-}
-  .property-card {
-    background-color: #fff;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-    margin: 20px;
-    width: 200px;
-    overflow: hidden;
-    transition: transform 0.3s ease;
-  }
-  
-  .property-card:hover {
-    transform: translateY(-5px);
-  }
-  
-  .card-image {
-    position: relative;
-  }
-  
-  .card-image img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-  }
-  
-  .card-status {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    background-color: white;
-    padding: 5px 10px;
-    border-radius: 20px;
-    font-size: 12px;
-    display: flex;
-    align-items: center;
-  }
-  
-  .status-dot {
-    width: 8px;
-    height: 8px;
-    background-color: #00b894; /* Green dot */
-    border-radius: 50%;
-    margin-right: 5px;
-  }
-  
-  .card-info {
-    padding: 15px;
-  }
-  
-  .card-info h4 {
-    font-size: 16px;
-    color: #333;
-  }
-  
-  .card-info p {
-    font-size: 14px;
-    color: #777;
-    margin: 5px 0;
-  }
-
-  /*host property edit page  */
-
-
-
-
-
-/*houserulesedit */
-
-
-
-/*influencer setting */
-
-
-.loading-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(255, 255, 255, 0.8); /* Light overlay */
+/* Header Styling */
+.UserHome-header {
   display: flex;
   align-items: center;
-  justify-content: center;
-  z-index: 1000;
+  justify-content: space-between;
+  background-color: black; /* Navbar background */
+  padding: 10px 40px;
+  height: 76px;
+}
+
+.UserHome-logo {
+  width: 240px;
+  height: auto;
+}
+
+/* Navigation Bar */
+.UserHome-nav ul {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.UserHome-nav li {
+  font-size: 16px;
+  color: white;
+  cursor: pointer;
+  transition: color 0.3s, border-bottom 0.3s;
+}
+
+.UserHome-nav li.active {
+  color: #00c4a7; /* Highlighted green */
+  border-bottom: 2px solid #00c4a7;
+  padding-bottom: 5px;
+}
+
+.UserHome-nav li:hover {
+  color: #00c4a7;
+}
+
+/* Main Section */
+.UserHome-main {
+  display: flex;
+  flex-wrap: wrap; /* Allows items to wrap to the next row */
+  gap: 20px; /* Adds spacing between items */
+  padding: 30px 40px;
+  justify-content: center; /* Centers the content */
+  align-items: flex-start; /* Aligns items to the top of the row */
+  background-color: white;
+  height: 100vh;
+}
+
+/* Property Grid */
+.UserHome-property-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px; /* Space between cards */
+  margin-top: 20px;
+  justify-items: center;
+}
+
+/* Property Card */
+.UserHome-property-card {
+  background-color: white;
+  border: 1px solid #e6e6e6;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  max-width: 350px; /* Ensure uniform size for cards */
+  cursor: pointer;
+}
+
+.UserHome-property-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Property Image Section */
+.UserHome-property-image {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.UserHome-property-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.UserHome-property-status {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: #fff;
+  padding: 5px 12px;
+  border-radius: 15px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #333;
+  border: 1px solid transparent;
+}
+
+.UserHome-property-status.listed {
+  border-color: #00c4a7;
+  color: #00c4a7;
+}
+
+.UserHome-property-status.in-progress {
+  border-color: orange;
+  color: orange;
+}
+
+/* Property Details */
+.UserHome-property-details {
+  padding: 15px;
+  text-align: center; /* Center-align text */
+}
+
+.UserHome-property-details h4 {
+  font-size: 18px;
+  color: #333;
+  font-weight: bold;
+  margin: 0;
+}
+
+.UserHome-property-details p {
+  font-size: 14px;
+  color: #555;
+  margin: 4px 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .UserHome-property-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+
+  .UserHome-property-details h4 {
+    font-size: 16px;
+  }
+
+  .UserHome-property-details p {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .UserHome-property-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
 }

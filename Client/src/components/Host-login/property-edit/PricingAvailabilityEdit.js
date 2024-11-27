@@ -1,21 +1,37 @@
-import React, { useState } from 'react';
-import '../Host-login-Css/pricingAndAvailability.css'
-export default function PricingAvailabilityEdit({ selectedPropertyData, onSave }) {
-  const [price, setPrice] = useState(selectedPropertyData.price || 0);
-  const [minNights, setMinNights] = useState(selectedPropertyData.minNights || 1);
-  const [maxNights, setMaxNights] = useState(selectedPropertyData.maxNights || 28);
-  const [bookingNotice, setBookingNotice] = useState(selectedPropertyData.bookingNotice || 'Same day');
-  const [checkinTime, setCheckinTime] = useState(selectedPropertyData.checkinTime || '12:00 am');
+import React, { useState, useEffect } from 'react';
+import '../Host-login-Css/pricingAndAvailability.css';
 
+export default function PricingAvailabilityEdit({ selectedPropertyData, onEditProperty }) {
+  // Extract and initialize states from `selectedPropertyData`
+  const [price, setPrice] = useState(selectedPropertyData?.pricing?.BaseCharge || 0);
+  const [minNights, setMinNights] = useState(selectedPropertyData?.availability?.minimumNight || 1);
+  const [maxNights, setMaxNights] = useState(selectedPropertyData?.availability?.maximumNight || 28);
+  const [bookingNotice, setBookingNotice] = useState(selectedPropertyData?.bookingNotice || 'Same day');
+  const [checkinTime, setCheckinTime] = useState(selectedPropertyData?.availability?.checkinTime || '12:00 am');
+
+  // Handle Save Action
   const handleSave = () => {
     const updatedData = {
-      price,
-      minNights,
-      maxNights,
+      pricing: {
+        BaseCharge: parseFloat(price),
+      },
+      availability: {
+        minimumNight: parseInt(minNights),
+        maximumNight: parseInt(maxNights),
+        checkinTime,
+      },
       bookingNotice,
-      checkinTime
     };
-    onSave(updatedData);
+    onEditProperty(updatedData);
+  };
+
+  // Handle Cancel Action
+  const handleCancel = () => {
+    setPrice(selectedPropertyData?.pricing?.BaseCharge || 0);
+    setMinNights(selectedPropertyData?.availability?.minimumNight || 1);
+    setMaxNights(selectedPropertyData?.availability?.maximumNight || 28);
+    setBookingNotice(selectedPropertyData?.bookingNotice || 'Same day');
+    setCheckinTime(selectedPropertyData?.availability?.checkinTime || '12:00 am');
   };
 
   return (
@@ -24,15 +40,16 @@ export default function PricingAvailabilityEdit({ selectedPropertyData, onSave }
 
       {/* Pricing Section */}
       <div className="price-section">
-        <h3>Now, set your price</h3>
+        <h3>Set Your Price</h3>
         <p>You can change it anytime.</p>
         <div className="price-input">
-          <label htmlFor="price">Add price</label>
+          <label htmlFor="price">Price per night (Base Charge)</label>
           <input
             type="number"
             id="price"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
+            min="0"
           />
         </div>
         <div className="price-summary">
@@ -54,6 +71,7 @@ export default function PricingAvailabilityEdit({ selectedPropertyData, onSave }
               id="min-nights"
               value={minNights}
               onChange={(e) => setMinNights(e.target.value)}
+              min="1"
             />
           </div>
           <div className="max-nights">
@@ -63,6 +81,7 @@ export default function PricingAvailabilityEdit({ selectedPropertyData, onSave }
               id="max-nights"
               value={maxNights}
               onChange={(e) => setMaxNights(e.target.value)}
+              min="1"
             />
           </div>
         </div>
@@ -98,9 +117,9 @@ export default function PricingAvailabilityEdit({ selectedPropertyData, onSave }
         </div>
       </div>
 
-      {/* Buttons */}
+      {/* Action Buttons */}
       <div className="button-group">
-        <button className="cancel-button" onClick={() => onSave(null)}>Cancel</button>
+        <button className="cancel-button" onClick={handleCancel}>Cancel</button>
         <button className="save-button" onClick={handleSave}>Save</button>
       </div>
     </div>

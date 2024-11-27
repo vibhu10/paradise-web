@@ -1,81 +1,140 @@
-import { useState, useEffect } from 'react';
-import './UserHome.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import PropertyEdit from './property-edit/Property-edit';
+import { useState, useEffect } from "react";
+import "./UserHome.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import PropertyEdit from "./property-edit/Property-edit";
 
 export default function UserHome() {
   const [myProperty, setMyProperty] = useState([]);
+  console.log(myProperty,"this is data in myproperty userhome")
   const [selectedProperty, setSelectedProperty] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [activeSection, setActiveSection] = useState("properties");
 
-  // Fetch data from the API when the component mounts
+  // Fetch user properties when "properties" section is active
   useEffect(() => {
     async function fetchProperties() {
-      setIsLoading(true); // Set loading to true before starting fetch
+      setIsLoading(true);
+      setError(null);
+
       try {
-        const response = await fetch("http://localhost:3000/api/property/");
+        const token = localStorage.getItem("token");
+        if (!token) throw new Error("Token not found, please log in again.");
+
+        const response = await fetch(
+          "http://localhost:3000/api/property/propertiesByEmail",
+          {
+            method: "GET",
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+
         if (!response.ok) {
-          throw new Error('Failed to fetch properties');
+          if (response.status === 401)
+            throw new Error("Unauthorized - Invalid token");
+          else throw new Error("Failed to fetch properties");
         }
+
         const data = await response.json();
-        setMyProperty(data);  // Set fetched data to state
+        if (data.properties && Array.isArray(data.properties)) {
+          setMyProperty(data.properties);
+        } else {
+          throw new Error("No properties found");
+        }
       } catch (error) {
         setError(error.message);
       } finally {
-        setTimeout(() => setIsLoading(false), 3000); // Show spinner for at least 3 seconds
+        setIsLoading(false);
       }
     }
-    fetchProperties();
-  }, []);
 
-  function handleSave(updatedAmenities) {
-    setMyProperty(prevProperties =>
-      prevProperties.map(property =>
-        property === selectedProperty
-          ? { ...property, amenities: updatedAmenities }
-          : property
-      )
-    );
-  }
+    if (activeSection === "properties") {
+      fetchProperties();
+    }
+  }, [activeSection]);
 
+  // Handle property selection
   const handlePropertyClick = (property) => {
     setSelectedProperty(property);
   };
 
+  // Handle returning to the property list
   const handleBackToList = () => {
     setSelectedProperty(null);
   };
 
-  return (
-    <div className="userHome-container">
-      <header>
-        <div>
-          <img
-            style={{ width: '240px', height: '76px', marginLeft: '10px' }}
-            src="/48564e5fe8898cf62b0bbf42276d6cf3.jpeg"
-            alt="paradise"
-          />
-        </div>
-        <div className="nav-bar">
-          <ul>
-            <li>Influencer</li>
-            <li>Calendar</li>
-            <li>Properties</li>
-            <li>Inbox</li>
-            <li>Upcoming</li>
-            <li>Menu</li>
-          </ul>
-        </div>
+  // Handle editing a property
+  const handleEditProperty = async (updatedProperty) => {
+    setIsLoading(true);
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) throw new Error("Token not found, please log in again.");
 
-        <div className="userhome-login">
-          {/* Optional login content */}
+      const response = await fetch(
+        "http://localhost:3000/api/property/editProperty",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(updatedProperty),
+        }
+      );
+
+      if (!response.ok) {
+        if (response.status === 401)
+          throw new Error("Unauthorized - Invalid token");
+        else throw new Error("Failed to edit property");
+      }
+
+      const data = await response.json();
+
+      // Update the edited property in the state
+      setMyProperty((prevProperties) =>
+        prevProperties.map((property) =>
+          property.id === data.id ? data : property
+        )
+      );
+      setSelectedProperty(data); // Keep the edited property selected
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <div className="UserHome-container">
+      <header className="UserHome-header">
+        <img
+          className="UserHome-logo"
+          src="/48564e5fe8898cf62b0bbf42276d6cf3.jpeg"
+          alt="paradise"
+        />
+        <nav className="UserHome-nav">
+          <ul>
+            <li onClick={() => setActiveSection("influencer")}>Influencers</li>
+            <li onClick={() => setActiveSection("calendar")}>Calendar</li>
+            <li
+              onClick={() => setActiveSection("properties")}
+              className={activeSection === "properties" ? "active" : ""}
+            >
+              Properties
+            </li>
+            <li onClick={() => setActiveSection("inbox")}>Inbox</li>
+            <li onClick={() => setActiveSection("upcoming")}>Upcoming</li>
+            <li onClick={() => setActiveSection("menu")}>Menu</li>
+          </ul>
+        </nav>
+        <div>
+          
         </div>
       </header>
 
-      <main>
+      <main className="UserHome-main">
         {isLoading ? (
-          <div className="loading-overlay">
+          <div className="UserHome-loading-overlay">
             <div className="spinner-border text-primary" role="status">
               <span className="visually-hidden">Loading...</span>
             </div>
@@ -84,28 +143,39 @@ export default function UserHome() {
           <p>Error: {error}</p>
         ) : selectedProperty ? (
           <>
-            {/* Back button */}
-            <button className="back-button" onClick={handleBackToList}>
-              ←
+            <button className="UserHome-back-button" onClick={handleBackToList}>
+              ← Back
             </button>
-            
-            {/* Property edit component */}
-            <PropertyEdit selectedPropertyData={selectedProperty} handleSave={handleSave} />
+            <PropertyEdit
+              selectedPropertyData={selectedProperty}
+              onEditProperty={handleEditProperty}
+            />
           </>
         ) : (
-          <div className="property-list">
+          <div className="UserHome-property-grid">
             {myProperty.map((property, index) => (
-              <div key={index} className="property-card" onClick={() => handlePropertyClick(property)}>
-                <div className="card-image">
-                  <img src={property.photo} alt={property.name} />
-                  <div className="card-status">
-                    <span className="status-dot"></span> {property.type === "listed" ? "Listed" : "In Progress"}
+              <div
+                key={property.propertyName
+                  }
+                className="UserHome-property-card"
+                onClick={() => handlePropertyClick(property)}
+              >
+                <div className="UserHome-property-image">
+                  <img
+                    src={property.propertyCoverPhoto}
+                    alt={property.propertyName}
+                  />
+                  <div
+                    className={`UserHome-property-status ${
+                      property.type === "listed" ? "listed" : "in-progress"
+                    }`}
+                  >
+                    {property.type === "listed" ? "Listed" : "In Progress"}
                   </div>
                 </div>
-                <div className="card-info">
-                  <h4>{property.location}</h4>
-                  <h6 style={{ color: "#198E78" }}>{property.name}</h6>
-                  <p>{property.dates}</p>
+                <div className="UserHome-property-details">
+                  <h4>{property.propertyName}</h4>
+                  <p>{property.title || "No title"}</p>
                 </div>
               </div>
             ))}

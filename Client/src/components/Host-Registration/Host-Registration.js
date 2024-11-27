@@ -43,25 +43,31 @@ console.log(currentPage,"printing page")
     }
 
     // Function to save property data to the server
-    async function savePropertyDataToServer() {
-        try {
-            const response = await fetch("http://localhost:3000/api/property/registration", {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(propertyData)
-            });
+   // Function to save property data to the server with JWT token
+async function savePropertyDataToServer() {
+    try {
+        // Retrieve the JWT token from localStorage (or other secure storage)
+        const token = localStorage.getItem('token');
 
-            if (response.ok) {
-                console.log("Property data saved successfully");
-            } else {
-                console.error("Failed to save property data");
-            }
-        } catch (error) {
-            console.error("Error saving property data:", error);
+        // Make the request to the backend with the token
+        const response = await fetch("http://localhost:3000/api/property/registration", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}` // Include the token in the Authorization header
+            },
+            body: JSON.stringify(propertyData) // Send the property data as JSON
+        });
+
+        if (response.ok) {
+            console.log("Property data saved successfully");
+        } else {
+            console.error("Failed to save property data:", await response.text());
         }
+    } catch (error) {
+        console.error("Error saving property data:", error);
     }
+}
 
     // useEffect to watch for changes in saveProperty
     useEffect(() => {

@@ -34,9 +34,11 @@
   }
   
   .amenity-item.selected {
-    background-color: #e0f7fa;
-    border-color: #00acc1;
+    border: 2px solid green;
+    background-color: #e6ffe6;
+    color: green;
   }
+  
   
   .amenity-icon {
     font-size: 24px;

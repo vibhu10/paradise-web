@@ -1,41 +1,50 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from "react";
+import "../Host-login-Css/amenites.css";
 
-import '../Host-login-Css/amenites.css'
 // List of amenities with their corresponding Font Awesome icon classes
 const amenitiesList = [
-  { name: 'Wifi', icon: 'fas fa-wifi' },
-  { name: 'TV', icon: 'fas fa-tv' },
-  { name: 'Kitchen', icon: 'fas fa-utensils' },
-  { name: 'Washing machine', icon: 'fas fa-soap' },
-  { name: 'Free parking on premises', icon: 'fas fa-parking' },
-  { name: 'Paid parking on premises', icon: 'fas fa-car' },
-  { name: 'Air conditioning', icon: 'fas fa-snowflake' },
-  { name: 'Dedicated workspace', icon: 'fas fa-laptop' },
-  { name: 'Pool', icon: 'fas fa-swimmer' },
-  { name: 'Hot tub', icon: 'fas fa-hot-tub' },
-  { name: 'Firepit', icon: 'fas fa-fire' },
-  { name: 'Outdoor shower', icon: 'fas fa-shower' }
+  { name: "wifi", displayName: "Wifi", icon: "fas fa-wifi" },
+  { name: "tv", displayName: "TV", icon: "fas fa-tv" },
+  { name: "kitchen", displayName: "Kitchen", icon: "fas fa-utensils" },
+  { name: "washing_machine", displayName: "Washing Machine", icon: "fas fa-soap" },
+  { name: "free_parking", displayName: "Free Parking", icon: "fas fa-parking" },
+  { name: "paid_parking", displayName: "Paid Parking", icon: "fas fa-car" },
+  { name: "air_conditioning", displayName: "Air Conditioning", icon: "fas fa-snowflake" },
+  { name: "workspace", displayName: "Workspace", icon: "fas fa-laptop" },
+  { name: "pool", displayName: "Pool", icon: "fas fa-swimmer" },
+  { name: "hot_tub", displayName: "Hot Tub", icon: "fas fa-hot-tub" },
+  { name: "firepit", displayName: "Firepit", icon: "fas fa-fire" },
+  { name: "outdoor_shower", displayName: "Outdoor Shower", icon: "fas fa-shower" },
 ];
 
-export default function AmenitiesEdit({ selectedPropertyData, onSave }) {
-  const [selectedAmenities, setSelectedAmenities] = useState(selectedPropertyData.amenities || []);
-console.log(selectedAmenities,"fdfd")
-  const toggleAmenity = (amenity) => {
-    if (selectedAmenities.includes(amenity)) {
-      setSelectedAmenities(selectedAmenities.filter(a => a !== amenity));
-    } else {
-      setSelectedAmenities([...selectedAmenities, amenity]);
+export default function AmenitiesEdit({ selectedPropertyData, onEditProperty }) {
+  const [selectedAmenities, setSelectedAmenities] = useState([]);
+
+  // Sync the state with incoming data
+  useEffect(() => {
+    if (selectedPropertyData && selectedPropertyData.amenities) {
+      setSelectedAmenities(selectedPropertyData.amenities);
     }
+  }, [selectedPropertyData]);
+
+  // Toggle amenities selection
+  const toggleAmenity = (amenity) => {
+    setSelectedAmenities((prev) =>
+      prev.includes(amenity)
+        ? prev.filter((a) => a !== amenity)
+        : [...prev, amenity]
+    );
   };
 
+  // Handle cancel action
   const handleCancel = () => {
-    // Reset to the initial data from props
-    setSelectedAmenities(selectedPropertyData.amenities || []);
+    setSelectedAmenities(selectedPropertyData?.amenities || []);
   };
 
-function handeSave(){
-onSave(selectedAmenities)
-}
+  // Handle save action
+  const handleSave = () => {
+    onEditProperty(selectedAmenities);
+  };
 
   return (
     <div className="amenities-edit-container">
@@ -44,19 +53,25 @@ onSave(selectedAmenities)
         {amenitiesList.map((amenity) => (
           <div
             key={amenity.name}
-            className={`amenity-item ${selectedAmenities.includes(amenity.name) ? 'selected' : ''}`}
+            className={`amenity-item ${
+              selectedAmenities.includes(amenity.name) ? "selected" : ""
+            }`}
             onClick={() => toggleAmenity(amenity.name)}
           >
             <div className="amenity-icon">
               <i className={amenity.icon}></i>
             </div>
-            <span>{amenity.name}</span>
+            <span>{amenity.displayName}</span>
           </div>
         ))}
       </div>
       <div className="button-group">
-        <button className="cancel-button" onClick={handleCancel}>Cancel</button>
-        <button className="save-button" onClick={handeSave}>Save</button>
+        <button className="cancel-button" onClick={handleCancel}>
+          Cancel
+        </button>
+        <button className="save-button" onClick={handleSave}>
+          Save
+        </button>
       </div>
     </div>
   );

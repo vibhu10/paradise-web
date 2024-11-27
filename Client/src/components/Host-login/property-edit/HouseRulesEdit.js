@@ -1,20 +1,22 @@
 import React, { useState } from 'react';
-import '../Host-login-Css/houseRules.css'
+import '../Host-login-Css/houseRules.css';
 
-export default function HouseRulesEdit({ selectedPropertyData, onSave }) {
-  const [formData, setFormData] = useState({
-    petsAllowed: selectedPropertyData.petsAllowed || false,
-    maxPets: selectedPropertyData.maxPets || 1,
-    eventsAllowed: selectedPropertyData.eventsAllowed || false,
-    smokingAllowed: selectedPropertyData.smokingAllowed || false,
-    quietHoursEnabled: selectedPropertyData.quietHoursEnabled || false,
-    quietHoursStart: selectedPropertyData.quietHoursStart || '23:00',
-    quietHoursEnd: selectedPropertyData.quietHoursEnd || '11:00',
-    commercialPhotography: selectedPropertyData.commercialPhotography || false,
-    maxGuests: selectedPropertyData.maxGuests || 1,
-    checkInTime: selectedPropertyData.checkInTime || '23:00',
-    checkOutTime: selectedPropertyData.checkOutTime || '11:00',
-  });
+export default function HouseRulesEdit({ selectedPropertyData, onEditProperty }) {
+  const initialState = {
+    petsAllowed: selectedPropertyData?.petsAllowed || false,
+    maxPets: selectedPropertyData?.maxPets || 1,
+    eventsAllowed: selectedPropertyData?.eventsAllowed || false,
+    smokingAllowed: selectedPropertyData?.smokingAllowed || false,
+    quietHoursEnabled: selectedPropertyData?.quietHoursEnabled || false,
+    quietHoursStart: selectedPropertyData?.quietHoursStart || '23:00',
+    quietHoursEnd: selectedPropertyData?.quietHoursEnd || '11:00',
+    commercialPhotography: selectedPropertyData?.commercialPhotography || false,
+    maxGuests: selectedPropertyData?.maxGuests || 1,
+    checkInTime: selectedPropertyData?.checkInTime || '15:00',
+    checkOutTime: selectedPropertyData?.checkOutTime || '11:00',
+  };
+
+  const [formData, setFormData] = useState(initialState);
 
   const handleChange = (e) => {
     const { name, type, value, checked } = e.target;
@@ -25,17 +27,22 @@ export default function HouseRulesEdit({ selectedPropertyData, onSave }) {
   };
 
   const handleSave = () => {
-    onSave(formData);
+    onEditProperty(formData);
+  };
+
+  const handleCancel = () => {
+    setFormData(initialState);
   };
 
   return (
     <div className="house-rules-edit">
       <h2>House Rules</h2>
 
+      {/* Pets Allowed */}
       <div className="rule-item">
         <label>
           <input
-            style={{accentColor: "#198E78"}}
+            style={{ accentColor: "#198E78" }}
             type="checkbox"
             name="petsAllowed"
             checked={formData.petsAllowed}
@@ -47,7 +54,6 @@ export default function HouseRulesEdit({ selectedPropertyData, onSave }) {
           <div className="sub-item">
             <label>Maximum number of pets allowed:</label>
             <input
-              style={{accentColor: "#198E78"}}
               type="number"
               name="maxPets"
               value={formData.maxPets}
@@ -58,11 +64,11 @@ export default function HouseRulesEdit({ selectedPropertyData, onSave }) {
         )}
       </div>
 
+      {/* Events Allowed */}
       <div className="rule-item">
         <label>
           <input
-            style={{accentColor: "#198E78"}}
-         
+            style={{ accentColor: "#198E78" }}
             type="checkbox"
             name="eventsAllowed"
             checked={formData.eventsAllowed}
@@ -72,10 +78,11 @@ export default function HouseRulesEdit({ selectedPropertyData, onSave }) {
         </label>
       </div>
 
+      {/* Smoking Allowed */}
       <div className="rule-item">
         <label>
           <input
-            style={{accentColor: "#198E78"}}
+            style={{ accentColor: "#198E78" }}
             type="checkbox"
             name="smokingAllowed"
             checked={formData.smokingAllowed}
@@ -85,11 +92,11 @@ export default function HouseRulesEdit({ selectedPropertyData, onSave }) {
         </label>
       </div>
 
+      {/* Quiet Hours */}
       <div className="rule-item">
         <label>Quiet hours</label>
         <label className="switch">
           <input
-            style={{accentColor: "#198E78"}}
             type="checkbox"
             name="quietHoursEnabled"
             checked={formData.quietHoursEnabled}
@@ -102,7 +109,6 @@ export default function HouseRulesEdit({ selectedPropertyData, onSave }) {
             <div>
               <label>Start Time:</label>
               <input
-
                 type="time"
                 name="quietHoursStart"
                 value={formData.quietHoursStart}
@@ -122,10 +128,11 @@ export default function HouseRulesEdit({ selectedPropertyData, onSave }) {
         )}
       </div>
 
+      {/* Commercial Photography */}
       <div className="rule-item">
         <label>
           <input
-            style={{accentColor: "#198E78"}}
+            style={{ accentColor: "#198E78" }}
             type="checkbox"
             name="commercialPhotography"
             checked={formData.commercialPhotography}
@@ -135,8 +142,9 @@ export default function HouseRulesEdit({ selectedPropertyData, onSave }) {
         </label>
       </div>
 
+      {/* Maximum Guests */}
       <div className="rule-item">
-        <label>Number of guests:</label>
+        <label>Maximum number of guests:</label>
         <input
           type="number"
           name="maxGuests"
@@ -146,8 +154,9 @@ export default function HouseRulesEdit({ selectedPropertyData, onSave }) {
         />
       </div>
 
+      {/* Check-in and Check-out Times */}
       <div className="rule-item">
-        <label>Check-in and checkout times:</label>
+        <label>Check-in and Check-out times:</label>
         <div className="sub-item grid">
           <div>
             <label>Check-in:</label>
@@ -159,7 +168,7 @@ export default function HouseRulesEdit({ selectedPropertyData, onSave }) {
             />
           </div>
           <div>
-            <label>Checkout:</label>
+            <label>Check-out:</label>
             <input
               type="time"
               name="checkOutTime"
@@ -170,9 +179,14 @@ export default function HouseRulesEdit({ selectedPropertyData, onSave }) {
         </div>
       </div>
 
+      {/* Action Buttons */}
       <div className="buttons">
-        <button className="cancel">Cancel</button>
-        <button onClick={handleSave} className="save">Save</button>
+        <button className="cancel" onClick={handleCancel}>
+          Cancel
+        </button>
+        <button className="save" onClick={handleSave}>
+          Save
+        </button>
       </div>
     </div>
   );

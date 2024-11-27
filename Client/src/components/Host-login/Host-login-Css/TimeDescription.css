@@ -1,9 +1,9 @@
 
 /*time and description body section */
 
-.timeandDescriptionEdit-body{
- 
-
+.time-and-description-edit{
+ width: 50%;
+ margin-left: 254px;
 }
 /* General layout styling for the form */
 .timeandDescriptionEdit-body {
