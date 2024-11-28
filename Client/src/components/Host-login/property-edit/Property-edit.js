@@ -80,7 +80,7 @@ export default function PropertyEdit({ selectedPropertyData,  onEditProperty }) 
     if (activeSection === 'Your Property') {
       switch (activeTab) {
         case 'Photos':
-          return <PhotoEdit selectedPropertyData={selectedPropertyData} />;
+          return <PhotoEdit selectedPropertyData={selectedPropertyData} onEditProperty={onEditProperty}/>;
         case 'Time&Description':
           return (
             <TimeAndDescriptionEdit

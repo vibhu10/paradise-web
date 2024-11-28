@@ -3,35 +3,39 @@ import "../Host-login-Css/photos.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
-export default function PhotoEdit() {
-  const [bedrooms, setBedrooms] = useState([
-    {
-      id: 1,
-      name: "Bedroom 1",
-      photos: [],
-      sleepingArrangement: {
-        single: 0,
-        double: 0,
-        queen: 1,
-        king: 0,
-        smallDouble: 0,
-        bunkBed: 0,
-        sofaBed: 0,
-        sofa: 0,
+export default function PhotoEdit({ selectedPropertyData, onEditProperty }) {
+  const [bedrooms, setBedrooms] = useState(
+    selectedPropertyData.bedrooms || [
+      {
+        id: 1,
+        name: "Bedroom 1",
+        photos: [],
+        sleepingArrangement: {
+          single: 0,
+          double: 0,
+          queen: 1,
+          king: 0,
+          smallDouble: 0,
+          bunkBed: 0,
+          sofaBed: 0,
+          sofa: 0,
+        },
       },
-    },
-  ]);
+    ]
+  );
+
+  const [photoGallery, setPhotoGallery] = useState(
+    selectedPropertyData.photoGallery || [
+      { name: "Living room", Photos: [] },
+      { name: "Full Kitchen", Photos: [] },
+      { name: "Exterior", Photos: [] },
+      { name: "Dining area", Photos: [] },
+      { name: "Wash Rooms", Photos: [] },
+    ]
+  );
 
   const [addPhotoButtonPopUP, setAddPhotoPopUp] = useState(false);
   const [selectedRoom, setSelectedRoom] = useState("");
-  const [photoGallery, setPhotoGallery] = useState([
-    { name: "Living room", Photos: [] },
-    { name: "Full Kitchen", Photos: [] },
-    { name: "Exterior", Photos: [] },
-    { name: "Dining area", Photos: [] },
-    { name: "Wash Rooms", Photos: [] },
-  ]);
-
   const [showModal, setShowModal] = useState(false);
   const [currentPhotos, setCurrentPhotos] = useState([]);
   const [currentRoom, setCurrentRoom] = useState(null); // Keep track of the current room or bedroom being shown
@@ -48,14 +52,13 @@ export default function PhotoEdit() {
   };
 
   const handlePhotoUpload = (e, roomName, isBedroom = false, bedroomId = null) => {
-    const files = e.target.files; // Now it's an array of files
+    const files = e.target.files;
 
     if (isBedroom) {
       const updatedBedrooms = [...bedrooms];
       const bedroomIndex = bedrooms.findIndex((room) => room.id === bedroomId);
 
       if (bedroomIndex >= 0) {
-        // Loop through the selected files and add each to the bedroom's photos array
         for (let i = 0; i < files.length; i++) {
           updatedBedrooms[bedroomIndex].photos.push(URL.createObjectURL(files[i]));
         }
@@ -66,7 +69,6 @@ export default function PhotoEdit() {
       const roomIndex = photoGallery.findIndex((room) => room.name === roomName);
 
       if (roomIndex >= 0) {
-        // Loop through the selected files and add each to the room's photos array
         for (let i = 0; i < files.length; i++) {
           updatedPhotoGallery[roomIndex].Photos.push(URL.createObjectURL(files[i]));
         }
@@ -85,50 +87,42 @@ export default function PhotoEdit() {
     }
   };
 
-  // Open modal with the current room or bedroom's photos
   const openPhotoModal = (photos, room) => {
     setCurrentPhotos(photos);
     setCurrentRoom(room);
     setShowModal(true);
   };
 
-  // Handle deleting a photo from the current room or bedroom
   const deletePhoto = (photoIndex) => {
     if (currentRoom) {
-      // Check if it's a bedroom or a gallery room
       if (currentRoom.Photos) {
-        // It's a room from the photoGallery
         const updatedGallery = [...photoGallery];
         const roomIndex = updatedGallery.findIndex((room) => room === currentRoom);
         updatedGallery[roomIndex].Photos.splice(photoIndex, 1);
         setPhotoGallery(updatedGallery);
       } else {
-        // It's a bedroom
         const updatedBedrooms = [...bedrooms];
         const bedroomIndex = updatedBedrooms.findIndex((bedroom) => bedroom === currentRoom);
         updatedBedrooms[bedroomIndex].photos.splice(photoIndex, 1);
         setBedrooms(updatedBedrooms);
       }
 
-      // Update current photos in modal after deletion
       setCurrentPhotos((prevPhotos) => prevPhotos.filter((_, idx) => idx !== photoIndex));
     }
   };
 
-  // Open modal to display all photos from all rooms and bedrooms
   const openAllPhotosModal = () => {
     const allPhotos = [
       ...bedrooms.flatMap((bedroom) => bedroom.photos),
       ...photoGallery.flatMap((room) => room.Photos),
     ];
 
-    setCurrentPhotos(allPhotos); // Set all photos in the modal
-    setShowAllPhotosModal(true); // Open the modal for all photos
+    setCurrentPhotos(allPhotos);
+    setShowAllPhotosModal(true);
   };
 
-  // Handle adding a new room by showing a prompt
   const handleAddRoom = () => {
-    setIsRoomModalOpen(true); // Open modal to enter room name
+    setIsRoomModalOpen(true);
   };
 
   const handleRoomNameSubmit = () => {
@@ -137,7 +131,7 @@ export default function PhotoEdit() {
         ...bedrooms,
         {
           id: bedrooms.length + 1,
-          name: newRoomName, // Use the entered room name
+          name: newRoomName,
           photos: [],
           sleepingArrangement: {
             single: 0,
@@ -151,11 +145,19 @@ export default function PhotoEdit() {
           },
         },
       ]);
-      setNewRoomName(""); // Reset room name input
-      setIsRoomModalOpen(false); // Close the modal
+      setNewRoomName("");
+      setIsRoomModalOpen(false);
     }
   };
 
+  const handleSaveChanges = () => {
+    const updatedData = {
+      bedrooms,
+      photoGallery,
+    };
+
+    onEditProperty(updatedData);
+  };
   return (
     <div className="photoEdit-hostlogin">
       <div id="photo-tour-section">
@@ -502,6 +504,24 @@ export default function PhotoEdit() {
           </div>
         </div>
       )}
+
+        {/* Save Button in Footer */}
+        <div className="save-footer">
+        <button
+          style={{
+            width: "150px",
+            padding: "10px",
+            backgroundColor: "#007BFF",
+            color: "white",
+            borderRadius: "5px",
+            fontWeight: "bold",
+            cursor: "pointer",
+          }}
+          onClick={handleSaveChanges}
+        >
+          Save Changes
+        </button>
+      </div>
     </div>
   );
 }

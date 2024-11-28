@@ -3,7 +3,8 @@ import bodyParser from 'body-parser';
 import cors from 'cors'; // Import CORS middleware
 import propertyRoutes from './src/routes/propertyRoutes.js';
 import userRoute from './src/routes/userRoutes.js';
-
+import dotenv from 'dotenv';
+dotenv.config()
 const server = express();
 
 // Enable CORS with specific options

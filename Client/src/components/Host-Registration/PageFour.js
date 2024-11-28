@@ -10,6 +10,9 @@ const mapContainerStyle = {
 
 const centerDefault = { lat: 25.7617, lng: -80.1918 }; // Default location (Miami)
 
+// Define the libraries outside of the component to avoid recreating the array on each render
+const libraries = ['places'];
+
 export function PageFour({ handleNext, handleBack }) {
   const [location, setLocation] = useState(centerDefault); // Current map center
   const [searchInput, setSearchInput] = useState(''); // Address input
@@ -17,8 +20,8 @@ export function PageFour({ handleNext, handleBack }) {
   const [errorMessage, setErrorMessage] = useState(null);
 
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY, // Use environment variable
-    libraries: ['places'],
+    googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY, // Use environment variable
+    libraries: libraries, // Use the static libraries constant here
   });
 
   useEffect(() => {
@@ -39,7 +42,7 @@ export function PageFour({ handleNext, handleBack }) {
   const handleSearch = async () => {
     const geocodeUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
       searchInput
-    )}&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`;
+    )}&key=${process.env.GOOGLE_MAPS_API_KEY}`;
 
     try {
       const response = await fetch(geocodeUrl);

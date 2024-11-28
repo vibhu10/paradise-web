@@ -104,16 +104,27 @@ export default class PropertyModel {
     static getPropertiesByEmail(ownerEmail) {
       return this.properties.filter(property => property.ownerEmail === ownerEmail);
     }
-  
-  // Edit a property by ID
-  static editProperty(id, updatedData) {
-    const propertyIndex = this.properties.findIndex((property) => property.id === id);
-    if (propertyIndex === -1) {
-      throw new Error("Property not found");
+    static editProperty(id, updatedData) {
+      console.log("Searching for property with ID:", id); // Log the ID being searched
+      const propertyIndex = this.properties.findIndex((property) => property.id === id);
+    
+      if (propertyIndex === -1) {
+        throw new Error("Property not found");
+      }
+    
+      // Merge the updated data
+      const updatedProperty = {
+        ...this.properties[propertyIndex],
+        ...updatedData,
+        id: this.properties[propertyIndex].id, // Ensure `id` remains unchanged
+      };
+    
+      this.properties[propertyIndex] = updatedProperty;
+    
+      return updatedProperty;
     }
-    this.properties[propertyIndex] = { ...this.properties[propertyIndex], ...updatedData };
-    return this.properties[propertyIndex];
-  }
+    
+    
 
     // Static method to edit a property by owner email and propertyId
   }

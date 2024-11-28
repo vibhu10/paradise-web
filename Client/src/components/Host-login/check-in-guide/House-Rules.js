@@ -1,21 +1,21 @@
 import './check-in-guide-css/house-rules.css';
 import { useState, useEffect } from 'react';
 
-export default function HouseRules({ onSave, selectedPropertyData }) {
+export default function HouseRules({ onEditProperty, selectedPropertyData }) {
     const [formData, setFormData] = useState({
         petsAllowed: false,
         maxPets: 1,
         eventsAllowed: false,
         smokingAllowed: false,
-        quietHoursStart: '11:00 pm',
-        quietHoursEnd: '11:00 am',
+        quietHoursStart: '23:00', // Default fallback values in 24-hour format
+        quietHoursEnd: '11:00',
         commercialPhotographyAllowed: false,
         numberOfGuests: 1,
-        checkInTime: '11:00 pm',
-        checkOutTime: '11:00 am',
+        checkInTime: '23:00',
+        checkOutTime: '11:00',
         noShoes: false,
         noSmokingInside: false,
-        additionalRules: []
+        additionalRules: [],
     });
 
     // Initialize formData with selectedPropertyData when the component mounts
@@ -23,19 +23,17 @@ export default function HouseRules({ onSave, selectedPropertyData }) {
         if (selectedPropertyData) {
             setFormData({
                 ...formData,
-                petsAllowed: selectedPropertyData.petsAllowed || false,
-                maxPets: selectedPropertyData.maxPets || 1,
-                eventsAllowed: selectedPropertyData.eventsAllowed || false,
-                smokingAllowed: selectedPropertyData.smokingAllowed || false,
-                quietHoursStart: selectedPropertyData.quietHoursStart || '11:00 pm',
-                quietHoursEnd: selectedPropertyData.quietHoursEnd || '11:00 am',
-                commercialPhotographyAllowed: selectedPropertyData.commercialPhotographyAllowed || false,
-                numberOfGuests: selectedPropertyData.numberOfGuests || 1,
-                checkInTime: selectedPropertyData.checkInTime || '11:00 pm',
-                checkOutTime: selectedPropertyData.checkOutTime || '11:00 am',
-                noShoes: selectedPropertyData.noShoes || false,
-                noSmokingInside: selectedPropertyData.noSmokingInside || false,
-                additionalRules: selectedPropertyData.additionalRules || []
+                petsAllowed: selectedPropertyData?.houseRules?.petsAllowed || false,
+                maxPets: selectedPropertyData?.houseRules?.maxNoPets || 1,
+                eventsAllowed: selectedPropertyData?.houseRules?.eventAllowed || false,
+                smokingAllowed: selectedPropertyData?.houseRules?.smokingAllowed || false,
+                commercialPhotographyAllowed: selectedPropertyData?.houseRules?.commercialPhotography || false,
+                numberOfGuests: selectedPropertyData?.houseRules?.numberOfGuests || 1,
+                quietHoursStart: selectedPropertyData?.quiteHour?.quiteHourStart?.slice(11, 16) || '23:00', // Extract time part
+                quietHoursEnd: selectedPropertyData?.quiteHour?.quiteHourEnd?.slice(11, 16) || '11:00', // Extract time part
+                checkInTime: selectedPropertyData?.checkinOut?.checkin?.[0]?.slice(11, 16) || '23:00', // Extract check-in time
+                checkOutTime: selectedPropertyData?.checkinOut?.checkout?.[0]?.slice(11, 16) || '11:00', // Extract check-out time
+                additionalRules: selectedPropertyData?.houseRules?.additionalRules || [],
             });
         }
     }, [selectedPropertyData]);
@@ -44,39 +42,35 @@ export default function HouseRules({ onSave, selectedPropertyData }) {
         const { name, value, type, checked } = e.target;
         setFormData((prev) => ({
             ...prev,
-            [name]: type === 'checkbox' ? checked : value
+            [name]: type === 'checkbox' ? checked : value,
         }));
     };
 
     const handleAdditionalRuleChange = (index, value) => {
         const updatedRules = [...formData.additionalRules];
-        updatedRules[index].value = value;
+        updatedRules[index] = value;
         setFormData((prev) => ({
             ...prev,
-            additionalRules: updatedRules
+            additionalRules: updatedRules,
         }));
     };
 
     const handleAddRule = () => {
         setFormData((prev) => ({
             ...prev,
-            additionalRules: [
-                ...prev.additionalRules,
-                { label: '', type: 'text', value: '' } // Default to text input
-            ]
+            additionalRules: [...prev.additionalRules, ''], // Add a new empty string for the rule value
         }));
     };
 
     const handleSave = () => {
-        onSave(formData);
+        onEditProperty(formData);
     };
 
     return (
         <div className="house-rules-container">
             <h3>House Rules</h3>
-            <p>Guests are expected to follow your rules and may be removed from Paradise if they don't.</p>
+            <p>Guests are expected to follow your rules and may be removed if they don't.</p>
 
-            {/* Existing fields */}
             <label>
                 Pets allowed
                 <input
@@ -186,21 +180,31 @@ export default function HouseRules({ onSave, selectedPropertyData }) {
             {formData.additionalRules.map((rule, index) => (
                 <div key={index} className="additional-rule">
                     <label>
-                       
-                        <input style={{border:"none", fontWeight:600}}
+                        <input
                             type="text"
                             value={rule}
-                            placeholder={rule}
+                            placeholder={`Rule ${index + 1}`}
                             onChange={(e) => handleAdditionalRuleChange(index, e.target.value)}
                         />
                     </label>
                 </div>
             ))}
 
-            <button type="button" style={{type:"block",background:"white",color:"black", border:"1px solid black"}} onClick={handleAddRule}>Add More Rules</button>
-            <div>
+            <button
+                type="button"
+                style={{ display: 'block', background: 'white', color: 'black', border: '1px solid black' }}
+                onClick={handleAddRule}
+            >
+                Add More Rules
+            </button>
 
-            <button style={{color:"white",background:"#198E78"}}onClick={handleSave}>Save</button>
+            <div>
+                <button
+                    style={{ color: 'white', background: '#198E78' }}
+                    onClick={handleSave}
+                >
+                    Save
+                </button>
             </div>
         </div>
     );

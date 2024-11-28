@@ -1,104 +1,135 @@
-import { useState, useEffect } from 'react';
-import './check-in-guide-css/check-in-out.css'
+import { useState, useEffect } from "react";
+import "./check-in-guide-css/check-in-out.css";
 
-const CheckInOut = ({ onSave, selectedPropertyData }) => {
-  // State to store the instructions, check-in, and check-out times
+const CheckInOut = ({ onEditProperty, selectedPropertyData }) => {
   const [instructions, setInstructions] = useState([]);
-  const [checkInTime, setCheckInTime] = useState('00:00');  // Default check-in time
-  const [checkOutTime, setCheckOutTime] = useState('00:00'); // Default check-out time
+  const [checkInTime, setCheckInTime] = useState("11:00 am");
+  const [checkOutTime, setCheckOutTime] = useState("11:00 am");
 
-  // Populate the instructions, check-in, and check-out times from selectedPropertyData
+  // Helper function to format ISO time to readable format
+  const formatTime = (isoTimeArray) => {
+    if (!isoTimeArray || isoTimeArray.length === 0) return "11:00 am"; // Default fallback
+    const isoTime = isoTimeArray[0];
+    const date = new Date(isoTime);
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    const suffix = hours >= 12 ? "pm" : "am";
+    const formattedHours = ((hours + 11) % 12) + 1;
+    return `${formattedHours}:${minutes.toString().padStart(2, "0")} ${suffix}`;
+  };
+
   useEffect(() => {
     if (selectedPropertyData) {
-      // Set instructions if available
-      if (selectedPropertyData.instructions) {
-        setInstructions(selectedPropertyData.instructions);
-      }
-      // Set check-in time if available
-      if (selectedPropertyData.checkInTime) {
-        setCheckInTime(selectedPropertyData.checkInTime);
-      }
-      // Set check-out time if available
-      if (selectedPropertyData.checkOutTime) {
-        setCheckOutTime(selectedPropertyData.checkOutTime);
-      }
+      setInstructions(selectedPropertyData.AddInstruction || []);
+      setCheckInTime(formatTime(selectedPropertyData.checkinOut?.checkin));
+      setCheckOutTime(formatTime(selectedPropertyData.checkinOut?.checkout));
     }
   }, [selectedPropertyData]);
 
-  // Function to handle instruction change (editing existing instructions)
   const handleInstructionChange = (e, index) => {
     const updatedInstructions = [...instructions];
     updatedInstructions[index] = e.target.value;
     setInstructions(updatedInstructions);
   };
 
-  // Function to add a new empty instruction
   const addInstruction = () => {
-    setInstructions([...instructions, "New check-in instruction..."]);
+    setInstructions([...instructions, ""]);
   };
 
-  // Function to save updated instructions, check-in, and check-out times
   const handleSave = () => {
-    // Pass the updated data to the parent component via onSave
-    onSave({
+    onEditProperty({
       ...selectedPropertyData,
-      instructions,
-      checkInTime,
-      checkOutTime
+      AddInstruction: instructions,
+      checkinOut: {
+        checkin: [new Date(`1970-01-01T${checkInTime}:00`).toISOString()],
+        checkout: [new Date(`1970-01-01T${checkOutTime}:00`).toISOString()],
+      },
     });
   };
 
-  // Generate time options from 00:00 to 23:59 (24-hour format)
-  const generateTimeOptions = () => {
-    let times = [];
-    for (let i = 0; i < 24; i++) {
-      for (let j = 0; j < 60; j += 30) {
-        const hour = i < 10 ? `0${i}` : i; // Add leading zero for single-digit hours
-        const minute = j === 0 ? '00' : j;
-        times.push(`${hour}:${minute}`);
-      }
+  const handleCancel = () => {
+    if (selectedPropertyData) {
+      setInstructions(selectedPropertyData.AddInstruction || []);
+      setCheckInTime(formatTime(selectedPropertyData.checkinOut?.checkin));
+      setCheckOutTime(formatTime(selectedPropertyData.checkinOut?.checkout));
     }
-    return times;
   };
+
+  const generateTimeOptions = () =>
+    [
+      "12:00 am",
+      "1:00 am",
+      "2:00 am",
+      "3:00 am",
+      "4:00 am",
+      "5:00 am",
+      "6:00 am",
+      "7:00 am",
+      "8:00 am",
+      "9:00 am",
+      "10:00 am",
+      "11:00 am",
+      "12:00 pm",
+      "1:00 pm",
+      "2:00 pm",
+      "3:00 pm",
+      "4:00 pm",
+      "5:00 pm",
+      "6:00 pm",
+      "7:00 pm",
+      "8:00 pm",
+      "9:00 pm",
+      "10:00 pm",
+      "11:00 pm",
+    ].map((time) => time);
 
   return (
     <div className="check-in-out-container">
       <h2>Check-in/out</h2>
-      
-      <div className="time-select">
-        <div className="checkin">
+
+      {/* Time Section */}
+      <div className="time-section">
+        <div className="time-box">
           <label htmlFor="checkin-time">Check-in</label>
           <select
             id="checkin-time"
-            value={checkInTime} // Set the value from state
-            onChange={(e) => setCheckInTime(e.target.value)} // Update state when changed
+            value={checkInTime}
+            onChange={(e) => setCheckInTime(e.target.value)}
           >
-            {generateTimeOptions().map((time, index) => (
-              <option key={index} value={time}>{time}</option>
+            {generateTimeOptions().map((time) => (
+              <option key={time} value={time}>
+                {time}
+              </option>
             ))}
           </select>
-          <p>Arrive between {checkInTime} and Flexible Leave before {checkOutTime}</p>
         </div>
 
-        <div className="checkout">
+        <div className="time-box">
           <label htmlFor="checkout-time">Checkout</label>
           <select
             id="checkout-time"
-            value={checkOutTime} // Set the value from state
-            onChange={(e) => setCheckOutTime(e.target.value)} // Update state when changed
+            value={checkOutTime}
+            onChange={(e) => setCheckOutTime(e.target.value)}
           >
-            {generateTimeOptions().map((time, index) => (
-              <option key={index} value={time}>{time}</option>
+            {generateTimeOptions().map((time) => (
+              <option key={time} value={time}>
+                {time}
+              </option>
             ))}
           </select>
         </div>
+        <p>
+          Arrive between {checkInTime} and Flexible Leave before {checkOutTime}
+        </p>
       </div>
 
+      {/* Instructions Section */}
       <div className="instructions-section">
         <h3>Check-in instructions</h3>
         {instructions.map((instruction, index) => (
           <div key={index} className="instruction-box">
-            <textarea className="instructions-section-textarea"
+            <textarea
+              placeholder="Enter instruction"
               value={instruction}
               onChange={(e) => handleInstructionChange(e, index)}
             />
@@ -109,29 +140,59 @@ const CheckInOut = ({ onSave, selectedPropertyData }) => {
         </button>
       </div>
 
+      {/* Check-in Method */}
       <div className="method-section">
         <h3>Check-in method</h3>
         <ul>
-          <li><strong>Smart lock:</strong> Guests will use a code or app to open a wifi-connected lock.</li>
-          <li><strong>Keypad:</strong> Guests will use the code you provide to open an electronic lock.</li>
-          <li><strong>Lockbox:</strong> Guests will use a code you provide to open a small safe that has a key inside.</li>
-          <li><strong>Building staff:</strong> Someone will be available 24 hours a day to let guests in.</li>
+          <li>
+            <strong>Smart lock:</strong> Guests use a code or app to open a
+            Wi-Fi-connected lock.
+          </li>
+          <li>
+            <strong>Keypad:</strong> Guests use the code you provide to open an
+            electronic lock.
+          </li>
+          <li>
+            <strong>Lockbox:</strong> Guests use a code to access a small safe
+            with a key inside.
+          </li>
+          <li>
+            <strong>Building staff:</strong> Staff is available 24/7 to assist
+            guests.
+          </li>
         </ul>
       </div>
 
+      {/* Checkout Instructions */}
       <div className="checkout-section">
         <h3>Checkout instructions</h3>
         <ul>
-          <li><strong>Throw rubbish away:</strong> Throw garbage in bins. Place the bins at the curb on Thursday...</li>
-          <li><strong>Turn things off:</strong> Turn off all the lights especially the string lights in the back yard.</li>
-          <li><strong>Lock up:</strong> Press the lock button on your way out.</li>
-          <li><strong>Additional requests:</strong> Please wash all your dishes and throw away everything in the fridge.</li>
+          <li>
+            <strong>Throw rubbish away:</strong> Dispose of garbage in bins and
+            place them at the curb on collection day.
+          </li>
+          <li>
+            <strong>Turn things off:</strong> Switch off all lights, especially
+            outdoor ones.
+          </li>
+          <li>
+            <strong>Lock up:</strong> Press the lock button on your way out.
+          </li>
+          <li>
+            <strong>Additional requests:</strong> Wash dishes and clear the
+            fridge.
+          </li>
         </ul>
       </div>
 
+      {/* Action Buttons */}
       <div className="action-buttons">
-        <button className="cancel">Cancel</button>
-        <button className="save" onClick={handleSave}>Save</button>
+        <button className="cancel" onClick={handleCancel}>
+          Cancel
+        </button>
+        <button className="save" onClick={handleSave}>
+          Save
+        </button>
       </div>
     </div>
   );

@@ -12,30 +12,31 @@ const fetchCountries = async () => {
     }));
 };
 
-export default function Directions({ onSave, selectedPropertyData }) {
+export default function Directions({ onEditProperty, selectedPropertyData }) {
     const [countries, setCountries] = useState([]);
     const [loading, setLoading] = useState(true);
 
+    // Extracting data from selectedPropertyData
     const [addressDirections, setAddressDirections] = useState(
-        selectedPropertyData?.addressDirections|| 'Address is [example address]. There is plenty of parking available. 4-6 in the driveway and 1 in the street.'
+        selectedPropertyData?.addressDirections || 'Address is [example address]. There is plenty of parking available. 4-6 in the driveway and 1 in the street.'
     );
 
     const [guestOptions, setGuestOptions] = useState({
-        stepFreeEntrance: selectedPropertyData?.guestOptions.stepFreeEntrance || false,
-        widerEntrance: selectedPropertyData?.guestOptions.widerEntrance || false,
-        accessibleParking: selectedPropertyData?.guestOptions.accessibleParking || false,
-        stepFreePath: selectedPropertyData?.guestOptions.stepFreePath || false,
+        stepFreeEntrance: selectedPropertyData?.guestOptions?.stepFreeEntrance || false,
+        widerEntrance: selectedPropertyData?.guestOptions?.widerEntrance || false,
+        accessibleParking: selectedPropertyData?.guestOptions?.accessibleParking || false,
+        stepFreePath: selectedPropertyData?.guestOptions?.stepFreePath || false,
     });
 
     const [addressData, setAddressData] = useState({
-        country: selectedPropertyData?.addressData.country || '',
-        flat: selectedPropertyData?.addressData.flat || '',
-        street: selectedPropertyData?.addressData.street || '',
-        landmark: selectedPropertyData?.addressData.landmark || '',
-        district: selectedPropertyData?.addressData.district || '',
-        city: selectedPropertyData?.addressData.city || '',
-        state: selectedPropertyData?.addressData.state || '',
-        pinCode: selectedPropertyData?.addressData.pinCode || '',
+        country: selectedPropertyData?.Address?.country || '',
+        flat: selectedPropertyData?.Address?.houseAndFlat || '',
+        street: selectedPropertyData?.Address?.streetAddress || '',
+        landmark: selectedPropertyData?.Address?.landmark || '',
+        district: selectedPropertyData?.Address?.district || '',
+        city: selectedPropertyData?.Address?.city || '',
+        state: selectedPropertyData?.Address?.state || '',
+        pinCode: selectedPropertyData?.Address?.pin || '',
     });
 
     const [showLocation, setShowLocation] = useState(selectedPropertyData?.showLocation || false);
@@ -50,6 +51,7 @@ export default function Directions({ onSave, selectedPropertyData }) {
         loadCountries();
     }, []);
 
+    // Handle checkbox changes for guest options
     const handleCheckboxChange = (e) => {
         setGuestOptions({
             ...guestOptions,
@@ -57,6 +59,7 @@ export default function Directions({ onSave, selectedPropertyData }) {
         });
     };
 
+    // Handle text input changes for address data
     const handleInputChange = (e) => {
         setAddressData({
             ...addressData,
@@ -64,6 +67,7 @@ export default function Directions({ onSave, selectedPropertyData }) {
         });
     };
 
+    // Save the updated property data
     const handleSave = () => {
         const updatedData = {
             addressDirections,
@@ -71,14 +75,15 @@ export default function Directions({ onSave, selectedPropertyData }) {
             addressData,
             showLocation,
         };
-        if (onSave) {
-            onSave(updatedData);
+        if (onEditProperty) {
+            onEditProperty(updatedData);
         }
     };
 
     return (
         <div className="directions-container">
             <h2 className="directions-title">Directions</h2>
+
             {/* Editable Address Directions */}
             <textarea
                 className="address-directions"
@@ -89,36 +94,36 @@ export default function Directions({ onSave, selectedPropertyData }) {
 
             <div className="guest-options">
                 <label>
-                    <input 
-                        type="checkbox" 
-                        name="stepFreeEntrance" 
+                    <input
+                        type="checkbox"
+                        name="stepFreeEntrance"
                         checked={guestOptions.stepFreeEntrance}
                         onChange={handleCheckboxChange}
                     />
                     Step-free guest entrance
                 </label>
                 <label>
-                    <input 
-                        type="checkbox" 
-                        name="widerEntrance" 
+                    <input
+                        type="checkbox"
+                        name="widerEntrance"
                         checked={guestOptions.widerEntrance}
                         onChange={handleCheckboxChange}
                     />
                     Guest entrance wider than 32 inches (81 centimeters)
                 </label>
                 <label>
-                    <input 
-                        type="checkbox" 
-                        name="accessibleParking" 
+                    <input
+                        type="checkbox"
+                        name="accessibleParking"
                         checked={guestOptions.accessibleParking}
                         onChange={handleCheckboxChange}
                     />
                     Accessible parking spot
                 </label>
                 <label>
-                    <input 
-                        type="checkbox" 
-                        name="stepFreePath" 
+                    <input
+                        type="checkbox"
+                        name="stepFreePath"
                         checked={guestOptions.stepFreePath}
                         onChange={handleCheckboxChange}
                     />
@@ -132,11 +137,12 @@ export default function Directions({ onSave, selectedPropertyData }) {
                 {loading ? (
                     <div>Loading countries...</div>
                 ) : (
-                    <select 
-                        name="country" 
-                        value={addressData.country} 
-                        onChange={handleInputChange} 
-                        className="full-width">
+                    <select
+                        name="country"
+                        value={addressData.country}
+                        onChange={handleInputChange}
+                        className="full-width"
+                    >
                         {countries.map((country) => (
                             <option key={country.code} value={country.name}>
                                 {country.name} ({country.callingCode})
@@ -144,74 +150,77 @@ export default function Directions({ onSave, selectedPropertyData }) {
                         ))}
                     </select>
                 )}
-                
-                <input 
-                    type="text" 
-                    name="flat" 
-                    placeholder="Flat, house, etc." 
-                    value={addressData.flat} 
-                    onChange={handleInputChange} 
+
+                <input
+                    type="text"
+                    name="flat"
+                    placeholder="Flat, house, etc."
+                    value={addressData.flat}
+                    onChange={handleInputChange}
                 />
-                <input 
-                    type="text" 
-                    name="street" 
-                    placeholder="Street address" 
-                    value={addressData.street} 
-                    onChange={handleInputChange} 
+                <input
+                    type="text"
+                    name="street"
+                    placeholder="Street address"
+                    value={addressData.street}
+                    onChange={handleInputChange}
                 />
-                <input 
-                    type="text" 
-                    name="landmark" 
-                    placeholder="Nearby landmark (if applicable)" 
-                    value={addressData.landmark} 
-                    onChange={handleInputChange} 
+                <input
+                    type="text"
+                    name="landmark"
+                    placeholder="Nearby landmark (if applicable)"
+                    value={addressData.landmark}
+                    onChange={handleInputChange}
                 />
-                <input 
-                    type="text" 
-                    name="district" 
-                    placeholder="District/locality (if applicable)" 
-                    value={addressData.district} 
-                    onChange={handleInputChange} 
+                <input
+                    type="text"
+                    name="district"
+                    placeholder="District/locality (if applicable)"
+                    value={addressData.district}
+                    onChange={handleInputChange}
                 />
-                <input 
-                    type="text" 
-                    name="city" 
-                    placeholder="City / town" 
-                    value={addressData.city} 
-                    onChange={handleInputChange} 
+                <input
+                    type="text"
+                    name="city"
+                    placeholder="City / town"
+                    value={addressData.city}
+                    onChange={handleInputChange}
                 />
-                <input 
-                    type="text" 
-                    name="state" 
-                    placeholder="State/union territory" 
-                    value={addressData.state} 
-                    onChange={handleInputChange} 
+                <input
+                    type="text"
+                    name="state"
+                    placeholder="State/union territory"
+                    value={addressData.state}
+                    onChange={handleInputChange}
                 />
-                <input 
-                    type="text" 
-                    name="pinCode" 
-                    placeholder="PIN code" 
-                    value={addressData.pinCode} 
-                    onChange={handleInputChange} 
+                <input
+                    type="text"
+                    name="pinCode"
+                    placeholder="PIN code"
+                    value={addressData.pinCode}
+                    onChange={handleInputChange}
                 />
             </div>
 
+            {/* Location Toggle */}
             <div className="location-toggle">
                 <label className="toggle-label">
                     Show your specific location
-                    <input 
-                        type="checkbox" 
+                    <input
+                        type="checkbox"
                         className="toggle-switch"
-                        checked={showLocation} 
+                        checked={showLocation}
                         onChange={() => setShowLocation(!showLocation)}
                     />
                 </label>
             </div>
 
+            {/* Map Placeholder */}
             <div className="map-placeholder">
                 <img src="https://via.placeholder.com/600x300" alt="Map location" />
             </div>
 
+            {/* Save/Cancel Buttons */}
             <div className="directions-actions">
                 <button className="cancel-button">Cancel</button>
                 <button className="save-button" onClick={handleSave}>Save</button>

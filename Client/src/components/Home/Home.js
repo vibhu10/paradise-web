@@ -479,6 +479,16 @@ export default function Home() {
             onChange={(e) => setDob(e.target.value)}
           />
         </div>
+           <div className="signup2-input-group">
+          <label htmlFor="Email">Email</label>
+          <input
+            type="email"
+            id="email"
+            value={email} 
+            disabled
+           
+          />
+        </div>
         <div className="signup2-input-group">
           <label htmlFor="password">Password</label>
           <input

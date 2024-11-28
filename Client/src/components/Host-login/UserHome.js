@@ -63,47 +63,39 @@ export default function UserHome() {
     setSelectedProperty(null);
   };
 
-  // Handle editing a property
+  // Handle editing a propertyconst
   const handleEditProperty = async (updatedProperty) => {
-    setIsLoading(true);
-    try {
-      const token = localStorage.getItem("token");
-      if (!token) throw new Error("Token not found, please log in again.");
+  setIsLoading(true);
 
-      const response = await fetch(
-        "http://localhost:3000/api/property/editProperty",
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify(updatedProperty),
-        }
-      );
+  try {
+    const token = localStorage.getItem("token");
+    if (!token) throw new Error("Token not found, please log in again.");
 
-      if (!response.ok) {
-        if (response.status === 401)
-          throw new Error("Unauthorized - Invalid token");
-        else throw new Error("Failed to edit property");
-      }
+    const response = await fetch("http://localhost:3000/api/property/editProperty", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ ...updatedProperty, id: selectedProperty.id }),
+    });
 
-      const data = await response.json();
+    if (!response.ok) throw new Error("Failed to update property");
 
-      // Update the edited property in the state
-      setMyProperty((prevProperties) =>
-        prevProperties.map((property) =>
-          property.id === data.id ? data : property
-        )
-      );
-      setSelectedProperty(data); // Keep the edited property selected
-    } catch (error) {
-      setError(error.message);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+    const updatedData = await response.json();
 
+    setMyProperty((prevProperties) =>
+      prevProperties.map((property) =>
+        property.id === updatedData.id ? updatedData : property
+      )
+    );
+    setSelectedProperty(updatedData); // Keep the edited property visible
+  } catch (error) {
+    setError(error.message);
+  } finally {
+    setIsLoading(false);
+  }
+   }
   return (
     <div className="UserHome-container">
       <header className="UserHome-header">

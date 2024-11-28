@@ -104,24 +104,36 @@ export default class PropertyController {
     // Edit property by email and propertyId
     
 
-editProperty = (req, res) => {
-  try {
-    const propertyId = parseInt(req.body.id); 
-    // Assuming the `id` is passed in the request body
-    console.log(propertyId,"property id for the propertyedit")
-    const updatedData = req.body;
+    editProperty = (req, res) => {
+      try {
+        const propertyId = parseInt(req.body.id); // Assuming numeric IDs
+        const updatedData = req.body;
+        
+        console.log("Received data in edit property controller:",propertyId, updatedData); // Log incoming data
+    
+        if (!propertyId) {
+          return res.status(400).json({ message: "Property ID is required" });
+        }
+    
+        if (!updatedData || Object.keys(updatedData).length === 0) {
+          return res.status(400).json({ message: "Updated data is required" });
+        }
+    
+        const updatedProperty = PropertyModel.editProperty(propertyId, updatedData);
+    console.log(updatedProperty,"data comming after update")
+        if (!updatedProperty) {
+          return res.status(404).json({ message: "Property not found" });
+        }
+    
+        return res.status(200).json({
+          message: "Property updated successfully",
+          property: updatedProperty,
+        });
+      } catch (error) {
+        console.error("Error updating property:", error.message);
+        return res.status(500).json({ message: "Internal server error" });
+      }
+    };
+    
 
-    if (!propertyId) {
-      return res.status(400).json({ message: "Property ID is required" });
-    }
-
-    const updatedProperty = PropertyModel.editProperty(propertyId, updatedData);
-
-    return res.status(200).json(updatedProperty);
-  } catch (error) {
-    return res.status(400).json({ message: error.message });
   }
-};
-
-  }
-

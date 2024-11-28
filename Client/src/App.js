@@ -7,6 +7,7 @@ import Inbox from './components/influencer/Inbox'
 import HostRegistration from './components/Host-Registration/Host-Registration';
 import UserHome from './components/Host-login/UserHome';
 import ProfilePage from './components/profiles/guest/profilePage';
+import HostProfile from './components/profiles/host/hostProfile';
 
 
 function App() {
@@ -24,6 +25,10 @@ function App() {
           <Route path='/influencer' element={<EdifInfluencerProfile/>}/>
           <Route path='/influencer/inbox' element={<Inbox/>}/>
           <Route path='/hostlogin'  element={<UserHome/>}/>
+          <Route path='/newHost' element={<HostProfile/>}/>
+         
+         
+
           </Routes>
       </div>
     </Router>
