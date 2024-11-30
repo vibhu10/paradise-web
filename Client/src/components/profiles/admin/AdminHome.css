@@ -1,0 +1,197 @@
+/* General Container */
+.adminHome-container {
+    display: flex;
+    height: 100vh;
+    font-family: "Arial", sans-serif;
+    background-color: #f9fafc;
+    overflow: hidden;
+}
+
+/* Sidebar */
+.adminHome-sidebar {
+    width: 400px; /* Increased width for better visibility */
+    background-color: black;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+}
+
+.adminHome-logo {
+    width: 350px; /* Increased logo size */
+    margin-bottom: 30px;
+    align-self: center;
+}
+
+.adminHome-menu {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+}
+
+.adminHome-menu li {
+    padding: 12px 20px;
+    margin: 20px 0;
+    cursor: pointer;
+    color: #cfd2dc;
+    text-align: left;
+    font-size: 22px;
+    font-weight: 500;
+    transition: background-color 0.3s, color 0.3s;
+    display: flex
+;
+    align-items: center;
+    gap: 10px;
+}
+
+.adminHome-menu li.active, .adminHome-menu li:hover {
+    /* background-color: #198E78; */
+    color: #198E78;
+    font-weight: bold;
+    border: none;
+}
+
+.adminHome-menu li .submenu {
+    padding-left: 30px;
+    font-size: 16px;
+    color: #b5b5b5;
+}
+
+/* Main Content */
+.adminHome-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #f4f6f9;
+}
+
+/* Header */
+.adminHome-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px; /* Increased padding for a spacious look */
+    background-color: white;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.adminHome-search {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Reduced gap for better alignment */
+    font-size: 16px; /* Slightly smaller font size for a cleaner look */
+    color: #333; /* Darker text color for better readability */
+    padding: 10px 20px; /* Added padding for more space around the elements */
+    background-color: #f4f4f4; /* Light background to differentiate it from other sections */
+    border-radius: 8px; /* Rounded corners for a modern look */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+}
+
+.adminHome-search input,
+.adminHome-search button {
+    padding: 8px 12px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.adminHome-search input:focus,
+.adminHome-search button:hover {
+    border-color: #007bff; /* Blue highlight on focus or hover */
+    outline: none;
+}
+
+.adminHome-search button {
+    background-color: #007bff; /* Blue button background */
+    color: #fff; /* White text on button */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.adminHome-search button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+.adminHome-header-right {
+    display: flex;
+    align-items: center;
+    gap: 30px; /* Increased spacing for clarity */
+}
+
+.notification-icon,
+.email-icon,
+.profile-icon,
+.menu-icon {
+    font-size: 22px; /* Larger icons for prominence */
+    cursor: pointer;
+    color: #555;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.notification-icon::after,
+.email-icon::after {
+    content: "";
+    width: 8px;
+    height: 8px;
+    background: red;
+    border-radius: 50%;
+    position: absolute;
+    top: 2px;
+    right: 2px;
+}
+
+.profile-icon {
+    background-color: #007bff;
+    color: white;
+    width: 40px; /* Increased size */
+    height: 40px;
+    border-radius: 50%;
+    font-weight: bold;
+    text-align: center;
+    line-height: 40px;
+}
+
+/* Active and Hover Effects */
+.status {
+    text-transform: capitalize;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+.status.active {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.status.pending {
+    background-color: #fff3cd;
+    color: #856404;
+}
+.adminHome-submenu {
+    list-style: none;
+    padding-left: 20px;
+    margin-top: 5px;
+}
+
+.adminHome-submenu li {
+    padding: 8px 10px;
+    cursor: pointer;
+    color: #ccc;
+    font-size: 16px;
+}
+
+.adminHome-submenu li:hover,
+.adminHome-submenu li.active {
+    color: #00ffcc;
+    font-weight: bold;
+}
+
+.adminHome-submenu img {
+    margin-right: 8px;
+    vertical-align: middle;
+}

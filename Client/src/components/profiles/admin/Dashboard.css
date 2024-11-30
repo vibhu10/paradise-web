@@ -1,0 +1,201 @@
+/* Dashboard Styles */
+.dashboard {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background-color: #f8f9fb;
+}
+
+/* Analytics Section */
+.dashboard-analytics {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.dashboard-analytics-card {
+    flex: 1;
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.dashboard-analytics-card-icon {
+    width: 50px;
+    height: 50px;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+}
+
+.dashboard-analytics-card h3 {
+    margin-bottom: 5px;
+    color: #6c757d;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+.dashboard-analytics-card p {
+    font-size: 24px;
+    font-weight: bold;
+    color: #343a40;
+    margin: 0;
+}
+
+/* Recent Users Section */
+.dashboard-recent-users {
+    margin-right: 40px;
+    /* min-height: 561px; */
+    width: 70%;
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* margin-bottom: 30px; */
+    min-height: 944px;
+}
+
+.dashboard-recent-users h3 {
+    margin-bottom: 20px;
+    font-size: 18px;
+    color: #343a40;
+}
+
+.dashboard-user-filters {
+    margin-bottom: 45px;
+    display: flex
+;
+    gap: 29px;
+}
+.dashboard-user-filters button {
+    padding: 17px 46px;
+    border: none;
+    border-radius: 8px;
+    background: #f1f1f1;
+    cursor: pointer;
+    color: #6c757d;
+    font-weight: bold;
+}
+
+.dashboard-user-filters button.active {
+    background: #198E78;
+    color: white;
+}
+
+.dashboard-user-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.dashboard-user-table th, .dashboard-user-table td {
+    text-align: left;
+    padding: 10px;
+    border-bottom: 1px solid #e9ecef;
+    font-size: 24px;
+    color: #6c757d;
+}
+
+.dashboard-user-table th {
+    background: #f8f9fb;
+    font-weight: bold;
+}
+
+.dashboard-user-table .active {
+    color:#198E78;
+    font-weight: bold;
+}
+
+.dashboard-user-table .pending {
+    color: #ffc107;
+    font-weight: bold;
+}
+
+.action-menu-container {
+    position: relative;
+}
+
+.action-button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    color: #6c757d;
+}
+
+.action-menu {
+    position: absolute;
+    top: 25px;
+    right: 0;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    z-index: 10;
+}
+
+.action-menu button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background: none;
+    text-align: left;
+    cursor: pointer;
+    font-size: 14px;
+    color: #343a40;
+}
+
+.action-menu button:hover {
+    background: #f8f9fb;
+}
+
+.dashboard-pagination {
+    text-align: center;
+}
+
+.dashboard-pagination button {
+    margin: 0 5px;
+    padding: 8px 12px;
+    border: none;
+    background: #f1f1f1;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.dashboard-pagination button.active {
+    background: #198E78;
+    color: white;
+}
+
+/* Booked Room Section */
+.dashboard-booked-rooms {
+    width: 30%;
+    height: 600px;
+    /* min-height: 434px; */
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-recent-users h3 {
+    margin-bottom: 25px;
+    font-size: 33px;
+    color: #343a40;
+}
+.dashboard-chart-placeholder {
+    height: 200px;
+    background: #e9ecef;
+    border-radius: 8px;
+}
+
+.dashboard-data-box{
+    display: flex;
+    
+}

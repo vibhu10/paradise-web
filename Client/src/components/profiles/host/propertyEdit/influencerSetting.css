@@ -1,0 +1,118 @@
+.influencerSettings-hostlogin {
+    padding: 30px;
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .influencerSettings-hostlogin h2 {
+    text-align: left;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .influencerSettings-hostlogin .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .influencerSettings-hostlogin label {
+    font-weight: 500;
+    color: #333;
+  }
+  
+  .influencerSettings-hostlogin .form-check {
+    margin-bottom: 15px;
+  }
+  
+  .influencerSettings-hostlogin .form-check-input {
+    margin-right: 8px;
+  }
+  
+  .influencerSettings-hostlogin .btn-outline-primary {
+  
+    width: 129px;
+    height: 100px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 16px;
+    padding: 12px 0;
+    color: black;
+    border-color: #198E78;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+
+  }
+  
+  .influencerSettings-hostlogin .btn-outline-primary:hover {
+    background-color: #198E78;
+    color: white;
+  }
+  
+  .influencerSettings-hostlogin .btn-outline-primary svg {
+    margin-right: 8px;
+    font-size: 20px;
+  }
+  
+  .influencerSettings-hostlogin .row {
+    margin-bottom: 10px;
+  }
+  
+  .influencerSettings-hostlogin .form-control {
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    padding: 12px;
+  }
+  
+  .influencerSettings-hostlogin textarea {
+    resize: none;
+  }
+  
+  .influencerSettings-hostlogin button[type="submit"] {
+    background-color: #198E78;
+    color: white;
+    border-radius: 6px;
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+  }
+  
+  .influencerSettings-hostlogin button[type="submit"]:hover {
+    background-color: #136655;
+  }
+  
+  .influencerSettings-hostlogin .form-check-label {
+    font-weight: 400;
+    color: #555;
+  }
+  
+  .influencerSettings-hostlogin .category-buttons .col {
+    padding: 5px;
+  }
+  
+  .influencerSettings-hostlogin .category-buttons .btn {
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 12px;
+    text-align: center;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .influencerSettings-hostlogin .category-buttons .btn.active {
+    border-color: #198E78;
+    background-color: #fff;
+    color: #198E78;
+  }
+  
+  .influencerSettings-hostlogin .category-buttons .btn:hover {
+    background-color: #e9f6f4;
+  }

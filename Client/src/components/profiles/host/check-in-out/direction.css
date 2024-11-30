@@ -1,0 +1,121 @@
+.directions-container {
+    display: flex;
+    flex-direction: column;
+    width: 700px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: Arial, sans-serif;
+}
+
+.directions-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.directions-address {
+    font-size: 14px;
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+.guest-options {
+    margin-bottom: 20px;
+}
+
+.guest-options label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.guest-options input {
+    margin-right: 10px;
+}
+
+.address-inputs {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.address-inputs input,
+.address-inputs select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    width: 100%;
+}
+
+.full-width {
+    grid-column: span 2;
+}
+
+.location-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.toggle-label {
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+}
+
+.toggle-switch {
+    margin-left: 10px;
+}
+
+.map-placeholder {
+    margin-bottom: 20px;
+}
+
+.directions-actions {
+    display: flex;
+    justify-content: space-between;
+}
+
+.cancel-button, .save-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.cancel-button {
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+.save-button {
+    background-color: #28a745;
+    color: white;
+}
+
+.save-button:hover {
+    background-color: #218838;
+}
+
+.cancel-button:hover {
+    background-color: #e2e2e2;
+}
+.address-directions {
+    width: 100%;
+    height: 60px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    font-size: 14px;
+    resize: none;
+}

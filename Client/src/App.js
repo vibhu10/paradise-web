@@ -7,7 +7,9 @@ import Inbox from './components/influencer/Inbox'
 import HostRegistration from './components/Host-Registration/Host-Registration';
 import UserHome from './components/Host-login/UserHome';
 import ProfilePage from './components/profiles/guest/profilePage';
-import HostProfile from './components/profiles/host/hostProfile';
+
+import AdminHome from './components/profiles/admin/AdminHome';
+import HostProfile from './components/profiles/host/HostProfile';
 
 
 function App() {
@@ -26,7 +28,7 @@ function App() {
           <Route path='/influencer/inbox' element={<Inbox/>}/>
           <Route path='/hostlogin'  element={<UserHome/>}/>
           <Route path='/newHost' element={<HostProfile/>}/>
-         
+         <Route path='/superAdmin' element={<AdminHome/>}/>
          
 
           </Routes>

@@ -14,10 +14,12 @@
 }
 
 .content-area-profilePage {
-  margin: 50px;
-  padding-top: 19px;
-  padding-left: 60px;
+  margin: 46px;
+  padding-top: 0px;
+  padding-left: 58px;
+  padding-right: 95px;
   background-color: #fff;
+  border-radius: 10px;
 }
 
 .loading-overlay {
