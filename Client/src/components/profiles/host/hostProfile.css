@@ -203,8 +203,8 @@
   transition: all 0.3s ease;
   margin-bottom: 30px;
   position: absolute;  /* Position the back button on the left */
-  top: 162px;
-  left: 20px;
+  top: 112px;
+  left: 100px;
 }
 
 .host-profile-back-button:hover {

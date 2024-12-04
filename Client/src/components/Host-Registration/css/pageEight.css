@@ -1,102 +1,159 @@
-/* Container for the entire page */
+/* General Container */
 .page-eight-container {
-    max-width: 800px;
+    font-family: "Arial", sans-serif;
+    max-width: 550px;
     margin: 0 auto;
-    padding: 20px;
-    font-family: 'Arial', sans-serif;
-    color: #333;
     text-align: center;
-}
-
-/* Header text */
-.page-eight-question {
-    font-size: 26px;
+  }
+  
+  /* Header */
+  .page-eight-header {
+    font-size: 24px;
     font-weight: bold;
-    margin-bottom: 30px;
-    color: #444;
-}
-
-/* Panel box styling */
-.page-eight-panel-box {
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    margin-bottom: 30px;
-}
-
-/* Photo container styling */
-.page-eight-photo-container {
-    position: relative;
     margin-bottom: 20px;
-    overflow: hidden;
-    border-radius: 10px;
-}
-
-.page-eight-cover-photo {
+  }
+  
+  /* Cover Photo Section */
+  .cover-photo-section {
+    position: relative;
+    margin-bottom: 30px;
+  }
+  
+  .cover-photo {
     width: 100%;
-    height: 300px;
+    max-width: 800px;
+    aspect-ratio: 16/9;
     object-fit: cover;
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-/* Cover photo button styling */
-.page-eight-cover-photo-button {
+  }
+  
+  .change-photo-btn {
     position: absolute;
     bottom: 10px;
     right: 10px;
-    background-color: rgba(0, 123, 255, 0.8);
-    color: #fff;
-    border: none;
+    background-color: white;
+    border: 2px solid gray;
+    border-radius: 5px;
     padding: 8px 12px;
-    border-radius: 5px;
     font-size: 14px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.page-eight-cover-photo-button:hover {
-    background-color: #0056b3;
-}
-
-.page-eight-cover-photo-button label {
-    cursor: pointer;
-    color: #fff;
-    text-decoration: none;
-}
-
-/* Property name input styling */
-.page-eight-property-name-input {
+  }
+  
+  /* Subsections */
+  .subsections {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
     margin-top: 20px;
-    text-align: left;
-}
-
-.page-eight-property-name-input label {
-    font-size: 16px;
-    display: block;
-    margin-bottom: 8px;
-    font-weight: bold;
-}
-
-.page-eight-property-name-input input {
+  }
+  
+  .subsection {
+    flex: 1;
+    position: relative;
+    text-align: center;
+    background: #f9f9f9;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .subsection-image {
     width: 100%;
-    padding: 12px;
-    font-size: 14px;
-    border: 1px solid #ddd;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+  
+  .image-overlay {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+  }
+  
+  .upload-btn {
+    background-color: white;
+    border: 2px solid gray;
     border-radius: 5px;
-    box-sizing: border-box;
-    transition: border-color 0.3s ease;
-}
-
-.page-eight-property-name-input input:focus {
-    border-color: #007BFF;
-    outline: none;
-}
-
+    padding: 5px 10px;
+    font-size: 12px;
+    cursor: pointer;
+  }
+  
+  /* Three Dots Menu */
+  .three-dots-menu {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+  }
+  
+  .menu {
+    position: absolute;
+    top: 30px;
+    right: 10px;
+    background: white;
+    border: 1px solid gray;
+    border-radius: 5px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+  }
+  
+  .menu button {
+    display: block;
+    width: 100%;
+    padding: 8px 10px;
+    font-size: 14px;
+    text-align: left;
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+  
+  .menu button:hover {
+    background-color: #f0f0f0;
+  }
+  
+  /* Footer */
+  .footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 30px;
+  }
+  
+  .footer-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .footer-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  .progress-bar {
+    flex: 1;
+    height: 5px;
+    background-color: #ddd;
+    margin: 0 20px;
+  }
+  
+  .back-btn {
+    background-color: #ccc;
+  }
+  
+ 
   /* Footer styling */
-  .page-eight-footer {
+  .page-seven-footer {
     display: flex;
     align-items: center;
     justify-content: space-between; /* Spread Back and Next buttons */
@@ -110,8 +167,8 @@
   }
   
   /* Back and Next buttons */
-  .page-eight-back-btn,
-  .page-eight-footer-button {
+  .page-seven-back-btn,
+  .page-seven-footer-button {
     padding: 10px 20px;
     width: 100px;
     border-radius: 20px;
@@ -122,13 +179,13 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
-  .page-eight-back-btn:hover,
-  .page-eight-next-btn:hover {
+  .page-seven-back-btn:hover,
+  .page-seven-next-btn:hover {
     background-color: #388e3c;
   }
   
-  .page-eight-progress-bar {
-    width: 750px;
+  .page-seven-progress-bar {
+    width: 600px;
     height: 4px;
     background-color: #198E78;
     border-radius: 2px;
@@ -138,3 +195,11 @@
     top: -3px;
     left: -17px;
 }
+  /* Error Message */
+.page-seven-error {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+    text-align: center;
+  }
+  

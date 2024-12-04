@@ -1,0 +1,180 @@
+.amenities-edit-container {
+  margin-top: 20px;
+  width: 100%;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.amenities-nav-wrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.amenities-nav {
+  display: flex;
+  gap: 15px;
+  overflow-x: auto;
+  scrollbar-width: none; /* Hide scrollbar in Firefox */
+  -ms-overflow-style: none; /* Hide scrollbar in IE */
+}
+
+.amenities-nav::-webkit-scrollbar {
+  display: none; /* Hide scrollbar in Chrome, Safari, and Opera */
+}
+
+.nav-arrow {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: #048968;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.nav-arrow:hover {
+  background-color: #e6f7ff;
+  transform: scale(1.1);
+}
+
+.nav-arrow.left {
+  position: absolute;
+  left: -50px;
+}
+
+.nav-arrow.right {
+  position: absolute;
+  right: -50px;
+}
+
+.amenity-tab {
+  background: none;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 16px;
+  color: #555;
+  border-bottom: 2px solid transparent;
+  transition: color 0.3s, border-bottom 0.3s;
+}
+
+.amenity-tab:hover {
+  color:#048968;
+}
+
+.amenity-tab.active {
+  color: #048968;
+  border-bottom: 2px solid#048968;
+  font-weight: bold;
+}
+
+.amenities-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.amenity-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s, border-color 0.3s, transform 0.2s;
+}
+
+.amenity-item:hover {
+  border-color: #048968;
+  background-color: #f0f8ff;
+  transform: translateY(-3px);
+}
+
+.amenity-item.selected {
+  background-color: #e6f7ff;
+  border-color: #048968;
+}
+
+.amenity-icon {
+  font-size: 28px;
+  margin-bottom: 10px;
+  color:#048968;
+}
+
+.amenities-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.btn {
+  padding: 10px 15px;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.btn-secondary {
+  background-color: #ddd;
+  color: #333;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-secondary:hover {
+  background-color: #ccc;
+  color: #000;
+}
+
+.btn-primary {
+  background-color: #048968;
+  color: white;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn-primary:hover {
+  background-color: #048968;
+  transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+  .amenity-tab {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+
+  .amenities-grid {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 10px;
+  }
+
+  .amenity-item {
+    padding: 10px;
+  }
+
+  .amenity-icon {
+    font-size: 24px;
+  }
+
+  .btn {
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+}

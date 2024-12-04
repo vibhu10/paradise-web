@@ -21,7 +21,7 @@ export default function HostRegistration() {
     const [currentPage, setCurrentPage] = useState(1);
     const [propertyData, setPropertyData] = useState({});
     const [saveProperty, setSaveProperty] = useState(false);
-  const navigate=useNavigate();
+  const navigate=useNavigate();console.log(propertyData,"checking data in host registratin")
   function handleNext() {
     if (currentPage >= 1 && currentPage <= 15) { // Allow transition to page 16
         setCurrentPage((p) => p + 1);

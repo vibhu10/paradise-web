@@ -1,80 +1,84 @@
 /* Main container */
 .page-seven-container {
-    font-family: Arial, sans-serif;
-    max-width: 800px;
-    margin: 0 auto;
-    text-align: center;
-    padding: 20px;
-    color: #333;
-  }
-  
-  /* Header styles */
-  .page-seven-title {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 8px;
-  }
-  
-  .page-seven-subtitle {
-    font-size: 14px;
-    color: #666;
-    margin-bottom: 20px;
-  }
-  
-  /* Section heading */
-  .page-seven-question {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 15px;
-  }
-  
-  /* Amenities grid layout */
-  .page-seven-amenities-section {
-    margin-bottom: 30px;
-  }
-  
-  .page-seven-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    justify-content: center;
-  }
-  
-  /* Individual amenity card */
-  .page-seven-amenity {
-    width: 110px;
-    height: 110px;
-    border: 2px solid #ccc;
-    border-radius: 8px;
-    display: flex
-;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    cursor: pointer;
-    transition: background-color 0.3s ease, border-color 0.3s ease;
-    background-color: white;
+  font-family: Arial, sans-serif;
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 20px;
+  color: #333;
 }
-  
-  .page-seven-amenity.selected {
-    border-color: #28a745;
-    background-color: #e6f9e6;
-  }
-  
-  .page-seven-icon {
-    font-size: 30px;
-    margin-bottom: -94px;
-  }
-  
-  .page-seven-label {
-    font-size: 12px;
-    font-weight: 500;
-    color: #555;
-  }
+
+/* Header styles */
+.page-seven-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.page-seven-subtitle {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+/* Section heading */
+.page-seven-question {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+/* Amenities grid layout */
+.page-seven-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+  justify-items: center;
+  margin-bottom: 20px;
+}
+
+/* Individual amenity card */
+.page-seven-amenity {
+  width: 120px;
+  height: 123px;
+  border: 2px solid #ddd;
+  border-radius: 12px;
+  display: flex
+;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  background-color: white;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+*, ::after, ::before {
+  box-sizing: border-box;
+}
+
+.page-seven-amenity.selected {
+  border-color: #28a745;
+  background-color: #f6fff6;
+}
+
+.page-seven-icon {
+  font-size: 32px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.page-seven-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #555;
+}
+
+
+
  
   /* Footer styling */
-  .page-seven-footer {
+  .page-eight-footer {
     display: flex;
     align-items: center;
     justify-content: space-between; /* Spread Back and Next buttons */
@@ -88,8 +92,8 @@
   }
   
   /* Back and Next buttons */
-  .page-seven-back-btn,
-  .page-seven-footer-button {
+  .page-eight-back-btn,
+  .page-eight-footer-button {
     padding: 10px 20px;
     width: 100px;
     border-radius: 20px;
@@ -100,13 +104,13 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
-  .page-seven-back-btn:hover,
-  .page-seven-next-btn:hover {
+  .page-eight-back-btn:hover,
+  .page-eight-next-btn:hover {
     background-color: #388e3c;
   }
   
-  .page-seven-progress-bar {
-    width: 600px;
+  .page-eight-progress-bar {
+    width: 750px;
     height: 4px;
     background-color: #198E78;
     border-radius: 2px;
@@ -117,7 +121,7 @@
     left: -17px;
 }
   /* Error Message */
-.page-seven-error {
+.page-eight-error {
     color: red;
     font-size: 14px;
     margin-top: 10px;

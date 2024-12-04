@@ -16,8 +16,6 @@ export function PageFive({ handleNext, handleBack, handleSaveProperty }) {
 
   const [errors, setErrors] = useState({}); // For validation errors
   const [countries, setCountries] = useState([]);
-  const [suggestions, setSuggestions] = useState([]);
-
   const API_KEY = "Q1g1ysByaCD2YQcU0UoEJzwfAnW4kKcn";
 
   // Fetch country data
@@ -27,56 +25,31 @@ export function PageFive({ handleNext, handleBack, handleSaveProperty }) {
     setCountries(data);
   }
 
-  // Fetch city recommendations
-  async function fetchCityRecommendations(country) {
-    if (!country) return;
-
-    try {
-      const res = await fetch(
-        `https://api.apilayer.com/geo/city/name/${country}`,
-        {
-          method: "GET",
-          headers: {
-            apikey: API_KEY,
-          },
-        }
-      );
-      const data = await res.json();
-      setSuggestions(data || []);
-    } catch (error) {
-      console.error("Error fetching city recommendations:", error);
-    }
-  }
-
   // Validate pin code
-  async function validatePinCode(pin, state) {
-    if (!pin || !state) return false;
+  // async function validatePinCode(pin, state) {
+  //   if (!pin || !state) return false;
 
-    try {
-      const res = await fetch(
-        `https://api.apilayer.com/geo/postal_code/${pin}/state/${state}`,
-        {
-          method: "GET",
-          headers: {
-            apikey: API_KEY,
-          },
-        }
-      );
-      const data = await res.json();
-      return data.isValid; // Assuming the API returns a field `isValid`
-    } catch (error) {
-      console.error("Error validating pin code:", error);
-      return false;
-    }
-  }
+  //   try {
+  //     const res = await fetch(
+  //       `https://api.apilayer.com/geo/postal_code/${pin}/state/${state}`,
+  //       {
+  //         method: "GET",
+  //         headers: {
+  //           apikey: API_KEY,
+  //         },
+  //       }
+  //     );
+  //     const data = await res.json();
+  //     return data.isValid; // Assuming the API returns a field `isValid`
+  //   } catch (error) {
+  //     console.error("Error validating pin code:", error);
+  //     return false;
+  //   }
+  // }
 
   useEffect(() => {
     getCountryData();
   }, []);
-
-  useEffect(() => {
-    fetchCityRecommendations(formData.country);
-  }, [formData.country]);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -96,9 +69,7 @@ export function PageFive({ handleNext, handleBack, handleSaveProperty }) {
     if (!formData.city) newErrors.city = "City / Town is required";
     if (!formData.state) newErrors.state = "State / Union Territory is required";
     if (!formData.pin) newErrors.pin = "Pin code is required";
-    else if (!(await validatePinCode(formData.pin, formData.state))) {
-      newErrors.pin = "Invalid pin code for the selected state.";
-    }
+  
 
     return newErrors;
   };
@@ -153,17 +124,6 @@ export function PageFive({ handleNext, handleBack, handleSaveProperty }) {
               </select>
               {errors.country && <p className="error-text">{errors.country}</p>}
             </div>
-
-            {suggestions.length > 0 && (
-              <div className="suggestions">
-                <p>Recommended cities:</p>
-                <ul>
-                  {suggestions.map((city, index) => (
-                    <li key={index}>{city.name}</li>
-                  ))}
-                </ul>
-              </div>
-            )}
 
             <input
               type="text"
