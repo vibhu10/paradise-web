@@ -106,3 +106,9 @@
     top: -5px;
     left: -16px;
 }
+
+.error-message {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}

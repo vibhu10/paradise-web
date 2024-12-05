@@ -3,7 +3,7 @@ import './pricingAndAvailability.css';
 
 export default function PricingAvailabilityEdit({ selectedPropertyData, onEditProperty }) {
   // Extract and initialize states from `selectedPropertyData`
-  const [price, setPrice] = useState(selectedPropertyData?.pricing?.BaseCharge || 0);
+  const [price, setPrice] = useState(selectedPropertyData?.price?.BaseCharge || 0);
   const [minNights, setMinNights] = useState(selectedPropertyData?.availability?.minimumNight || 1);
   const [maxNights, setMaxNights] = useState(selectedPropertyData?.availability?.maximumNight || 28);
   const [bookingNotice, setBookingNotice] = useState(selectedPropertyData?.bookingNotice || 'Same day');
@@ -27,7 +27,10 @@ export default function PricingAvailabilityEdit({ selectedPropertyData, onEditPr
 
   // Handle Cancel Action
   const handleCancel = () => {
-    setPrice(selectedPropertyData?.pricing?.BaseCharge || 0);
+    setPrice(selectedPropertyData?.
+      price
+      ?.BaseCharge
+      || 0);
     setMinNights(selectedPropertyData?.availability?.minimumNight || 1);
     setMaxNights(selectedPropertyData?.availability?.maximumNight || 28);
     setBookingNotice(selectedPropertyData?.bookingNotice || 'Same day');

@@ -350,24 +350,38 @@ export default function Home() {
   {propertyData && propertyData.length > 0 ? (
     propertyData.map((property, index) => (
       <div key={index} className="hotel-card">
+        {/* Property Cover Image */}
         <img
-          src={property.propertyCoverPhoto || "https://via.placeholder.com/150"} // Fallback to a placeholder if no image
-          alt={`Image of ${property.propertyName || "Unknown Property"}`} // Handle missing property name
+          src={
+            property.coverPhotos?.cover?.image || 
+            "https://via.placeholder.com/150"
+          } 
+          alt={`Image of ${property.title || "Unknown Property"}`} // Handle missing property name
         />
         <div id="hotel-detail">
-          <h3 style={{ color: "#198E78" }}>{property.propertyName || "Unnamed Property"}</h3>
+          {/* Property Title */}
+          <h3 style={{ color: "#198E78" }}>
+            {property.title || "Unnamed Property"}
+          </h3>
+          
+          {/* Check-in Time */}
           <p>
             Check-in:{" "}
             {property.availability?.checkinTime
               ? new Date(property.availability.checkinTime).toLocaleTimeString([], {
                   hour: "2-digit",
                   minute: "2-digit",
-                }) // Format to HH:mm AM/PM
+                })
               : "N/A"}
           </p>
+
+          {/* Minimum and Maximum Nights */}
           <p>
-            Min Nights: {property.availability?.minimumNight || "N/A"} | Max Nights: {property.availability?.maximumNight || "N/A"}
+            Min Nights: {property.availability?.minimumNight || "N/A"} | Max Nights:{" "}
+            {property.availability?.maximumNight || "N/A"}
           </p>
+
+          {/* Pricing Details */}
           <p
             style={{
               color: "black",
@@ -375,18 +389,20 @@ export default function Home() {
               fontWeight: "bold",
             }}
           >
-            ${Math.floor(property.pricing?.BaseCharge || 0)}/night Total:{" "}
+            ${Math.floor(property.price?.BaseCharge || 0)}/night Total:{" "}
             <span style={{ color: "#198E78" }}>
-              ${Math.floor(property.pricing?.PriceBeforeTax || 0)}
+              ${Math.floor(property.price?.PriceBeforeTax || 0)}
             </span>
           </p>
         </div>
       </div>
     ))
   ) : (
+    // Fallback for No Properties
     <p>No properties available to display.</p>
   )}
 </div>
+
 
 
 </div>

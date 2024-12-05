@@ -4,6 +4,7 @@ import '../Host-Registration/css/pageNine.css';
 export function PageNine({ handleNext, handleBack, handleSaveProperty }) {
   const [text, setText] = useState("");
   const [charCount, setCharCount] = useState(0);
+  const [error, setError] = useState(""); // State to handle error message
 
   useEffect(() => {
     const count = text.length;
@@ -17,6 +18,12 @@ export function PageNine({ handleNext, handleBack, handleSaveProperty }) {
 
   // Function to handle saving data and moving to the next page
   const handleNextClick = async () => {
+    if (text.trim() === "") {
+      setError("Please enter a title for your property."); // Set error message
+      return;
+    }
+
+    setError(""); // Clear error message if title is valid
     await handleSaveProperty({ title: text });
     handleNext();
   };
@@ -40,6 +47,7 @@ export function PageNine({ handleNext, handleBack, handleSaveProperty }) {
             placeholder="Enter a short title for your property"
           />
           <p className="page-nine-char-count">{charCount}/50</p>
+          {error && <p className="error-message">{error}</p>} {/* Conditionally render error message */}
         </div>
       </div>
       <footer className="page-nine-footer">

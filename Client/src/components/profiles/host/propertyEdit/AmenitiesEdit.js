@@ -3,6 +3,7 @@ import { useRef } from "react";
 import "./amenities.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+ 
   faWifi,
   faThermometerThreeQuarters,
   faSnowflake,
@@ -73,9 +74,9 @@ const amenitiesData = [
   {
     category: "Essentials",
     options: [
-      { id: "wifi", name: "Wi-Fi", icon: faWifi },
-      { id: "heating", name: "Heating", icon: faThermometerThreeQuarters },
-      { id: "airConditioning", name: "Air conditioning", icon: faSnowflake },
+      { id: "Wifi", name: "Wi-Fi", icon: faWifi },
+      { id: "Heating", name: "Heating", icon: faThermometerThreeQuarters },
+      { id: "Air Conditioning", name: "Air conditioning", icon: faSnowflake },
       { id: "hotWater", name: "Hot water", icon: faShower },
       { id: "towels", name: "Towels, bed linens, soap, and toilet paper", icon: faBath },
       { id: "extraPillows", name: "Extra pillows and blankets", icon: faBed },
@@ -85,7 +86,7 @@ const amenitiesData = [
   {
     category: "Kitchen & Dining",
     options: [
-      { id: "kitchen", name: "Fully equipped kitchen", icon: faUtensils },
+      { id: "Kitchen", name: "Fully equipped kitchen", icon: faUtensils },
       { id: "refrigerator", name: "Refrigerator", icon: faSnowflake },
       { id: "stove", name: "Stove", icon: faBurn },
       { id: "oven", name: "Oven", icon: faUtensilSpoon },
@@ -106,7 +107,7 @@ const amenitiesData = [
       { id: "bodySoap", name: "Body soap", icon: faSoap },
       { id: "hotTub", name: "Hot tub/jacuzzi", icon: faHotTub },
       { id: "showerGel", name: "Shower gel", icon: faPumpSoap },
-      { id: "bathtub", name: "Bathtub", icon: faBath },
+      { id: "Bathtub", name: "Bathtub", icon: faBath },
     ],
   },
   {
@@ -116,12 +117,13 @@ const amenitiesData = [
       { id: "dryer", name: "Dryer", icon: faFan },
       { id: "iron", name: "Iron", icon: faShirt },
       { id: "dryingRack", name: "Drying rack for clothes", icon: faTshirt },
+      {id:"Washing Machine", name:"Washing Machine",}
     ],
   },
   {
     category: "Entertainment",
     options: [
-      { id: "tv", name: "TV", icon: faTv },
+      { id: "TV", name: "TV", icon: faTv },
       { id: "cableTv", name: "Cable TV", icon: faSatelliteDish },
       { id: "streaming", name: "Netflix or streaming services", icon: faFilm },
       { id: "books", name: "Books and reading material", icon: faBook },
@@ -156,16 +158,17 @@ const amenitiesData = [
   {
     category: "Outdoor & Recreation",
     options: [
-      { id: "pool", name: "Pool", icon: faSwimmer },
+      { id: "Pool", name: "Pool", icon: faSwimmer },
       { id: "hotTub", name: "Hot tub", icon: faHotTub },
       { id: "patio", name: "Patio or balcony", icon: faUmbrellaBeach },
       { id: "outdoorFurniture", name: "Outdoor furniture", icon: faCouch },
       { id: "bbqGrill", name: "BBQ grill", icon: faFireAlt },
       { id: "garden", name: "Garden or backyard", icon: faTree },
-      { id: "firePit", name: "Fire pit", icon: faFire },
+      { id: "FirePit", name: "Fire pit", icon: faFire },
       { id: "hammock", name: "Hammock", icon: faBed },
       { id: "beachEssentials", name: "Beach essentials (towels, chairs, umbrellas)", icon: faUmbrella },
       { id: "sportsEquipment", name: "Sports equipment (kayaks, bikes, etc.)", icon: faBicycle },
+       {id:"Outdoor Shower",name:"Outdoor Shower",}
     ],
   },
   {
@@ -181,15 +184,15 @@ const amenitiesData = [
   {
     category: "Workspace",
     options: [
-      { id: "dedicatedWorkspace", name: "Dedicated workspace (desk and chair)", icon: faChair },
+      { id: "Dedicated Workspace", name: "Dedicated workspace (desk and chair)", icon: faChair },
     ],
   },
   {
     category: "Parking",
     options: [
-      { id: "freeParking", name: "Free parking on premises", icon: faParking },
+      { id: "Free parking on premises", name: "Free parking on premises", icon: faParking },
       { id: "streetParking", name: "Free street parking", icon: faCarSide },
-      { id: "paidParking", name: "Paid parking off premises", icon: faMoneyBill },
+      { id: "Paid parking on premises", name: "Paid parking off premises", icon: faMoneyBill },
       { id: "evCharger", name: "EV charger", icon: faChargingStation },
     ],
   },
@@ -214,54 +217,24 @@ const amenitiesData = [
       { id: "smartHome", name: "Smart home devices (e.g., Alexa, Google Home)", icon: faRobot },
     ],
   },
-];
-
-
-export default function AmenitiesEdit({ selectedPropertyData, onEditProperty }) {
+];export default function AmenitiesEdit({ selectedPropertyData, onEditProperty }) {
   const [amenities, setAmenities] = useState(() => {
-    return amenitiesData.map((category) => {
-      const incomingCategory = selectedPropertyData?.amenities?.find(
-        (cat) => cat.category === category.category
-      );
+    // Initialize state from selectedPropertyData
+    return amenitiesData.map(category => {
+      const selectedCategory = selectedPropertyData?.amenities?.find(cat => cat.category === category.category);
       return {
         ...category,
-        options: category.options.map((option) => ({
+        options: category.options.map(option => ({
           ...option,
-          selected: incomingCategory?.options?.some(
-            (incomingOption) => incomingOption.id === option.id && incomingOption.selected
-          ) || false,
-        })),
+          selected: selectedCategory?.options?.includes(option.id) || false, // Mark as selected if available
+        }))
       };
     });
   });
 
   const [selectedCategory, setSelectedCategory] = useState("Essentials");
-
-  useEffect(() => {
-    console.log(amenities); // Debug state initialization
-  }, [amenities]);
-
-  const handleToggleOption = (category, optionId) => {
-    const updatedAmenities = amenities.map((cat) =>
-      cat.category === category
-        ? {
-            ...cat,
-            options: cat.options.map((option) =>
-              option.id === optionId ? { ...option, selected: !option.selected } : option
-            ),
-          }
-        : cat
-    );
-    setAmenities(updatedAmenities);
-  };
-
-  const handleSave = () => {
-    console.log("Saving the following data:", amenities); // Debug save
-    if (onEditProperty) {
-      onEditProperty({ ...selectedPropertyData, amenities });
-    }
-  };
   const navRef = useRef(null);
+
   const scrollNav = (distance) => {
     if (navRef.current) {
       navRef.current.scrollBy({
@@ -271,56 +244,70 @@ export default function AmenitiesEdit({ selectedPropertyData, onEditProperty }) 
     }
   };
 
+  const handleToggleOption = (category, optionId) => {
+    const updatedAmenities = amenities.map(cat => 
+      cat.category === category
+        ? {
+            ...cat,
+            options: cat.options.map(option => 
+              option.id === optionId
+                ? { ...option, selected: !option.selected } // Toggle selected state
+                : option
+            )
+          }
+        : cat
+    );
+    setAmenities(updatedAmenities);
+  };
+
+  const handleSave = () => {
+    console.log("Saving the following data:", amenities);
+    if (onEditProperty) {
+      onEditProperty({ ...selectedPropertyData, amenities });
+    }
+  };
+
+  useEffect(() => {
+  
+  }, [amenities]);
+
   return (
     <div className="amenities-edit-container">
-    <div className="amenities-nav-wrapper">
-      <button
-        className="scroll-btn left"
-        onClick={() => scrollNav(-200)}
-      >
-        &#8249;
-      </button>
-      <div className="amenities-nav" ref={navRef}>
-        {amenities.map((cat) => (
-          <button
-            key={cat.category}
-            className={`amenity-tab ${cat.category === selectedCategory ? "active" : ""}`}
-            onClick={() => setSelectedCategory(cat.category)}
-          >
-            {cat.category}
-          </button>
-        ))}
+      <div className="amenities-nav-wrapper">
+        <button className="scroll-btn left" onClick={() => scrollNav(-200)}>&#8249;</button>
+        <div className="amenities-nav" ref={navRef}>
+          {amenities.map(cat => (
+            <button
+              key={cat.category}
+              className={`amenity-tab ${cat.category === selectedCategory ? "active" : ""}`}
+              onClick={() => setSelectedCategory(cat.category)}
+            >
+              {cat.category}
+            </button>
+          ))}
+        </div>
+        <button className="scroll-btn right" onClick={() => scrollNav(200)}>&#8250;</button>
       </div>
-      <button
-        className="scroll-btn right"
-        onClick={() => scrollNav(200)}
-      >
-        &#8250;
-      </button>
-    </div>
-    <div className="amenities-grid">
-      {amenities
-        .find((cat) => cat.category === selectedCategory)
-        ?.options.map((option) => (
+      <div className="amenities-grid">
+        {amenities.find(cat => cat.category === selectedCategory)?.options.map(option => (
           <div
             key={option.id}
             className={`amenity-item ${option.selected ? "selected" : ""}`}
             onClick={() => handleToggleOption(selectedCategory, option.id)}
           >
-            <FontAwesomeIcon icon={option.icon} className="amenity-icon" />
+            <FontAwesomeIcon icon={option.icon} />
             <span>{option.name}</span>
           </div>
         ))}
+      </div>
+      <div className="amenities-actions">
+        <button className="btn btn-secondary" onClick={() => setAmenities(amenitiesData)}>
+          Cancel
+        </button>
+        <button className="btn btn-primary" onClick={handleSave}>
+          Save
+        </button>
+      </div>
     </div>
-    <div className="amenities-actions">
-      <button className="btn btn-secondary" onClick={() => setAmenities(amenitiesData)}>
-        Cancel
-      </button>
-      <button className="btn btn-primary" onClick={handleSave}>
-        Save
-      </button>
-    </div>
-  </div>
-  
   );
 }

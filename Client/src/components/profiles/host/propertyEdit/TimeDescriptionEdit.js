@@ -3,7 +3,7 @@ import "./TimeDescription.css";
 
 export default function TimeAndDescriptionEdit({
   selectedPropertyData,
-  onEditProperty,
+  onSave,
 }) {
   const {
     title: initialTitle = "",
@@ -19,7 +19,7 @@ export default function TimeAndDescriptionEdit({
   useEffect(() => {
     if (selectedPropertyData?.id) {
       setTitle(selectedPropertyData.title || "");
-      setInternalName(selectedPropertyData.internalName || "");
+      setInternalName(selectedPropertyData.propertyName|| "");
       setDescription(selectedPropertyData.description || "");
     }
   }, [selectedPropertyData?.id]);
@@ -29,7 +29,7 @@ export default function TimeAndDescriptionEdit({
     const updatedData = { title, internalName, description };
 
     try {
-      await onEditProperty(updatedData); // Wait for the parent to handle the update
+      await onSave(updatedData); // Wait for the parent to handle the update
     } catch (error) {
       console.error("Failed to update property:", error);
     } finally {

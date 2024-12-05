@@ -97,6 +97,14 @@ export default function HostProfile() {
     }
   };
 
+  const handleSaveFromChild = (updatedData) => {
+    setSelectedProperty((prev) => {
+      const newSelectedProperty = { ...prev, ...updatedData };
+      handleEditProperty(newSelectedProperty); // Persist changes to the server
+      return newSelectedProperty;
+    });
+  };
+
   const renderTabs = () => {
     const tabs =
       activeSection === "Your Property"
@@ -136,7 +144,10 @@ export default function HostProfile() {
   const renderComponent = () => {
     if (!selectedProperty) return null;
 
-    const commonProps = { selectedPropertyData: selectedProperty, onEditProperty: handleEditProperty };
+    const commonProps = {
+      selectedPropertyData: selectedProperty,
+      onSave: handleSaveFromChild,
+    };
 
     if (activeSection === "Your Property") {
       switch (activeTab) {
@@ -233,24 +244,27 @@ export default function HostProfile() {
         ) : (
           <div className="host-profile-property-grid">
             {myProperty.map((property) => (
+              
               <div
-                key={property.id}
-                className="host-profile-property-card"
-                onClick={() => handlePropertyClick(property)}
-              >
-                <div className="host-profile-property-image">
-                  <img src={property.propertyCoverPhoto} alt={property.propertyName} />
-                  <div
-                    className={`property-status ${property.type === "listed" ? "listed" : "in-progress"}`}
-                  >
-                    {property.type === "listed" ? "Listed" : "In Progress"}
-                  </div>
-                </div>
-                <div className="host-profile-property-details">
-                  <h4>{property.propertyName}</h4>
-                  <p>{property.title || "No title"}</p>
+              key={property.id}
+              className="host-profile-property-card"
+              onClick={() => handlePropertyClick(property)}
+            >
+              <div className="host-profile-property-image">
+                <img src={property.coverPhotos?.cover?.image} alt={property.propertyName} />
+                <div
+                  className={`property-status ${property.type === "listed" ? "listed" : "in-progress"}`}
+                >
+                  {property.type === "listed" ? "Listed" : "In Progress"}
                 </div>
               </div>
+              <div className="host-profile-property-details">
+                <h4 style={{color:" #198E78"}}>{property.propertyName || "No Internal Name"}</h4>
+                <p className="property-title">{property.title || "No title"}</p>
+                <p className="property-address">{property.address || "No address provided"}</p>
+              </div>
+            </div>
+            
             ))}
           </div>
         )}

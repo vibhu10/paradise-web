@@ -78,7 +78,7 @@
 
  
   /* Footer styling */
-  .page-eight-footer {
+  .page-seven-footer {
     display: flex;
     align-items: center;
     justify-content: space-between; /* Spread Back and Next buttons */
@@ -92,8 +92,8 @@
   }
   
   /* Back and Next buttons */
-  .page-eight-back-btn,
-  .page-eight-footer-button {
+  .page-seven-back-btn,
+  .page-seven-footer-button {
     padding: 10px 20px;
     width: 100px;
     border-radius: 20px;
@@ -104,13 +104,13 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
-  .page-eight-back-btn:hover,
-  .page-eight-next-btn:hover {
+  .page-seven-back-btn:hover,
+  .page-seven-next-btn:hover {
     background-color: #388e3c;
   }
   
-  .page-eight-progress-bar {
-    width: 750px;
+  .page-seven-progress-bar {
+    width: 650px;
     height: 4px;
     background-color: #198E78;
     border-radius: 2px;
@@ -121,7 +121,7 @@
     left: -17px;
 }
   /* Error Message */
-.page-eight-error {
+.page-seven-error {
     color: red;
     font-size: 14px;
     margin-top: 10px;

@@ -1,74 +1,117 @@
+/* Full-screen container with centered content */
 .PageTen-container {
-  font-family: Arial, sans-serif;
-  max-width: 450px;
-  margin: 50px auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
   padding: 20px;
+  box-sizing: border-box;
 }
 
+/* Center the page panel with a max width of 50% of the screen */
 .PageTen-panel {
-  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 50%;
+  max-width: 700px; /* Ensures it doesn't grow too large */
+  min-width: 400px; /* Prevents it from being too small */
   padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.PageTen-description,
-.PageTen-pricing {
-  margin-bottom: 30px;
-}
-
-.PageTen-description h5,
-.PageTen-pricing h5 {
+/* Title styling for the property name field */
+.PageTen-property-name h5 {
   font-size: 20px;
   font-weight: bold;
-  margin-bottom: 5px;
-  text-align: center;
+  color: #333;
+  margin-bottom: 10px;
 }
 
-.PageTen-description p,
-.PageTen-pricing p {
-  color: #6b6b6b;
+/* Subtitle styling for extra guidance */
+.PageTen-subtitle {
   font-size: 14px;
-  text-align: center;
-}
-
-#PageTen-description-textarea {
-  width: 100%;
-  height: 120px;
-  border: 1px solid #e1e1e1;
-  border-radius: 5px;
-  padding: 10px;
-  font-size: 14px;
-  margin-top: 10px;
-}
-
-.PageTen-word-count {
-  text-align: right;
-  color: #198e78;
+  color: #666;
   margin-top: 5px;
 }
 
-.PageTen-price-input {
-  width: 100%;
-  height: 45px;
-  border: 1px solid #e1e1e1;
-  border-radius: 5px;
-  padding: 10px;
+/* Styling the input field for property name */
+.PageTen-property-name-input {
+  padding: 12px;
   font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
   margin-top: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
 }
 
-.PageTen-price-details p {
-  display: flex;
-  justify-content: space-between;
-  font-size: 14px;
-  margin: 5px 0;
+/* Focused input field */
+.PageTen-property-name-input:focus {
+  outline: none;
+  border-color: #4A90E2;
 }
 
-.PageTen-you-earn {
-  color: #198e78;
+/* Styling the error state of the input field */
+.PageTen-property-name-input.error {
+  border-color: red;
+}
+
+/* Error message styling */
+.PageTen-error {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+/* Styling for the description section */
+.PageTen-description h5 {
+  font-size: 20px;
   font-weight: bold;
+  color: #333;
 }
+
+.PageTen-description p {
+  font-size: 14px;
+  color: #666;
+  margin-top: 5px;
+}
+
+/* Textarea for the description field */
+.PageTen-description textarea {
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-top: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 120px;
+  resize: vertical;
+  transition: border-color 0.3s ease;
+}
+
+/* Textarea focused style */
+.PageTen-description textarea:focus {
+  outline: none;
+  border-color: #4A90E2;
+}
+
+/* Word count display */
+.PageTen-word-count {
+  font-size: 14px;
+  color: #666;
+  margin-top: 5px;
+}
+
+
+
+
+
 
  /* Footer styling */
  .PageTen-footer {
@@ -104,7 +147,7 @@
 }
 
 .PageTen-progress-bar {
-  width: 1050px;
+  width: 1100px;
   height: 4px;
   background-color: #198E78;
   border-radius: 2px;
@@ -114,8 +157,8 @@
   left: -16px;
 }
 
-.PageTen-error {
-  color: red;
-  font-size: 12px;
-  margin-top: 5px;
+.error-message {
+color: red;
+font-size: 12px;
+margin-top: 5px;
 }

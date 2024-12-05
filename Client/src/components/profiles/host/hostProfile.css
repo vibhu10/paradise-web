@@ -130,68 +130,105 @@
   margin-top: 40px;
 }
 
+
+/* Host profile property card container */
 .host-profile-property-card {
-  background-color: #fff;
-  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+
+  border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  max-width: 350px;
+  margin: 20px;
 }
 
 .host-profile-property-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 }
 
+/* Styling for property image section */
 .host-profile-property-image {
   position: relative;
   width: 100%;
   height: 200px;
   overflow: hidden;
-  border-radius: 15px 15px 0 0;
 }
-
 .host-profile-property-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-bottom: 4px solid #ddd;
+  border-radius: 10%;
 }
 
+/* Status label styling */
 .property-status {
   position: absolute;
-  top: 15px;
-  right: 15px;
+  top: 10px;
+  left: 10px;
+  padding: 5px 10px;
   background-color: rgba(0, 0, 0, 0.6);
   color: white;
-  padding: 5px 15px;
   font-size: 14px;
   border-radius: 5px;
+  font-weight: bold;
 }
 
 .property-status.listed {
-  background-color: #28a745;
+  background-color: #28a745; /* Green for listed */
 }
 
 .property-status.in-progress {
-  background-color: #ff9f00;
+  background-color: #ffc107; /* Yellow for in progress */
 }
 
+/* Property details section */
 .host-profile-property-details {
-  padding: 20px;
+  padding: 15px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+
 }
 
 .host-profile-property-details h4 {
   font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 10px;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
 }
 
-.host-profile-property-details p {
+.property-title {
   font-size: 14px;
-  color: #666;
-  line-height: 1.5;
+  color: #777;
+  line-height: 1.4;
+  margin: 0;
 }
+
+.property-address {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.4;
+  margin: 0;
+  font-style: italic;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+  .host-profile-property-card {
+    max-width: 100%;
+  }
+
+  .host-profile-property-image img {
+    object-position: center;
+  }
+}
+
 
 /* Back Button */
 .host-profile-back-button {

@@ -30,11 +30,11 @@ export default class PropertyController {
 
   // Method to add a new property
 
-
   addProperty = (req, res) => {
     try {
         // Extract data from the request body
         const propertyData = req.body;
+        console.log(propertyData, "data coming in property controller");
 
         // Retrieve the user's email from the JWT payload (added by the jwtAuth middleware)
         const userEmail = req.user?.email;
@@ -47,13 +47,23 @@ export default class PropertyController {
         propertyData.ownerEmail = userEmail;
 
         // Validate the incoming data
-        if (!propertyData.title || !propertyData.propertyName || !propertyData.pricing?.BaseCharge) {
-            return res.status(400).json({ message: 'Missing required property fields' });
+        // Check if required fields are present
+        const missingFields = [];
+        if (!propertyData.title) missingFields.push('title');
+      
+        if (!propertyData.price.BaseCharge
+        ) missingFields.push('BaseCharge');
+
+        if (missingFields.length > 0) {
+            return res.status(400).json({
+                message: 'Missing required property fields',
+                missingFields,
+            });
         }
 
-        // Add the property using the static method
-        PropertyModel.addProperty(propertyData);
-
+        // Add the property using the static method in your model
+       
+PropertyModel.addProperty(propertyData)
         // Retrieve the newly added property (last property in the static array)
         const newProperty = PropertyModel.properties[PropertyModel.properties.length - 1];
 
@@ -63,6 +73,7 @@ export default class PropertyController {
             property: newProperty, // Respond with the created property
         });
     } catch (error) {
+        // Catch any unexpected errors
         res.status(500).json({
             message: 'An error occurred while adding the property',
             error: error.message,
@@ -102,6 +113,19 @@ export default class PropertyController {
   }
   
     // Edit property by email and propertyId
+    
+     getPropertyByName = (req, res) => {
+      const { internalName, name } = req.query; // Use query parameters for GET request
+    console.log(internalName,name,"namereceived")
+      // Use the static method from the model to fetch the property
+      const property = PropertyModel.getPropertyByName(internalName, name);
+    
+      if (!property) {
+        return res.status(404).json({ message: 'Property not found' });
+      }
+    
+      return res.status(200).json({ property });
+    };
     
 
     editProperty = (req, res) => {
