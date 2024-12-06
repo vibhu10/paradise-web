@@ -114,50 +114,82 @@ PropertyModel.addProperty(propertyData)
   
     // Edit property by email and propertyId
     
-     getPropertyByName = (req, res) => {
-      const { internalName, name } = req.query; // Use query parameters for GET request
-    console.log(internalName,name,"namereceived")
-      // Use the static method from the model to fetch the property
-      const property = PropertyModel.getPropertyByName(internalName, name);
-    
-      if (!property) {
-        return res.status(404).json({ message: 'Property not found' });
-      }
-    
-      return res.status(200).json({ property });
-    };
+
     
 
-    editProperty = (req, res) => {
-      try {
-        const propertyId = parseInt(req.body.id); // Assuming numeric IDs
-        const updatedData = req.body;
-        
-        console.log("Received data in edit property controller:",propertyId, updatedData); // Log incoming data
-    
-        if (!propertyId) {
-          return res.status(400).json({ message: "Property ID is required" });
-        }
-    
-        if (!updatedData || Object.keys(updatedData).length === 0) {
-          return res.status(400).json({ message: "Updated data is required" });
-        }
-    
-        const updatedProperty = PropertyModel.editProperty(propertyId, updatedData);
-    console.log(updatedProperty,"data comming after update")
-        if (!updatedProperty) {
-          return res.status(404).json({ message: "Property not found" });
-        }
-    
-        return res.status(200).json({
-          message: "Property updated successfully",
-          property: updatedProperty,
-        });
-      } catch (error) {
-        console.error("Error updating property:", error.message);
-        return res.status(500).json({ message: "Internal server error" });
-      }
-    };
-    
+
+
+    // In PropertyController.js
+async getPropertyDetails(req, res) {
+  try {
+    const { title, internalName } = req.query;
+
+    if (!title && !internalName) {
+      return res.status(400).json({
+        message: 'At least title or internalName is required.',
+      });
+    }
+
+    // Try to find the property by either title or internalName
+    const property = PropertyModel.properties.find((prop) => 
+      
+      (title && prop.title === title) || (internalName && prop.internalName === internalName)
+    );
+
+    if (!property) {
+      return res.status(404).json({
+        message: 'Property not found.',
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      property,
+    });
+  } catch (error) {
+    console.error('Error fetching property details:', error.message);
+    res.status(500).json({
+      message: 'Internal server error',
+      error: error.message,
+    });
+  }
+}
+// Method to update a property
+async updateProperty(req, res) {
+  try {
+    const { propertyId } = req.params;  // Property ID from route params
+    const updatedData = req.body;  // New data for the property
+console.log(propertyId,updatedData,"incontroller for update")
+    // Retrieve the user's email from JWT payload
+    const userEmail = req.user?.email;
+
+    if (!userEmail) {
+      return res.status(400).json({ message: 'User email not found in token' });
+    }
+
+    // Find the property by ID and check if the user is the owner
+    const property = PropertyModel.properties.find(
+      (prop) => prop.id === parseInt(propertyId) && prop.ownerEmail === userEmail
+    );
+
+    if (!property) {
+      return res.status(404).json({ message: 'Property not found or you are not the owner' });
+    }
+
+    // Update the property data with the provided information
+    Object.assign(property, updatedData);
+
+    // Return a success response with the updated property
+    return res.status(200).json({
+      message: 'Property updated successfully',
+      property,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: 'Error updating property', error: error.message });
+  }
+}
 
   }
+
+  

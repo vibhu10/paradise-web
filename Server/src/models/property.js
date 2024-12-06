@@ -104,33 +104,37 @@ export default class PropertyModel {
     static getPropertiesByEmail(ownerEmail) {
       return this.properties.filter(property => property.ownerEmail === ownerEmail);
     }
-    static editProperty(id, updatedData) {
-      console.log("Searching for property with ID:", id); // Log the ID being searched
-      const propertyIndex = this.properties.findIndex((property) => property.id === id);
+ 
+    // Static method to get property details based on title and internalName
+    static getPropertyDetails(title, internalName) {
+      console.log(title, internalName, "in the model");
     
+      // Search for a match by either title or internalName (propertyName)
+      return this.properties.find(
+        (property) =>
+          (title && property.title === title) || (internalName && property.propertyName === internalName)
+      );
+    }
+    static updateProperty(propertyId, updatedData) {
+      // Find the property by its ID
+      const propertyIndex = PropertyModel.properties.findIndex((property) => property.id === propertyId);
+      
       if (propertyIndex === -1) {
         throw new Error("Property not found");
       }
-    
-      // Merge the updated data
-      const updatedProperty = {
-        ...this.properties[propertyIndex],
-        ...updatedData,
-        id: this.properties[propertyIndex].id, // Ensure `id` remains unchanged
-      };
-    
-      this.properties[propertyIndex] = updatedProperty;
-    
-      return updatedProperty;
+  
+      // Update the property with new data
+      const property = PropertyModel.properties[propertyIndex];
+      
+      // Update each property field with the corresponding value in updatedData
+      Object.assign(property, updatedData);
+  
+      // Return the updated property
+      return property;
     }
-      // Static method to get property by internalName and name
-  static getPropertyByName(internalName, name) {
-    return this.properties.find(property => property.internalName === internalName && property.name === name);
   }
-    
 
-    // Static method to edit a property by owner email and propertyId
-  }
+  
 // Initialize the static properties list
 PropertyModel.properties = [
   // Property 1

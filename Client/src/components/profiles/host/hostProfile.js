@@ -1,19 +1,21 @@
 import React, { useState, useEffect } from "react";
-import './HostProfile.css';
+import "./HostProfile.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import PhotoEdit from './propertyEdit/PhotoEdit';
-import TimeAndDescriptionEdit from './propertyEdit/TimeDescriptionEdit';
-import AmenitiesEdit from './propertyEdit/AmenitiesEdit';
-import PricingAvailabilityEdit from './propertyEdit/PricingAvailabilityEdit';
-import HouseRulesEdit from './propertyEdit/HouseRulesEdit';
-import AccessibilityEdit from './propertyEdit/AccessibilityEdit';
-import InfluencerSettings from './propertyEdit/InfluencerSettings';
-import CheckInOut from './check-in-out/Check-In-Out';
-import Directions from './check-in-out/Directions';
-import GuideBook from './check-in-out/Guide-book';
-import HouseManual from './check-in-out/House-Manual';
-import HouseRules from './check-in-out/House-Rules';
-import WifiDetails from './check-in-out/Wifi-Details';
+
+// Import all child components
+import PhotoEdit from "./propertyEdit/PhotoEdit";
+import TimeAndDescriptionEdit from "./propertyEdit/TimeDescriptionEdit";
+import AmenitiesEdit from "./propertyEdit/AmenitiesEdit";
+import PricingAvailabilityEdit from "./propertyEdit/PricingAvailabilityEdit";
+import HouseRulesEdit from "./propertyEdit/HouseRulesEdit";
+import AccessibilityEdit from "./propertyEdit/AccessibilityEdit";
+import InfluencerSettings from "./propertyEdit/InfluencerSettings";
+import CheckInOut from "./check-in-out/Check-In-Out";
+import Directions from "./check-in-out/Directions";
+import GuideBook from "./check-in-out/Guide-book";
+import HouseManual from "./check-in-out/House-Manual";
+import HouseRules from "./check-in-out/House-Rules";
+import WifiDetails from "./check-in-out/Wifi-Details";
 
 export default function HostProfile() {
   const [myProperty, setMyProperty] = useState([]);
@@ -23,14 +25,15 @@ export default function HostProfile() {
   const [activeSection, setActiveSection] = useState("Your Property");
   const [activeTab, setActiveTab] = useState("Photos");
 
+  // Fetch all properties when the component mounts
   useEffect(() => {
-    async function fetchProperties() {
+    const fetchProperties = async () => {
       setIsLoading(true);
       setError(null);
 
       try {
         const token = localStorage.getItem("token");
-        if (!token) throw new Error("Token not found, please log in again.");
+        if (!token) throw new Error("Token not found. Please log in again.");
 
         const response = await fetch(
           "http://localhost:3000/api/property/propertiesByEmail",
@@ -41,9 +44,11 @@ export default function HostProfile() {
         );
 
         if (!response.ok) {
-          if (response.status === 401)
-            throw new Error("Unauthorized - Invalid token");
-          else throw new Error("Failed to fetch properties");
+          const errorMessage =
+            response.status === 401
+              ? "Unauthorized - Invalid token."
+              : "Failed to fetch properties.";
+          throw new Error(errorMessage);
         }
 
         const data = await response.json();
@@ -53,58 +58,82 @@ export default function HostProfile() {
       } finally {
         setIsLoading(false);
       }
-    }
+    };
 
     fetchProperties();
   }, []);
 
-  const handlePropertyClick = (property) => {
-    setSelectedProperty(property);
-  };
-
-  const handleEditProperty = async (updatedProperty) => {
+  // Fetch single property details
+  const handlePropertyClick = async (property) => {
     setIsLoading(true);
+    setError(null);
 
     try {
       const token = localStorage.getItem("token");
-      if (!token) throw new Error("Token not found, please log in again.");
+      if (!token) throw new Error("Token not found. Please log in again.");
 
       const response = await fetch(
-        "http://localhost:3000/api/property/editProperty",
+        `http://localhost:3000/api/property/propertyDetails?title=${encodeURIComponent(
+          property.title
+        )}&internalName=${encodeURIComponent(property.internalName)}`,
+        {
+          method: "GET",
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch property details.");
+      }
+
+      const propertyDetails = await response.json();
+      setSelectedProperty(propertyDetails.property);
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Handle save data from child component
+  const handleSaveFromChild = async (updatedData) => {
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) throw new Error("Token not found. Please log in again.");
+
+      // Send the request to the API
+      const response = await fetch(
+        `http://localhost:3000/api/property/updateProperty/${updatedData.propertyId}`,
         {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify({ ...updatedProperty, id: selectedProperty.id }),
+          body: JSON.stringify(updatedData),
         }
       );
 
-      if (!response.ok) throw new Error("Failed to update property");
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error("Update failed:", errorData);
+        throw new Error(errorData.message || "Failed to update property.");
+      }
 
-      const updatedData = await response.json();
-      setMyProperty((prev) =>
-        prev.map((property) =>
-          property.id === updatedData.id ? updatedData : property
-        )
-      );
-      setSelectedProperty(updatedData);
-    } catch (err) {
-      setError(err.message);
+      const data = await response.json();
+      setSelectedProperty(data.property);
+    } catch (error) {
+      setError(error.message);
+      console.error("Error:", error.message);
     } finally {
       setIsLoading(false);
     }
   };
 
-  const handleSaveFromChild = (updatedData) => {
-    setSelectedProperty((prev) => {
-      const newSelectedProperty = { ...prev, ...updatedData };
-      handleEditProperty(newSelectedProperty); // Persist changes to the server
-      return newSelectedProperty;
-    });
-  };
-
+  // Render tabs based on active section
   const renderTabs = () => {
     const tabs =
       activeSection === "Your Property"
@@ -141,8 +170,9 @@ export default function HostProfile() {
     );
   };
 
+  // Render the active child component
   const renderComponent = () => {
-    if (!selectedProperty) return null;
+    if (!selectedProperty) return <p>Loading data...</p>;
 
     const commonProps = {
       selectedPropertyData: selectedProperty,
@@ -194,21 +224,21 @@ export default function HostProfile() {
         <img
           className="host-profile-logo"
           src="/48564e5fe8898cf62b0bbf42276d6cf3.jpeg"
-          alt="paradise"
+          alt="Paradise"
         />
         <nav className="host-profile-nav">
           <ul>
-            <li onClick={() => setActiveSection("influencer")}>Influencers</li>
-            <li onClick={() => setActiveSection("calendar")}>Calendar</li>
+            <li onClick={() => setActiveSection("Influencers")}>Influencers</li>
+            <li onClick={() => setActiveSection("Calendar")}>Calendar</li>
             <li
-              onClick={() => setActiveSection("properties")}
-              className={activeSection === "properties" ? "active" : ""}
+              onClick={() => setActiveSection("Your Property")}
+              className={activeSection === "Your Property" ? "active" : ""}
             >
               Properties
             </li>
-            <li onClick={() => setActiveSection("inbox")}>Inbox</li>
-            <li onClick={() => setActiveSection("upcoming")}>Upcoming</li>
-            <li onClick={() => setActiveSection("menu")}>Menu</li>
+            <li onClick={() => setActiveSection("Inbox")}>Inbox</li>
+            <li onClick={() => setActiveSection("Upcoming")}>Upcoming</li>
+            <li onClick={() => setActiveSection("Menu")}>Menu</li>
           </ul>
         </nav>
       </header>
@@ -218,21 +248,28 @@ export default function HostProfile() {
           <>
             <div className="host-profile-section-toggle-buttons">
               <button
-                className={`host-profile-toggle-button ${activeSection === 'Your Property' ? 'active' : ''}`}
-                onClick={() => setActiveSection('Your Property')}
+                className={`host-profile-toggle-button ${
+                  activeSection === "Your Property" ? "active" : ""
+                }`}
+                onClick={() => setActiveSection("Your Property")}
               >
                 Your Property
               </button>
               <button
-                className={`host-profile-toggle-button ${activeSection === 'Check-in Guide' ? 'active' : ''}`}
-                onClick={() => setActiveSection('Check-in Guide')}
+                className={`host-profile-toggle-button ${
+                  activeSection === "Check-in Guide" ? "active" : ""
+                }`}
+                onClick={() => setActiveSection("Check-in Guide")}
               >
                 Check-in Guide
               </button>
             </div>
 
-            <button onClick={() => setSelectedProperty(null)} className="host-profile-back-button">
-              ←
+            <button
+              onClick={() => setSelectedProperty(null)}
+              className="host-profile-back-button"
+            >
+              ← Back
             </button>
             {renderTabs()}
             {renderComponent()}
@@ -244,27 +281,29 @@ export default function HostProfile() {
         ) : (
           <div className="host-profile-property-grid">
             {myProperty.map((property) => (
-              
               <div
-              key={property.id}
-              className="host-profile-property-card"
-              onClick={() => handlePropertyClick(property)}
-            >
-              <div className="host-profile-property-image">
-                <img src={property.coverPhotos?.cover?.image} alt={property.propertyName} />
-                <div
-                  className={`property-status ${property.type === "listed" ? "listed" : "in-progress"}`}
-                >
-                  {property.type === "listed" ? "Listed" : "In Progress"}
+                key={property.id}
+                className="host-profile-property-card"
+                onClick={() => handlePropertyClick(property)}
+              >
+                <div className="host-profile-property-image">
+                  <img
+                    src={property.coverPhotos?.cover?.image}
+                    alt={property.propertyName}
+                  />
+                  <div
+                    className={`property-status ${
+                      property.type === "listed" ? "listed" : "in-progress"
+                    }`}
+                  >
+                    {property.type === "listed" ? "Listed" : "In Progress"}
+                  </div>
                 </div>
+                <h3>{property.internalName}</h3>
+                <p>{property.title
+                }</p>
+                <span>{property.nightRate}</span>
               </div>
-              <div className="host-profile-property-details">
-                <h4 style={{color:" #198E78"}}>{property.propertyName || "No Internal Name"}</h4>
-                <p className="property-title">{property.title || "No title"}</p>
-                <p className="property-address">{property.address || "No address provided"}</p>
-              </div>
-            </div>
-            
             ))}
           </div>
         )}

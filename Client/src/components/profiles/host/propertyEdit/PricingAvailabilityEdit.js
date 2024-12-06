@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './pricingAndAvailability.css';
 
-export default function PricingAvailabilityEdit({ selectedPropertyData, onEditProperty }) {
+export default function PricingAvailabilityEdit({ selectedPropertyData, onSave }) {
   // Extract and initialize states from `selectedPropertyData`
   const [price, setPrice] = useState(selectedPropertyData?.price?.BaseCharge || 0);
   const [minNights, setMinNights] = useState(selectedPropertyData?.availability?.minimumNight || 1);
@@ -22,15 +22,14 @@ export default function PricingAvailabilityEdit({ selectedPropertyData, onEditPr
       },
       bookingNotice,
     };
-    onEditProperty(updatedData);
+
+    // Call the onSave function passed from the parent component
+    onSave(updatedData);
   };
 
   // Handle Cancel Action
   const handleCancel = () => {
-    setPrice(selectedPropertyData?.
-      price
-      ?.BaseCharge
-      || 0);
+    setPrice(selectedPropertyData?.price?.BaseCharge || 0);
     setMinNights(selectedPropertyData?.availability?.minimumNight || 1);
     setMaxNights(selectedPropertyData?.availability?.maximumNight || 28);
     setBookingNotice(selectedPropertyData?.bookingNotice || 'Same day');

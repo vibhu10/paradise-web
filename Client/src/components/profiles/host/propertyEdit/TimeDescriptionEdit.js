@@ -2,46 +2,61 @@ import React, { useState, useEffect } from "react";
 import "./TimeDescription.css";
 
 export default function TimeAndDescriptionEdit({
-  selectedPropertyData,
-  onSave,
+  selectedPropertyData, // Data from the parent
+
+  onSave,               // Save function from the parent
 }) {
-  const {
-    title: initialTitle = "",
-    internalName: initialInternalName = "",
-    description: initialDescription = "",
-  } = selectedPropertyData || {};
+  console.log(selectedPropertyData,"tesing")
+  // Initialize state with default values
+  const [title, setTitle] = useState("");
+  const [internalName, setInternalName] = useState("");
+  const [description, setDescription] = useState("");
+  const [propertyId, setPropertyId] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-  const [title, setTitle] = useState(initialTitle);
-  const [internalName, setInternalName] = useState(initialInternalName);
-  const [description, setDescription] = useState(initialDescription);
-  const [loading, setLoading] = useState(false); // Local loading state
-
+  // Sync with parent data when `selectedPropertyData` changes
   useEffect(() => {
-    if (selectedPropertyData?.id) {
-      setTitle(selectedPropertyData.title || "");
-      setInternalName(selectedPropertyData.propertyName|| "");
-      setDescription(selectedPropertyData.description || "");
+    if (selectedPropertyData) {
+      const { title, internalName, description, id } = selectedPropertyData;
+      setTitle(title || "");
+      setInternalName(internalName || "");
+      setDescription(description || "");
+      setPropertyId(id || null); // Ensure `id` is saved
     }
-  }, [selectedPropertyData?.id]);
+  }, [selectedPropertyData]);
 
+  // Handle Save
   const handleSave = async () => {
-    setLoading(true); // Show loading spinner
-    const updatedData = { title, internalName, description };
-
+    setLoading(true);
     try {
-      await onSave(updatedData); // Wait for the parent to handle the update
+      const updatedData = {
+        propertyId,  // Include the `propertyId`
+        title,
+        internalName,
+        description,
+      };
+      await onSave(updatedData); // Call parent save function
     } catch (error) {
-      console.error("Failed to update property:", error);
+      console.error("Error saving data:", error);
     } finally {
-      setLoading(false); // Hide loading spinner
+      setLoading(false);
     }
   };
 
+  // Handle Cancel - Reset fields to initial parent values
   const handleCancel = () => {
-    setTitle(initialTitle);
-    setInternalName(initialInternalName);
-    setDescription(initialDescription);
+    if (selectedPropertyData && selectedPropertyData.property) {
+      const { title, internalName, description } = selectedPropertyData.property;
+      setTitle(title || "");
+      setInternalName(internalName || "");
+      setDescription(description || "");
+    }
   };
+
+  // Display a loading state if no data
+  if (!selectedPropertyData) {
+    return <p>Loading data...</p>;
+  }
 
   return (
     <div className="time-and-description-edit">
@@ -55,6 +70,7 @@ export default function TimeAndDescriptionEdit({
         </div>
       ) : (
         <>
+          {/* Title */}
           <div className="form-group">
             <label htmlFor="title" className="form-label">
               English Title
@@ -72,6 +88,7 @@ export default function TimeAndDescriptionEdit({
             </p>
           </div>
 
+          {/* Internal Name */}
           <div className="form-group">
             <label htmlFor="internalName" className="form-label">
               Internal Name
@@ -85,14 +102,13 @@ export default function TimeAndDescriptionEdit({
               placeholder="For internal use only (up to 50 characters)"
             />
             <p
-              className={`char-limit ${
-                internalName.length > 50 ? "error" : ""
-              }`}
+              className={`char-limit ${internalName.length > 50 ? "error" : ""}`}
             >
               {`${internalName.length}/50`}
             </p>
           </div>
 
+          {/* Description */}
           <div className="form-group">
             <label htmlFor="description" className="form-label">
               Description
@@ -106,6 +122,7 @@ export default function TimeAndDescriptionEdit({
             />
           </div>
 
+          {/* Action Buttons */}
           <div className="button-group">
             <button className="cancel-button" onClick={handleCancel}>
               Cancel
