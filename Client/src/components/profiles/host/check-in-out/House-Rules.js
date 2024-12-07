@@ -1,8 +1,9 @@
 import './house-rules.css';
 import { useState, useEffect } from 'react';
 
-export default function HouseRules({ onEditProperty, selectedPropertyData }) {
+export default function HouseRules({ onSave, selectedPropertyData }) {
     const [formData, setFormData] = useState({
+        propertyId: null, // Add propertyId to the state
         petsAllowed: false,
         maxPets: 1,
         eventsAllowed: false,
@@ -23,13 +24,17 @@ export default function HouseRules({ onEditProperty, selectedPropertyData }) {
         if (selectedPropertyData) {
             setFormData({
                 ...formData,
+                propertyId: selectedPropertyData?.id || null, // Set the property ID
                 petsAllowed: selectedPropertyData?.houseRules?.petsAllowed || false,
-                maxPets: selectedPropertyData?.houseRules?.maxNoPets || 1,
+                maxPets: selectedPropertyData?.
+                maxPets
+                || 1,
                 eventsAllowed: selectedPropertyData?.houseRules?.eventAllowed || false,
                 smokingAllowed: selectedPropertyData?.houseRules?.smokingAllowed || false,
                 commercialPhotographyAllowed: selectedPropertyData?.houseRules?.commercialPhotography || false,
                 numberOfGuests: selectedPropertyData?.houseRules?.numberOfGuests || 1,
-                quietHoursStart: selectedPropertyData?.quiteHour?.quiteHourStart?.slice(11, 16) || '23:00', // Extract time part
+                quietHoursStart: selectedPropertyData?.quiteHour?.
+                quiteHourStart?.slice(11, 16) || '23:00', // Extract time part
                 quietHoursEnd: selectedPropertyData?.quiteHour?.quiteHourEnd?.slice(11, 16) || '11:00', // Extract time part
                 checkInTime: selectedPropertyData?.checkinOut?.checkin?.[0]?.slice(11, 16) || '23:00', // Extract check-in time
                 checkOutTime: selectedPropertyData?.checkinOut?.checkout?.[0]?.slice(11, 16) || '11:00', // Extract check-out time
@@ -63,7 +68,7 @@ export default function HouseRules({ onEditProperty, selectedPropertyData }) {
     };
 
     const handleSave = () => {
-        onEditProperty(formData);
+        onSave(formData); // Now includes the propertyId
     };
 
     return (

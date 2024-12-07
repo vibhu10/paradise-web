@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./HostProfile.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-// Import all child components
+// Import all child components for "Your Property"
 import PhotoEdit from "./propertyEdit/PhotoEdit";
 import TimeAndDescriptionEdit from "./propertyEdit/TimeDescriptionEdit";
 import AmenitiesEdit from "./propertyEdit/AmenitiesEdit";
@@ -10,12 +10,23 @@ import PricingAvailabilityEdit from "./propertyEdit/PricingAvailabilityEdit";
 import HouseRulesEdit from "./propertyEdit/HouseRulesEdit";
 import AccessibilityEdit from "./propertyEdit/AccessibilityEdit";
 import InfluencerSettings from "./propertyEdit/InfluencerSettings";
+
+// Import all child components for "Check-in Guide"
 import CheckInOut from "./check-in-out/Check-In-Out";
 import Directions from "./check-in-out/Directions";
 import GuideBook from "./check-in-out/Guide-book";
 import HouseManual from "./check-in-out/House-Manual";
 import HouseRules from "./check-in-out/House-Rules";
 import WifiDetails from "./check-in-out/Wifi-Details";
+import UpcomingReservations from "./host-nav-bar/UpcomingReservations";
+
+import ListingsCalendar from "./host-nav-bar/ListingsCalendar";
+// Placeholder components for other sections
+const Menu = () => <div>Menu Component</div>;
+
+const Influencers = () => <div>Influencers Component</div>;
+const Inbox = () => <div>Inbox Component</div>;
+
 
 export default function HostProfile() {
   const [myProperty, setMyProperty] = useState([]);
@@ -24,6 +35,7 @@ export default function HostProfile() {
   const [error, setError] = useState(null);
   const [activeSection, setActiveSection] = useState("Your Property");
   const [activeTab, setActiveTab] = useState("Photos");
+  const [activeSubSection, setActiveSubSection] = useState("Your Property");
 
   // Fetch all properties when the component mounts
   useEffect(() => {
@@ -95,7 +107,7 @@ export default function HostProfile() {
     }
   };
 
-  // Handle save data from child component
+  // Save updates from child components
   const handleSaveFromChild = async (updatedData) => {
     setIsLoading(true);
     setError(null);
@@ -104,7 +116,6 @@ export default function HostProfile() {
       const token = localStorage.getItem("token");
       if (!token) throw new Error("Token not found. Please log in again.");
 
-      // Send the request to the API
       const response = await fetch(
         `http://localhost:3000/api/property/updateProperty/${updatedData.propertyId}`,
         {
@@ -119,7 +130,6 @@ export default function HostProfile() {
 
       if (!response.ok) {
         const errorData = await response.json();
-        console.error("Update failed:", errorData);
         throw new Error(errorData.message || "Failed to update property.");
       }
 
@@ -127,16 +137,15 @@ export default function HostProfile() {
       setSelectedProperty(data.property);
     } catch (error) {
       setError(error.message);
-      console.error("Error:", error.message);
     } finally {
       setIsLoading(false);
     }
   };
 
-  // Render tabs based on active section
+  // Render the tabs for "Your Property" or "Check-in Guide"
   const renderTabs = () => {
     const tabs =
-      activeSection === "Your Property"
+      activeSubSection === "Your Property"
         ? [
             "Photos",
             "Time & Description",
@@ -170,16 +179,14 @@ export default function HostProfile() {
     );
   };
 
-  // Render the active child component
+  // Render the active child component based on the active tab
   const renderComponent = () => {
-    if (!selectedProperty) return <p>Loading data...</p>;
-
     const commonProps = {
       selectedPropertyData: selectedProperty,
       onSave: handleSaveFromChild,
     };
 
-    if (activeSection === "Your Property") {
+    if (activeSubSection === "Your Property") {
       switch (activeTab) {
         case "Photos":
           return <PhotoEdit {...commonProps} />;
@@ -198,7 +205,7 @@ export default function HostProfile() {
         default:
           return null;
       }
-    } else if (activeSection === "Check-in Guide") {
+    } else if (activeSubSection === "Check-in Guide") {
       switch (activeTab) {
         case "Check-in/out":
           return <CheckInOut {...commonProps} />;
@@ -215,6 +222,86 @@ export default function HostProfile() {
         default:
           return null;
       }
+    }
+  };
+
+  // Render the active section
+  const renderActiveSection = () => {
+    if (activeSection === "Your Property") {
+      return selectedProperty ? (
+        <>
+          <div className="host-profile-section-toggle-buttons">
+            <button
+              onClick={() => setActiveSubSection("Your Property")}
+              className={`host-profile-toggle-button ${
+                activeSubSection === "Your Property" ? "active" : ""
+              }`}
+            >
+              Your Property
+            </button>
+            <button
+              onClick={() => setActiveSubSection("Check-in Guide")}
+              className={`host-profile-toggle-button ${
+                activeSubSection === "Check-in Guide" ? "active" : ""
+              }`}
+            >
+              Check-in Guide
+            </button>
+          </div>
+          <button
+            onClick={() => setSelectedProperty(null)}
+            className="host-profile-back-button"
+          >
+            ← Back
+          </button>
+          {renderTabs()}
+          {renderComponent()}
+        </>
+      ) : isLoading ? (
+        <p>Loading...</p>
+      ) : error ? (
+        <p>Error: {error}</p>
+      ) : (
+        <div className="host-profile-property-grid">
+          {myProperty.map((property) => (
+            <div
+              key={property.id}
+              className="host-profile-property-card"
+              onClick={() => handlePropertyClick(property)}
+            >
+              <div className="host-profile-property-image">
+                <img
+                  src={property.coverPhotos?.cover?.image}
+                  alt={property.propertyName}
+                />
+                <div
+                  className={`property-status ${
+                    property.type === "listed" ? "listed" : "in-progress"
+                  }`}
+                >
+                  {property.type === "listed" ? "Listed" : "In Progress"}
+                </div>
+              </div>
+              <div style={{ border: "none" }}>
+                <h3 style={{ color: "#198E78", marginBottom: "5px" }}>
+                  {property.internalName}
+                </h3>
+                <p style={{ marginTop: "0" }}>{property.title}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      );
+    } else if (activeSection === "Menu") {
+      return <Menu />;
+    } else if (activeSection === "Calendar") {
+      return <ListingsCalendar/>;
+    } else if (activeSection === "Influencers") {
+      return <Influencers />;
+    } else if (activeSection === "Inbox") {
+      return <Inbox />;
+    } else if (activeSection === "Upcoming") {
+      return <UpcomingReservations/>;
     }
   };
 
@@ -242,72 +329,7 @@ export default function HostProfile() {
           </ul>
         </nav>
       </header>
-
-      <main className="host-profile-main">
-        {selectedProperty ? (
-          <>
-            <div className="host-profile-section-toggle-buttons">
-              <button
-                className={`host-profile-toggle-button ${
-                  activeSection === "Your Property" ? "active" : ""
-                }`}
-                onClick={() => setActiveSection("Your Property")}
-              >
-                Your Property
-              </button>
-              <button
-                className={`host-profile-toggle-button ${
-                  activeSection === "Check-in Guide" ? "active" : ""
-                }`}
-                onClick={() => setActiveSection("Check-in Guide")}
-              >
-                Check-in Guide
-              </button>
-            </div>
-
-            <button
-              onClick={() => setSelectedProperty(null)}
-              className="host-profile-back-button"
-            >
-              ← Back
-            </button>
-            {renderTabs()}
-            {renderComponent()}
-          </>
-        ) : isLoading ? (
-          <p>Loading...</p>
-        ) : error ? (
-          <p>Error: {error}</p>
-        ) : (
-          <div className="host-profile-property-grid">
-            {myProperty.map((property) => (
-              <div
-                key={property.id}
-                className="host-profile-property-card"
-                onClick={() => handlePropertyClick(property)}
-              >
-                <div className="host-profile-property-image">
-                  <img
-                    src={property.coverPhotos?.cover?.image}
-                    alt={property.propertyName}
-                  />
-                  <div
-                    className={`property-status ${
-                      property.type === "listed" ? "listed" : "in-progress"
-                    }`}
-                  >
-                    {property.type === "listed" ? "Listed" : "In Progress"}
-                  </div>
-                </div>
-                <h3>{property.internalName}</h3>
-                <p>{property.title
-                }</p>
-                <span>{property.nightRate}</span>
-              </div>
-            ))}
-          </div>
-        )}
-      </main>
+      <main className="host-profile-main">{renderActiveSection()}</main>
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import './check-in-out.css';
+import "./check-in-out.css";
 
-const CheckInOut = ({ onEditProperty, selectedPropertyData }) => {
+const CheckInOut = ({ onSave, selectedPropertyData }) => {
   const [instructions, setInstructions] = useState([]);
   const [checkInTime, setCheckInTime] = useState("11:00 am");
   const [checkOutTime, setCheckOutTime] = useState("11:00 am");
@@ -16,6 +16,17 @@ const CheckInOut = ({ onEditProperty, selectedPropertyData }) => {
     const suffix = hours >= 12 ? "pm" : "am";
     const formattedHours = ((hours + 11) % 12) + 1;
     return `${formattedHours}:${minutes.toString().padStart(2, "0")} ${suffix}`;
+  };
+
+  // Helper function to parse time into a valid Date object
+  const parseTime = (timeString) => {
+    const [time, modifier] = timeString.split(" ");
+    let [hours, minutes] = time.split(":").map(Number);
+
+    if (modifier === "pm" && hours !== 12) hours += 12;
+    if (modifier === "am" && hours === 12) hours = 0;
+
+    return new Date(1970, 0, 1, hours, minutes, 0); // Use a fixed date for time-only values
   };
 
   useEffect(() => {
@@ -37,12 +48,20 @@ const CheckInOut = ({ onEditProperty, selectedPropertyData }) => {
   };
 
   const handleSave = () => {
-    onEditProperty({
+    const checkInDate = parseTime(checkInTime);
+    const checkOutDate = parseTime(checkOutTime);
+
+    // if (checkInDate >= checkOutDate) {
+    //   alert("Check-out time must be after check-in time!");
+    //   return;
+    // }
+
+    onSave({
       ...selectedPropertyData,
       AddInstruction: instructions,
       checkinOut: {
-        checkin: [new Date(`1970-01-01T${checkInTime}:00`).toISOString()],
-        checkout: [new Date(`1970-01-01T${checkOutTime}:00`).toISOString()],
+        checkin: [checkInDate.toISOString()],
+        checkout: [checkOutDate.toISOString()],
       },
     });
   };
@@ -84,17 +103,18 @@ const CheckInOut = ({ onEditProperty, selectedPropertyData }) => {
     ].map((time) => time);
 
   return (
-    <div className="check-in-out-container">
-      <h2>Check-in/out</h2>
+    <div className="check-in-out-container" id="check-in-out-container">
+      <h2 id="title">Check-in/out</h2>
 
       {/* Time Section */}
       <div className="time-section">
-        <div className="time-box">
+        <div className="time-box" id="check-in-box">
           <label htmlFor="checkin-time">Check-in</label>
           <select
             id="checkin-time"
             value={checkInTime}
             onChange={(e) => setCheckInTime(e.target.value)}
+            aria-label="Select check-in time"
           >
             {generateTimeOptions().map((time) => (
               <option key={time} value={time}>
@@ -104,12 +124,13 @@ const CheckInOut = ({ onEditProperty, selectedPropertyData }) => {
           </select>
         </div>
 
-        <div className="time-box">
+        <div className="time-box" id="check-out-box">
           <label htmlFor="checkout-time">Checkout</label>
           <select
             id="checkout-time"
             value={checkOutTime}
             onChange={(e) => setCheckOutTime(e.target.value)}
+            aria-label="Select check-out time"
           >
             {generateTimeOptions().map((time) => (
               <option key={time} value={time}>
@@ -119,12 +140,12 @@ const CheckInOut = ({ onEditProperty, selectedPropertyData }) => {
           </select>
         </div>
         <p>
-          Arrive between {checkInTime} and Flexible Leave before {checkOutTime}
+          Arrive between <strong>{checkInTime}</strong> and leave before <strong>{checkOutTime}</strong>
         </p>
       </div>
 
       {/* Instructions Section */}
-      <div className="instructions-section">
+      <div className="instructions-section" id="instructions-section">
         <h3>Check-in instructions</h3>
         {instructions.map((instruction, index) => (
           <div key={index} className="instruction-box">
@@ -132,6 +153,7 @@ const CheckInOut = ({ onEditProperty, selectedPropertyData }) => {
               placeholder="Enter instruction"
               value={instruction}
               onChange={(e) => handleInstructionChange(e, index)}
+              aria-label={`Instruction ${index + 1}`}
             />
           </div>
         ))}
@@ -140,53 +162,8 @@ const CheckInOut = ({ onEditProperty, selectedPropertyData }) => {
         </button>
       </div>
 
-      {/* Check-in Method */}
-      <div className="method-section">
-        <h3>Check-in method</h3>
-        <ul>
-          <li>
-            <strong>Smart lock:</strong> Guests use a code or app to open a
-            Wi-Fi-connected lock.
-          </li>
-          <li>
-            <strong>Keypad:</strong> Guests use the code you provide to open an
-            electronic lock.
-          </li>
-          <li>
-            <strong>Lockbox:</strong> Guests use a code to access a small safe
-            with a key inside.
-          </li>
-          <li>
-            <strong>Building staff:</strong> Staff is available 24/7 to assist
-            guests.
-          </li>
-        </ul>
-      </div>
-
-      {/* Checkout Instructions */}
-      <div className="checkout-section">
-        <h3>Checkout instructions</h3>
-        <ul>
-          <li>
-            <strong>Throw rubbish away:</strong> Dispose of garbage in bins and
-            place them at the curb on collection day.
-          </li>
-          <li>
-            <strong>Turn things off:</strong> Switch off all lights, especially
-            outdoor ones.
-          </li>
-          <li>
-            <strong>Lock up:</strong> Press the lock button on your way out.
-          </li>
-          <li>
-            <strong>Additional requests:</strong> Wash dishes and clear the
-            fridge.
-          </li>
-        </ul>
-      </div>
-
       {/* Action Buttons */}
-      <div className="action-buttons">
+      <div className="action-buttons" id="action-buttons">
         <button className="cancel" onClick={handleCancel}>
           Cancel
         </button>

@@ -1,37 +1,49 @@
-import React, { useState } from 'react';
-import './houseRules.css';
+import React, { useState, useEffect } from "react";
+import "./houseRules.css";
 
-export default function HouseRulesEdit({ selectedPropertyData, onEditProperty }) {
+export default function HouseRulesEdit({ selectedPropertyData, onSave }) {
+  // Initialize state with selectedPropertyData or fallback to defaults
   const initialState = {
-    petsAllowed: selectedPropertyData?.petsAllowed || false,
-    maxPets: selectedPropertyData?.maxPets || 1,
-    eventsAllowed: selectedPropertyData?.eventsAllowed || false,
-    smokingAllowed: selectedPropertyData?.smokingAllowed || false,
+    petsAllowed: selectedPropertyData?.houseRules.petsAllowed || false,
+    maxPets: selectedPropertyData?.houseRules.maxNoPets || 1,
+    eventsAllowed: selectedPropertyData?.houseRules.eventAllowed || false,
+    smokingAllowed: selectedPropertyData?.houseRules.smokingAllowed || false,
     quietHoursEnabled: selectedPropertyData?.quietHoursEnabled || false,
-    quietHoursStart: selectedPropertyData?.quietHoursStart || '23:00',
-    quietHoursEnd: selectedPropertyData?.quietHoursEnd || '11:00',
+    quietHoursStart: selectedPropertyData?.quietHoursStart || "23:00",
+    quietHoursEnd: selectedPropertyData?.quietHoursEnd || "11:00",
     commercialPhotography: selectedPropertyData?.commercialPhotography || false,
     maxGuests: selectedPropertyData?.maxGuests || 1,
-    checkInTime: selectedPropertyData?.checkInTime || '15:00',
-    checkOutTime: selectedPropertyData?.checkOutTime || '11:00',
+    checkInTime: selectedPropertyData?.checkinOut.checkin || "15:00",
+    checkOutTime: selectedPropertyData?.checkinOut.checkout || "11:00",
+    propertyId: selectedPropertyData?.id || null, // Ensure propertyId is included
   };
 
   const [formData, setFormData] = useState(initialState);
+
+  // Sync state with selectedPropertyData on mount or when it changes
+  useEffect(() => {
+    if (selectedPropertyData) {
+      setFormData({
+        ...initialState,
+        propertyId: selectedPropertyData?.id || null,
+      });
+    }
+  }, [selectedPropertyData]);
 
   const handleChange = (e) => {
     const { name, type, value, checked } = e.target;
     setFormData((prevData) => ({
       ...prevData,
-      [name]: type === 'checkbox' ? checked : value,
+      [name]: type === "checkbox" ? checked : value,
     }));
   };
 
   const handleSave = () => {
-    onEditProperty(formData);
+    onSave(formData); // Save the entire formData including propertyId
   };
 
   const handleCancel = () => {
-    setFormData(initialState);
+    setFormData(initialState); // Reset to initial values
   };
 
   return (

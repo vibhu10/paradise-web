@@ -1,0 +1,165 @@
+/* General Styling */
+.upcoming-reservations-container {
+    min-width:80%;
+    margin: 40px auto;
+    font-family: Arial, sans-serif;
+    color: #333;
+    padding: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: #fff;
+  }
+  
+  /* Header and Tabs */
+  .upcoming-reservations-container h1 {
+    font-size: 24px;
+    margin-bottom: 8px;
+  }
+  
+  .upcoming-reservations-description {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 20px;
+  }
+  
+  .upcoming-reservations-tabs {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #e0e0e0;
+  }
+  
+  .upcoming-reservations-tab {
+    font-size: 14px;
+    padding: 10px 0;
+    color: #888;
+    cursor: pointer;
+    flex: 1;
+    text-align: center;
+    position: relative;
+  }
+  
+  .upcoming-reservations-tab.active {
+    color: #1e9159;
+    font-weight: bold;
+    border-bottom: 2px solid #1e9159;
+  }
+  
+  /* Carousel Section */
+  .upcoming-reservations-carousel {
+    overflow: hidden;
+    width: 100%;
+  }
+  
+  .upcoming-reservations-carousel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+  }
+  
+  .upcoming-reservations-carousel-card {
+    min-width: calc(100% / 3);
+    padding: 16px;
+    box-sizing: border-box;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    margin-right: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .upcoming-reservations-carousel-card:last-child {
+    margin-right: 0;
+  }
+  
+  .upcoming-reservations-days {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+  }
+  
+  .upcoming-reservations-info {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  
+  .upcoming-reservations-image img {
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+    object-fit: cover;
+  }
+  
+  .upcoming-reservations-info h3 {
+    font-size: 18px;
+    margin: 0;
+    color: #333;
+  }
+  
+  .upcoming-reservations-info p {
+    font-size: 14px;
+    color: #777;
+  }
+  
+  /* Pagination Controls */
+  .upcoming-reservations-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    gap: 10px;
+  }
+  
+  .upcoming-reservations-pagination-button {
+    border: none;
+    background-color: #f1f1f1;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+    color: #333;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease;
+  }
+  
+  .upcoming-reservations-pagination-button:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .upcoming-reservations-pagination-button:disabled {
+    color: #ccc;
+    background-color: #f9f9f9;
+    cursor: not-allowed;
+  }
+  
+  .upcoming-reservations-no-data {
+    text-align: center;
+    color: #777;
+    font-size: 16px;
+    margin-top: 20px;
+  }
+  
+  /* Help Section */
+  .upcoming-reservations-help-section {
+    margin-top: 30px;
+  }
+  
+  .upcoming-reservations-help-section h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: #333;
+  }
+  
+  .upcoming-reservations-help-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  

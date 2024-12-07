@@ -1,16 +1,20 @@
 import { useState, useEffect } from 'react';
-import './wifi-details.css'
+import './wifi-details.css';
 
 export default function WifiDetails({ onSave, selectedPropertyData }) {
     const [wifiDetails, setWifiDetails] = useState({
         networkName: '',
         password: ''
     });
+    const [propertyId, setPropertyId] = useState(null); // Add state for propertyId
 
-    // Populate the wifiDetails from selectedPropertyData on component mount or when data changes
+    // Populate wifiDetails and propertyId from selectedPropertyData on component mount or when data changes
     useEffect(() => {
-        if (selectedPropertyData && selectedPropertyData.wifiDetails) {
-            setWifiDetails(selectedPropertyData.wifiDetails);
+        if (selectedPropertyData) {
+            setPropertyId(selectedPropertyData.id || null); // Set the propertyId
+            if (selectedPropertyData.wifiDetails) {
+                setWifiDetails(selectedPropertyData.wifiDetails); // Populate wifiDetails
+            }
         }
     }, [selectedPropertyData]);
 
@@ -21,7 +25,7 @@ export default function WifiDetails({ onSave, selectedPropertyData }) {
 
     // Function to save wifi details
     const handleSave = () => {
-        onSave({ ...selectedPropertyData, wifiDetails });
+        onSave({ ...selectedPropertyData, wifiDetails, propertyId }); // Pass the propertyId along with wifiDetails
     };
 
     return (
@@ -30,7 +34,7 @@ export default function WifiDetails({ onSave, selectedPropertyData }) {
             <p>Create a guidebook to easily share local tips with guests.</p>
 
             <div className="input-group">
-                {/* <label>WiFi network name</label> */}
+                {/* WiFi network name */}
                 <input
                     type="text"
                     value={wifiDetails.networkName}
@@ -40,16 +44,17 @@ export default function WifiDetails({ onSave, selectedPropertyData }) {
             </div>
 
             <div className="input-group">
-                {/* <label>WiFi password</label> */}
+                {/* WiFi password */}
                 <input
                     type="text"
                     value={wifiDetails.password}
                     onChange={(e) => handleChange('password', e.target.value)}
                     placeholder="Enter WiFi password"
                 />
-               
             </div>
+
             <p className="note">Shared 24–48 hours before check-in</p>
+
             <div className="action-buttons">
                 <button className="cancel">Cancel</button>
                 <button className="save" onClick={handleSave}>Save</button>

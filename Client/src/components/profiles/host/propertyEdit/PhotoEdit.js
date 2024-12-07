@@ -3,7 +3,7 @@ import "./photos.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
-export default function PhotoEdit({ selectedPropertyData, onEditProperty }) {
+export default function PhotoEdit({ selectedPropertyData, onSave }) {
   const [bedrooms, setBedrooms] = useState(
     selectedPropertyData.bedrooms || [
       {
@@ -156,7 +156,7 @@ export default function PhotoEdit({ selectedPropertyData, onEditProperty }) {
       photoGallery,
     };
 
-    onEditProperty(updatedData);
+   onSave(updatedData);
   };
   return (
     <div className="photoEdit-hostlogin">

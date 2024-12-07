@@ -155,7 +155,7 @@
 .host-profile-property-image {
   position: relative;
   width: 100%;
-  height: 200px;
+  height: 250px;
   overflow: hidden;
 }
 .host-profile-property-image img {
@@ -332,4 +332,11 @@
   color: #198E78;
   font-size: 16px;
   margin-top: 15px;
+}
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
 }

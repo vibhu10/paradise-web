@@ -3,11 +3,15 @@ import './guide-book.css';
 
 export default function GuideBook({ onSave, selectedPropertyData }) {
     const [guideBooks, setGuideBooks] = useState([]);
+    const [propertyId, setPropertyId] = useState(null);  // Add state for propertyId
 
-    // Populate the guideBooks from selectedPropertyData on component mount or when data changes
+    // Populate the guideBooks and propertyId from selectedPropertyData on component mount or when data changes
     useEffect(() => {
-        if (selectedPropertyData && selectedPropertyData.guideBooks) {
-            setGuideBooks(selectedPropertyData.guideBooks);  // Note the capital "B" to match the data.
+        if (selectedPropertyData) {
+            setPropertyId(selectedPropertyData.id || null); // Set the propertyId
+            if (selectedPropertyData.guideBooks) {
+                setGuideBooks(selectedPropertyData.guideBooks);  // Populate guideBooks
+            }
         }
     }, [selectedPropertyData]);
 
@@ -31,7 +35,7 @@ export default function GuideBook({ onSave, selectedPropertyData }) {
 
     // Function to save updated guidebooks
     const handleSave = () => {
-        onSave({ ...selectedPropertyData, guideBooks });
+        onSave({ ...selectedPropertyData, guideBooks, propertyId });  // Pass the propertyId with the data
     };
 
     return (
