@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./HostProfile.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-
+import { useNavigate } from "react-router-dom";
 // Import all child components for "Your Property"
 import PhotoEdit from "./propertyEdit/PhotoEdit";
 import TimeAndDescriptionEdit from "./propertyEdit/TimeDescriptionEdit";
@@ -19,8 +19,12 @@ import HouseManual from "./check-in-out/House-Manual";
 import HouseRules from "./check-in-out/House-Rules";
 import WifiDetails from "./check-in-out/Wifi-Details";
 import UpcomingReservations from "./host-nav-bar/UpcomingReservations";
+import Messages from "./host-nav-bar/Messages";
 
-import ListingsCalendar from "./host-nav-bar/ListingsCalendar";
+import CalendarWithBookings from "./host-nav-bar/CalendarComponent";
+
+
+
 // Placeholder components for other sections
 const Menu = () => <div>Menu Component</div>;
 
@@ -36,7 +40,15 @@ export default function HostProfile() {
   const [activeSection, setActiveSection] = useState("Your Property");
   const [activeTab, setActiveTab] = useState("Photos");
   const [activeSubSection, setActiveSubSection] = useState("Your Property");
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    // Clear JWT token from localStorage
+    localStorage.removeItem("token");
+    // Redirect to homepage
+    navigate("/");
+  };
   // Fetch all properties when the component mounts
   useEffect(() => {
     const fetchProperties = async () => {
@@ -295,11 +307,11 @@ export default function HostProfile() {
     } else if (activeSection === "Menu") {
       return <Menu />;
     } else if (activeSection === "Calendar") {
-      return <ListingsCalendar/>;
+      return <CalendarWithBookings/>;
     } else if (activeSection === "Influencers") {
-      return <Influencers />;
+      return  <></>;
     } else if (activeSection === "Inbox") {
-      return <Inbox />;
+      return <Messages />;
     } else if (activeSection === "Upcoming") {
       return <UpcomingReservations/>;
     }
@@ -308,27 +320,58 @@ export default function HostProfile() {
   return (
     <div className="host-profile-container">
       <header className="host-profile-header">
-        <img
-          className="host-profile-logo"
-          src="/48564e5fe8898cf62b0bbf42276d6cf3.jpeg"
-          alt="Paradise"
-        />
-        <nav className="host-profile-nav">
-          <ul>
-            <li onClick={() => setActiveSection("Influencers")}>Influencers</li>
-            <li onClick={() => setActiveSection("Calendar")}>Calendar</li>
-            <li
-              onClick={() => setActiveSection("Your Property")}
-              className={activeSection === "Your Property" ? "active" : ""}
-            >
-              Properties
-            </li>
-            <li onClick={() => setActiveSection("Inbox")}>Inbox</li>
-            <li onClick={() => setActiveSection("Upcoming")}>Upcoming</li>
-            <li onClick={() => setActiveSection("Menu")}>Menu</li>
-          </ul>
-        </nav>
-      </header>
+  <img
+    className="host-profile-logo"
+    src="/48564e5fe8898cf62b0bbf42276d6cf3.jpeg"
+    alt="Paradise"
+  />
+  <nav className="host-profile-nav">
+    <ul>
+      <li onClick={() => setActiveSection("Influencers")}>Influencers</li>
+      <li onClick={() => setActiveSection("Calendar")}className={activeSection === "Calendar" ? "active" : ""}>Calendar</li>
+      <li
+        onClick={() => setActiveSection("Your Property")}
+        className={activeSection === "Your Property" ? "active" : ""}
+      >
+        Properties
+      </li>
+      <li onClick={() => setActiveSection("Inbox")} className={activeSection === "Inbox" ? "active" : ""}>Inbox</li>
+      <li onClick={() => setActiveSection("Upcoming")}className={activeSection === "Upcoming" ? "active" : ""}>Upcoming</li>
+      <li onClick={() => setActiveSection("Menu")}className={activeSection === "Menu" ? "active" : ""}>Menu</li>
+    </ul>
+  </nav>
+  <div className="host-profile-user-section">
+    <img
+      className="host-profile-user-photo"
+      src="/path-to-user-photo.jpg" // Replace with dynamic user profile photo URL
+      alt="User Profile"
+    />
+    <div className="hamburger-menu" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+      <div className="line"></div>
+      <div className="line"></div>
+      <div className="line"></div>
+    </div>
+    {isMenuOpen && (
+      <div className="dropdown-menu">
+        <ul>
+          <li>Profile</li>
+          <li>Settings</li>
+          <li>Saved</li>
+          <li>Payments</li>
+          <li>List Your Property</li>
+          <li>Referral Program</li>
+          <li>Switch to Travelling</li>
+          <hr />
+          <li>Help Center</li>
+          <li>Resources</li>
+          <li>Feedback</li>
+          <li onClick={handleLogout}>Logout</li>
+        </ul>
+      </div>
+    )}
+  </div>
+</header>
+
       <main className="host-profile-main">{renderActiveSection()}</main>
     </div>
   );

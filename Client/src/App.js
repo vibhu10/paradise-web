@@ -26,8 +26,8 @@ function App() {
         
           <Route path='/influencer' element={<EdifInfluencerProfile/>}/>
           <Route path='/influencer/inbox' element={<Inbox/>}/>
-          <Route path='/hostlogin'  element={<UserHome/>}/>
-          <Route path='/newHost' element={<HostProfile/>}/>
+          
+          <Route path='/hostlogin' element={<HostProfile/>}/>
          <Route path='/superAdmin' element={<AdminHome/>}/>
          
 
