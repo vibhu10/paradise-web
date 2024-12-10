@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './guide-book.css';
+import './house-manula.css';
 
 export default function HouseManual({ onSave, selectedPropertyData }) {
     const [manualText, setManualText] = useState('');

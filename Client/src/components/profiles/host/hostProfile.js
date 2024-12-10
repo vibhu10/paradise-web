@@ -21,15 +21,13 @@ import WifiDetails from "./check-in-out/Wifi-Details";
 import UpcomingReservations from "./host-nav-bar/UpcomingReservations";
 import Messages from "./host-nav-bar/Messages";
 
-import CalendarWithBookings from "./host-nav-bar/CalendarComponent";
+
+import BookingCalendar from "./host-nav-bar/CalendarComponent";
 
 
 
 // Placeholder components for other sections
 const Menu = () => <div>Menu Component</div>;
-
-const Influencers = () => <div>Influencers Component</div>;
-const Inbox = () => <div>Inbox Component</div>;
 
 
 export default function HostProfile() {
@@ -307,7 +305,7 @@ export default function HostProfile() {
     } else if (activeSection === "Menu") {
       return <Menu />;
     } else if (activeSection === "Calendar") {
-      return <CalendarWithBookings/>;
+      return <BookingCalendar/>;
     } else if (activeSection === "Influencers") {
       return  <></>;
     } else if (activeSection === "Inbox") {
@@ -354,7 +352,7 @@ export default function HostProfile() {
     {isMenuOpen && (
       <div className="dropdown-menu">
         <ul>
-          <li>Profile</li>
+          <li onClick={()=>navigate("/user-profile")}>Profile</li>
           <li>Settings</li>
           <li>Saved</li>
           <li>Payments</li>

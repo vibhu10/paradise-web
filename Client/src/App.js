@@ -5,11 +5,12 @@ import Home from './components/Home/Home';
 import  EdifInfluencerProfile from './components/influencer/Edif-Influencer-Profile';
 import Inbox from './components/influencer/Inbox'
 import HostRegistration from './components/Host-Registration/Host-Registration';
-import UserHome from './components/Host-login/UserHome';
+
 import ProfilePage from './components/profiles/guest/profilePage';
 
 import AdminHome from './components/profiles/admin/AdminHome';
 import HostProfile from './components/profiles/host/HostProfile';
+
 
 
 function App() {
