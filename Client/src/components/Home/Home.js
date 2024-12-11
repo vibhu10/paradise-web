@@ -539,7 +539,7 @@ export default function Home() {
 
 
       {/* Footer */}
-      <div className="home-footer">Footer content here</div>
+
     </div>
   );
 }

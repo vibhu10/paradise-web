@@ -44,17 +44,18 @@ export default function Directions({ selectedPropertyData, onSave }) {
       });
       setAddressData({
         country: address?.country || "",
-        flat: address?.
-        flat || "",
+        flat: address?.flat
+ || "",
         street: address?.
-        street
-         || "",
+street
+ || "",
         landmark: address?.landmark || "",
         district: address?.district || "",
         city: address?.city || "",
         state: address?.state || "",
-        pinCode: address?.
-        pinCode || "",
+        pinCode
+: address?.pinCode
+ || "",
       });
       setShowLocation(location || false);
     }
@@ -118,13 +119,17 @@ export default function Directions({ selectedPropertyData, onSave }) {
       });
       setAddressData({
         country: address?.country || "",
-        flat: address?.houseAndFlat || "",
-        street: address?.streetAddress || "",
+        flat: address?.flat
+ || "",
+        street: address?.
+street
+ || "",
         landmark: address?.landmark || "",
         district: address?.district || "",
         city: address?.city || "",
         state: address?.state || "",
-        pinCode: address?.pin || "",
+        pinCode:address?.pinCode
+ || "",
       });
       setShowLocation(location || false);
     }
@@ -257,8 +262,9 @@ export default function Directions({ selectedPropertyData, onSave }) {
         <input
           type="text"
           name="pinCode"
-          placeholder="PIN code"
-          value={addressData.pinCode}
+          placeholder="pinCode"
+          value={addressData.pinCode
+}
           onChange={handleInputChange}
         />
       </div>

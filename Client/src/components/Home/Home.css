@@ -283,7 +283,7 @@
   .hotel-data {
     width: 100vw;
     height: 81vh;
-    border: 2px solid black;
+  
     display: flex
 ;
     flex-wrap: wrap;

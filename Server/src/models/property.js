@@ -137,189 +137,619 @@ export default class PropertyModel {
   
 // Initialize the static properties list
 PropertyModel.properties = [
-  // Property 1
-  {
-    propertyType: ["Unique", "Luxury", "Group Stays"],
-    Address: {
-      country: "Hungary",
-      houseAndFlat: "Flat A101",
-      streetAddress: "Main Street 12",
-      landmark: "Near Central Park",
-      district: "Budapest District",
-      city: "Budapest",
-      state: "Pest",
-      pin: "1007",
-      showLocation: true,
-    },
-    basicDetails: {
-      Guests: 4,
-      Bedrooms: 2,
-      Beds: 3,
-      Bathrooms: 2,
-    },
-    amenities: [
-      { category: "Essentials", options: ["Wifi", "Air Conditioning"] },
-      { category: "Kitchen & Dining", options: ["Full Kitchen"] },
-      { category: "Laundry", options: ["Dryer"] },
-      { category: "Parking", options: ["Free parking on premises"] },
-      { category: "Outdoor & Recreation", options: ["Pool", "Firepit"] },
-      { category: "Bathroom", options: ["Bathtub"] },
-    ],
-    coverPhotos: {
-      1: { name: "Living Room", image: "https://via.placeholder.com/400?text=Living+Room" },
-      2: { name: "Master Bedroom", image: "https://via.placeholder.com/400?text=Master+Bedroom" },
-      cover: { name: "Cover Photo", image: "https://via.placeholder.com/600?text=Cover+Photo" },
-    },
-    title: "Luxury Apartment in Budapest",
-    description: "A spacious apartment with modern amenities and a private balcony.",
-    price: {
-      BaseCharge: 2000,
-      ServiceFees: 300,
-      PriceBeforeTax: 2300,
-      YouEarn: 1700,
-    },
-    availability: {
-      minimumNight: 2,
-      maximumNight: 7,
-      checkinTime: "2024-12-06T14:00:00.000Z",
-    },
-    bedrooms: [
-      {
-        id: 1,
-        name: "Bedroom 1",
-        photos: ["https://via.placeholder.com/400?text=Bedroom+1"],
-        sleepingArrangement: {
-          single: 1,
-          double: 1,
-          queen: 0,
-          king: 1,
-          smallDouble: 0,
-          bunkBed: 0,
-          sofaBed: 1,
-          sofa: 0,
-        },
+   {
+      title: "Lakeview Paradise",
+      internalName: "property_one",
+      propertyType: ["Luxury", "Waterfront", "Scenic Views"],
+      Address: {
+        country: "Switzerland",
+        houseAndFlat: "flat no 12",
+        streetAddress: "street no one",
+        landmark: "near city center",
+        district: "swiz",
+        city: "Zurich",
+        state: "zrich",
+        pin: "12445",
+        showLocation: true
       },
-    ],
-    photoGallery: [
-      { name: "Living Room", Photos: ["https://via.placeholder.com/400?text=Living+Room"] },
-      { name: "Kitchen", Photos: ["https://via.placeholder.com/400?text=Kitchen"] },
-      { name: "Exterior", Photos: ["https://via.placeholder.com/400?text=Exterior"] },
-    ],
-    checkinOut: {
-      checkin: ["2024-12-06T14:00:00.000Z"],
-      checkout: ["2024-12-13T10:00:00.000Z"],
-    },
-    quiteHour: {
-      quiteHourStart: ["22:00"],
-      quiteHourEnd: ["06:00"],
-    },
-    AddInstruction: ["Please remove shoes before entering.", "Quiet hours after 10 PM."],
-    houseRules: {
-      petsAllowed: true,
-      maxNoPets: 1,
-      smokingAllowed: false,
-      commercialPhotography: false,
-      eventAllowed: false,
-      numberOfGuests: 4,
-    },
-    cards: [],
-    payoutMethod: "PayPal",
-    billingCountry: "Canada",
-    ownerEmail: "vibhu@admin.com",
-    id: 1,
-    propertyName:"propertyOne"
-  },
-  // Property 2
-  {
-    propertyType: ["Seasonal", "Romantic", "Unique"],
-    Address: {
-      country: "Canada",
-      houseAndFlat: "Cottage B3",
-      streetAddress: "12 Snowy Lane",
-      landmark: "Near Lake Louise",
-      district: "Banff",
-      city: "Calgary",
-      state: "Alberta",
-      pin: "T0L",
-      showLocation: true,
-    },
-    basicDetails: {
-      Guests: 6,
-      Bedrooms: 3,
-      Beds: 4,
-      Bathrooms: 2,
-    },
-    amenities: [
-      { category: "Essentials", options: ["Wifi", "Heating"] },
-      { category: "Kitchen & Dining", options: ["Microwave", "Coffee Maker"] },
-      { category: "Outdoor & Recreation", options: ["Jacuzzi", "Grill"] },
-      { category: "Parking", options: ["Private Parking"] },
-    ],
-    coverPhotos: {
-      1: { name: "Exterior", image: "https://via.placeholder.com/400?text=Exterior" },
-      2: { name: "Bedroom", image: "https://via.placeholder.com/400?text=Bedroom" },
-      cover: { name: "Living Room", image: "https://via.placeholder.com/600?text=Living+Room" },
-    },
-    title: "Snowy Mountain Retreat",
-    description: "Escape to the tranquility of the mountains with this cozy winter cabin.",
-    price: {
-      BaseCharge: 3000,
-      ServiceFees: 450,
-      PriceBeforeTax: 3450,
-      YouEarn: 2550,
-    },
-    availability: {
-      minimumNight: 3,
-      maximumNight: 10,
-      checkinTime: "2024-12-10T15:00:00.000Z",
-    },
-    bedrooms: [
-      {
-        id: 1,
-        name: "Master Bedroom",
-        photos: ["https://via.placeholder.com/400?text=Master+Bedroom"],
-        sleepingArrangement: {
-          single: 0,
-          double: 1,
-          queen: 1,
-          king: 0,
-          smallDouble: 0,
-          bunkBed: 0,
-          sofaBed: 1,
-          sofa: 0,
-        },
+      basicDetails: {
+        Guests: 2,
+        Bedrooms: 1,
+        Beds: 3,
+        Bathrooms: 2
       },
-    ],
-    photoGallery: [
-      { name: "Living Room", Photos: ["https://via.placeholder.com/400?text=Living+Room"] },
-      { name: "Kitchen", Photos: ["https://via.placeholder.com/400?text=Kitchen"] },
-      { name: "Balcony", Photos: ["https://via.placeholder.com/400?text=Balcony"] },
-    ],
-    checkinOut: {
-      checkin: ["2024-12-10T15:00:00.000Z"],
-      checkout: ["2024-12-15T10:00:00.000Z"],
-    },
-    quiteHour: {
-      quiteHourStart: ["21:00"],
-      quiteHourEnd: ["07:00"],
-    },
-    AddInstruction: ["Do not leave fireplace unattended.", "Keep snowshoes inside the mudroom."],
-    houseRules: {
-      petsAllowed: false,
-      maxNoPets: 0,
-      smokingAllowed: false,
-      commercialPhotography: true,
-      eventAllowed: true,
-      numberOfGuests: 6,
-    },
-    cards: [],
-    payoutMethod: "Bank account",
-    billingCountry: "USA",
-    ownerEmail: "emma@host.com",
-    id: 2,
-     propertyName:"propertyTwo"
-  },
-  // Properties 3–8 (Additional properties, structured similarly) ...
+      amenities: [
+        {
+          category: "Essentials",
+          options: ["Wifi", "Air Conditioning"]
+        },
+        {
+          category: "Kitchen & Dining",
+          options: ["Kitchen"]
+        },
+        {
+          category: "Laundry",
+          options: ["Washing Machine"]
+        },
+        {
+          category: "Parking",
+          options: ["Free parking on premises", "Paid parking on premises"]
+        },
+        {
+          category: "Workspace",
+          options: ["Dedicated Workspace"]
+        },
+        {
+          category: "Entertainment",
+          options: ["TV"]
+        },
+        {
+          category: "Outdoor & Recreation",
+          options: ["Pool", "Firepit", "Outdoor Shower"]
+        },
+        {
+          category: "Bathroom",
+          options: ["Bathtub"]
+        }
+      ],
+      coverPhotos: {
+        1: {
+          name: "Living Room",
+          image: "blob:http://localhost:3001/84d2fdfa-87a4-4e32-b442-a8de6ec608f5"
+        },
+        2: {
+          name: "Bedroom",
+          image: "/image (1).png"
+        },
+        4: {
+          name: "balcony view",
+          image: "blob:http://localhost:3001/6485e5ad-7498-4a54-872b-4543cd85cbf1"
+        },
+        cover: {
+          name: "Cover Photo",
+          image: "blob:http://localhost:3001/1037382d-6acb-451a-9dee-bbb8f72e935a"
+        }
+      },
+      description: "This is a property with a very good view of mountains and a lake.",
+      price: {
+        BaseCharge: 2000,
+        ServiceFees: 280,
+        PriceBeforeTax: 2280,
+        YouEarn: 1940
+      },
+      availability: {
+        minimumNight: 1,
+        maximumNight: 5,
+        checkinTime: "2024-12-10T05:10:44.887Z"
+      },
+      bedrooms: [
+        {
+          id: 1,
+          name: "Bedroom 1",
+          photos: ["blob:http://localhost:3001/dbdd0dee-ed8e-4979-bf87-971b19a43b24"],
+          sleepingArrangement: {
+            single: 0,
+            double: 0,
+            queen: 0,
+            king: 1,
+            smallDouble: 0,
+            bunkBed: 1,
+            sofaBed: 0,
+            sofa: 0
+          }
+        },
+        {
+          id: 2,
+          name: "pool",
+          photos: ["blob:http://localhost:3001/3088d113-8baf-4207-9db9-403ad3911b9f"],
+          sleepingArrangement: {
+            single: 0,
+            double: 0,
+            queen: 0,
+            king: 0,
+            smallDouble: 0,
+            bunkBed: 0,
+            sofaBed: 0,
+            sofa: 0
+          }
+        }
+      ],
+      photoGallery: [
+        {
+          name: "Living room",
+          Photos: [
+            "blob:http://localhost:3001/23cb0e33-5a62-48fb-bca1-f096c7d1b340",
+            "blob:http://localhost:3001/6cf9527b-883a-423a-ba1e-5f355a30fefa",
+            "blob:http://localhost:3001/6f08699a-b3d4-424d-b4ed-c4387b3e5e19",
+            "blob:http://localhost:3001/e4973e10-6018-439d-9ec0-bf95299ca59d"
+          ]
+        },
+        {
+          name: "Full Kitchen",
+          Photos: []
+        },
+        {
+          name: "Exterior",
+          Photos: [
+            "blob:http://localhost:3001/00fe005a-e44d-4359-84ab-6f82b7c73ad8",
+            "blob:http://localhost:3001/2a5863fb-d5cf-4c2e-b5c7-bf0f4e710123",
+            "blob:http://localhost:3001/6a7cc47a-53f5-4170-912b-259ac89c5f98"
+          ]
+        },
+        {
+          name: "Dining area",
+          Photos: []
+        },
+        {
+          name: "Wash Rooms",
+          Photos: [
+            "blob:http://localhost:3001/70750eac-2488-4f24-bc8c-093b4438e941",
+            "blob:http://localhost:3001/922b8656-e1b6-4a5f-af31-d09871f23403",
+            "blob:http://localhost:3001/1703690d-f7ea-408e-a7fb-3bb4113ac72c"
+          ]
+        }
+      ],
+      checkinOut: {
+        checkin: ["2024-12-10T06:30:00.000Z"],
+        checkout: ["2024-12-10T05:30:00.000Z"]
+      },
+      quiteHour: {
+        quiteHourStart: ["2024-12-09T18:30:00.000Z"],
+        quiteHourEnd: ["2024-12-10T01:30:00.000Z"]
+      },
+      AddInstruction: [
+        "instruction one",
+        "instruction two",
+        "instruction three"
+      ],
+      houseRules: {
+        petsAllowed: true,
+        maxNoPets: 1,
+        smokingAllowed: true,
+        commercialPhotography: true,
+        eventAllowed: true,
+        numberOfGuests: 1
+      },
+      cards: [],
+      payoutMethod: "Bank account",
+      billingCountry: "United States",
+      ownerEmail: "vibhu@admin.com",
+      id: 1
+    }
+    ,
+      {
+        title: "Mountain Retreat",
+        internalName: "property_two",
+        propertyType: ["Rustic", "Mountain View", "Peaceful"],
+        Address: {
+          country: "Canada",
+          houseAndFlat: "Chalet 15",
+          streetAddress: "Alpine Road 23",
+          landmark: "Near Pine Forest",
+          district: "Whistler",
+          city: "Vancouver",
+          state: "British Columbia",
+          pin: "V0N 1B2",
+          showLocation: true
+        },
+        basicDetails: {
+          Guests: 6,
+          Bedrooms: 3,
+          Beds: 4,
+          Bathrooms: 2
+        },
+        amenities: [
+          { category: "Essentials", options: ["Wifi", "Heating"] },
+          { category: "Kitchen & Dining", options: ["Full Kitchen"] },
+          { category: "Outdoor & Recreation", options: ["Hot Tub", "Barbecue Grill"] },
+          { category: "Entertainment", options: ["Board Games"] }
+        ],
+        coverPhotos: {
+          1: { name: "Living Room", image: "https://via.placeholder.com/300" },
+          2: { name: "Bedroom", image: "https://via.placeholder.com/300" },
+          3: { name: "Balcony View", image: "https://via.placeholder.com/300" },
+          cover: { name: "Cover Photo", image: "https://via.placeholder.com/300" }
+        },
+        description: "A cozy retreat with stunning mountain views and peaceful surroundings.",
+        price: {
+          BaseCharge: 2500,
+          ServiceFees: 300,
+          PriceBeforeTax: 2800,
+          YouEarn: 2400
+        },
+        availability: {
+          minimumNight: 2,
+          maximumNight: 10,
+          checkinTime: "2024-12-10T14:00:00Z"
+        },
+        bedrooms: [
+          {
+            id: 1,
+            name: "Master Bedroom",
+            photos: ["https://via.placeholder.com/300"],
+            sleepingArrangement: { king: 1 }
+          },
+          {
+            id: 2,
+            name: "Guest Bedroom",
+            photos: ["https://via.placeholder.com/300"],
+            sleepingArrangement: { queen: 1 }
+          }
+        ],
+        photoGallery: [
+          { name: "Living Room", Photos: ["https://via.placeholder.com/300"] },
+          { name: "Kitchen", Photos: ["https://via.placeholder.com/300"] },
+          { name: "Exterior", Photos: ["https://via.placeholder.com/300"] }
+        ],
+        checkinOut: {
+          checkin: ["2024-12-11T15:00:00Z"],
+          checkout: ["2024-12-12T10:00:00Z"]
+        },
+        quiteHour: {
+          quiteHourStart: ["2024-12-10T22:00:00Z"],
+          quiteHourEnd: ["2024-12-11T06:00:00Z"]
+        },
+        AddInstruction: [
+          "No noise after 10 PM",
+          "Dispose of trash in the bins provided"
+        ],
+        houseRules: {
+          petsAllowed: false,
+          smokingAllowed: false,
+          eventAllowed: false,
+          numberOfGuests: 6
+        },
+        cards: [],
+        payoutMethod: "Bank account",
+        billingCountry: "Canada",
+        ownerEmail: "owner1@example.com",
+        id: 2
+      },
+      {
+        title: "Beachside Villa",
+        internalName: "property_three",
+        propertyType: ["Luxury", "Beachfront", "Modern"],
+        Address: {
+          country: "Australia",
+          houseAndFlat: "Villa 8",
+          streetAddress: "Ocean Drive",
+          landmark: "Near Surfer's Point",
+          district: "Gold Coast",
+          city: "Brisbane",
+          state: "Queensland",
+          pin: "4217",
+          showLocation: true
+        },
+        basicDetails: {
+          Guests: 8,
+          Bedrooms: 4,
+          Beds: 6,
+          Bathrooms: 3
+        },
+        amenities: [
+          { category: "Essentials", options: ["Wifi", "Air Conditioning"] },
+          { category: "Kitchen & Dining", options: ["Fully Equipped Kitchen"] },
+          { category: "Outdoor & Recreation", options: ["Swimming Pool", "Beach Access"] },
+          { category: "Entertainment", options: ["Smart TV"] }
+        ],
+        coverPhotos: {
+          1: { name: "Living Room", image: "https://via.placeholder.com/300" },
+          2: { name: "Bedroom", image: "https://via.placeholder.com/300" },
+          3: { name: "Balcony View", image: "https://via.placeholder.com/300" },
+          cover: { name: "Cover Photo", image: "https://via.placeholder.com/300" }
+        },
+        description: "A luxurious villa with direct beach access and stunning ocean views.",
+        price: {
+          BaseCharge: 4000,
+          ServiceFees: 500,
+          PriceBeforeTax: 4500,
+          YouEarn: 3700
+        },
+        availability: {
+          minimumNight: 3,
+          maximumNight: 15,
+          checkinTime: "2024-12-10T12:00:00Z"
+        },
+        bedrooms: [
+          {
+            id: 1,
+            name: "Master Suite",
+            photos: ["https://via.placeholder.com/300"],
+            sleepingArrangement: { king: 1 }
+          },
+          {
+            id: 2,
+            name: "Guest Room",
+            photos: ["https://via.placeholder.com/300"],
+            sleepingArrangement: { queen: 1 }
+          }
+        ],
+        photoGallery: [
+          { name: "Living Room", Photos: ["https://via.placeholder.com/300"] },
+          { name: "Kitchen", Photos: ["https://via.placeholder.com/300"] },
+          { name: "Exterior", Photos: ["https://via.placeholder.com/300"] }
+        ],
+        checkinOut: {
+          checkin: ["2024-12-11T14:00:00Z"],
+          checkout: ["2024-12-12T11:00:00Z"]
+        },
+        quiteHour: {
+          quiteHourStart: ["2024-12-10T23:00:00Z"],
+          quiteHourEnd: ["2024-12-11T07:00:00Z"]
+        },
+        AddInstruction: ["Keep gates closed", "Shower before using the pool"],
+        houseRules: {
+          petsAllowed: true,
+          smokingAllowed: false,
+          eventAllowed: true,
+          numberOfGuests: 8
+        },
+        cards: [],
+        payoutMethod: "PayPal",
+        billingCountry: "Australia",
+        ownerEmail: "vibhu@admin.com",
+        id: 3
+      }
+    
+      ,
+        {
+          title: "Oceanfront Bliss",
+          internalName: "property_four",
+          propertyType: ["Luxury", "Beachfront", "Scenic Views"],
+          Address: {
+            country: "Maldives",
+            houseAndFlat: "Villa 15",
+            streetAddress: "Coral Road",
+            landmark: "Near Coral Reef Resort",
+            district: "Malé Atoll",
+            city: "Malé",
+            state: "Maldives",
+            pin: "20224",
+            showLocation: true
+          },
+          basicDetails: {
+            Guests: 4,
+            Bedrooms: 2,
+            Beds: 3,
+            Bathrooms: 2
+          },
+          amenities: [
+            {
+              category: "Essentials",
+              options: ["Wifi", "Air Conditioning", "Heating"]
+            },
+            {
+              category: "Kitchen & Dining",
+              options: ["Fully Equipped Kitchen"]
+            },
+            {
+              category: "Outdoor & Recreation",
+              options: ["Private Pool", "Beach Access"]
+            }
+          ],
+          coverPhotos: {
+            1: {
+              name: "Living Room",
+              image: "https://via.placeholder.com/150"
+            },
+            2: {
+              name: "Bedroom",
+              image: "https://via.placeholder.com/150"
+            },
+            cover: {
+              name: "Cover Photo",
+              image: "https://via.placeholder.com/150"
+            }
+          },
+          description: "Experience tranquility in a private beachfront villa with breathtaking ocean views.",
+          price: {
+            BaseCharge: 4000,
+            ServiceFees: 400,
+            PriceBeforeTax: 4400,
+            YouEarn: 3600
+          },
+          availability: {
+            minimumNight: 3,
+            maximumNight: 10,
+            checkinTime: "2024-12-20T15:00:00.000Z"
+          },
+          bedrooms: [
+            {
+              id: 1,
+              name: "Master Bedroom",
+              photos: ["https://via.placeholder.com/150"],
+              sleepingArrangement: {
+                single: 0,
+                double: 1,
+                queen: 1,
+                king: 0,
+                smallDouble: 0,
+                bunkBed: 0,
+                sofaBed: 0,
+                sofa: 0
+              }
+            },
+            {
+              id: 2,
+              name: "Guest Bedroom",
+              photos: ["https://via.placeholder.com/150"],
+              sleepingArrangement: {
+                single: 2,
+                double: 0,
+                queen: 0,
+                king: 0,
+                smallDouble: 0,
+                bunkBed: 0,
+                sofaBed: 0,
+                sofa: 0
+              }
+            }
+          ],
+          photoGallery: [
+            {
+              name: "Pool Area",
+              Photos: ["https://via.placeholder.com/150"]
+            },
+            {
+              name: "Beach View",
+              Photos: ["https://via.placeholder.com/150"]
+            }
+          ],
+          checkinOut: {
+            checkin: ["2024-12-20T15:00:00.000Z"],
+            checkout: ["2024-12-30T11:00:00.000Z"]
+          },
+          quiteHour: {
+            quiteHourStart: ["2024-12-19T22:00:00.000Z"],
+            quiteHourEnd: ["2024-12-20T07:00:00.000Z"]
+          },
+          AddInstruction: [
+            "Use eco-friendly products during your stay.",
+            "Do not disturb marine life in the nearby reef."
+          ],
+          houseRules: {
+            petsAllowed: false,
+            maxNoPets: 0,
+            smokingAllowed: false,
+            commercialPhotography: true,
+            eventAllowed: false,
+            numberOfGuests: 4
+          },
+          cards: [],
+          payoutMethod: "Bank account",
+          billingCountry: "United States",
+          ownerEmail: "vibhu@admin.com",
+          id: 4
+        },
+        {
+          title: "Forest Retreat",
+          internalName: "property_five",
+          propertyType: ["Nature", "Adventure", "Wellness"],
+          Address: {
+            country: "Canada",
+            houseAndFlat: "Cabin 23",
+            streetAddress: "Evergreen Road",
+            landmark: "Near National Park Entrance",
+            district: "Ontario",
+            city: "Toronto",
+            state: "Ontario",
+            pin: "M5B 2H1",
+            showLocation: true
+          },
+          basicDetails: {
+            Guests: 6,
+            Bedrooms: 3,
+            Beds: 6,
+            Bathrooms: 3
+          },
+          amenities: [
+            {
+              category: "Essentials",
+              options: ["Wifi", "Heating"]
+            },
+            {
+              category: "Outdoor & Recreation",
+              options: ["Hiking Trails", "Firepit", "Hot Tub"]
+            },
+            {
+              category: "Kitchen & Dining",
+              options: ["Outdoor BBQ", "Modern Kitchen"]
+            }
+          ],
+          coverPhotos: {
+            1: {
+              name: "Cabin Front",
+              image: "https://via.placeholder.com/150"
+            },
+            cover: {
+              name: "Cover Photo",
+              image: "https://via.placeholder.com/150"
+            }
+          },
+          description: "Reconnect with nature in this cozy forest cabin, perfect for adventure seekers and families.",
+          price: {
+            BaseCharge: 3500,
+            ServiceFees: 350,
+            PriceBeforeTax: 3850,
+            YouEarn: 3200
+          },
+          availability: {
+            minimumNight: 2,
+            maximumNight: 14,
+            checkinTime: "2024-12-22T16:00:00.000Z"
+          },
+          bedrooms: [
+            {
+              id: 1,
+              name: "Master Bedroom",
+              photos: ["https://via.placeholder.com/150"],
+              sleepingArrangement: {
+                single: 0,
+                double: 0,
+                queen: 1,
+                king: 0,
+                smallDouble: 0,
+                bunkBed: 0,
+                sofaBed: 0,
+                sofa: 0
+              }
+            },
+            {
+              id: 2,
+              name: "Kids Room",
+              photos: ["https://via.placeholder.com/150"],
+              sleepingArrangement: {
+                single: 4,
+                double: 0,
+                queen: 0,
+                king: 0,
+                smallDouble: 0,
+                bunkBed: 2,
+                sofaBed: 0,
+                sofa: 0
+              }
+            }
+          ],
+          photoGallery: [
+            {
+              name: "Living Room",
+              Photos: ["https://via.placeholder.com/150"]
+            },
+            {
+              name: "Hot Tub Area",
+              Photos: ["https://via.placeholder.com/150"]
+            }
+          ],
+          checkinOut: {
+            checkin: ["2024-12-22T16:00:00.000Z"],
+            checkout: ["2024-12-29T11:00:00.000Z"]
+          },
+          quiteHour: {
+            quiteHourStart: ["2024-12-21T23:00:00.000Z"],
+            quiteHourEnd: ["2024-12-22T07:00:00.000Z"]
+          },
+          AddInstruction: [
+            "Bring your own firewood.",
+            "Use designated trails for hiking."
+          ],
+          houseRules: {
+            petsAllowed: true,
+            maxNoPets: 2,
+            smokingAllowed: false,
+            commercialPhotography: true,
+            eventAllowed: true,
+            numberOfGuests: 6
+          },
+          cards: [],
+          payoutMethod: "PayPal",
+          billingCountry: "United States",
+          ownerEmail: "vibhu@admin.com",
+          id: 5
+        }
+      
+      
+  
+
 ];
 
 

@@ -217,91 +217,139 @@ const amenitiesData = [
       { id: "smartHome", name: "Smart home devices (e.g., Alexa, Google Home)", icon: faRobot },
     ],
   },
-];export default function AmenitiesEdit({ selectedPropertyData, onEditProperty }) {
-  const [amenities, setAmenities] = useState(() => {
-    // Initialize state from selectedPropertyData
-    return amenitiesData.map(category => {
-      const selectedCategory = selectedPropertyData?.amenities?.find(cat => cat.category === category.category);
-      return {
-        ...category,
-        options: category.options.map(option => ({
-          ...option,
-          selected: selectedCategory?.options?.includes(option.id) || false, // Mark as selected if available
-        }))
-      };
-    });
-  });
+];
 
+export default function AmenitiesEdit({ selectedPropertyData, onSave }) {
+  const initialState = {
+    propertyId: selectedPropertyData?.id || null, // Extract property ID
+    amenities: [],
+  };
+
+  const [formData, setFormData] = useState(initialState);
   const [selectedCategory, setSelectedCategory] = useState("Essentials");
   const navRef = useRef(null);
 
+  // Sync state with selectedPropertyData when it changes
+  useEffect(() => {
+    if (selectedPropertyData) {
+      const updatedAmenities = amenitiesData.map((category) => {
+        const selectedCategory = selectedPropertyData?.amenities?.find(
+          (cat) => cat.category === category.category
+        );
+        return {
+          ...category,
+          options: category.options.map((option) => ({
+            ...option,
+            selected: selectedCategory?.options?.includes(option.id) || false,
+          })),
+        };
+      });
+
+      setFormData({
+        propertyId: selectedPropertyData.id || null,
+        amenities: updatedAmenities,
+      });
+    }
+  }, [selectedPropertyData]);
+
   const scrollNav = (distance) => {
     if (navRef.current) {
-      navRef.current.scrollBy({
-        left: distance,
-        behavior: "smooth",
-      });
+      navRef.current.scrollBy({ left: distance, behavior: "smooth" });
     }
   };
 
   const handleToggleOption = (category, optionId) => {
-    const updatedAmenities = amenities.map(cat => 
+    const updatedAmenities = formData.amenities.map((cat) =>
       cat.category === category
         ? {
             ...cat,
-            options: cat.options.map(option => 
+            options: cat.options.map((option) =>
               option.id === optionId
-                ? { ...option, selected: !option.selected } // Toggle selected state
+                ? { ...option, selected: !option.selected }
                 : option
-            )
+            ),
           }
         : cat
     );
-    setAmenities(updatedAmenities);
+    setFormData((prevState) => ({
+      ...prevState,
+      amenities: updatedAmenities,
+    }));
   };
 
   const handleSave = () => {
-    console.log("Saving the following data:", amenities);
-    if (onEditProperty) {
-      onEditProperty({ ...selectedPropertyData, amenities });
+    if (!formData.propertyId) {
+      console.error("Error: Property ID not found.");
+      return;
     }
+
+    // Format the amenities payload with only selected options
+    const formattedAmenities = formData.amenities.map((cat) => ({
+      category: cat.category,
+      options: cat.options
+        .filter((option) => option.selected)
+        .map((option) => option.id),
+    }));
+
+    const payload = {
+      propertyId: formData.propertyId,  // Ensure propertyId is correctly included
+      amenities: formattedAmenities,
+    };
+
+    console.log("Saving amenities:", payload);
+
+    // Call the onSave callback and pass the payload
+    if (onSave) onSave(payload);
   };
 
-  useEffect(() => {
-  
-  }, [amenities]);
+  const handleReset = () => {
+    setFormData({
+      ...formData,
+      amenities: amenitiesData, // Reset to initial amenities
+    });
+  };
 
   return (
     <div className="amenities-edit-container">
       <div className="amenities-nav-wrapper">
-        <button className="scroll-btn left" onClick={() => scrollNav(-200)}>&#8249;</button>
+        <button className="scroll-btn left" onClick={() => scrollNav(-200)}>
+          &#8249;
+        </button>
         <div className="amenities-nav" ref={navRef}>
-          {amenities.map(cat => (
+          {formData.amenities.map((cat) => (
             <button
               key={cat.category}
-              className={`amenity-tab ${cat.category === selectedCategory ? "active" : ""}`}
+              className={`amenity-tab ${
+                cat.category === selectedCategory ? "active" : ""
+              }`}
               onClick={() => setSelectedCategory(cat.category)}
             >
               {cat.category}
             </button>
           ))}
         </div>
-        <button className="scroll-btn right" onClick={() => scrollNav(200)}>&#8250;</button>
+        <button className="scroll-btn right" onClick={() => scrollNav(200)}>
+          &#8250;
+        </button>
       </div>
+
       <div className="amenities-grid">
-        {amenities.find(cat => cat.category === selectedCategory)?.options.map(option => (
-          <div
-            key={option.id}
-            className={`amenity-item ${option.selected ? "selected" : ""}`}
-            onClick={() => handleToggleOption(selectedCategory, option.id)}
-          >
-            <FontAwesomeIcon icon={option.icon} />
-            <span>{option.name}</span>
-          </div>
-        ))}
+        {formData.amenities
+          .find((cat) => cat.category === selectedCategory)
+          ?.options.map((option) => (
+            <div
+              key={option.id}
+              className={`amenity-item ${option.selected ? "selected" : ""}`}
+              onClick={() => handleToggleOption(selectedCategory, option.id)}
+            >
+              <FontAwesomeIcon icon={option.icon} />
+              <span>{option.name}</span>
+            </div>
+          ))}
       </div>
+
       <div className="amenities-actions">
-        <button className="btn btn-secondary" onClick={() => setAmenities(amenitiesData)}>
+        <button className="btn btn-secondary" onClick={handleReset}>
           Cancel
         </button>
         <button className="btn btn-primary" onClick={handleSave}>

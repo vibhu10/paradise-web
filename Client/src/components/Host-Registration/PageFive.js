@@ -4,13 +4,15 @@ import "../Host-Registration/css/pageFive.css";
 export function PageFive({ handleNext, handleBack, handleSaveProperty }) {
   const [formData, setFormData] = useState({
     country: "",
-    houseAndFlat: "",
-    streetAddress: "",
+
+    flat: "",
+
+    street: "",
     landmark: "",
     district: "",
     city: "",
     state: "",
-    pin: "",
+    pinCode: "",
     showLocation: false,
   });
 
@@ -65,11 +67,11 @@ export function PageFive({ handleNext, handleBack, handleSaveProperty }) {
   const validateFields = async () => {
     const newErrors = {};
     if (!formData.country) newErrors.country = "Country/Region is required";
-    if (!formData.streetAddress) newErrors.streetAddress = "Street address is required";
+    if (!formData.street) newErrors.street = "Street address is required";
     if (!formData.city) newErrors.city = "City / Town is required";
-    if (!formData.state) newErrors.state = "State / Union Territory is required";
+    if (!formData.state)
+      newErrors.state = "State / Union Territory is required";
     if (!formData.pin) newErrors.pin = "Pin code is required";
-  
 
     return newErrors;
   };
@@ -100,7 +102,8 @@ export function PageFive({ handleNext, handleBack, handleSaveProperty }) {
         <div className="page-5-text">
           <p className="page-5-title">Confirm your address</p>
           <p className="page-5-subtitle">
-            Your address is only shared with guests after they’ve made a reservation.
+            Your address is only shared with guests after they’ve made a
+            reservation.
           </p>
         </div>
         <div className="page-5-form-data">
@@ -111,7 +114,9 @@ export function PageFive({ handleNext, handleBack, handleSaveProperty }) {
                 name="country"
                 value={formData.country}
                 onChange={handleChange}
-                className={`page-5-input ${errors.country ? "input-error" : ""}`}
+                className={`page-5-input ${
+                  errors.country ? "input-error" : ""
+                }`}
               >
                 <option value="" disabled>
                   Country/Region
@@ -129,7 +134,7 @@ export function PageFive({ handleNext, handleBack, handleSaveProperty }) {
               type="text"
               name="houseAndFlat"
               placeholder="Flat, house, etc. (if applicable)"
-              value={formData.houseAndFlat}
+              value={formData.flat}
               onChange={handleChange}
               className="page-5-input"
             />
@@ -137,13 +142,13 @@ export function PageFive({ handleNext, handleBack, handleSaveProperty }) {
             <div className="form-group">
               <input
                 type="text"
-                name="streetAddress"
+                name="street"
                 placeholder="Street address"
-                value={formData.streetAddress}
+                value={formData.street}
                 onChange={handleChange}
-                className={`page-5-input ${errors.streetAddress ? "input-error" : ""}`}
+                className={`page-5-input ${errors.street ? "input-error" : ""}`}
               />
-              {errors.streetAddress && <p className="error-text">{errors.streetAddress}</p>}
+              {errors.street && <p className="error-text">{errors.street}</p>}
             </div>
 
             <div className="page-5-form-row">
@@ -185,7 +190,9 @@ export function PageFive({ handleNext, handleBack, handleSaveProperty }) {
                   placeholder="State/Union Territory"
                   value={formData.state}
                   onChange={handleChange}
-                  className={`page-5-input ${errors.state ? "input-error" : ""}`}
+                  className={`page-5-input ${
+                    errors.state ? "input-error" : ""
+                  }`}
                 />
                 {errors.state && <p className="error-text">{errors.state}</p>}
               </div>
@@ -194,21 +201,23 @@ export function PageFive({ handleNext, handleBack, handleSaveProperty }) {
             <div className="form-group">
               <input
                 type="number"
-                name="pin"
+                name="pinCode
+street
+"
                 placeholder="Pin code"
-                value={formData.pin}
+                value={formData.pinCode}
                 onChange={handleChange}
-                className={`page-5-input ${errors.pin ? "input-error" : ""}`}
+                className={`page-5-input ${errors.pinCode ? "input-error" : ""}`}
               />
-              {errors.pin && <p className="error-text">{errors.pin}</p>}
+              {errors.pin && <p className="error-text">{errors.pinCode}</p>}
             </div>
 
             <label className="page-5-switch">
               <div className="page-5-switch-content">
                 <h6>Show your specific location</h6>
                 <p>
-                  Make it clear to guests where your place is located. We'll only share
-                  your address after they've made a reservation.
+                  Make it clear to guests where your place is located. We'll
+                  only share your address after they've made a reservation.
                 </p>
               </div>
               <input
@@ -242,7 +251,10 @@ export function PageFive({ handleNext, handleBack, handleSaveProperty }) {
           Back
         </button>
         <div className="page-5-progress-bar"></div>
-        <button onClick={handleNextClick} className="page-5-btn page-5-next-btn">
+        <button
+          onClick={handleNextClick}
+          className="page-5-btn page-5-next-btn"
+        >
           Next
         </button>
       </div>
