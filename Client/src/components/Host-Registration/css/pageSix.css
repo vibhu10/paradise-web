@@ -1,0 +1,124 @@
+/* PageSix Component Styles */
+.page-six-container {
+  /* height: 100vh; */
+  height: 81vh;
+  display: flex
+;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* padding: 20px; */
+  font-family: Arial, sans-serif;
+  background-color: #fff;
+}
+  .page-six-header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .page-six-header h2 {
+    font-size: 22px;
+    margin-bottom: 5px;
+    font-weight: 600;
+  }
+  
+  .page-six-header p {
+    font-size: 14px;
+    color: gray;
+    font-weight: 500;
+  }
+  
+  .page-six-counter-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .page-six-counter-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px 15px;
+  }
+  
+  .page-six-counter-label {
+    font-size: 16px;
+    color: black;
+    font-weight: 500;
+  }
+  
+  .page-six-counter-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .page-six-counter-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 32px;
+    height: 32px;
+    font-size: 18px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: white;
+    cursor: pointer;
+    color: black;
+}
+  .page-six-counter-button:hover {
+    background-color: #f5f5f5;
+  }
+  
+  .page-six-counter-value {
+    font-size: 16px;
+    font-weight: 500;
+    color: black;
+  }
+  
+
+  /* Footer styling */
+.page-six-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Spread Back and Next buttons */
+    width: 100%; /* Full width of the screen */
+    position: fixed; /* Fixed at the bottom */
+    bottom: 0;
+    left: 0;
+    background-color: #fff; /* Background color */
+    padding: 16px;
+    box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Back and Next buttons */
+  .page-six-back-btn,
+  .page-six-footer-button {
+    padding: 10px 20px;
+    width: 100px;
+    border-radius: 20px;
+    border: none;
+    background-color: #198E78;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .page-six-back-btn:hover,
+  .page-six-next-btn:hover {
+    background-color: #388e3c;
+  }
+  
+  .page-six-progress-bar {
+    width: 750px;
+    height: 4px;
+    background-color: #198E78;
+    border-radius: 2px;
+    margin: 0 16px;
+    position: relative;
+    left: -823px;
+    top: -37px;}

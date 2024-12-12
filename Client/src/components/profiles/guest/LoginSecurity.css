@@ -1,0 +1,118 @@
+/* General Container Styling */
+.login-security-container {
+    max-width: 600px;
+    margin: 50px auto;
+    font-family: Arial, sans-serif;
+    color: #333;
+  }
+  
+  /* Titles and Subtitles */
+  .login-security-container h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .login-security-container p {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 30px;
+  }
+  
+  /* Form Section */
+  .login-security-container .password-section .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .login-security-container .password-section label {
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+  
+  .login-security-container .password-section input {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .login-security-container .update-password-btn {
+    background-color:#198E78;
+    color: white;
+ width: 180px;
+    font-size: 16px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .login-security-container .update-password-btn:hover {
+    background-color: #167b47;
+  }
+  
+  /* Social Accounts Section */
+  .login-security-container .social-accounts-section h3 {
+    margin-top: 30px;
+    margin-bottom: 10px;
+  }
+  
+  .login-security-container .social-account-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .login-security-container .social-account-row span {
+    font-size: 14px;
+  }
+  
+  .login-security-container .social-connect-btn {
+    background: none;
+    border: none;
+    font-size: 14px;
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 8px 16px; /* Added padding for consistent button sizing */
+    border-radius: 4px;
+  }
+  
+  .login-security-container .connect-btn {
+    color: #007bff;
+  }
+  
+  .login-security-container .connect-btn:hover {
+    color: #0056b3;
+  }
+  
+  .login-security-container .disconnect-btn {
+    color: red;
+  }
+  
+  .login-security-container .disconnect-btn:hover {
+    color: darkred;
+  }
+  
+  /* Deactivate Section */
+  .login-security-container .deactivate-section {
+    margin-top: 20px;
+  }
+  
+  .login-security-container .deactivate-btn {
+    background: none;
+    border: none;
+    font-size: 14px;
+    color: red;
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 8px 16px; /* Added padding for consistency */
+    border-radius: 4px;
+  }
+  
+  .login-security-container .deactivate-btn:hover {
+    color: darkred;
+  }
+  

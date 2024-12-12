@@ -1,0 +1,90 @@
+.page-four-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 100vh;
+    background-color: #f9f9f9;
+    padding: 20px;
+  }
+  
+  .page-four-text h1 {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .page-four-address-input-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .page-four-address-input {
+    width: calc(100% - 100px);
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 30px;
+    margin-right: 10px;
+  }
+  
+  .page-four-search-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #198e78;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+  }
+  
+  .page-four-search-button:hover {
+    background-color: #146655;
+  }
+  
+  .page-four-map {
+    width: 100%;
+  }
+  
+  /* Footer styling */
+.page-4-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Spread Back and Next buttons */
+  width: 100%; /* Full width of the screen */
+  position: fixed; /* Fixed at the bottom */
+  bottom: 0;
+  left: 0;
+  background-color: #fff; /* Background color */
+  padding: 16px;
+  box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Back and Next buttons */
+.page-4-back-btn,
+.page-4-next-btn {
+  padding: 10px 20px;
+  width: 100px;
+  border-radius: 20px;
+  border: none;
+  background-color: #198E78;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.page-4-back-btn:hover,
+.page-4-next-btn:hover {
+  background-color: #388e3c;
+}
+
+.page-4-progress-bar {
+  width: 400px;
+  height: 4px;
+  background-color: #198E78;
+  border-radius: 2px;
+  margin: 0 16px;
+  position: relative;
+  left: -823px;
+  top: -37px;} 

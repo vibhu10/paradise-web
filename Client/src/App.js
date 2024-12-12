@@ -5,7 +5,15 @@ import Home from './components/Home/Home';
 import  EdifInfluencerProfile from './components/influencer/Edif-Influencer-Profile';
 import Inbox from './components/influencer/Inbox'
 import HostRegistration from './components/Host-Registration/Host-Registration';
-import UserHome from './components/Host-login/UserHome';
+
+import ProfilePage from './components/profiles/guest/profilePage';
+
+import AdminHome from './components/profiles/admin/AdminHome';
+import HostProfile from './components/profiles/host/HostProfile';
+import PropertyPage from './components/Home/PropertyPage';
+
+
+
 function App() {
   return (
     <Router>
@@ -14,11 +22,19 @@ function App() {
         <Routes>
          
           <Route path="/" element={<Home />} /> 
-          <Route path='/hostRegistration' element={<HostRegistration/>}/>
-        <Route path='/influencer' element={<EdifInfluencerProfile/>}/>
-        <Route path='/influencer/inbox' element={<Inbox/>}/>
-        <Route path='/hostlogin'  element={<UserHome/>}/>
-        </Routes>
+
+          <Route path="/user-profile" element={<ProfilePage/>} />
+          <Route path='/host-Registration' element={<HostRegistration/>}/>
+        
+          <Route path='/influencer' element={<EdifInfluencerProfile/>}/>
+          <Route path='/influencer/inbox' element={<Inbox/>}/>
+          
+          <Route path='/hostlogin' element={<HostProfile/>}/>
+         <Route path='/superAdmin' element={<AdminHome/>}/>
+         <Route path='/property' element={<PropertyPage/>}/>
+         
+
+          </Routes>
       </div>
     </Router>
   );

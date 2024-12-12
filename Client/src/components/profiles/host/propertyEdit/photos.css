@@ -1,0 +1,264 @@
+.photoEdit-hostlogin{
+  width: 90%;
+  height: auto;
+  /* border: 2px solid gray; */
+
+}
+
+#photo-tour-section{
+  width: 106%;
+  /* border: 2px solid red; */
+  height: 400px;
+
+}
+#photo-tour-section .heading-photo-tour{
+  width: 100%;
+  /* border:2px solid black; */
+  height: 20%;
+  margin-bottom: 10px;
+
+}
+
+
+.addphotos-gallery-popup{
+  width: 700px;
+  height: 500px;
+  opacity: 0.9;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.15);
+  position: absolute;
+  left: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  justify-content: space-around;
+  z-index: 100;
+}
+
+.photos-gallery{
+  width: 100%;
+  /* border: 2px solid blue; */
+  justify-content: space-around;
+  height: 70%;
+  display: flex;
+  flex-wrap: wrap;
+  
+  }
+  .photo-container{
+    
+  }
+.photo-gallery-div{
+  width: 240px;
+  height: 274px;
+  border-radius: 10px;
+  /* border: 2px solid gray; */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.image-gallery-photo{
+  width: 100%; /* Adjust to your desired size */
+  height: 70%; /* Maintain aspect ratio */
+  max-width: 300px; /* Set a maximum width */
+  border-radius: 10px; /* Optional: for rounded corners */
+  object-fit: cover; /* Optional: to control how the image fits the box */
+}
+.bedromm-accordian-outer{
+
+  width: 100%;
+  border: 2px solid black;
+}
+
+
+
+
+.bedroom-manager {
+  padding: 20px;
+}
+
+.add-bedroom-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.bedroom-accordion {
+  border: 1px solid #ccc;
+  padding: 15px;
+  margin-top: 15px;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+.accordian-divs{
+  background-color:#F7F7F7;
+  border-radius:20px;
+  border: 1px solid #F7F7F7;
+ padding: 20px;
+ margin-bottom: 10px;
+}
+
+.accordion-item{
+  width: 99%;
+  border: none;
+ 
+}
+.accordion-header{
+width: 100%;
+}
+.accordion-body{
+  width: 100%;
+  background-color:white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+align-items: center;  
+}
+.accordion-button{
+  width: 100%;
+}
+
+.file-upload-bedrooms-accordian{
+  width: 300px;
+  height: 300px;
+}
+
+.bedrooms-photos-footer-container {
+  height: auto;
+  width: 100%;
+  opacity: 0.9;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.15);
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+  display: flex;
+}
+
+
+.bedroom-photo-container {
+  position: relative;
+  cursor: pointer;
+  margin-right: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.photo-stack {
+  position: relative;
+  width: 100px;
+  height: 100px;
+}
+
+.stacked-photo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 220px;
+  height: 200px;
+  border: 2px solid white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.stacked-photo:nth-child(2) {
+  top: 10px;
+  left: 10px;
+}
+
+.stacked-photo:nth-child(3) {
+  top: 20px;
+  left: 20px;
+}
+
+/* Modal CSS */
+.photo-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.photo-modal-content {
+  display: flex;
+  flex-direction: column;
+ 
+  padding: 10px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 85%;
+  min-height: 500px;
+  width: 100%;
+  max-height: 80vh; /* Set a maximum height to allow scrolling when content exceeds this height */
+  overflow-y: auto;  /* Enables vertical scroll if content exceeds the height */
+  opacity: 1.5; /* Note: Opacity values over 1.0 won't make a difference */
+}
+
+
+.photo-modal-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.photo-modal-gallery img {
+  width: 200px;
+  height: 200px;
+  border-radius: 10px;
+}
+
+.close-modal {
+  /* background-color: red;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer; */
+}
+.delete-photo-btn {
+  color: white;
+  background-color: transparent;
+  position: relative;
+  top: -85px;
+  left: -40px;
+  border-radius: 50%;
+  width: 48px;
+  height: 41px;
+}
+
+
+  .delete-photo-btn:hover {
+    color: red;
+  }
+.photo-modal-content-roomName{
+  display: flex;
+  flex-direction: column;
+ justify-content: center;
+ align-items: center;
+  padding: 10px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 30%;
+  height: 30%;
+  
+  width: 100%;
+  max-height: 80vh; /* Set a maximum height to allow scrolling when content exceeds this height */
+  overflow-y: auto;  /* Enables vertical scroll if content exceeds the height */
+  opacity: 1.5; /* Note: Opacity values over 1.0 won't make a difference */
+
+}

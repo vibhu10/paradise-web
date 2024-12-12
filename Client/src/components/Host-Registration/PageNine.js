@@ -1,52 +1,64 @@
 import { useState, useEffect } from "react";
+import '../Host-Registration/css/pageNine.css';
 
-export function PageNine({ handleNext, handleBack }) {
-    const [text, setText] = useState("");
-    const [wordCount, setWordCount] = useState(0);
+export function PageNine({ handleNext, handleBack, handleSaveProperty }) {
+  const [text, setText] = useState("");
+  const [charCount, setCharCount] = useState(0);
+  const [error, setError] = useState(""); // State to handle error message
 
-    useEffect(() => {
-     
-        const words = text.trim().split(/\s+/);
-        const count = words.filter(word => word.length > 0).length;
+  useEffect(() => {
+    const count = text.length;
+    setCharCount(count);
 
-    
-        setWordCount(count);
+    if (count > 50) {
+      alert("You have reached your limit of 50 characters.");
+      setText(text.slice(0, 50));
+    }
+  }, [text]);
 
-        if (count > 50) {
-            alert("You have reached your limit of 50 words.");
-         
-            setText(words.slice(0, 50).join(' '));
-        }
-    }, [text]);
+  // Function to handle saving data and moving to the next page
+  const handleNextClick = async () => {
+    if (text.trim() === "") {
+      setError("Please enter a title for your property."); // Set error message
+      return;
+    }
 
-    return (
-        <div>
-            <header className="header-host">
-                <img src="/48564e5fe8898cf62b0bbf42276d6cf3.jpeg" alt="paradise" />
-                <button>Exit</button>
-            </header>
-            <div className="body-host">
-                <div className="pannel-box-page9">
-                    <div>
-                        <h5 style={{ textAlign: "center" }}>Now, let's give your property a short title</h5>
-                        <p style={{ textAlign: "center" }}>Short titles work best</p>
-                    </div>
-                    <textarea
-                        id="textarea-page9"
-                        name="textarea-page9"
-                        value={text}
-                        onChange={(e) => setText(e.target.value)}
-                        rows="4"
-                        cols="50" 
-                    />
-                    <p style={{color:"#198E78"}}>Words: {wordCount}/50</p>
-                </div>
-            </div>
-            <div className='host-footer'>
-                {/* <div className="loading-pageNine"></div> */}
-                <button onClick={handleBack}>Back</button>
-                <button onClick={handleNext}>Next</button>
-            </div>
+    setError(""); // Clear error message if title is valid
+    await handleSaveProperty({ title: text });
+    handleNext();
+  };
+
+  return (
+    <div className="page-nine-container">
+      <div className="page-nine-body-host">
+        <div className="page-nine-panel-box">
+          <div className="page-nine-title-box">
+            <h5 className="page-nine-title">Now, let's give your property a short title</h5>
+            <p className="page-nine-subtitle">Short titles work best</p>
+          </div>
+          <textarea
+            id="page-nine-textarea"
+            className="page-nine-textarea"
+            name="textarea-page9"
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            rows="4"
+            cols="50"
+            placeholder="Enter a short title for your property"
+          />
+          <p className="page-nine-char-count">{charCount}/50</p>
+          {error && <p className="error-message">{error}</p>} {/* Conditionally render error message */}
         </div>
-    );
+      </div>
+      <footer className="page-nine-footer">
+        <button className="page-nine-back-btn" onClick={handleBack}>
+          Back
+        </button>
+        <div className="page-nine-progress-bar"></div>
+        <button className="page-nine-next-btn" onClick={handleNextClick}>
+          Next
+        </button>
+      </footer>
+    </div>
+  );
 }

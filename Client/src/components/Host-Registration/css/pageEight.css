@@ -1,0 +1,338 @@
+/* General Container and Title */
+.page-eight-specific-container {
+    padding: 20px;
+    font-family: 'Roboto', Arial, sans-serif;
+    background-color: #f4f6f9; /* Softer background for a modern look */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.page-eight-specific-title {
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #1e2a38; /* Dark text for better readability */
+}
+
+/* Add Photo Button */
+.page-eight-add-photo-button {
+    position: absolute;
+    top: 100px;
+    right: 702px;
+    color: black;
+    background-color: #ebf5f6;
+    border: none;
+    border-radius: 50%;
+    width: 39px;
+    height: 39px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.page-eight-add-photo-button:hover {
+    background-color: #138496;
+    transform: scale(1.1);
+}
+
+/* Cover Photo Section */
+.page-eight-specific-cover-container {
+    position: relative;
+    text-align: center;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 800px;
+}
+
+.page-eight-specific-cover-photo {
+    width: 100%;
+    height: auto;
+    max-height: 350px;
+    border-radius: 10px;
+    object-fit: cover;
+    border: 2px solid #ddd;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.page-eight-specific-cover-photo:hover {
+    transform: scale(1.03);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.page-eight-specific-label {
+    margin-top: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #4a4a4a;
+}
+
+/* Photo Section Below Cover - Grid Layout */
+.page-eight-specific-room-section {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Create 2 columns */
+    gap: 20px;
+    justify-items: center;
+    width: 100%;
+    max-width: 800px; /* Limit width for better appearance */
+    margin-top: 20px; /* Add space between cover photo and this section */
+}
+
+/* Individual Photo Cards */
+.page-eight-specific-room-card {
+    position: relative;
+    width: 100%; /* Make the cards flexible */
+    max-width: 350px; /* Max width for each card */
+    height: 250px; /* Keep card height proportional */
+    border: 2px solid #ddd;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+    background: white;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.page-eight-specific-room-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.page-eight-specific-room-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Room Name Button */
+.room-name-button {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 20px;
+    z-index: 10;
+    cursor: default;
+    text-transform: capitalize;
+}
+
+/* Photo Menu */
+.page-eight-specific-menu {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.page-eight-specific-menu-toggle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    width: 32px;
+    height: 44px;
+    font-size: 28px;
+    color: #444;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+.page-eight-specific-menu-toggle:hover {
+    background-color: #f8f9fa;
+}
+
+.page-eight-specific-menu-dropdown {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    z-index: 10;
+    animation: fadeIn 0.2s ease-in-out;
+}
+
+.page-eight-specific-menu-dropdown label,
+.page-eight-specific-menu-dropdown button {
+    display: block;
+    padding: 10px 15px;
+    font-size: 14px;
+    color: #007bff;
+    cursor: pointer;
+    text-align: left;
+    background: none;
+    border: none;
+    width: 100%;
+}
+
+.page-eight-specific-menu-dropdown button:hover,
+.page-eight-specific-menu-dropdown label:hover {
+    background-color: #f1f1f1;
+}
+
+/* Popup */
+.page-eight-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1001;
+}
+
+.page-eight-popup {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    max-width: 400px;
+    width: 90%;
+    animation: slideIn 0.3s ease-in-out;
+}
+
+.page-eight-popup h2 {
+    margin-bottom: 20px;
+    font-size: 22px;
+    color: #333;
+}
+
+.page-eight-popup input[type="text"],
+.page-eight-popup input[type="file"] {
+    margin-bottom: 15px;
+    padding: 12px;
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.page-eight-popup-button {
+    margin: 5px;
+    padding: 10px 20px;
+    background: #28a745;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.page-eight-popup-button:hover {
+    background: #218838;
+}
+
+/* Footer Buttons */
+.page-eight-specific-footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    margin-top: 20px;
+    width: 100%;
+    max-width: 800px;
+}
+
+.page-eight-specific-footer-button {
+    padding: 12px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    color: white;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.page-eight-specific-footer-button:nth-child(1) {
+    background-color: #6c757d; /* Gray for Back */
+}
+
+.page-eight-specific-footer-button:nth-child(1):hover {
+    background-color: #5a6268;
+}
+
+.page-eight-specific-footer-button:nth-child(2) {
+    background-color: #007bff; /* Blue for Next */
+}
+
+.page-eight-specific-footer-button:nth-child(2):hover {
+    background-color: #0056b3;
+}
+
+/* Footer styling */
+.page-eight-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Spread Back and Next buttons */
+    width: 100%; /* Full width of the screen */
+    position: fixed; /* Fixed at the bottom */
+    bottom: 0;
+    left: 0;
+    background-color: #fff; /* Background color */
+    padding: 16px;
+    box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Back and Next buttons */
+.page-eight-back-btn,
+.page-eight-footer-button {
+    padding: 10px 20px;
+    width: 100px;
+    border-radius: 20px;
+    border: none;
+    background-color: #198E78;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.page-eight-back-btn:hover,
+.page-eight-next-btn:hover {
+    background-color: #388e3c;
+}
+
+.page-eight-progress-bar {
+    width: 800px;
+    height: 4px;
+    background-color: #198E78;
+    border-radius: 2px;
+    margin: 0 16px;
+    position: absolute;
+    top: -3px;
+    left: -17px;
+}
+
+/* Error Message */
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+    text-align: center;
+}
+.page-eight-specific-layout{
+    
+}

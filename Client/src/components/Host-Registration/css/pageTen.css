@@ -1,0 +1,164 @@
+/* Full-screen container with centered content */
+.PageTen-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Center the page panel with a max width of 50% of the screen */
+.PageTen-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 50%;
+  max-width: 700px; /* Ensures it doesn't grow too large */
+  min-width: 400px; /* Prevents it from being too small */
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Title styling for the property name field */
+.PageTen-property-name h5 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+/* Subtitle styling for extra guidance */
+.PageTen-subtitle {
+  font-size: 14px;
+  color: #666;
+  margin-top: 5px;
+}
+
+/* Styling the input field for property name */
+.PageTen-property-name-input {
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-top: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+/* Focused input field */
+.PageTen-property-name-input:focus {
+  outline: none;
+  border-color: #4A90E2;
+}
+
+/* Styling the error state of the input field */
+.PageTen-property-name-input.error {
+  border-color: red;
+}
+
+/* Error message styling */
+.PageTen-error {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+/* Styling for the description section */
+.PageTen-description h5 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+}
+
+.PageTen-description p {
+  font-size: 14px;
+  color: #666;
+  margin-top: 5px;
+}
+
+/* Textarea for the description field */
+.PageTen-description textarea {
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-top: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 120px;
+  resize: vertical;
+  transition: border-color 0.3s ease;
+}
+
+/* Textarea focused style */
+.PageTen-description textarea:focus {
+  outline: none;
+  border-color: #4A90E2;
+}
+
+/* Word count display */
+.PageTen-word-count {
+  font-size: 14px;
+  color: #666;
+  margin-top: 5px;
+}
+
+
+
+
+
+
+ /* Footer styling */
+ .PageTen-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Spread Back and Next buttons */
+  width: 100%; /* Full width of the screen */
+  position: fixed; /* Fixed at the bottom */
+  bottom: 0;
+  left: 0;
+  background-color: #fff; /* Background color */
+  padding: 16px;
+  box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Back and Next buttons */
+.PageTen-back-btn,
+.PageTen-next-btn {
+  padding: 10px 20px;
+  width: 100px;
+  border-radius: 20px;
+  border: none;
+  background-color: #198E78;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.PageTen-back-btn:hover,
+.PageTen-next-btn:hover {
+  background-color: #388e3c;
+}
+
+.PageTen-progress-bar {
+  width: 1100px;
+  height: 4px;
+  background-color: #198E78;
+  border-radius: 2px;
+  margin: 0 16px;
+  position: absolute;
+  top: -5px;
+  left: -16px;
+}
+
+.error-message {
+color: red;
+font-size: 12px;
+margin-top: 5px;
+}

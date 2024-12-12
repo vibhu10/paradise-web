@@ -1,0 +1,130 @@
+/* Main container */
+.page-seven-container {
+  font-family: Arial, sans-serif;
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 20px;
+  color: #333;
+}
+
+/* Header styles */
+.page-seven-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.page-seven-subtitle {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+/* Section heading */
+.page-seven-question {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+/* Amenities grid layout */
+.page-seven-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+  justify-items: center;
+  margin-bottom: 20px;
+}
+
+/* Individual amenity card */
+.page-seven-amenity {
+  width: 120px;
+  height: 123px;
+  border: 2px solid #ddd;
+  border-radius: 12px;
+  display: flex
+;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  background-color: white;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+*, ::after, ::before {
+  box-sizing: border-box;
+}
+
+.page-seven-amenity.selected {
+  border-color: #28a745;
+  background-color: #f6fff6;
+}
+
+.page-seven-icon {
+  font-size: 32px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.page-seven-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #555;
+}
+
+
+
+ 
+  /* Footer styling */
+  .page-seven-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Spread Back and Next buttons */
+    width: 100%; /* Full width of the screen */
+    position: fixed; /* Fixed at the bottom */
+    bottom: 0;
+    left: 0;
+    background-color: #fff; /* Background color */
+    padding: 16px;
+    box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Back and Next buttons */
+  .page-seven-back-btn,
+  .page-seven-footer-button {
+    padding: 10px 20px;
+    width: 100px;
+    border-radius: 20px;
+    border: none;
+    background-color: #198E78;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .page-seven-back-btn:hover,
+  .page-seven-next-btn:hover {
+    background-color: #388e3c;
+  }
+  
+  .page-seven-progress-bar {
+    width: 650px;
+    height: 4px;
+    background-color: #198E78;
+    border-radius: 2px;
+    margin: 0 16px;
+    position: absolute;
+   
+    top: -3px;
+    left: -17px;
+}
+  /* Error Message */
+.page-seven-error {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+    text-align: center;
+  }
+  

@@ -1,0 +1,97 @@
+.PropertyPage {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    line-height: 1.6;
+  }
+  
+  .PropertyPage-header h1 {
+    font-size: 2rem;
+    font-weight: bold;
+  }
+  
+  .PropertyPage-header p {
+    color: gray;
+    margin: 5px 0;
+  }
+  
+  .PropertyPage-main {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .PropertyPage-imageGallery {
+    flex: 3;
+  }
+  
+  .PropertyPage-mainImage img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+  
+  .PropertyPage-thumbnailImages {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .PropertyPage-thumbnailImages img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  
+  .PropertyPage-bookingCard {
+    flex: 1;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .PropertyPage-price {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .PropertyPage-bookingForm label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  .PropertyPage-bookingForm input,
+  .PropertyPage-bookingForm select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .PropertyPage-bookingForm button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .PropertyPage-bookingForm button:hover {
+    background-color: #0056b3;
+  }
+  
+  .PropertyPage-priceBreakdown p {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .PropertyPage-description,
+  .PropertyPage-amenities {
+    margin-top: 40px;
+  }
+  

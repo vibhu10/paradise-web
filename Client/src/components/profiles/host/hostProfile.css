@@ -1,0 +1,409 @@
+/* General Container */
+.host-profile-container {
+  font-family: 'Arial', sans-serif;
+  background-color: #ffffff;  /* Set background color to white */
+  color: #333;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;  /* Remove padding */
+  margin: 0;   /* Remove margin */
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+/* Header Styling */
+.host-profile-header {
+  width: 100%;
+  background-color: #000000;  /* Header background color changed to black */
+  color: white;
+  padding: 20px 30px;
+  display: flex;
+  justify-content: space-around;  /* Center the buttons in header */
+  align-items: center;
+  border-bottom: 1px solid #e0e0e0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  position: fixed;  /* Fix the header at the top */
+  top: 0;
+  left: 0;
+  z-index: 1000;  /* Ensure it's above other elements */
+}
+
+.host-profile-logo {
+  width: 120px;
+  height: auto;
+  object-fit: contain;
+  margin-right: 20px;
+}
+
+.host-profile-nav ul {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  justify-content: center;  /* Center the navigation links */
+}
+
+.host-profile-nav li {
+  margin: 0 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.host-profile-nav li:hover {
+  color: #198E78;
+}
+
+.host-profile-nav .active {
+  font-weight: bold;
+  color: #198E78;
+}
+
+/* Section Toggle Buttons */
+.host-profile-section-toggle-buttons {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.host-profile-toggle-button {
+  padding: 12px 25px;
+  border: 2px solid #198E78;
+  border-radius: 50px;
+  background-color: #f1f1f1;
+  font-size: 16px;
+  color: #198E78;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.host-profile-toggle-button:hover {
+  background-color: #198E78;
+  color: white;
+  transform: translateY(-2px);
+}
+
+.host-profile-toggle-button.active {
+  background-color: #198E78;
+  color: white;
+}
+
+/* Tab Styling */
+.host-profile-tab-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.host-profile-tab-list li {
+  padding: 12px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  transition: all 0.3s ease;
+}
+
+.host-profile-tab-list li:hover {
+  background-color: #e0e0e0;
+}
+
+.host-profile-tab-list .active-tab {
+  background-color: #198E78;
+  color: white;
+  font-weight: bold;
+}
+
+/* Property Cards */
+.host-profile-property-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px;
+  width: 100%;
+  padding: 30px;
+  margin-top: 40px;
+}
+
+
+/* Host profile property card container */
+.host-profile-property-card {
+  display: flex;
+  flex-direction: column;
+
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  max-width: 350px;
+  margin: 20px;
+}
+
+.host-profile-property-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Styling for property image section */
+.host-profile-property-image {
+  position: relative;
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+}
+.host-profile-property-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-bottom: 4px solid #ddd;
+  border-radius: 10%;
+}
+
+/* Status label styling */
+.property-status {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 5px 10px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  font-size: 14px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.property-status.listed {
+  background-color: #28a745; /* Green for listed */
+}
+
+.property-status.in-progress {
+  background-color: #ffc107; /* Yellow for in progress */
+}
+
+/* Property details section */
+.host-profile-property-details {
+  padding: 15px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+
+}
+
+.host-profile-property-details h4 {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+}
+
+.property-title {
+  font-size: 14px;
+  color: #777;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.property-address {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.4;
+  margin: 0;
+  font-style: italic;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+  .host-profile-property-card {
+    max-width: 100%;
+  }
+
+  .host-profile-property-image img {
+    object-position: center;
+  }
+}
+
+
+/* Back Button */
+.host-profile-back-button {
+  background-color: #f1f1f1;
+  border: 2px solid #ddd;
+  border-radius: 50px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 30px;
+  position: absolute;  /* Position the back button on the left */
+  top: 112px;
+  left: 100px;
+}
+
+.host-profile-back-button:hover {
+  background-color: #198E78;
+  color: white;
+  border-color:#198E78;
+  transform: translateY(-2px);
+}
+
+/* Loading and Error States */
+.host-profile-loading,
+.host-profile-error {
+  text-align: center;
+  padding: 50px;
+  font-size: 18px;
+  color: #666;
+}
+
+.host-profile-error {
+  color: red;
+}
+
+/* Active Section Styles */
+.host-profile-main {
+  width: 100%;
+  display: flex
+;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1300px;
+  margin-top: 71px;
+}
+
+.host-profile-property-details h4 {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.host-profile-property-details p {
+  font-size: 15px;
+  color: #666;
+}
+
+/* Edit Components */
+.host-profile-edit-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 20px 0;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  width: 100%;
+}
+
+.host-profile-edit-container h2 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.host-profile-edit-container button {
+  padding: 12px 25px;
+  background-color: #198E78;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 20px;
+}
+
+.host-profile-edit-container button:hover {
+  background-color:#198E78;
+  transform: translateY(-2px);
+}
+
+/* Error and Success Messages */
+.host-profile-error-message {
+  color: red;
+  font-size: 16px;
+  margin-top: 15px;
+}
+
+.host-profile-success-message {
+  color: #198E78;
+  font-size: 16px;
+  margin-top: 15px;
+}
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+
+
+.host-profile-user-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  position: relative;
+}
+
+.host-profile-user-photo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.hamburger-menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 24px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.hamburger-menu .line {
+  height: 3px;
+  background-color: #fff;
+  border-radius: 5px;
+}
+.dropdown-menu {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.dropdown-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dropdown-menu ul li {
+  padding: 10px;
+  cursor: pointer;
+  color: #333;
+  border-bottom: 1px solid #eee;
+}
+
+.dropdown-menu ul li:last-child {
+  border-bottom: none;
+}
+
+.dropdown-menu ul li:hover {
+  background-color: #f5f5f5;
+}

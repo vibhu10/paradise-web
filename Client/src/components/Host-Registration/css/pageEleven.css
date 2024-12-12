@@ -1,0 +1,63 @@
+
+/*page eleven */
+.pannel-box-page11{
+    width: 30%;
+  height: 90%;
+}
+.pannel-box-page11-div1{
+
+ 
+    width: 70%;
+    height: 50%;
+}
+
+.pannel-box-page11-div2{
+ 
+  width: 100%;
+  height: 50%;
+
+}
+
+ /* Footer styling */
+ .PageEleven-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Spread Back and Next buttons */
+    width: 100%; /* Full width of the screen */
+    position: fixed; /* Fixed at the bottom */
+    bottom: 0;
+    left: 0;
+    background-color: #fff; /* Background color */
+    padding: 16px;
+    box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Back and Next buttons */
+  .PageEleven-back-btn,
+  .PageEleven-next-btn {
+    padding: 10px 20px;
+    width: 100px;
+    border-radius: 20px;
+    border: none;
+    background-color: #198E78;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .PageEleven-back-btn:hover,
+  .PageEleven-next-btn:hover {
+    background-color: #388e3c;
+  }
+  
+  .PageEleven-progress-bar {
+    width: 1250px;
+    height: 4px;
+    background-color: #198E78;
+    border-radius: 2px;
+    margin: 0 16px;
+    position: absolute;
+    top: -5px;
+    left: -16px;
+  }

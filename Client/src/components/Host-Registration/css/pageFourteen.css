@@ -1,0 +1,116 @@
+PageFourteen Styles
+
+.PageFourteen-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 45%;
+    margin: 0 auto;
+  }
+  
+  .PageFourteen-body-host {
+    width: 100%;
+  }
+  
+  .PageFourteen-panel-box {
+    width: 35%;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin-left: 30%;
+    margin-top: 147px;
+  }
+  
+  .PageFourteen-panel-box h4 {
+    font-size: 24px;
+    font-weight: 600;
+  }
+  
+  .PageFourteen-panel-box p {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  
+  .PageFourteen-panel-box h6 {
+    font-size: 16px;
+    margin-top: 15px;
+  }
+  
+  .PageFourteen-panel-box button {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .PageFourteen-panel-box button:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .PageFourteen-host-footer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  .PageFourteen-host-footer button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .PageFourteen-host-footer button:hover {
+    background-color: #0056b3;
+  }
+  
+  .PageFourteen-host-footer button:disabled {
+    background-color: #ccc;
+  }
+  
+  /* Footer styling */
+.PageFourteen-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Spread Back and Next buttons */
+    width: 100%; /* Full width of the screen */
+    position: fixed; /* Fixed at the bottom */
+    bottom: 0;
+    left: 0;
+    background-color: #fff; /* Background color */
+    padding: 16px;
+    box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Back and Next buttons */
+  .PageFourteen-back-btn,
+  .PageFourteen-footer-button {
+    padding: 10px 20px;
+    width: 100px;
+    border-radius: 20px;
+    border: none;
+    background-color: #198E78;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .PageFourteen-back-btn:hover,
+  .PageFourteen-next-btn:hover {
+    background-color: #388e3c;
+  }
+  
+  .PageFourteen-progress-bar {
+    width:1600px;
+    height: 4px;
+    background-color: #198E78;
+    border-radius: 2px;
+    /* margin: 0 16px; */
+    position: absolute;
+    top: -3px;
+    left: 1px;
+}

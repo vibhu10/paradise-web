@@ -1,0 +1,122 @@
+/* General Page Styling */
+.notifications-page {
+    font-family: Arial, sans-serif;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    color: #333;
+  }
+  
+  h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .notifications-description {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 20px;
+  }
+  
+  /* Notifications List */
+  .notifications-list {
+    margin-bottom: 20px;
+  }
+  
+  .notification-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .notification-content {
+    display: flex;
+    align-items: center;
+  }
+  
+  .notification-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .notification-text p {
+    margin: 0;
+    font-size: 14px;
+    color: #333;
+    line-height: 1.5;
+  }
+  
+  .notification-text span {
+    font-size: 12px;
+    color: #888;
+  }
+  
+  /* Delete Button */
+  .notification-delete {
+    background: none;
+    border: none;
+    font-size: 18px;
+    color: #888;
+    cursor: pointer;
+  }
+  
+  .notification-delete:hover {
+    color: #ff0000;
+  }
+  
+  /* Preferences Section */
+  .notification-preferences h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .preferences-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .preference-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 14px;
+  }
+  
+  /* Toggle Switch Styling */
+  .toggle-switch {
+    width: 40px;
+    height: 20px;
+    border-radius: 15px;
+    background-color: #ddd;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .toggle-switch.active {
+    background-color: #4caf50;
+  }
+  
+  .toggle-thumb {
+    width: 18px;
+    height: 18px;
+    background-color: #fff;
+    border-radius: 50%;
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    transition: all 0.3s ease;
+  }
+  
+  .toggle-switch.active .toggle-thumb {
+    left: 21px;
+  }
+  

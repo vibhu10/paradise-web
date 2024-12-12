@@ -1,6 +1,7 @@
 import { useState } from "react";
+import '../Host-Registration/css/pageFourteen.css';
 
-export function PageFourteen({ handleNext, handleBack }) {
+export function PageFourteen({ handleNext, handleBack, handleSaveProperty }) {
   const [houseRules, setHouseRules] = useState({
     petsAllowed: false,
     maxNoPets: 0,
@@ -11,7 +12,6 @@ export function PageFourteen({ handleNext, handleBack }) {
   });
 
   const handleCheckboxChange = (e) => {
-    console.log(e)
     const { name, checked } = e.target;
     setHouseRules((prev) => ({
       ...prev,
@@ -20,7 +20,6 @@ export function PageFourteen({ handleNext, handleBack }) {
   };
 
   const incrementValue = (key) => {
-    
     setHouseRules((prev) => ({
       ...prev,
       [key]: prev[key] + 1,
@@ -34,15 +33,19 @@ export function PageFourteen({ handleNext, handleBack }) {
     }));
   };
 
-  return (
-    <div>
-      <header className="header-host">
-        <img src="/48564e5fe8898cf62b0bbf42276d6cf3.jpeg" alt="paradise" />
-        <button>Exit</button>
-      </header>
+  // Function to handle saving data when Next is pressed
+  const handleNextWithSave = () => {
+    handleSaveProperty({
+      houseRules: houseRules,
+    });
 
-      <div className="body-host">
-        <div className="panel-box-page14">
+    handleNext();
+  };
+
+  return (
+    <div className="PageFourteen-container">
+    
+        <div className="PageFourteen-panel-box">
           <h4>House Rules</h4>
           <p>
             Guests are expected to follow your rules and may be removed from
@@ -143,12 +146,16 @@ export function PageFourteen({ handleNext, handleBack }) {
             </button>
           </h6>
         </div>
-      </div>
-
-      <div className="host-footer">
-        {/* <div className="loading-pageFourteen"></div> */}
-        <button onClick={handleBack}>Back</button>
-        <button onClick={handleNext}>Next</button>
+      
+      <div className="PageFourteen-footer">
+        <button className="PageFourteen-footer-button" onClick={handleBack}>
+          Back
+        </button>
+        <div className="PageFourteen-progress-bar"></div>
+       
+        <button className="PageFourteen-footer-button" onClick={handleNextWithSave}>
+          Next
+        </button>
       </div>
     </div>
   );

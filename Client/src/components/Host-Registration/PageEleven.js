@@ -1,8 +1,9 @@
 import { useState } from "react";
 import Flatpickr from "react-flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
+import "../Host-Registration/css/pageEleven.css";
 
-export function PageEleven({ handleNext, handleBack }) {
+export function PageEleven({ handleNext, handleBack, handleSaveProperty }) {
   const [price, setPrice] = useState({
     BaseCharge: 0,
     ServiceFees: 0,
@@ -10,30 +11,35 @@ export function PageEleven({ handleNext, handleBack }) {
     YouEarn: 0,
   });
 
-  const [Availability, setAvailability] = useState({
+  const [availability, setAvailability] = useState({
     minimumNight: 0,
     maximumNight: 0,
-    checkinTime: 12,
+    checkinTime: new Date(),
   });
 
- 
+  const [errors, setErrors] = useState({
+    price: false,
+    minimumNight: false,
+    maximumNight: false,
+    checkinTime: false,
+  });
 
-  console.log(Availability)
   function handleChanges(e) {
     const { name, value } = e.target;
+    const numericValue = parseInt(value, 10);
     setAvailability((prevData) => ({
       ...prevData,
-      [name]: value,
+      [name]: numericValue >= 0 ? numericValue : 0, // Prevent negative values
     }));
   }
 
- 
   function handleTimeChange(date) {
     setAvailability((prevData) => ({
       ...prevData,
-      checkinTime: date[0], 
+      checkinTime: date[0],
     }));
   }
+
   function handlePrice(e) {
     const baseCharge = parseFloat(e.target.value) || 0;
     const serviceFees = (baseCharge * 14) / 100;
@@ -48,13 +54,33 @@ export function PageEleven({ handleNext, handleBack }) {
     }));
   }
 
+  function validateFields() {
+    const errorsObj = {
+      price: price.BaseCharge <= 0,
+      minimumNight: availability.minimumNight <= 0,
+      maximumNight: availability.maximumNight <= 0,
+      checkinTime: !availability.checkinTime,
+    };
+
+    setErrors(errorsObj);
+
+    // Return false if any field has an error
+    return !Object.values(errorsObj).some((error) => error);
+  }
+
+  // Function to save data and move to the next page
+  const handleNextClick = async () => {
+    if (validateFields()) {
+      await handleSaveProperty({
+        price: price,
+        availability: availability,
+      });
+      handleNext(); // Proceed to the next page
+    }
+  };
+
   return (
     <div>
-      <header className="header-host">
-        <img src="/48564e5fe8898cf62b0bbf42276d6cf3.jpeg" alt="paradise" />
-        <button>Exit</button>
-      </header>
-
       <div className="body-host">
         <div className="pannel-box-page11">
           <div className="pannel-box-page11-div1">
@@ -75,6 +101,9 @@ export function PageEleven({ handleNext, handleBack }) {
               value={price.BaseCharge === 0 ? "" : price.BaseCharge}
               onChange={handlePrice}
             />
+            {errors.price && (
+              <p style={{ color: "red", fontSize: "12px" }}>Price is required.</p>
+            )}
 
             <p
               style={{
@@ -129,67 +158,104 @@ export function PageEleven({ handleNext, handleBack }) {
               }}
             >
               You earn{" "}
-              <span style={{ marginLeft: "auto" }}>${price.YouEarn.toFixed(2)}</span>
+              <span style={{ marginLeft: "auto" }}>
+                ${price.YouEarn.toFixed(2)}
+              </span>
             </p>
           </div>
 
           <div className="pannel-box-page11-div2">
             <h4>Availability</h4>
             <p>
-              These settings apply to all nights, unless you customise them by
+              These settings apply to all nights, unless you customize them by
               date.
             </p>
             <div>
-                <h9 style={{marginRight:"40px",fontSize: '12px'}}>MinimumNights</h9>
-                <h9 style={{fontSize: '12px'}}>maximumNight</h9>
-                </div>
+              <h9 style={{ marginRight: "40px", fontSize: "12px" }}>
+                Minimum Nights
+              </h9>
+              <h9 style={{ fontSize: "12px" }}>Maximum Nights</h9>
+            </div>
             <input
-            style={{width:100,height:70,borderRadius:10,border:"1px solid gray", marginRight:30,marginBottom:20,fontWeight:600,textAlign:"center",fontSize:17}}
+              style={{
+                width: 100,
+                height: 70,
+                borderRadius: 10,
+                border: "1px solid gray",
+                marginRight: 30,
+                marginBottom: 20,
+                fontWeight: 600,
+                textAlign: "center",
+                fontSize: 17,
+              }}
               type="number"
               name="minimumNight"
-              value={Availability.minimumNight}
-              onChange={handleChanges} 
-              
+              value={availability.minimumNight}
+              onChange={handleChanges}
             />
+            {errors.minimumNight && (
+              <p style={{ color: "red", fontSize: "12px" }}>
+                Minimum nights must be greater than 0.
+              </p>
+            )}
 
             <input
-             style={{width:100,height:70,borderRadius:10,border:"1px solid gray" ,marginBottom:20,fontWeight:600,textAlign:"center",fontSize:17}}
+              style={{
+                width: 100,
+                height: 70,
+                borderRadius: 10,
+                border: "1px solid gray",
+                marginBottom: 20,
+                fontWeight: 600,
+                textAlign: "center",
+                fontSize: 17,
+              }}
               type="number"
               name="maximumNight"
-              value={Availability.maximumNight}
+              value={availability.maximumNight}
               onChange={handleChanges}
-            
             />
+            {errors.maximumNight && (
+              <p style={{ color: "red", fontSize: "12px" }}>
+                Maximum nights must be greater than 0.
+              </p>
+            )}
 
             <label htmlFor="timePicker" className="form-label">
               Guests can book on the same day as check-in until this time.
             </label>
-            <div className="input-group" style={{width:300,height:60}}>
+            <div className="input-group" style={{ width: 300, height: 60 }}>
               <Flatpickr
-                 style={{fontWeight:600,fontSize:17}}
+                style={{ fontWeight: 600, fontSize: 17 }}
                 id="timePicker"
                 className="form-control"
-                value={Availability.checkinTime}
-                onChange={handleTimeChange} 
+                value={availability.checkinTime}
+                onChange={handleTimeChange}
                 options={{
                   enableTime: true,
                   noCalendar: true,
-                  dateFormat: "h:i K", 
+                  dateFormat: "h:i K",
                   time_24hr: false,
                 }}
               />
+              {errors.checkinTime && (
+                <p style={{ color: "red", fontSize: "12px" }}>
+                  Check-in time is required.
+                </p>
+              )}
             </div>
           </div>
         </div>
       </div>
-
-         
- 
-      <div className="host-footer">
-        {/* <div className="loading-pageEleven"></div> */}
-        <button onClick={handleBack}>Back</button>
-        <button onClick={handleNext}>Next</button>
-      </div>
+      <footer className="PageEleven-footer">
+        <button className="PageEleven-back-btn" onClick={handleBack}>
+          Back
+        </button>
+        <div className="PageEleven-progress-bar"></div>
+        <button className="PageEleven-next-btn" onClick={handleNextClick}>
+          Next
+        </button>
+      </footer>
     </div>
   );
 }

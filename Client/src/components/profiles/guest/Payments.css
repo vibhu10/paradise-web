@@ -1,0 +1,164 @@
+/* Container and general styles */
+.manage-payment-container {
+    max-width: 600px;
+    margin: 0 auto;
+    font-family: "Arial", sans-serif;
+    padding: 20px;
+    background-color: #fff;
+    color: #000;
+  }
+  
+  .title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .subtitle {
+    font-size: 14px;
+    color: #6b6b6b;
+    margin-bottom: 20px;
+  }
+  
+  /* Saved Cards Section */
+  .saved-cards {
+    margin-bottom: 20px;
+  }
+  
+  .card-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .card-details {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .card-logo {
+    width: 40px;
+  }
+  
+  .card-number {
+    font-weight: bold;
+  }
+  
+  .card-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+  }
+  
+  .primary-checkmark {
+    font-size: 18px;
+    color: green;
+  }
+  
+  .three-dots {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  
+  .dropdown {
+    display: none;
+    position: absolute;
+    top: 25px;
+    right: 0;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    z-index: 1;
+  }
+  
+  .card-actions:hover .dropdown {
+    display: block;
+  }
+  
+  .add-card-btn {
+    display: block;
+    color: #007bff;
+    background: none;
+    border: none;
+    margin-top: 15px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  /* Divider */
+  .divider {
+    margin: 20px 0;
+    border: none;
+    height: 1px;
+    background-color: #ddd;
+  }
+  
+  /* Payments and Payouts */
+  .payments-payouts h3 {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  .section-description {
+    font-size: 14px;
+    color: #6b6b6b;
+    margin-bottom: 15px;
+  }
+  
+  .manage-payments-btn {
+    background: #008060;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px;
+  }
+  
+  /* Payout Section */
+  .payout-section .field-label {
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  
+  .input-field {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+  }
+  
+  /* Radio Button Styling */
+  .payment-method {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .radio-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  .radio-label {
+    font-size: 14px;
+    display: block;
+  }
+  
+  .radio-label small {
+    color: #6b6b6b;
+    font-size: 12px;
+    display: block;
+  }
+  

@@ -1,0 +1,48 @@
+.congratulations-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #000000;
+    color: #ffffff;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .message-box {
+    max-width: 50%;
+    border-radius: 10px;
+    background-color: transparent;
+}
+  
+  h1 {
+    font-size: 3.5rem;
+    font-weight: bold;
+  }
+  
+  p {
+    margin: 22px 0;
+    line-height: 1.6;
+  }
+  
+  .signature {
+    font-size: 1.2rem;
+    margin-top: 30px;
+  }
+  
+  .cta-button {
+    margin-top: 30px;
+    background-color: #ff385c;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 15px 30px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .cta-button:hover {
+    background-color: #e02450;
+  }
+  

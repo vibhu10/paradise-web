@@ -1,0 +1,114 @@
+.page-nine-container {
+    margin-left: 600px;
+    margin-top: 226px;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    max-width: 700px;
+    /* margin: auto; */
+    text-align: center;
+}
+  
+  .page-nine-body-host {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .page-nine-panel-box {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    /* border: 1px solid #eaeaea;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
+    width: 100%;
+  }
+  
+  .page-nine-title-box {
+    margin-bottom: 20px;
+  }
+  
+  .page-nine-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .page-nine-subtitle {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 20px;
+  }
+  
+  .page-nine-textarea {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 14px;
+    line-height: 1.5;
+    resize: none;
+    outline: none;
+  }
+  
+  .page-nine-textarea:focus {
+    border-color: #198e78;
+    box-shadow: 0 0 5px rgba(25, 142, 120, 0.5);
+  }
+  
+  .page-nine-char-count {
+    text-align: right;
+    font-size: 12px;
+    color: #198e78;
+    margin-top: 10px;
+  }
+  
+ /* Footer styling */
+.page-nine-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Spread Back and Next buttons */
+    width: 100%; /* Full width of the screen */
+    position: fixed; /* Fixed at the bottom */
+    bottom: 0;
+    left: 0;
+    background-color: #fff; /* Background color */
+    padding: 16px;
+    box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Back and Next buttons */
+  .page-nine-back-btn,
+  .page-nine-next-btn {
+    padding: 10px 20px;
+    width: 100px;
+    border-radius: 20px;
+    border: none;
+    background-color: #198E78;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .page-nine-back-btn:hover,
+  .page-nine-next-btn:hover {
+    background-color: #388e3c;
+  }
+  
+  .page-nine-progress-bar {
+    width: 900px;
+    height: 4px;
+    background-color: #198E78;
+    border-radius: 2px;
+    margin: 0 16px;
+    position: absolute;
+    top: -5px;
+    left: -16px;
+}
+
+.error-message {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}

@@ -1,0 +1,107 @@
+
+/*time and description body section */
+
+.time-and-description-edit {
+    width: 50%;
+    margin-left: 100px;
+}
+/* General layout styling for the form */
+.timeandDescriptionEdit-body {
+font-family: Arial, sans-serif;
+max-width: 800px;
+margin: 20px auto;
+padding: 20px;
+background-color: #fff;
+border-radius: 8px;
+/* box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); */
+}
+
+/* Section heading styling */
+.section-heading {
+font-size: 1.5rem;
+font-weight: 600;
+margin-bottom: 20px;
+}
+
+/* Form group layout */
+.form-group {
+margin-bottom: 20px;
+}
+
+/* Label styling */
+.form-label {
+display: block;
+font-size: 1rem;
+margin-bottom: 8px;
+font-weight: 500;
+color: #333;
+}
+
+/* Input styling */
+.form-input, .form-textarea {
+width: 100%;
+padding: 10px;
+font-size: 1rem;
+border: 1px solid #ccc;
+border-radius: 4px;
+background-color: #f9f9f9;
+resize: none;
+box-sizing: border-box;
+}
+
+/* Larger textarea for description */
+.form-textarea {
+height: 100px;
+}
+
+/* Character limit text */
+.char-limit {
+font-size: 0.875rem;
+color: #999;
+margin-top: 5px;
+}
+
+/* Internal note styling */
+.internal-note {
+font-size: 0.875rem;
+color: #666;
+margin-top: 5px;
+}
+
+/* Button container styling */
+.button-group {
+display: flex;
+justify-content: flex-start;
+gap: 10px;
+}
+
+/* Button styling */
+.cancel-button, .save-button {
+padding: 10px 20px;
+font-size: 1rem;
+border-radius: 4px;
+cursor: pointer;
+border: none;
+transition: background-color 0.3s ease;
+}
+
+/* Cancel button styling */
+.cancel-button {
+background-color: #f5f5f5;
+color: #333;
+}
+
+/* Save button styling */
+.save-button {
+background-color: #198E78;
+color: white;
+}
+
+/* Hover effect for buttons */
+.cancel-button:hover {
+background-color: #e0e0e0;
+}
+
+.save-button:hover {
+background-color: #218838;
+}

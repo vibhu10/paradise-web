@@ -1,0 +1,218 @@
+/* Base Styles */
+/* body {
+    margin: 0;
+    font-family: "Roboto", Arial, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    border: 2px solid red;
+  } */
+  
+  .page-5-body-host {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    
+  
+  }
+  
+  .page-5-main-div {
+    width: 100%;
+    padding: 20px;
+  }
+  
+  /* Header Section */
+  .page-5-text {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .page-5-title {
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 5px;
+    color: #222;
+  }
+  
+  .page-5-subtitle {
+    font-size: 16px;
+    color: #666;
+    line-height: 1.5;
+  }
+  
+  /* Form Styles */
+  .page-5-form-data {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .page-5-input {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 14px 16px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .page-5-input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+  }
+  
+  /* Two-column layout for specific fields */
+  .page-5-form-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+  }
+  
+  .page-5-form-row .page-5-input {
+    flex: 1;
+  }
+  
+  /* Dropdown (Select) Styling */
+  .page-5-input select {
+    appearance: none;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23666' width='24' height='24'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E") no-repeat right 12px center;
+    background-size: 12px;
+  }
+  
+  /* Toggle Switch */
+  .page-5-switch {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+  }
+  
+  .page-5-switch-content {
+    flex: 1;
+  }
+  
+  .page-5-switch-content h6 {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0;
+    color: #333;
+  }
+  
+  .page-5-switch-content p {
+    font-size: 14px;
+    color: #666;
+    margin: 5px 0 0;
+  }
+  
+  .page-5-slider {
+    position: relative;
+    width: 44px;
+    height: 24px;
+    background: #ccc;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+  }
+  
+  .page-5-slider::before {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-radius: 50%;
+    top: 2px;
+    left: 2px;
+    transition: transform 0.3s ease-in-out;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  }
+  
+  .page-5-switch input[type="checkbox"] {
+    display: none;
+  }
+  
+  .page-5-switch input[type="checkbox"]:checked + .page-5-slider {
+    background: #4caf50;
+  }
+  
+  .page-5-switch input[type="checkbox"]:checked + .page-5-slider::before {
+    transform: translateX(20px);
+  }
+  
+  /* Map Section */
+  .page-5-map {
+    height: 280px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #f4f4f4;
+  }
+  
+  /* Footer Buttons */
+/* Footer styling */
+.page-5-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Spread Back and Next buttons */
+    width: 100%; /* Full width of the screen */
+    position: fixed; /* Fixed at the bottom */
+    bottom: 0;
+    left: 0;
+    background-color: #fff; /* Background color */
+    padding: 16px;
+    box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Back and Next buttons */
+  .page-5-back-btn,
+  .page-5-next-btn {
+    padding: 10px 20px;
+    width: 100px;
+    border-radius: 20px;
+    border: none;
+    background-color: #198E78;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .page-5-back-btn:hover,
+  .page-5-next-btn:hover {
+    background-color: #388e3c;
+  }
+  
+  .page-5-progress-bar {
+    width: 550px;
+    height: 4px;
+    background-color: #198E78;
+    border-radius: 2px;
+    margin: 0 16px;
+    position: relative;
+    left: -823px;
+    top: -37px;}
+  
+  /* Responsive Design */
+  @media (max-width: 600px) {
+    .page-5-form-row {
+      flex-direction: column;
+    }
+  
+  
+  }
+  /* Highlight input with errors */
+.input-error {
+  border: 1px solid red;
+}
+
+/* Error message text */
+.error-text {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
