@@ -5,21 +5,7 @@ import { useState,useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const hotels = [
-  {
-    id: 1,
-    name: "Miami, Florida",
-    description: "Lorem Ipsum is simply",
-    checkIn: "Aug 18",
-    checkOut: "Aug 23",
-    pricePerNight: 224,
-    totalPrice: 1382,
-    rating: 4.98,
-    reviews: 154,
-    image: "/pexels-neverlandphotos-5028910.jpg",
-  },
-  // Add more hotels here...
-];
+
 
 const filters = [
   { icon: "bookmark-fill", label: "Featured" },
@@ -47,6 +33,7 @@ export default function Home() {
   const [showDropdown, setShowDropdown] = useState(false);
   const [loginPopup, setLoginPopup] = useState(false);
   const [signupPopup, setSignupPopup] = useState(false);
+
   const navigate = useNavigate();
 
   const [propertyData, setPropertyData] = useState(null);//state for the showing all property
@@ -74,8 +61,9 @@ export default function Home() {
 
 
 
-
-
+  function selectedProperty(property) {
+    navigate("/property", { state: { property } });
+  }
 
 
   const checkEmailExistence = async () => {
@@ -349,7 +337,7 @@ export default function Home() {
 <div className="hotel-data">
   {propertyData && propertyData.length > 0 ? (
     propertyData.map((property, index) => (
-      <div key={index} className="hotel-card">
+      <div key={index} className="hotel-card" onClick={()=>selectedProperty(property)}>
         {/* Property Cover Image */}
         <img
           src={

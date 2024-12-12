@@ -10,6 +10,7 @@ import ProfilePage from './components/profiles/guest/profilePage';
 
 import AdminHome from './components/profiles/admin/AdminHome';
 import HostProfile from './components/profiles/host/HostProfile';
+import PropertyPage from './components/Home/PropertyPage';
 
 
 
@@ -30,6 +31,7 @@ function App() {
           
           <Route path='/hostlogin' element={<HostProfile/>}/>
          <Route path='/superAdmin' element={<AdminHome/>}/>
+         <Route path='/property' element={<PropertyPage/>}/>
          
 
           </Routes>
