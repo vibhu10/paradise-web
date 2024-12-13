@@ -1,97 +1,191 @@
-.PropertyPage {
+/* PropertyPage.css */
+
+/* General Styling */
+.property-page {
     font-family: Arial, sans-serif;
-    padding: 20px;
+    color: #333;
     line-height: 1.6;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
   }
   
-  .PropertyPage-header h1 {
-    font-size: 2rem;
+  /* Header Section */
+  .property-header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .property-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+  }
+  
+  .property-header p {
+    margin: 5px 0;
+    color: #666;
+  }
+  
+  /* Image Gallery */
+  .image-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .main-image img {
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .thumbnail-images img {
+    width: 100%;
+    max-width: 150px;
+    height: auto;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s;
+  }
+  
+  .thumbnail-images img:hover {
+    transform: scale(1.1);
+  }
+  
+  /* Description Section */
+  .property-description {
+    margin-bottom: 30px;
+  }
+  
+  .ratings {
+    display: flex;
+    justify-content: flex-start;
+    gap: 15px;
+    font-size: 1rem;
+    margin-bottom: 15px;
+  }
+  
+  .ratings span {
+    padding: 5px 10px;
+    border-radius: 15px;
+  }
+  
+  .top-rated {
+    background-color: #f0c14b;
+    color: #000;
     font-weight: bold;
   }
   
-  .PropertyPage-header p {
-    color: gray;
-    margin: 5px 0;
-  }
-  
-  .PropertyPage-main {
-    display: flex;
-    gap: 20px;
-  }
-  
-  .PropertyPage-imageGallery {
-    flex: 3;
-  }
-  
-  .PropertyPage-mainImage img {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-  }
-  
-  .PropertyPage-thumbnailImages {
-    display: flex;
-    gap: 10px;
+  .show-more {
+    background-color: #008489;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
     margin-top: 10px;
   }
   
-  .PropertyPage-thumbnailImages img {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    border-radius: 10px;
+  .show-more:hover {
+    background-color: #006f6b;
+  }
+  
+  /* Amenities Section */
+  .amenities {
+    margin-bottom: 30px;
+  }
+  
+  .amenities h3 {
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+  }
+  
+  .amenities ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .amenities li {
+    margin-bottom: 10px;
+  }
+  
+  .more-amenities {
+    background-color: #008489;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
     cursor: pointer;
   }
   
-  .PropertyPage-bookingCard {
-    flex: 1;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  .more-amenities:hover {
+    background-color: #006f6b;
   }
   
-  .PropertyPage-price {
+  /* Booking Section */
+  .booking-card {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .price {
     font-size: 1.5rem;
     font-weight: bold;
     margin-bottom: 20px;
   }
   
-  .PropertyPage-bookingForm label {
+  .price span {
+    font-size: 1rem;
+    color: #666;
+  }
+  
+  .booking-form label {
     display: block;
     margin-bottom: 10px;
+    font-size: 0.9rem;
   }
   
-  .PropertyPage-bookingForm input,
-  .PropertyPage-bookingForm select {
+  .booking-form input,
+  .booking-form select {
     width: 100%;
     padding: 8px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
     border-radius: 5px;
   }
   
-  .PropertyPage-bookingForm button {
-    width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
+  .booking-form button {
+    background-color: #ff5a5f;
+    color: #fff;
     border: none;
+    padding: 10px 15px;
     border-radius: 5px;
+    font-size: 1rem;
     cursor: pointer;
   }
   
-  .PropertyPage-bookingForm button:hover {
-    background-color: #0056b3;
+  .booking-form button:hover {
+    background-color: #e0444f;
   }
   
-  .PropertyPage-priceBreakdown p {
-    display: flex;
-    justify-content: space-between;
+  .price-breakdown {
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: 20px;
   }
   
-  .PropertyPage-description,
-  .PropertyPage-amenities {
-    margin-top: 40px;
+  .price-breakdown p {
+    margin: 5px 0;
+  }
+  
+  .price-breakdown hr {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 10px 0;
   }
   

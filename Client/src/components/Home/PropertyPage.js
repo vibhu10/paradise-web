@@ -1,5 +1,5 @@
 import React from "react";
-import "./PropertyPage.css"; // Include a CSS file for styling or use inline styles
+import "./PropertyPage.css";
 
 const PropertyPage = () => {
   return (
@@ -14,30 +14,45 @@ const PropertyPage = () => {
       {/* Image Gallery */}
       <div className="image-gallery">
         <div className="main-image">
-          <img src="main-image-url" alt="Treehouse" />
+          <img
+            src="https://via.placeholder.com/800x500"
+            alt="Main Treehouse View"
+          />
         </div>
         <div className="thumbnail-images">
-          <img src="image-1-url" alt="Thumbnail 1" />
-          <img src="image-2-url" alt="Thumbnail 2" />
-          <img src="image-3-url" alt="Thumbnail 3" />
-          <img src="image-4-url" alt="Thumbnail 4" />
+          <img
+            src="https://via.placeholder.com/150"
+            alt="Thumbnail 1"
+          />
+          <img
+            src="https://via.placeholder.com/150"
+            alt="Thumbnail 2"
+          />
+          <img
+            src="https://via.placeholder.com/150"
+            alt="Thumbnail 3"
+          />
+          <img
+            src="https://via.placeholder.com/150"
+            alt="Thumbnail 4"
+          />
         </div>
       </div>
 
       {/* Description Section */}
       <div className="property-description">
         <div className="ratings">
-          <span>🌟 Top Rated</span>
-          <span>4.98 · 118 Reviews</span>
+          <span className="top-rated">🌟 Top Rated</span>
+          <span className="reviews">4.98 · 118 Reviews</span>
         </div>
         <p>
-          Hoots Treehouse is a picture-perfect, romantic, luxurious treehouse with all
-          mod cons in an area of outstanding natural beauty - only 45 minutes south
-          of M25. Clad in aromatic cedar wood, beautifully furnished - ideal private,
-          woodland retreat for couples. Can also comfortably sleep up to 2 children
-          (from 5 years) on single mattresses in loft area accessed by a ladder and
-          hatch. NOT SUITABLE FOR 4 ADULTS. A wonderful place to chill-out and lose
-          yourself - you won’t want to leave! Sheer bliss!
+          Hoots Treehouse is a picture-perfect, romantic, luxurious treehouse with
+          all mod cons in an area of outstanding natural beauty - only 45 minutes
+          south of M25. Clad in aromatic cedar wood, beautifully furnished - ideal
+          private, woodland retreat for couples. Can also comfortably sleep up to 2
+          children (from 5 years) on single mattresses in loft area accessed by a
+          ladder and hatch. NOT SUITABLE FOR 4 ADULTS. A wonderful place to
+          chill-out and lose yourself - you won’t want to leave! Sheer bliss!
         </p>
         <button className="show-more">Show more</button>
       </div>
@@ -63,7 +78,9 @@ const PropertyPage = () => {
       {/* Booking Section */}
       <div className="booking-card">
         <div className="price">
-          <p>$275 <span>night</span></p>
+          <p>
+            $275 <span>/ night</span>
+          </p>
         </div>
         <form className="booking-form">
           <label>
