@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./HostProfile.css";
+import "./hostProfile.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate } from "react-router-dom";
 // Import all child components for "Your Property"

@@ -9,8 +9,9 @@ import HostRegistration from './components/Host-Registration/Host-Registration';
 import ProfilePage from './components/profiles/guest/profilePage';
 
 import AdminHome from './components/profiles/admin/AdminHome';
-import HostProfile from './components/profiles/host/HostProfile';
+// import HostProfile from './components/profiles/host/HostProfile';
 import PropertyPage from './components/Home/PropertyPage';
+import HostProfile from './components/profiles/host/HostProfile';
 
 
 
