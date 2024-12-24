@@ -1,6 +1,9 @@
 export default class PropertyModel {
   constructor({
-    propertyType = [], // Array of property types
+    kindOfProperty = {
+      mainType: null, // Single main property type (e.g., "Homes")
+      subTypes: [], // Array for potential subtypes (e.g., "Beach House")
+    },
     title = "",
     propertyName = "",
     pricing = {
@@ -53,7 +56,7 @@ export default class PropertyModel {
     billingCountry = "",
   } = {}) {
     // Assigning properties to the object
-    this.propertyType = propertyType;
+    this.kindOfProperty = kindOfProperty;
     this.title = title;
     this.propertyName = propertyName;
     this.pricing = pricing;
@@ -74,6 +77,8 @@ export default class PropertyModel {
     this.payoutMethod = payoutMethod;
     this.billingCountry = billingCountry;
   }
+
+
 
   // Static method to add a new property to the list
   static addProperty(propertyData) {
@@ -132,9 +137,99 @@ export default class PropertyModel {
       // Return the updated property
       return property;
     }
-  }
 
+    static getPropertyByType(type) {
+      const filteredProperties = this.properties.filter((p) =>
+        p.propertyType.includes(type)  // This checks if the 'type' is in the propertyType array
+      );
+      return filteredProperties;
+    }
+
+
+   
+// Model Function
+
+  static getAdvancedFilteredProperties(filters) {
+    console.log(filters, "in model");
   
+    return this.properties.filter(property => {
+      const {
+        price = {},
+        selectedFilters = [],
+        selectedAmenities = [],
+        selectedPropertyTypes = [],
+        petsAllowed = null,
+        instantBook = null,
+        flexibleCancellation = null,
+        accessibilityFeatures = {},
+      } = filters;
+  
+      // 1. Filter by price range
+      if (
+        (price.$gte !== undefined && property.price.BaseCharge < price.$gte) ||
+        (price.$lte !== undefined && property.price.BaseCharge > price.$lte)
+      ) {
+        return false;
+      }
+  
+      // 2. Filter by selected filters (e.g., "Luxury", "Scenic Views")
+      if (
+        selectedFilters.length > 0 &&
+        !selectedFilters.some(filter => property.filters.includes(filter))
+      ) {
+        return false;
+      }
+  
+      // 3. Filter by selected amenities
+      if (
+        selectedAmenities.length > 0 &&
+        !selectedAmenities.every(amenity =>
+          property.amenities.some(category => category.options.includes(amenity))
+        )
+      ) {
+        return false;
+      }
+  
+      // 4. Filter by selected property types
+      if (
+        selectedPropertyTypes.length > 0 &&
+        !selectedPropertyTypes.some(type => property.propertyType.includes(type))
+      ) {
+        return false;
+      }
+  
+      // 5. Filter by petsAllowed
+      if (petsAllowed !== null && property.houseRules.petsAllowed !== petsAllowed) {
+        return false;
+      }
+  
+      // 6. Filter by instantBook
+      if (instantBook !== null && property.instantBook !== instantBook) {
+        return false;
+      }
+  
+      // 7. Filter by flexibleCancellation
+      if (flexibleCancellation !== null && property.flexibleCancellation !== flexibleCancellation) {
+        return false;
+      }
+  
+      // 8. Filter by accessibility features
+      if (Object.keys(accessibilityFeatures).length > 0) {
+        const matchesAccessibility = Object.entries(accessibilityFeatures).every(
+          ([key, value]) => property.accessibilityFeatures[key] === value
+        );
+        if (!matchesAccessibility) {
+          return false;
+        }
+      }
+  
+      // If all filters pass, include the property
+      return true;
+    });
+  }
+  
+}
+ 
 // Initialize the static properties list
 PropertyModel.properties = [
    {
@@ -207,7 +302,7 @@ PropertyModel.properties = [
         },
         cover: {
           name: "Cover Photo",
-          image: "blob:http://localhost:3001/1037382d-6acb-451a-9dee-bbb8f72e935a"
+          image:"https://images.pexels.com/photos/261102/pexels-photo-261102.jpeg"
         }
       },
       description: "This is a property with a very good view of mountains and a lake.",
@@ -348,7 +443,7 @@ PropertyModel.properties = [
           1: { name: "Living Room", image: "https://via.placeholder.com/300" },
           2: { name: "Bedroom", image: "https://via.placeholder.com/300" },
           3: { name: "Balcony View", image: "https://via.placeholder.com/300" },
-          cover: { name: "Cover Photo", image: "https://via.placeholder.com/300" }
+          cover: { name: "Cover Photo", image: "https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg" }
         },
         description: "A cozy retreat with stunning mountain views and peaceful surroundings.",
         price: {
@@ -436,7 +531,7 @@ PropertyModel.properties = [
           1: { name: "Living Room", image: "https://via.placeholder.com/300" },
           2: { name: "Bedroom", image: "https://via.placeholder.com/300" },
           3: { name: "Balcony View", image: "https://via.placeholder.com/300" },
-          cover: { name: "Cover Photo", image: "https://via.placeholder.com/300" }
+          cover: { name: "Cover Photo", image: "https://images.pexels.com/photos/189296/pexels-photo-189296.jpeg" }
         },
         description: "A luxurious villa with direct beach access and stunning ocean views.",
         price: {
@@ -538,7 +633,7 @@ PropertyModel.properties = [
             },
             cover: {
               name: "Cover Photo",
-              image: "https://via.placeholder.com/150"
+              image: "https://images.pexels.com/photos/271618/pexels-photo-271618.jpeg"
             }
           },
           description: "Experience tranquility in a private beachfront villa with breathtaking ocean views.",
@@ -663,7 +758,7 @@ PropertyModel.properties = [
             },
             cover: {
               name: "Cover Photo",
-              image: "https://via.placeholder.com/150"
+              image: "https://images.pexels.com/photos/271618/pexels-photo-271618.jpeg"
             }
           },
           description: "Reconnect with nature in this cozy forest cabin, perfect for adventure seekers and families.",

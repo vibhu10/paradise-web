@@ -10,10 +10,11 @@ propertyRoutes.post('/registration', jwtAuth,propertyController.addProperty)
 
 propertyRoutes.get('/propertiesByEmail',jwtAuth,propertyController.getPropertiesByEmail)
 propertyRoutes.put('/updateProperty/:propertyId', jwtAuth, propertyController.updateProperty);
-
-
-propertyRoutes.get(  '/propertyDetails',
+propertyRoutes.get('/filtersByPropertyType',propertyController.getPropertyByType)
+propertyRoutes.post('/advancedfilter',propertyController.getAdvancedFilteredProperties)
+propertyRoutes.get( '/propertyDetails',
     jwtAuth,
     propertyController.getPropertyDetails
   );
+
 export default propertyRoutes

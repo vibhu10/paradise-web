@@ -155,6 +155,8 @@ async getPropertyDetails(req, res) {
   }
 }
 // Method to update a property
+
+
 async updateProperty(req, res) {
   try {
     const { propertyId } = req.params;  // Property ID from route params
@@ -190,6 +192,74 @@ console.log(propertyId,updatedData,"incontroller for update")
   }
 }
 
+
+getPropertyByType = (req, res) => {
+
+  const { type } = req.query;  // Get 'type' from the query string
+
+  const properties = PropertyModel.getPropertyByType(type);  // Filter based on the type
+  res.json(properties);  // Send the filtered properties back to the client
+};
+
+// advanced filer for property
+async getAdvancedFilteredProperties(req, res) {
+
+  const {
+    selectedFilters = [],
+    selectedAmenities = [],
+    selectedPropertyTypes = [],
+    priceRange = { min: 0, max: 0 },
+    petsAllowed,
+    instantBook,
+    flexibleCancellation,
+    accessibilityFeatures = {},
+  } = req.body;
+
+  console.log("Pets Allowed:", petsAllowed, "Property Types:", selectedPropertyTypes);
+
+  let query = {};
+
+
+  // Price range filter
+  if (priceRange.min !== undefined) query.price = { $gte: parseInt(priceRange.min) };
+  if (priceRange.max !== undefined) query.price = { ...query.price, $lte: parseInt(priceRange.max) };
+
+  // Array-based filters
+  if (selectedFilters.length) query.filters = { $in: selectedFilters };
+  if (selectedAmenities.length) query.amenities = { $in: selectedAmenities };
+  if (selectedPropertyTypes.length) query.propertyTypes = { $in: selectedPropertyTypes };
+
+  // Boolean filters
+  if (petsAllowed !== undefined) query.petsAllowed = petsAllowed;
+  if (instantBook !== undefined) query.instantBook = instantBook;
+  if (flexibleCancellation !== undefined) query.flexibleCancellation = flexibleCancellation;
+
+  // Accessibility features
+  if (accessibilityFeatures) {
+    const accessibilityQuery = Object.entries(accessibilityFeatures).reduce(
+      (acc, [key, value]) => {
+        acc[key] = value;
+        return acc;
+      },
+      {}
+    );
+    if (Object.keys(accessibilityQuery).length) query.accessibilityFeatures = accessibilityQuery;
   }
+
+  try {
+    const properties = await PropertyModel.getAdvancedFilteredProperties(query);
+    res.status(200).json(properties);
+  } catch (error) {
+    console.error('Error querying properties:', error);
+    res.status(500).send('Internal Server Error');
+  }
+}
+
+}
+
+
+
+
+  
 
   
