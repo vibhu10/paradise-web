@@ -5,8 +5,8 @@ export default class userController{
 
     signUp(req,res){
        console.log(req.body,"data comming form form i fill")
-        const{firstName,lastName,dob,email,password,type="guest",isHost="false"}=req.body;
-       const user= UserModal.singUp(firstName,lastName,email,password,dob,type,isHost)
+        const{firstName,lastName,dob,email,password,type="guest",status="pending"}=req.body;
+       const user= UserModal.singUp(firstName,lastName,email,password,dob,type,status)
        res.status(201).send(user);
        console.log(user)
     }

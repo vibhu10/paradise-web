@@ -12,9 +12,6 @@ propertyRoutes.get('/propertiesByEmail',jwtAuth,propertyController.getProperties
 propertyRoutes.put('/updateProperty/:propertyId', jwtAuth, propertyController.updateProperty);
 propertyRoutes.get('/filtersByPropertyType',propertyController.getPropertyByType)
 propertyRoutes.post('/advancedfilter',propertyController.getAdvancedFilteredProperties)
-propertyRoutes.get( '/propertyDetails',
-    jwtAuth,
-    propertyController.getPropertyDetails
-  );
-
+propertyRoutes.get( '/propertyDetails', jwtAuth, propertyController.getPropertyDetails );
+propertyRoutes.get('/checkUserHaveProperty',propertyController.checkUserHavePropery);
 export default propertyRoutes

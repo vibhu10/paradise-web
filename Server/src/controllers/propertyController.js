@@ -38,14 +38,14 @@ export default class PropertyController {
 
         // Retrieve the user's email from the JWT payload (added by the jwtAuth middleware)
         const userEmail = req.user?.email;
-
+       const propertyStatus="inprogress"
         if (!userEmail) {
             return res.status(400).json({ message: 'User email not found in token' });
         }
 
         // Embed the user's email in the property data
         propertyData.ownerEmail = userEmail;
-
+       propertyData.status=propertyStatus;
         // Validate the incoming data
         // Check if required fields are present
         const missingFields = [];
@@ -254,6 +254,20 @@ async getAdvancedFilteredProperties(req, res) {
     res.status(500).send('Internal Server Error');
   }
 }
+
+
+
+
+// checking user have property
+checkUserHavePropery(req,res){
+  const userEmail=req.query.email;
+  console.log(req.query,"user email in controller");
+  const properties=PropertyModel.checkUserHavePropery(userEmail)
+  console.log(properties,"properties cecking user have property");
+   res.send(properties)
+}
+
+
 
 }
 

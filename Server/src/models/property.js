@@ -227,7 +227,21 @@ export default class PropertyModel {
       return true;
     });
   }
+  //checking user have property
+static checkUserHavePropery(ownerEmail) {
+  console.log(ownerEmail, "in the model");
+  const filteredProperties = this.properties.filter(
+      property => property.ownerEmail === ownerEmail
+  );
   
+  if (filteredProperties.length > 0) {
+      return true;
+  } else {
+      return false;
+  }
+}
+
+
 }
  
 // Initialize the static properties list
@@ -353,10 +367,10 @@ PropertyModel.properties = [
         {
           name: "Living room",
           Photos: [
-            "blob:http://localhost:3001/23cb0e33-5a62-48fb-bca1-f096c7d1b340",
-            "blob:http://localhost:3001/6cf9527b-883a-423a-ba1e-5f355a30fefa",
-            "blob:http://localhost:3001/6f08699a-b3d4-424d-b4ed-c4387b3e5e19",
-            "blob:http://localhost:3001/e4973e10-6018-439d-9ec0-bf95299ca59d"
+            "https://images.pexels.com/photos/3581753/pexels-photo-3581753.jpeg",
+            "https://images.pexels.com/photos/3581753/pexels-photo-3581753.jpeg",
+            "https://images.pexels.com/photos/3581753/pexels-photo-3581753.jpeg",
+            "https://images.pexels.com/photos/3581753/pexels-photo-3581753.jpeg"
           ]
         },
         {
@@ -366,9 +380,9 @@ PropertyModel.properties = [
         {
           name: "Exterior",
           Photos: [
-            "blob:http://localhost:3001/00fe005a-e44d-4359-84ab-6f82b7c73ad8",
-            "blob:http://localhost:3001/2a5863fb-d5cf-4c2e-b5c7-bf0f4e710123",
-            "blob:http://localhost:3001/6a7cc47a-53f5-4170-912b-259ac89c5f98"
+            "https://images.pexels.com/photos/3241973/pexels-photo-3241973.jpeg",
+            "https://images.pexels.com/photos/3241973/pexels-photo-3241973.jpeg",
+            "https://images.pexels.com/photos/3241973/pexels-photo-3241973.jpeg"
           ]
         },
         {
@@ -378,9 +392,9 @@ PropertyModel.properties = [
         {
           name: "Wash Rooms",
           Photos: [
-            "blob:http://localhost:3001/70750eac-2488-4f24-bc8c-093b4438e941",
-            "blob:http://localhost:3001/922b8656-e1b6-4a5f-af31-d09871f23403",
-            "blob:http://localhost:3001/1703690d-f7ea-408e-a7fb-3bb4113ac72c"
+            "https://images.pexels.com/photos/3242207/pexels-photo-3242207.jpeg",
+            "https://images.pexels.com/photos/3242207/pexels-photo-3242207.jpeg",
+            "https://images.pexels.com/photos/3242207/pexels-photo-3242207.jpeg"
           ]
         }
       ],
