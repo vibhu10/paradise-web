@@ -22,7 +22,7 @@ signIn(req, res) {
         // Creating token with additional user info, like 'id'
         const token = jwt.sign(
             { email: result.email, id: result.id }, // Include 'id' in the token payload
-            "szdi014rTyUfylsmwwEkJF5HAOsiKWrq", 
+           process.env.JWT_SECRET, // 
             { expiresIn: "1h" }
         );
         console.log(token);

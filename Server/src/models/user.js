@@ -1,17 +1,18 @@
 // user model with roles  client host and influencer
 export default class UserModal{
-    constructor(firstName,lastName,email,password,dob,type,id,status){
-
-       this.firstName=firstName;
-       this.lastName=lastName;
-        this.email=email;
-        this.password=password;
-        this.dob=dob;
-        this.type=type;
-        this.id=id;
-        this.status=status;
+  constructor(firstName, lastName, email, password, dob, type = "guest", status = "inactive") {
+    this.id = null; // Will be assigned later
+    this.firstName = firstName || "";
+    this.lastName = lastName || "";
+    this.email = email || "";
+    this.password = password || "";
+    this.dob = dob || "";
+    this.type = 'user';
+    this.mobile = ""; // Default to empty
+    this.gender = ""; // Default to empty
+    this.address = ""; // Default to empty
+    this.status = status || "inactive";
   }
-
   static singUp(firstName,lastName,email,password,dob,type,status){
 const newUser=new UserModal(firstName,lastName,email,password,dob,type,status);
 newUser.id=users.length+1;
@@ -53,6 +54,14 @@ static updateProfile(email, updates) {
 
   return users[userIndex];
 }
+
+static getAllUsers() {
+  return users;
+}
+
+
+
+
 }
 var users = [
   {
@@ -85,7 +94,7 @@ var users = [
       lastName: "Admin",
       email: "super@admin.com",
       password: "admin123",
-      type: "super_admin",
+      type:"user",
       mobile: "1234567890",
       gender: 'other',
       address: "global",

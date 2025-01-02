@@ -1,4 +1,6 @@
+import HostModal from '../models/host.js';
 import PropertyModel from '../models/property.js';
+import UserModal from '../models/user.js';
 
 export default class PropertyController {
   constructor() {
@@ -28,58 +30,71 @@ export default class PropertyController {
     res.json(filteredProperties);
   }
 
-  // Method to add a new property
+// Method to add a new property
+addProperty = async (req, res) => {
+  try {
+      // Extract data from the request body
+      const propertyData = req.body;
 
-  addProperty = (req, res) => {
-    try {
-        // Extract data from the request body
-        const propertyData = req.body;
-        console.log(propertyData, "data coming in property controller");
+      console.log(propertyData, "data coming in property controller");
 
-        // Retrieve the user's email from the JWT payload (added by the jwtAuth middleware)
-        const userEmail = req.user?.email;
-       const propertyStatus="inprogress"
-        if (!userEmail) {
-            return res.status(400).json({ message: 'User email not found in token' });
-        }
+      // Retrieve the user's email from the JWT payload (added by the jwtAuth middleware)
+      const userEmail = req.user?.email;
 
-        // Embed the user's email in the property data
-        propertyData.ownerEmail = userEmail;
-       propertyData.status=propertyStatus;
-        // Validate the incoming data
-        // Check if required fields are present
-        const missingFields = [];
-        if (!propertyData.title) missingFields.push('title');
-      
-        if (!propertyData.price.BaseCharge
-        ) missingFields.push('BaseCharge');
+      if (!userEmail) {
+          return res.status(400).json({ message: 'User email not found in token' });
+      }
 
-        if (missingFields.length > 0) {
-            return res.status(400).json({
-                message: 'Missing required property fields',
-                missingFields,
-            });
-        }
+      // Check if the user exists in HostModal
+      let userProfile = HostModal.findProfile(userEmail);
 
-        // Add the property using the static method in your model
-       
-PropertyModel.addProperty(propertyData)
-        // Retrieve the newly added property (last property in the static array)
-        const newProperty = PropertyModel.properties[PropertyModel.properties.length - 1];
+      if (!userProfile) {
+          // If user doesn't exist in HostModal, add profile
+          const userData = await UserModal.findProfile(userEmail);
+          if (userData) {
+              // Assuming some logic to map UserModal data to HostModal
+              userProfile = HostModal.addProfile(userData);
+          }
+      }
 
-        // Return success response
-        res.status(201).json({
-            message: 'Property added successfully',
-            property: newProperty, // Respond with the created property
-        });
-    } catch (error) {
-        // Catch any unexpected errors
-        res.status(500).json({
-            message: 'An error occurred while adding the property',
-            error: error.message,
-        });
-    }
+      const propertyStatus = "inprogress";
+
+      // Embed the user's email in the property data
+      propertyData.ownerEmail = userEmail;
+      propertyData.status = propertyStatus;
+
+      // Validate the incoming data
+      const missingFields = [];
+      if (!propertyData.title) missingFields.push('title');
+      if (!propertyData.price.BaseCharge) missingFields.push('BaseCharge');
+
+      if (missingFields.length > 0) {
+          return res.status(400).json({
+              message: 'Missing required property fields',
+              missingFields,
+          });
+      }
+
+      // Add the property using the static method in your model
+      await PropertyModel.addProperty(propertyData);
+
+      // Retrieve the newly added property (last property in the static array)
+      const newProperty = PropertyModel.properties[PropertyModel.properties.length - 1];
+
+      // Return success response
+      res.status(201).json({
+          message: 'Property added successfully',
+          property: newProperty, // Respond with the created property
+      });
+  } catch (error) {
+      // Catch any unexpected errors
+      res.status(500).json({
+          message: 'An error occurred while adding the property',
+          error: error.message,
+      });
+  }
 };
+
 
   
   // Method to rate a property

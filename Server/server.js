@@ -5,6 +5,7 @@ import cors from 'cors'; // Import CORS middleware
 import propertyRoutes from './src/routes/propertyRoutes.js';
 import userRoute from './src/routes/userRoutes.js';
 import dotenv from 'dotenv';
+import adminRoute from './src/routes/adminRoutes.js';
 dotenv.config()
 const server = express();
 
@@ -35,7 +36,7 @@ server.use(bodyParser.json());
 // Define routes
 server.use("/api/property", propertyRoutes);
 server.use('/api/users', userRoute);
-
+server.use('/api/admin',adminRoute);
 server.get('/', (req, res) => {
   res.send('This is the Node server');
 });
