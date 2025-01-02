@@ -1,4 +1,6 @@
+import HostModal from '../models/host.js';
 import PropertyModel from '../models/property.js';
+import UserModal from '../models/user.js';
 
 export default class PropertyController {
   constructor() {
@@ -28,58 +30,71 @@ export default class PropertyController {
     res.json(filteredProperties);
   }
 
-  // Method to add a new property
+// Method to add a new property
+addProperty = async (req, res) => {
+  try {
+      // Extract data from the request body
+      const propertyData = req.body;
 
-  addProperty = (req, res) => {
-    try {
-        // Extract data from the request body
-        const propertyData = req.body;
-        console.log(propertyData, "data coming in property controller");
+      console.log(propertyData, "data coming in property controller");
 
-        // Retrieve the user's email from the JWT payload (added by the jwtAuth middleware)
-        const userEmail = req.user?.email;
+      // Retrieve the user's email from the JWT payload (added by the jwtAuth middleware)
+      const userEmail = req.user?.email;
 
-        if (!userEmail) {
-            return res.status(400).json({ message: 'User email not found in token' });
-        }
+      if (!userEmail) {
+          return res.status(400).json({ message: 'User email not found in token' });
+      }
 
-        // Embed the user's email in the property data
-        propertyData.ownerEmail = userEmail;
+      // Check if the user exists in HostModal
+      let userProfile = HostModal.findProfile(userEmail);
 
-        // Validate the incoming data
-        // Check if required fields are present
-        const missingFields = [];
-        if (!propertyData.title) missingFields.push('title');
-      
-        if (!propertyData.price.BaseCharge
-        ) missingFields.push('BaseCharge');
+      if (!userProfile) {
+          // If user doesn't exist in HostModal, add profile
+          const userData = await UserModal.findProfile(userEmail);
+          if (userData) {
+              // Assuming some logic to map UserModal data to HostModal
+              userProfile = HostModal.addProfile(userData);
+          }
+      }
 
-        if (missingFields.length > 0) {
-            return res.status(400).json({
-                message: 'Missing required property fields',
-                missingFields,
-            });
-        }
+      const propertyStatus = "inprogress";
 
-        // Add the property using the static method in your model
-       
-PropertyModel.addProperty(propertyData)
-        // Retrieve the newly added property (last property in the static array)
-        const newProperty = PropertyModel.properties[PropertyModel.properties.length - 1];
+      // Embed the user's email in the property data
+      propertyData.ownerEmail = userEmail;
+      propertyData.status = propertyStatus;
 
-        // Return success response
-        res.status(201).json({
-            message: 'Property added successfully',
-            property: newProperty, // Respond with the created property
-        });
-    } catch (error) {
-        // Catch any unexpected errors
-        res.status(500).json({
-            message: 'An error occurred while adding the property',
-            error: error.message,
-        });
-    }
+      // Validate the incoming data
+      const missingFields = [];
+      if (!propertyData.title) missingFields.push('title');
+      if (!propertyData.price.BaseCharge) missingFields.push('BaseCharge');
+
+      if (missingFields.length > 0) {
+          return res.status(400).json({
+              message: 'Missing required property fields',
+              missingFields,
+          });
+      }
+
+      // Add the property using the static method in your model
+      await PropertyModel.addProperty(propertyData);
+
+      // Retrieve the newly added property (last property in the static array)
+      const newProperty = PropertyModel.properties[PropertyModel.properties.length - 1];
+
+      // Return success response
+      res.status(201).json({
+          message: 'Property added successfully',
+          property: newProperty, // Respond with the created property
+      });
+  } catch (error) {
+      // Catch any unexpected errors
+      res.status(500).json({
+          message: 'An error occurred while adding the property',
+          error: error.message,
+      });
+  }
 };
+
 
   
   // Method to rate a property
@@ -155,6 +170,8 @@ async getPropertyDetails(req, res) {
   }
 }
 // Method to update a property
+
+
 async updateProperty(req, res) {
   try {
     const { propertyId } = req.params;  // Property ID from route params
@@ -190,6 +207,88 @@ console.log(propertyId,updatedData,"incontroller for update")
   }
 }
 
+
+getPropertyByType = (req, res) => {
+
+  const { type } = req.query;  // Get 'type' from the query string
+
+  const properties = PropertyModel.getPropertyByType(type);  // Filter based on the type
+  res.json(properties);  // Send the filtered properties back to the client
+};
+
+// advanced filer for property
+async getAdvancedFilteredProperties(req, res) {
+
+  const {
+    selectedFilters = [],
+    selectedAmenities = [],
+    selectedPropertyTypes = [],
+    priceRange = { min: 0, max: 0 },
+    petsAllowed,
+    instantBook,
+    flexibleCancellation,
+    accessibilityFeatures = {},
+  } = req.body;
+
+  console.log("Pets Allowed:", petsAllowed, "Property Types:", selectedPropertyTypes);
+
+  let query = {};
+
+
+  // Price range filter
+  if (priceRange.min !== undefined) query.price = { $gte: parseInt(priceRange.min) };
+  if (priceRange.max !== undefined) query.price = { ...query.price, $lte: parseInt(priceRange.max) };
+
+  // Array-based filters
+  if (selectedFilters.length) query.filters = { $in: selectedFilters };
+  if (selectedAmenities.length) query.amenities = { $in: selectedAmenities };
+  if (selectedPropertyTypes.length) query.propertyTypes = { $in: selectedPropertyTypes };
+
+  // Boolean filters
+  if (petsAllowed !== undefined) query.petsAllowed = petsAllowed;
+  if (instantBook !== undefined) query.instantBook = instantBook;
+  if (flexibleCancellation !== undefined) query.flexibleCancellation = flexibleCancellation;
+
+  // Accessibility features
+  if (accessibilityFeatures) {
+    const accessibilityQuery = Object.entries(accessibilityFeatures).reduce(
+      (acc, [key, value]) => {
+        acc[key] = value;
+        return acc;
+      },
+      {}
+    );
+    if (Object.keys(accessibilityQuery).length) query.accessibilityFeatures = accessibilityQuery;
   }
+
+  try {
+    const properties = await PropertyModel.getAdvancedFilteredProperties(query);
+    res.status(200).json(properties);
+  } catch (error) {
+    console.error('Error querying properties:', error);
+    res.status(500).send('Internal Server Error');
+  }
+}
+
+
+
+
+// checking user have property
+checkUserHavePropery(req,res){
+  const userEmail=req.query.email;
+  console.log(req.query,"user email in controller");
+  const properties=PropertyModel.checkUserHavePropery(userEmail)
+  console.log(properties,"properties cecking user have property");
+   res.send(properties)
+}
+
+
+
+}
+
+
+
+
+  
 
   
